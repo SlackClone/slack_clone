@@ -1,0 +1,9 @@
+development:
+  DATABASE_PASSWORD: ''
+
+test:
+  DATABASE_PASSWORD: ''
+
+production:
+  DATABASE_URL: ''
+  DATABASE_PASSWORD: ''
