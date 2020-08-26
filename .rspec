@@ -1,1 +1,8 @@
+#Require spec_helper automatically in your *_spec.rb
 --require spec_helper
+
+#顯示顏色
+--color
+
+#顯示描述
+--format documentation
