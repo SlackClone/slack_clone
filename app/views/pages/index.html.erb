@@ -1,4 +1,23 @@
-<h1>slack_clone test page</h1>
+<h1>sladock</h1>
+<ul>
+  <% if user_signed_in? %>
+    <li>
+      <%= link_to "創立新的Workspace", new_workspace_path %>
+    </li>
+    <li>
+      <%= link_to "Sign_out", destroy_user_session_path, method: "delete", class: "nav-link" %>
+    </li>
+  <% else %>
+    <li>
+      <%= link_to "Sign up", new_user_registration_path, class: "nav-link" %>
+    </li>
+    <li>
+      <%= link_to "Sign in", new_user_session_path, class: "nav-link" %>
+    </li>
 
-<%= link_to 'Sign in', new_user_session_path if !user_signed_in? %>
-<%= link_to 'Sign out', destroy_user_session_path, method: :delete if user_signed_in? %>
+  <% end %>
+</ul>
+
+<ul>
+  
+</ul>
