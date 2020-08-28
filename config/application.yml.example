@@ -1,8 +1,8 @@
 development:
   DATABASE_PASSWORD: ''
-  DOMAIN: 'gmail.com'
-  USERNAME: <%=ENV['chentset@gmail.com']%>
-  PASSWORD: <%=ENV['test33686390']%>
+  DOMAIN: ''
+  USERNAME: ''
+  PASSWORD: ''
 
 test:
   DATABASE_PASSWORD: ''
