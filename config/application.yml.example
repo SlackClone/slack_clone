@@ -1,5 +1,8 @@
 development:
   DATABASE_PASSWORD: ''
+  DOMAIN: ''
+  USERNAME: ''
+  PASSWORD: ''
 
 test:
   DATABASE_PASSWORD: ''
