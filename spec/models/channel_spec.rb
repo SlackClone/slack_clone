@@ -37,13 +37,13 @@ RSpec.describe Channel, type: :model do
     expect(channel).not_to be_valid
   end
 
-  # 確認 members 這個欄位「預設值為1」
-  it "is 1 in memebers default value" do
-    channel = Channel.new
-    expect(channel.members).to eq(1)
+  # 確認 members 這個欄位為「必填」
+  it "is not valid without a members" do
+    channel = Channel.new(members: nil)
+    expect(channel).not_to be_valid
   end
 
-  # create 一個 workspace、一個 channel，測試 workspace.channels 是否包含 channel
+  # create 一個 workspace、一個 channel，測試 channel.workspace 跟 workspace 同一個
   it "belongs_to workspace" do
     workspace = Workspace.create(name: "W_1")
     channel = Channel.create(name: "C_1", public: true, members: 1, workspace_id: workspace.id)
