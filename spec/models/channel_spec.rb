@@ -50,4 +50,13 @@ RSpec.describe Channel, type: :model do
     expect(channel.workspace).to eq(workspace)
   end
 
+  # create 一個 workspace、二個 channel，測試 workspace.channels 是否包含兩個 channel
+  it "has_many messages" do
+    workspace = Workspace.create(name: "W_1")
+    channel = Channel.create(name: "C_1", public: true, members: 1, workspace_id: workspace.id)
+    message1 = Message.create(content: "anything", channel_id: channel.id)
+    message2 = Message.create(content: "anything", channel_id: channel.id)
+    expect(channel.messages).to include(message1, message2)
+  end
+
 end

@@ -25,10 +25,11 @@ RSpec.describe Workspace, type: :model do
     expect(workspace2).not_to be_valid
   end
 
-  # create 一個 workspace、一個 channel，測試 workspace.channels 是否包含 channel
+  # create 一個 workspace、二個 channel，測試 workspace.channels 是否包含兩個 channel
   it "has_many channels" do
     workspace = Workspace.create(name: "W_1")
-    channel = Channel.create(name: "C_1", public: true, members: 1, workspace_id: workspace.id)
-    expect(workspace.channels).to include(channel)
+    channel1 = Channel.create(name: "C_1", public: true, members: 1, workspace_id: workspace.id)
+    channel2 = Channel.create(name: "C_2", public: true, members: 1, workspace_id: workspace.id)
+    expect(workspace.channels).to include(channel1, channel2)
   end
 end
