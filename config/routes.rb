@@ -4,7 +4,8 @@ Rails.application.routes.draw do
   resource :pages
 
   resources :workspaces do
-    resource :channels, only: [:show, :new, :create, :update]
+    resource :channels, only: [:new, :create, :update]
+    resources :channels, only: [:show]
   end
 
   resources :channels, except: [:show, :new, :create, :update] do

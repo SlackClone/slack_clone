@@ -8,16 +8,12 @@
     <%= f.text_field :topic %>
   </div>
   <div class="field">
-    <%= f.label :public, "Private" %>
-    <%= f.check_box :public %>
-  </div>
-  <div class="field">
     <%= f.label :description %>
     <%= f.text_field :description %>
   </div>
   <div class="field">
-    <%= f.label :member %>
-    <%= f.number_field :member, in: 5..20 %>
+    <%= f.label :members %>
+    <%= f.number_field :members, in: 5..20 %>
   </div>
   <%= f.submit "submit" %>
 <% end %>

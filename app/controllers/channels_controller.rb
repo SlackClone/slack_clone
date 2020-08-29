@@ -20,14 +20,16 @@ class ChannelsController < ApplicationController
   end
 
   def show
+    @channel = @workspace.channels.find(params[:id])
   end
 
   private
   def channel_params
-    params.require(:channel).permit(:name, :)
+    params.require(:channel).permit(:name, :topic, :description, :members)
   end
 
   def find_workspace
     @workspace = Workspace.find(params[:workspace_id])
   end
+
 end
