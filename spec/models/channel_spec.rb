@@ -23,11 +23,9 @@ RSpec.describe Channel, type: :model do
 
   # 確認 name 必須要是「唯一值」
   it "is not valid with same name" do
-    channel1 = Channel.new
-    channel1.name = "CN_name"
-    channel1.save
-    channel2 = Channel.new
-    channel2.name = "CN_name"
+    workspace = Workspace.create(name: "W_1")
+    channel1 = Channel.create(name: "name", public: true, members: 1, workspace_id: workspace.id)
+    channel2 = Channel.create(name: "name", public: true, members: 1, workspace_id: workspace.id)
     expect(channel2).not_to be_valid
   end
 
