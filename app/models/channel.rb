@@ -3,5 +3,7 @@ class Channel < ApplicationRecord
   validates :public, presence: true
 
   has_many :messages
+  has_many :users_channels
+  has_many :users, through: :users_channels
   belongs_to :workspace
 end

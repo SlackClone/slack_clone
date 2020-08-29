@@ -1,0 +1,23 @@
+<%= form_with(model: @channel,url:workspace_channels_path(id: @channel.workspace_id), local: true) do |f| %>
+  <div class="field">
+    <%= f.label :name, "channel name" %>
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :topic %>
+    <%= f.text_field :topic %>
+  </div>
+  <div class="field">
+    <%= f.label :public, "Private" %>
+    <%= f.check_box :public %>
+  </div>
+  <div class="field">
+    <%= f.label :description %>
+    <%= f.text_field :description %>
+  </div>
+  <div class="field">
+    <%= f.label :member %>
+    <%= f.number_field :member, in: 5..20 %>
+  </div>
+  <%= f.submit "submit" %>
+<% end %>

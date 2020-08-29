@@ -1,8 +1,11 @@
 class WorkspacesController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except:[:index]
   before_action :find_workspace
   
   def index  
+    if current_user
+      @workspaces = current_user.workspaces
+    end
   end
     
   def new
@@ -11,6 +14,7 @@ class WorkspacesController < ApplicationController
 
   def create
     @workspace = Workspace.new(workspace_params)  
+    @workspace.users << current_user
     if @workspace.save
       redirect_to workspace_path(@workspace.id), notice: "Welcome to #{@workspace.name}"
     else

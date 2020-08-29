@@ -1,1 +1,5 @@
-<h1><%= @workspace.name %></h1>
+<h1>Workspace名稱：<%= @workspace.name %></h1>
+<%= link_to "create a channel", new_workspace_channels_path(@workspace.id) %>
+<div>
+  <%= link_to "homepage", root_path %>
+</div>
