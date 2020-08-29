@@ -25,9 +25,10 @@ RSpec.describe Workspace, type: :model do
     expect(workspace2).not_to be_valid
   end
 
-  # 確認 created_at 這個欄位為「必填」
-  it "is not valid without a created_at" do
-    workspace = Workspace.new(created_at: nil)
-    expect(workspace).not_to be_valid
+  # create 一個 workspace、一個 channel，測試 workspace.channels 是否包含 channel
+  it "has_many channels" do
+    workspace = Workspace.create(name: "W_1")
+    channel = Channel.create(name: "C_1", public: true, members: 1, workspace_id: workspace.id)
+    expect(workspace.channels).to include(channel)
   end
 end
