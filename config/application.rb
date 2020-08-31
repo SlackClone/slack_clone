@@ -11,10 +11,6 @@ module SlackClone
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 6.0
 
-    # 設定 rspec 檔案不會隨著 MVC 檔案建立同時產生
-    config.generators do |g|
-      g.test_framework nil
-    end
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration can go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded after loading
