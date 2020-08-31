@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_31_074726) do
+ActiveRecord::Schema.define(version: 2020_08_31_080846) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -18,7 +18,7 @@ ActiveRecord::Schema.define(version: 2020_08_31_074726) do
   create_table "channels", force: :cascade do |t|
     t.string "name"
     t.text "topic"
-    t.boolean "public"
+    t.boolean "public", default: true
     t.text "description"
     t.bigint "workspace_id", null: false
     t.datetime "deleted_at"
