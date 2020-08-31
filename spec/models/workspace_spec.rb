@@ -10,11 +10,13 @@ RSpec.describe Workspace, type: :model do
   end
 
   # 確認 name 這個欄位為「必填」
-  it "is not valid without a name" do
-    workspace = Workspace.new(name: nil)
-    expect(workspace).not_to be_valid
-  end
+  # it "is not valid without a name" do
+  #   workspace = Workspace.new(name: nil)
+  #   expect(workspace).not_to be_valid
+  # end
 
+  it { should validate_presence_of(:name) }
+  
   # 確認 name 必須要是「唯一值」
   it "is not valid with same name" do
     workspace1 = Workspace.new

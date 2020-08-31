@@ -22,11 +22,16 @@ RSpec.describe Channel, type: :model do
   end
 
   # 確認 name 必須要是「唯一值」
-  it "is not valid with same name" do
-    workspace = Workspace.create(name: "W_1")
-    channel1 = Channel.create(name: "name", public: true, members: 1, workspace_id: workspace.id)
-    channel2 = Channel.create(name: "name", public: true, members: 1, workspace_id: workspace.id)
-    expect(channel2).not_to be_valid
+  describe "is not valid with same name" do
+    # workspace = Workspace.create(name: "W_1")
+    # channel1 = Channel.create(name: "name", public: true, members: 1, workspace_id: workspace.id)
+    # channel2 = Channel.create(name: "name", public: true, members: 1, workspace_id: workspace.id)
+    # expect(channel2).not_to be_valid
+
+    let!(:channel_1) { create(:channel) }
+    subject { build(:channel) }
+    
+    it { should validate_uniqueness_of(:name) }
   end
 
   # 確認 public 這個欄位為「必填」
