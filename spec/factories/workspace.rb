@@ -1,5 +1,5 @@
 FactoryBot.define do
   factory :workspace do
-    # name { Faker::Name.name }
+    name { Faker::Name.name }
   end
 end
