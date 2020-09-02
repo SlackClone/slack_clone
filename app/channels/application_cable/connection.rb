@@ -14,7 +14,7 @@ module ApplicationCable
         puts env["warden"]
         current_user
       else
-        reject_authorized_connection
+        reject_unauthorized_connection
       end
     end
   end

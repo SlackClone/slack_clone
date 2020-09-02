@@ -14,9 +14,9 @@
 </div>
   <h2>以下顯示已加入的聊天室</h2>
 <div class="active-area">
-  <% @active_channel.each do |channel| %>
-  <div class="active-channel" channel-id=<%= channel.channel.id %>  >
-    <%= link_to channel.channel.name, workspace_channel_path(workspace_id: @workspace.id, id: channel.channel.id)%>
+  <% @joined_channel.each do |channel| %>
+  <div class="active-channel" channel-id=<%= channel.channel_id %>  >
+    <%= link_to channel.channel.name, workspace_channel_path(workspace_id: @workspace.id, id: channel.channel_id)%>
   </div>
   <% end %>
 </div>

@@ -3,8 +3,8 @@
   <% @workspaces.each do |workspace| %>
     <p>
       <%= link_to workspace.name, workspace_path(workspace.id) %>
-      <%= link_to "加入workspace", workspace_users_workspaces_path(workspace.id), method:"post" %>
-      <%= link_to "離開workspace", workspace_users_workspaces_path(workspace.id), method:"delete" %>
+      <%= link_to "加入workspace", workspace_users_workspaces_path(workspace.id), method:"post", remote: true %>
+      <%= link_to "離開workspace", workspace_users_workspaces_path(workspace.id), method:"delete", remote: true %>
     </p>
 
   <% end %>

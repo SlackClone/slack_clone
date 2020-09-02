@@ -1,7 +1,7 @@
 <%= form_with(model: @workspace, url: workspaces_path) do |f| %>
   <div>
     <%= f.label :name, "Workspace Name" %>
-    <%= f.text_field :name, type: "text", placeholder: "Enter workspace name"%>
+    <%= f.text_field :name, placeholder: "Enter workspace name"%>
   </div>
   <%= f.submit "Submit" %>
 <% end %>

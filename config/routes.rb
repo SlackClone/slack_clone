@@ -1,18 +1,16 @@
 Rails.application.routes.draw do
-
   devise_for :users, controllers: { omniauth_callbacks: "users/omniauth_callbacks" }
-  resource :pages
-
+  
+  root to: 'workspaces#index'
   resources :workspaces do
     resource :users_workspaces
-    resource :channels, only: %i[new create update]
+    resource :channels, only: %i[new create]
     resources :channels, only: [:show]
   end
 
-  resources :channels, except: [:show, :new, :create, :update] do
+  resources :channels, except: %i[show new create] do
     resource :users_channels
-    resources :messages
+    # resources :messages
   end
-  root to: 'workspaces#index'
 
 end

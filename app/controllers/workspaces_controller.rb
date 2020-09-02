@@ -13,6 +13,7 @@ class WorkspacesController < ApplicationController
 
   def create
     @workspace = Workspace.new(workspace_params)  
+    @workspace << current_user
     if @workspace.save
       redirect_to workspace_path(@workspace.id), notice: "Welcome to #{@workspace.name}"
     else
@@ -21,10 +22,7 @@ class WorkspacesController < ApplicationController
   end
 
   def show
-    @active_channel = UsersChannel.where(user_id: current_user.id).where(channel_id: @workspace.channels.ids)
-  end
-
-  def update
+    @joined_channel = UsersChannel.where(user_id: current_user.id).where(channel_id: @workspace.channels.ids)
   end
 
   private

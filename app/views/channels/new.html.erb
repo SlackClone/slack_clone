@@ -1,4 +1,4 @@
-<%= form_with(model: @channel,url:workspace_channels_path(id: @channel.workspace_id), local: true) do |f| %>
+<%= form_with(model: @channel, url:workspace_channels_path(id: @channel.workspace_id)) do |f| %>
   <div class="field">
     <%= f.label :name, "channel name" %>
     <%= f.text_field :name %>
