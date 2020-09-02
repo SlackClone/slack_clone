@@ -34,6 +34,6 @@ class User < ApplicationRecord
   has_many :workspaces, through: :users_workspaces
   has_many :users_channels
   has_many :channels, through: :users_channels
+  
   has_many :messages
-
 end

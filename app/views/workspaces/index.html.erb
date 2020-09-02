@@ -1,6 +1,17 @@
 <% if user_signed_in? %>
   <h3>以下顯示所有的workspaces:</h3>
   <% @workspaces.each do |workspace| %>
-    <p><%= link_to workspace.name, workspace_path(workspace.id) %></p>
+    <p>
+      <%= link_to workspace.name, workspace_path(workspace.id) %>
+      <%= link_to "加入workspace", workspace_users_workspaces_path(workspace.id), method:"post" %>
+      <%= link_to "離開workspace", workspace_users_workspaces_path(workspace.id), method:"delete" %>
+    </p>
+
+  <% end %>
+  <h3>以下顯示加入的workspaces:</h3>
+  <% @joined_workspace.each do |workspace| %>
+    <p>
+      <%= link_to workspace.workspace.name, workspace_path(workspace.workspace.id)%>
+    </p>
   <% end %>
 <% end %>

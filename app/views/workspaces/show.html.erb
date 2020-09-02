@@ -1,9 +1,23 @@
 <h1>Workspace名稱：<%= @workspace.name %></h1>
-<%= link_to "create a channel", new_workspace_channels_path(@workspace.id) %>
-<div>
+<%= link_to "創立聊天室", new_workspace_channels_path(@workspace.id) %>
   <h2>以下顯示在<%= @workspace.name %>所有的channels</h2>
+<div>
   <% @workspace.channels.each do |channel| %>
+  <div>
     <%= link_to channel.name, workspace_channel_path(workspace_id: @workspace.id, id: channel.id) %>
+    <%= link_to "刪除聊天室", channel_path(channel.id), method: "delete", destroy_channel: channel.id, data:{confirm:"確定要刪除嗎？"} %>
+    <%= link_to "加入聊天室", channel_users_channels_path(channel.id), method: "post", remote: true, add_channel: channel.id %>
+    <%= link_to "離開聊天室", channel_users_channels_path(channel.id), method: "delete", remote: true, leave_channel: channel.id %>
+
+  </div>
+  <% end %>
+</div>
+  <h2>以下顯示已加入的聊天室</h2>
+<div class="active-area">
+  <% @active_channel.each do |channel| %>
+  <div class="active-channel" channel-id=<%= channel.channel.id %>  >
+    <%= link_to channel.channel.name, workspace_channel_path(workspace_id: @workspace.id, id: channel.channel.id)%>
+  </div>
   <% end %>
 </div>
 <div>

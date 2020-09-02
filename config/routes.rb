@@ -4,7 +4,8 @@ Rails.application.routes.draw do
   resource :pages
 
   resources :workspaces do
-    resource :channels, only: [:new, :create, :update]
+    resource :users_workspaces
+    resource :channels, only: %i[new create update]
     resources :channels, only: [:show]
   end
 

@@ -1,11 +1,10 @@
 class WorkspacesController < ApplicationController
-  before_action :authenticate_user!, except:[:index]
-  before_action :find_workspace
+  before_action :authenticate_user!
+  before_action :find_workspace, except: [:index, :new, :create]
   
   def index  
-    if current_user
-      @workspaces = current_user.workspaces
-    end
+    @workspaces = Workspace.all
+    @joined_workspace = UsersWorkspace.where(user_id: current_user.id)
   end
     
   def new
@@ -14,7 +13,6 @@ class WorkspacesController < ApplicationController
 
   def create
     @workspace = Workspace.new(workspace_params)  
-    @workspace.users << current_user
     if @workspace.save
       redirect_to workspace_path(@workspace.id), notice: "Welcome to #{@workspace.name}"
     else
@@ -23,6 +21,7 @@ class WorkspacesController < ApplicationController
   end
 
   def show
+    @active_channel = UsersChannel.where(user_id: current_user.id).where(channel_id: @workspace.channels.ids)
   end
 
   def update
@@ -34,6 +33,6 @@ class WorkspacesController < ApplicationController
   end
 
   def find_workspace
-    @workspace = Workspace.find_by(id: params[:id])
+    @workspace = Workspace.find(params[:id])
   end
 end
