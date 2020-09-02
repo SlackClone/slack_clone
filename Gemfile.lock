@@ -285,7 +285,7 @@ DEPENDENCIES
   shoulda-matchers (~> 4.4, >= 4.4.1)
   spring
   spring-watcher-listen (~> 2.0.0)
-  strong_migrations
+  strong_migrations (~> 0.7.1)
   turbolinks (~> 5)
   tzinfo-data
   web-console (>= 3.3.0)
