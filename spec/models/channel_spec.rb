@@ -6,16 +6,11 @@ RSpec.describe Channel, type: :model do
     it { should validate_presence_of(:public) }
     it "is valid if public default value is true" do
       channel = create(:channel)
-      # expect(channel.public).to eq(true)
-      channel.public.should == true
+      expect(channel.public).to eq(true)
     end
-    it "is valid if name is unique with workspace_id" do
-      channel1 = create(:channel)
-      channel2 = build(:channel)
-      expect(channel2).to validate_uniqueness_of(:name).scoped_to(:workspace_id)
-    end
+    subject { FactoryBot.create(:channel) }
+    it { should validate_uniqueness_of(:name).scoped_to(:workspace_id) }
   end
-
 
   describe 'association' do
     it { should belong_to(:workspace) }
