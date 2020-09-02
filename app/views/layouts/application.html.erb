@@ -24,14 +24,14 @@
         <%= link_to "創立新的Workspace", new_workspace_path %>
       </li>
       <li>
-        <%= link_to "Sign_out", destroy_user_session_path, method: "delete", class: "nav-link" %>
+        <%= link_to "登出", destroy_user_session_path, method: "delete", class: "nav-link" %>
       </li>
     <% else %>
       <li>
-        <%= link_to "Sign up", new_user_registration_path, class: "nav-link" %>
+        <%= link_to "註冊", new_user_registration_path, class: "nav-link" %>
       </li>
       <li>
-        <%= link_to "Sign in", new_user_session_path, class: "nav-link" %>
+        <%= link_to "登入", new_user_session_path, class: "nav-link" %>
       </li>
 
     <% end %>

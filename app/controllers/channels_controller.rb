@@ -31,7 +31,7 @@ class ChannelsController < ApplicationController
 
   private
   def channel_params
-    params.require(:channel).permit(:name, :topic, :description, :members)
+    params.require(:channel).permit(:name, :topic, :description)
   end
 
   def find_workspace
