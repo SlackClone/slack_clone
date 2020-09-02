@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_31_080846) do
+ActiveRecord::Schema.define(version: 2020_09_02_095725) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -50,6 +50,25 @@ ActiveRecord::Schema.define(version: 2020_08_31_080846) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  create_table "users_channels", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "channel_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["channel_id"], name: "index_users_channels_on_channel_id"
+    t.index ["user_id"], name: "index_users_channels_on_user_id"
+  end
+
+  create_table "users_workspaces", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "workspace_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.string "role"
+    t.index ["user_id"], name: "index_users_workspaces_on_user_id"
+    t.index ["workspace_id"], name: "index_users_workspaces_on_workspace_id"
+  end
+
   create_table "workspaces", force: :cascade do |t|
     t.string "name"
     t.datetime "deleted_at"
@@ -59,4 +78,8 @@ ActiveRecord::Schema.define(version: 2020_08_31_080846) do
 
   add_foreign_key "channels", "workspaces"
   add_foreign_key "messages", "channels"
+  add_foreign_key "users_channels", "channels"
+  add_foreign_key "users_channels", "users"
+  add_foreign_key "users_workspaces", "users"
+  add_foreign_key "users_workspaces", "workspaces"
 end
