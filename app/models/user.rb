@@ -7,6 +7,11 @@ class User < ApplicationRecord
          :omniauthable, omniauth_providers: [:google_oauth2]
          
 
+  has_many :users_workspaces
+  has_many :workspaces, through: :users_workspaces
+  has_many :users_channels
+  has_many :channels, through: :users_channels
+  has_many :messages
 
   def self.find_for_google_oauth2(access_token, signed_in_resource=nil)
     data = access_token.info
@@ -29,4 +34,6 @@ class User < ApplicationRecord
       )
     end
   end
+
+  
 end
