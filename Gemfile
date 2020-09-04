@@ -3,8 +3,6 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.6.5'
 gem 'devise', '~>  4.7.2'
-# 信件測試，不用真的發信
-gem 'letter_opener', group: :development
 # 把事件放到背景處理
 gem 'sidekiq', '~> 6.0', '>= 6.0.3'
 gem 'redis', '~> 4.1', '>= 4.1.3'
