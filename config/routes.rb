@@ -17,7 +17,7 @@ Rails.application.routes.draw do
 
   resources :channels, except: %i[show new create] do
     resource :users_channels
-    # resources :messages
+    resources :messages
   end
   
   # 信件測試
