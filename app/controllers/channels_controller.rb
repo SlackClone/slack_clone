@@ -18,6 +18,7 @@ class ChannelsController < ApplicationController
 
   def show
     @channel = @workspace.channels.find(params[:id])
+    @message = @channel.messages.new
   end
 
   def destroy

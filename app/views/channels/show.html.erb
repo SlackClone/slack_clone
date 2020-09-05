@@ -3,11 +3,10 @@
 </h3>
 
 <% @channel.messages.each do |message| %>
-  <%= message.content %>
-  <%= message.user %>
+  <p><%= message.content %> - <%= message.user %></p>
 <% end %>
 
-<%= form_with(model: @message, url: new_channel_message_path(@channel)) do |form| %>
+<%= form_with(model: @message, url: channel_messages_path(@channel)) do |form| %>
   <%= form.text_field :content, placeholder: "輸入訊息" %>
   <%= form.submit "送出" %>
 <% end %>
