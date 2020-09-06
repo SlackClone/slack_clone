@@ -2,11 +2,14 @@
   聊天室名字:<%= @channel.name %>
 </h3>
 
-<% @channel.messages.each do |message| %>
-  <p><%= message.content %> - <%= message.user %></p>
-<% end %>
+<div class="messages">
+  <% @channel.messages.each do |message| %>
+    <%= render 'messages/message_broadcast', message: message %>
+  <% end %>
+</div>
 
-<%= form_with(model: @message, url: channel_messages_path(@channel)) do |form| %>
-  <%= form.text_field :content, placeholder: "輸入訊息" %>
-  <%= form.submit "送出" %>
-<% end %>
+
+  <%= form_with(model: @message, url: channel_messages_path(@channel), id: "new_message") do |form| %>
+    <%= form.text_field :content, placeholder: "輸入訊息" %>
+    <%= form.submit "送出", id: "send_message_btn" %>
+  <% end %>

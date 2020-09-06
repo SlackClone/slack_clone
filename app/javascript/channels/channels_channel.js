@@ -11,7 +11,9 @@ document.addEventListener('turbolinks:load', ()=>{
     },
   
     received(data) {
-      console.log(data.message)
+      // console.log(data)
+      const messageContainer = document.querySelector('.messages')
+      messageContainer.innerHTML = messageContainer.innerHTML + data.message
     }
   });
 })

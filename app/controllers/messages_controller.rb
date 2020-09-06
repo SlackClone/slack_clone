@@ -7,14 +7,14 @@ class MessagesController < ApplicationController
     @message = @channel.messages.new(message_params)
     # debugger
     if @message.save
-      redirect_to request.referrer, notice: "新增留言成功"
-    else
+      SendMessageJob.perform_later(@message)
+    end
 
   end  
 
 
   private
   def message_params
-    params.require(:message).permit(:content).merge(user: current_user)
+    params.require(:message).permit(:content).merge(user: current_user.id)
   end
 end
