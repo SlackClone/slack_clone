@@ -18,7 +18,7 @@
   <ul>
     <% if user_signed_in? %>
       <p>
-        <%= current_user.email %>
+        <%= current_user.nickname %>
       </p>
       <li>
         <%= link_to "創立新的Workspace", new_workspace_path %>
