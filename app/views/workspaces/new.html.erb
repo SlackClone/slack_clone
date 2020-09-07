@@ -1,7 +1,26 @@
-<%= form_with(model: @workspace, url: workspaces_path) do |f| %>
+
+<div>
+  <%= render "./shared/header" %>
+  <div class="chatroom grid grid-cols-12">
+    <div class="bg-light_sladock text-white col-span-2">
+      <%= form_with(model: @workspace, url: workspaces_path) do |f| %>
   <div>
     <%= f.label :name, "Workspace Name" %>
     <%= f.text_field :name, placeholder: "Enter workspace name"%>
   </div>
-  <%= f.submit "Submit" %>
-<% end %>
+    <%= f.submit "Submit" %>
+  <% end %>
+  </div>
+    <div class=" col-span-10 border border-1">
+    </div>  
+  </div>
+  <div class="chatroom grid grid-cols-12 h-10 border border-1 ">
+    <div class="bg-light_sladock text-white col-span-2">
+    </div>
+    <div class=" col-span-10">
+    </div>  
+  </div>
+
+
+  
+</div>
