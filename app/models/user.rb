@@ -3,7 +3,7 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   # 新增 omniauthable第三方的module
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable,:validatable,:confirmable,
+         :recoverable, :rememberable,:validatable,
          :omniauthable, omniauth_providers: [:google_oauth2]
          
 
