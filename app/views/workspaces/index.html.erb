@@ -1,14 +1,48 @@
-<h3>以下顯示所有的workspaces:</h3>
-<% @workspaces.each do |workspace| %>
-  <p>
-    <%= link_to workspace.name, workspace_path(workspace.id) %>
-    <%= link_to "加入workspace", workspace_users_workspaces_path(workspace.id), method:"post", remote: true %>
-    <%= link_to "離開workspace", workspace_users_workspaces_path(workspace.id), method:"delete", remote: true %>
-  </p>
-<% end %>
-<h3> 以下顯示加入的workspaces:</h3>
-<% @joined_workspace.each do |workspace| %>
-  <p>
-    <%= link_to workspace.workspace.name, workspace_path(workspace.workspace.id)%>
-  </p>
-<% end %>
+
+<div>
+  <div class="header bg-deep_sladock h-10 border border-2">
+    <div class="pt-1 grid grid-cols-4">
+      <div class="w-full search-area flex col-start-2 col-end-4 ">
+        <svg class="h-8 w-8 pr-2" fill="none" viewBox="0 0 24 24" stroke="white">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+        <input class="w-3/4 rounded bg-light_sladock " type="text" placeholder="Search">
+        <svg class="h-8 w-8 pl-2" viewBox="0 0 20 20" fill="white">
+          <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd" />
+        </svg>
+      </div>
+      <div class="profile pr-2 col-span-1 ml-auto">
+        <img class="h-8 w-8 rounded" src="https://ca.slack-edge.com/T018LF2LHK3-U018XMDF20Y-g206a10ded6a-512" alt="">
+      </div>
+    </div>
+  </div>
+  <div class="chatroom grid grid-cols-12">
+    <div class="bg-light_sladock text-white col-span-2">
+        <h3>以下顯示所有的workspaces:</h3>
+        <% @workspaces.each do |workspace| %>
+          <p>
+            <%= link_to workspace.name, workspace_path(workspace.id) %>
+            <%= link_to "加入workspace", workspace_users_workspaces_path(workspace.id), method:"post", remote: true %>
+            <%= link_to "離開workspace", workspace_users_workspaces_path(workspace.id), method:"delete", remote: true %>
+          </p>
+        <% end %>
+        <h3>以下顯示加入的workspaces:</h3>
+        <% @joined_workspace.each do |workspace| %>
+          <p>
+            <%= link_to workspace.workspace.name, workspace_path(workspace.workspace.id)%>
+          </p>
+        <% end %>
+    </div>
+    <div class=" col-span-10 border border-2">
+    </div>  
+  </div>
+  <div class="chatroom grid grid-cols-12 h-10 border border-2 ">
+    <div class="bg-light_sladock text-white col-span-2">
+    </div>
+    <div class=" col-span-10">
+    </div>  
+  </div>
+
+
+  
+</div>
