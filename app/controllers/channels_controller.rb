@@ -18,7 +18,7 @@ class ChannelsController < ApplicationController
 
   def show
     @channel = @workspace.channels.find(params[:id])
-    @message = @channel.messages.new(user_id: current_user.id)
+    @message = @channel.messages.new
   end
 
   def destroy
