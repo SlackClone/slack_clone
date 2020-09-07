@@ -1,3 +1,15 @@
 <h3 id="<%= @channel.id %>" class="chatroomName">
   聊天室名字:<%= @channel.name %>
 </h3>
+
+<div class="messages">
+  <% @channel.messages.each do |message| %>
+    <%= render 'messages/message_broadcast', message: message %>
+  <% end %>
+</div>
+
+
+<%= form_with(model: @message, url: channel_messages_path(@channel), id: "new_message") do |form| %>
+  <%= form.text_field :content, placeholder: "輸入訊息" %>
+  <%= form.submit "送出", id: "send_message_btn" %>
+<% end %>
