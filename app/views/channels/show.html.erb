@@ -9,7 +9,7 @@
 </div>
 
 
-  <%= form_with(model: @message, url: channel_messages_path(@channel), id: "new_message") do |form| %>
-    <%= form.text_field :content, placeholder: "輸入訊息" %>
-    <%= form.submit "送出", id: "send_message_btn" %>
-  <% end %>
+<%= form_with(model: @message, url: channel_messages_path(@channel), id: "new_message") do |form| %>
+  <%= form.text_field :content, placeholder: "輸入訊息" %>
+  <%= form.submit "送出", id: "send_message_btn" %>
+<% end %>
