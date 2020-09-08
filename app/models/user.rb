@@ -6,6 +6,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable,:validatable,:confirmable,
          :omniauthable, omniauth_providers: [:google_oauth2]
          
+  validates :nickname, presence: true
 
   has_many :users_workspaces
   has_many :workspaces, through: :users_workspaces
