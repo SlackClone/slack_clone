@@ -3,17 +3,20 @@
     <%= @workspace.name %>
   </h3> 
 </div>
-<div class="w-full bg-white border px-0"></div>
+<div class="w-full bg-white border "></div>
 <div class="w-full">Threads</div>
 <div class="w-full">Mentions & reactions</div>
 <div class="w-full">Saved items</div>
 <div class="w-full">More</div>
 <div class="w-full">Shared</div>
-<div class="w-full" data-controller="channels">
-  <p class="font-medium">Channels</p>
+<div class="w-full">
+  <p class="font-medium flex justify-between">
+    Channels
+    <%= link_to "new a channel", new_workspace_channels_path(workspace_id: @workspace.id) %>
+  </p>
     <% @channels.each do |channel| %>
-      <li data-target="channels.joined" data-channels-id="<%= channel.id%>">
-        <%= link_to channel.name, workspace_channel_path(workspace_id: @workspace.id, id: channel.id) %><%= channel.users.include?(current_user) ? (link_to "-", channel_users_channels_path(channel.id), method: "delete", remote: true, data:{action: "click->channels#addChannel"}):(link_to "+", channel_users_channels_path(channel.id), method: "post", remote: true, data:{action: "click->channels#removeChannel"}) %></li>
+      <li data-controller="channels" data-channels-id="<%= channel.id %>">
+        <%= link_to channel.name, workspace_channel_path(workspace_id: @workspace.id, id: channel.id) %><%= channel.users.include?(current_user) ? (link_to "-", channel_users_channels_path(channel.id), method: "delete", remote: true, data:{action: "click->channels#addChannel", target: "channels.symbol"}):(link_to "+", channel_users_channels_path(channel.id), method: "post", remote: true, data:{action: "click->channels#removeChannel", target: "channels.symbol"}) %></li>
     <% end %>
 </div>
 <div class="w-full">

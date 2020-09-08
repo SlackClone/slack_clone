@@ -2,7 +2,7 @@
   <%= render "./shared/header" %>
   <div class="chatroom grid grid-cols-12">
     <div class="bg-light_sladock col-span-2">
-      <%= form_with(model: @channel, url:workspace_channels_path(id: @channel.workspace_id)) do |f| %>
+      <%= form_with(model: @channel, url:workspace_channels_path(id: @channel.workspace_id), local:true) do |f| %>
       <div class="field">
         <%= f.label :name, "channel name" %>
         <%= f.text_field :name %>
