@@ -2,15 +2,12 @@
   <%= render "./shared/header" %>
   <div class="chatroom grid grid-cols-12">
     <div class="bg-light_sladock text-white col-span-2">
-      <h3 id="channel-id" data-channel-id="<%= @channel.id %>" >
-        聊天室名字:<%= @channel.name %>
-      </h3>
       <%= render "./shared/leftbar" %>
     </div>
     <div class="h-full col-span-10 border border-1 bg-gray-700">
     <div class="flex-col justify-end pb-12 px-5">
       <% @channel.messages.each do |msg| %>
-        <%= render "messages/message_broadcast" , message: msg%>
+        <%= render "messages/message_broadcast" , message: msg %>
       <% end %>
     </div>
       <%= render "./shared/msgform" %>

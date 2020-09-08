@@ -27,16 +27,6 @@ ActiveRecord::Schema.define(version: 2020_09_07_061206) do
     t.index ["workspace_id"], name: "index_channels_on_workspace_id"
   end
 
-  create_table "ckeditor_assets", force: :cascade do |t|
-    t.string "data_file_name", null: false
-    t.string "data_content_type"
-    t.integer "data_file_size"
-    t.string "type", limit: 30
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["type"], name: "index_ckeditor_assets_on_type"
-  end
-
   create_table "messages", force: :cascade do |t|
     t.text "content"
     t.bigint "channel_id", null: false
@@ -71,7 +61,6 @@ ActiveRecord::Schema.define(version: 2020_09_07_061206) do
     t.bigint "channel_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.datetime "last_read_at"
     t.index ["channel_id"], name: "index_users_channels_on_channel_id"
     t.index ["user_id"], name: "index_users_channels_on_user_id"
   end
