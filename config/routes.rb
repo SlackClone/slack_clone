@@ -20,7 +20,6 @@ Rails.application.routes.draw do
     resources :messages
   end
 
-  resources :direct_messages
   
   # 信件測試
 
