@@ -24,15 +24,23 @@ window.addEventListener('turbolinks:load', function(){
     const html = matchArray.map(place => {
       const regex = new RegExp(this.value, 'g');
       const account = place.nickname.replace(regex, `<span class="hl">${this.value}</span>`);
+      
       return `
-        <div class="bg-gray-300">
-          <span class="name">${account}</span>
+        <div class="bg-gray-200 flex justify-between items-center px-3">
+          <p class="name font-bold">${account}</p>
+          <span class="text-xs text-gray-600">Already in this channel</span>
         </div> `;
     }).join('');
+    console.log(html == '')
     //如果INPUT的值為空的時候清空所有的東西
-    if (searchInput.value) {
+    if (searchInput.value && html !== '') {
+      memberGroup.classList.remove('hidden');
       memberGroup.innerHTML = html;
+    } else if (html == ''){
+      memberGroup.classList.remove('hidden');
+      memberGroup.innerHTML = `<span class="text-gray-600">No one found matching <strong class="text-gray-800">${searchInput.value}</strong></span>`
     } else {
+      memberGroup.classList.add('hidden');
       memberGroup.innerHTML = ''
     }
   }
