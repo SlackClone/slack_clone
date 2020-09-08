@@ -1,8 +1,8 @@
 import consumer from "./consumer"
-document.addEventListener('turbolinks:load', ()=>{
-  const element = document.querySelector(".chatroomName")
-  const chatroomId = element.getAttribute("id")
-  consumer.subscriptions.create("ChannelsChannel", {
+document.addEventListener('turbolinks:load', () => {
+  const elementChannel = document.getElementById('channel-id')
+  const chatroomId = elementChannel.getAttribute("date-channel-id")
+  consumer.subscriptions.create({channel:"ChannelsChannel", channel_id:`${chatroomId}`}, {
     connected() {
       console.log(`connected to channel ${chatroomId}`)
     },

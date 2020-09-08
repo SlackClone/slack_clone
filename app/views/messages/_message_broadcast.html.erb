@@ -1,11 +1,9 @@
-<% if message.content %>
-  <div class="content">
-    <%= message.content %>
-  </div>
-  <div class="author">
-    <%= message.user.email %>
-  </div>
-  <div class="createtime">
-    <%= message.created_at %>
-  </div>
-<% end %>
+<div class="content">
+  <%= message.content %>
+</div>
+<div class="author">
+  <%= message.user.nickname %>
+</div>
+<div class="createtime">
+  <%= message.created_at %>
+</div>
