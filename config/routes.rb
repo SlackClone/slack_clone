@@ -19,7 +19,12 @@ Rails.application.routes.draw do
     resource :users_channels
     resources :messages
   end
-
+  
+  namespace :api do
+    namespace :v1 do
+      resources :users_workspaces, only: [:index]
+    end
+  end
   # 信件測試
 
   if Rails.env.development?

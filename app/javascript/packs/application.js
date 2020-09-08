@@ -7,13 +7,14 @@ require("@rails/ujs").start()
 // require("turbolinks").start()         
 require("@rails/activestorage").start()
 require("channels")
-
+require("stylesheets")
 import "tailwindcss/base";
 import "tailwindcss/components";
 import "tailwindcss/utilities";
 import $ from 'jquery';
 window.jQuery = $
 window.$ = $
+
 
 
 $(document).ready(function () {
