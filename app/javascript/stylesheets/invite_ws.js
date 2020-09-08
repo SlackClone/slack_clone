@@ -1,10 +1,12 @@
 window.addEventListener('turbolinks:load', function(){
-  // const url = ''
+  //索取workspaceId
+  const workspaceId = window.location.href.match(/\d*$/)
+  const url = `http://localhost:3000//api/v1/users_workspaces.json?workspace=${workspaceId[0]}`
   const users = [];
-  fetch('http://localhost:3000//api/v1/users_workspaces.json')
+  fetch(url)
   .then(blob => blob.json())
   .then(data => users.push(...data));
-  const sgggg = document.querySelector('.sgggg')
+  const memberGroup = document.querySelector('.member-group')
   //點選按鈕後會顯示DIV
   document.querySelector('.invite-ws-btn').addEventListener('click', function(){
     document.querySelector('.add-people').classList.remove('hidden');
@@ -16,34 +18,39 @@ window.addEventListener('turbolinks:load', function(){
   //INPUT事件
   const searchInput = document.querySelector('.search')
   searchInput.addEventListener('input',displayMatches)
+  //顯示出符合規則的值並innerHTML
   function displayMatches() {
     const matchArray = findMatches(this.value,users);
     const html = matchArray.map(place => {
-      const regex = new RegExp(this.value, 'gi');
-      const account = place.email.replace(regex, `<span class="hl">${this.value}</span>`);
+      const regex = new RegExp(this.value, 'g');
+      const account = place.nickname.replace(regex, `<span class="hl">${this.value}</span>`);
       return `
-        <li>
+        <div class="bg-gray-300">
           <span class="name">${account}</span>
-        </li>
-      `;
+        </div> `;
     }).join('');
+    //如果INPUT的值為空的時候清空所有的東西
     if (searchInput.value) {
-    sgggg.innerHTML = html;
-  } else {
-    sgggg.innerHTML = ''
+      memberGroup.innerHTML = html;
+    } else {
+      memberGroup.innerHTML = ''
+    }
   }
+  // 找到符合規則的user
+  function findMatches(wordToMatch,users) {
+    return cleanParams(users).filter(place => {
+      // here we need to figure out if the city or state matches what was searched
+      const regex = new RegExp(wordToMatch, 'g');
+      if (place.nickname) {
+        return place.nickname.match(regex)
+      }
+    });
+  }
+  //只有當前的workspace的人才可以被顯示出來
+  function cleanParams(users) {
+    return users.filter((e)=> e.workspace_ids == workspaceId[0])
   }
 
-  function findMatches(wordToMatch,users) {
-    return users.filter(place => {
-      // here we need to figure out if the city or state matches what was searched
-      const regex = new RegExp(wordToMatch, 'gi');
-      return place.email.match(regex)
-     
-    });
-    
-  }
-  
 })
 
 
