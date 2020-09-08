@@ -1,3 +1,12 @@
+<h3 id="channel-id" data-channel-id="<%= @channel.id %>" >
+  聊天室名字:<%= @channel.name %>
+</h3>
+
+<div class="messages">
+  <% @channel.messages.each do |message| %>
+    <%= render 'messages/message_broadcast', message: message %>
+  <% end %>
+</div>
 
 
 <div>
