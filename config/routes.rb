@@ -19,6 +19,8 @@ Rails.application.routes.draw do
     resource :users_channels
     resources :messages
   end
+
+  resources :direct_messages
   
   # 信件測試
 
