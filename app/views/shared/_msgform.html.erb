@@ -1,7 +1,4 @@
 <div class="bg-gray-700 text-white relative h-screen" data-controller="channel" data-channel-id="<%= @channel.id %>">
-  <div class="h-full flex flex-col justify-end pb-12 px-5" data-target="channel.messages">
-    <%= render @channel.messages.order(:created_at) %>
-  </div>
   <div class="xl:w-2/3">
     <%= form_with(model: @message, url:channel_messages_path(@channel.id) , class: "fixed bottom-0 bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500", data: {action: "ajax:success->channel#clearMsg"}) do |f| %>
       <div class="flex">
