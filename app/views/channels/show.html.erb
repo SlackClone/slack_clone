@@ -7,8 +7,8 @@
       </h3>
       <%= render "./shared/leftbar" %>
     </div>
-    <div class="col-span-10 border border-1 bg-gray-700">
-    <div class="flex-col itemsp-end">
+    <div class="h-full col-span-10 border border-1 bg-gray-700">
+    <div class="flex-col justify-end pb-12 px-5">
       <% @channel.messages.each do |msg| %>
         <%= render "messages/message_broadcast" , message: msg%>
       <% end %>
