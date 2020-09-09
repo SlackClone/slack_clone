@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   }
   
   resource :pages, only: [:show]
-
+  
   
   root to: 'workspaces#index'
   resources :workspaces do
@@ -20,7 +20,6 @@ Rails.application.routes.draw do
     resources :messages
   end
 
-  
   # 信件測試
 
   if Rails.env.development?

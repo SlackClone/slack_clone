@@ -8,12 +8,13 @@ class ChannelsController < ApplicationController
   def create
     @channel = @workspace.channels.new(channel_params)
     @channel.users << current_user
+
     if @channel.save
-      redirect_to @workspace, notice: "Chatroom was successfully created."
+      redirect_to workspace_channel_path(@workspace, @channel), notice: "Chatroom was successfully created."
     else
       render :new
     end
-    
+
   end
 
   def show
