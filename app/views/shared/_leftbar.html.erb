@@ -1,0 +1,23 @@
+<div class="flex">
+  <h3 class="chatroomName">
+    <%= @workspace.name %>
+  </h3> 
+</div>
+<div class="w-full bg-white border px-0"></div>
+<div class="w-full">Threads</div>
+<div class="w-full">Mentions & reactions</div>
+<div class="w-full">Saved items</div>
+<div class="w-full">More</div>
+<div class="w-full">Shared</div>
+<div class="w-full">
+  <p class="font-medium">Channels</p>
+    <% @channels.each do |channel| %>
+      <li>
+        <%= link_to channel.name, workspace_channel_path(workspace_id: @workspace.id, id: channel.id), data:{controller: "unreads",unreads_id: channel.id} %>
+        <%= channel.users.include?(current_user) ? (link_to "-", channel_users_channels_path(channel.id), method: "delete", remote: true, leave_channel: channel.id):(link_to "+", channel_users_channels_path(channel.id), method: "post", remote: true, add_channel: channel.id) %>
+      </li>
+    <% end %>
+</div>
+<div class="w-full">
+  <p class="font-medium">Direct messages</p>
+</div>

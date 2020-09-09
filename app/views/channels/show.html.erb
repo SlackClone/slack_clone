@@ -5,23 +5,15 @@
       <h3 id="channel-id" data-channel-id="<%= @channel.id %>" >
         聊天室名字:<%= @channel.name %>
       </h3>
+      <%= render "./shared/leftbar" %>
     </div>
-    <div class=" col-span-10 border border-1">
-    </div>  
-  </div>
-  <div class="chatroom grid grid-cols-12 h-10 border border-1 ">
-    <div class="bg-light_sladock text-white col-span-2">
-    </div>
-    <div class=" col-span-10">
-      <div class="messages">
-        <% @channel.messages.each do |message| %>
-          <%= render 'messages/message_broadcast', message: message %>
-        <% end %>
-      </div>
-      <%= form_with(model: @message, url: channel_messages_path(@channel), id: "new_message") do |form| %>
-        <%= form.text_field :content, placeholder: "輸入訊息" %>
-        <%= form.submit "送出", id: "send_message_btn" %>
+    <div class="h-full col-span-10 border border-1 bg-gray-700">
+    <div class="flex-col justify-end pb-12 px-5">
+      <% @channel.messages.each do |msg| %>
+        <%= render "messages/message_broadcast" , message: msg%>
       <% end %>
+    </div>
+      <%= render "./shared/msgform" %>
     </div>  
   </div>  
 </div>
