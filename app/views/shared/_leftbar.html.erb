@@ -16,7 +16,13 @@
   </p>
     <% @channels.each do |channel| %>
       <li data-controller="channels" data-channels-id="<%= channel.id %>">
-        <%= link_to channel.name, workspace_channel_path(workspace_id: @workspace.id, id: channel.id) %><%= channel.users.include?(current_user) ? (link_to "-", channel_users_channels_path(channel.id), method: "delete", remote: true, data:{action: "click->channels#addChannel", target: "channels.symbol"}):(link_to "+", channel_users_channels_path(channel.id), method: "post", remote: true, data:{action: "click->channels#removeChannel", target: "channels.symbol"}) %></li>
+        <%= link_to channel.name, workspace_channel_path(@workspace, channel) %>
+        <% if channel.users.include?(current_user) %>
+          <%= link_to "-", channel_users_channels_path(channel.id), method: "post", remote: true, data:{action: "click->channels#removeChannel", target: "channels.symbol"} %>
+        <% else %>
+          <%= link_to "+", channel_users_channels_path(channel.id), method: "delete", remote: true, data:{action: "click->channels#addChannel", target: "channels.symbol"} %>
+        <% end %>
+      </li>
     <% end %>
 </div>
 <div class="w-full">
