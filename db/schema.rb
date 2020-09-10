@@ -10,6 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+
 ActiveRecord::Schema.define(version: 2020_09_10_074501) do
 
   # These are extensions that must be enabled in order to support this database
@@ -28,6 +29,7 @@ ActiveRecord::Schema.define(version: 2020_09_10_074501) do
     t.index ["workspace_id"], name: "index_channels_on_workspace_id"
   end
 
+<<<<<<< HEAD
   create_table "directmsgs", force: :cascade do |t|
     t.string "name"
     t.datetime "deleted_at"
@@ -37,6 +39,9 @@ ActiveRecord::Schema.define(version: 2020_09_10_074501) do
     t.index ["workspace_id"], name: "index_directmsgs_on_workspace_id"
   end
 
+=======
+<<<<<<< HEAD
+>>>>>>> g model Directmsg and third model with User, also association
   create_table "invitations", force: :cascade do |t|
     t.string "receiver_email"
     t.string "invitation_token"
@@ -48,6 +53,13 @@ ActiveRecord::Schema.define(version: 2020_09_10_074501) do
     t.index ["accept_at"], name: "index_invitations_on_accept_at"
     t.index ["user_id"], name: "index_invitations_on_user_id"
     t.index ["workspace_id"], name: "index_invitations_on_workspace_id"
+=======
+  create_table "directmsgs", force: :cascade do |t|
+    t.string "name"
+    t.datetime "deleted_at"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+>>>>>>> g model Directmsg and third model with User, also association
   end
 
   create_table "messages", force: :cascade do |t|
