@@ -3,4 +3,5 @@ class Message < ApplicationRecord
   
   belongs_to :user
   belongs_to :channel
+  belongs_to :messageable, :polymorphic => true
 end
