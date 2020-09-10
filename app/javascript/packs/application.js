@@ -11,8 +11,17 @@ require("channels")
 import "tailwindcss/base";
 import "tailwindcss/components";
 import "tailwindcss/utilities";
+import $ from 'jquery';
+window.jQuery = $
+window.$ = $
 
 
+$(document).ready(function () {
+  $('.clickopen').click(function (event) {
+    event.preventDefault();
+    $('.open').slideToggle();
+  });
+});
 
 // Uncomment to copy all static images under ../images to the output folder and reference
 // them with the image_pack_tag helper in views (e.g <%= image_pack_tag 'rails.png' %>)

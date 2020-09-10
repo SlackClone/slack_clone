@@ -1,5 +1,5 @@
 
-<div class="header bg-deep_sladock h-10 border border-1">
+<div class="header bg-deep_sladock h-10 border border-1 ">
     <div class="pt-1 grid grid-cols-4">
       <div class="w-full search-area flex items-center col-start-2 col-end-4 ">
         <svg class="h-8 w-8 pr-2" fill="none" viewBox="0 0 24 24" stroke="white">
@@ -11,7 +11,47 @@
         </svg>
       </div>
       <div class="profile pr-2 col-span-1 ml-auto">
-        <img class="h-8 w-8 rounded" src="https://ca.slack-edge.com/T018LF2LHK3-U018XMDF20Y-g206a10ded6a-512" alt="">
+       <div>
+        <div class="clickopen relative" >
+          <span class="rounded-md shadow-sm">
+            <img img src="https://ca.slack-edge.com/T018LF2LHK3-U018XMDF20Y-g206a10ded6a-32" class="leading-5 transition ease-in-out duration-150" id="options-menu" aria-haspopup="true" aria-expanded="true">
+          </span>
+        </div>
+        <div class="mt-2 w-56 rounded-md shadow-lg hidden open absolute right-0">
+          <div class="rounded-md bg-white shadow-xs" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
+            <div class="pl-2 py-1 flex ">
+              <img src="https://ca.slack-edge.com/T018LF2LHK3-U018XMDF20Y-g206a10ded6a-32" alt="" >
+              <a href="#" class="block px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 hover:text-gray-900 focus:outline-none focus:bg-gray-100 focus:text-gray-900" role="menuitem">Status</a>
+            </div>
+            <div class="border-t border-gray-100"></div>
+            <div class="py-1">
+              <a href="#" class="block px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 hover:text-gray-900 focus:outline-none focus:bg-gray-100 focus:text-gray-900" role="menuitem">Edit profile</a>
+            </div>
+            <div class="border-t border-gray-100"></div>
+            <div class="py-1">
+              <a href="#" class="block px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 hover:text-gray-900 focus:outline-none focus:bg-gray-100 focus:text-gray-900" role="menuitem">sign out</a>
+            </div>
+          </div>
+        </div>
+      </div>
       </div>
     </div>
   </div>
+
+
+
+
+  
+
+
+
+ <!--
+    Dropdown panel, show/hide based on dropdown state.
+
+    Entering: "transition ease-out duration-100"
+      From: "transform opacity-0 scale-95"
+      To: "transform opacity-100 scale-100"
+    Leaving: "transition ease-in duration-75"
+      From: "transform opacity-100 scale-100"
+      To: "transform opacity-0 scale-95"
+  -->
