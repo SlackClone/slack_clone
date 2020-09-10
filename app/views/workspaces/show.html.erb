@@ -42,27 +42,12 @@
       <div class=" col-span-10">
       </div>  
     </div>
-
   </div>
-<<<<<<< HEAD
+  <% end %>
 <% else %>
   <h2>請先加入workspace</h2>
 <% end %>
-=======
-  <% end %>
-</div>
-  <h2>以下顯示已加入的聊天室</h2>
-<div class="active-area">
-  <% @joined_channel.each do |channel| %>
-  <div class="active-channel" channel-id=<%= channel.channel_id %>  >
-    <%= link_to channel.channel.name, workspace_channel_path(workspace_id: @workspace.id, id: channel.channel_id)%>
-  </div>
-  <% end %>
-</div>
-<div>
-  <%= link_to "回首頁", root_path %>
-</div>
-
+<%# button顯示 %>
 <button class="invite-ws-btn h-8 w-8 text-gray-600 rounded hover:bg-gray-100 hover:text-gray-900 active:bg-gray-400 focus:outline-none">
 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z" />
@@ -76,15 +61,14 @@
     <button class="invite-cancel-btn font-bold text-gray-600 focus:outline-none">X</button>
     </div>
     <span class="text-xs text-gray-600">#student</span>
-    <input type="text" placeholder="Search by name or email"class="search relative font-bold px-2 py-2 mb-5 border border-gray-800 rounded block w-full placeholder-gray-600 focus:outline-none focus:shadow-outline" multiple>
-    <div class="member-group hidden absolute top:0 bg-gray-100 py-2 inset-x-0 mx-5 border border-gray-500 rounded" >
-    
-    </div>
+    <%= form_with(model:@invitation,url:workspace_invitations_path(@workspace),method: 'POST') do |f| %>
+      <%= f.text_field :receiver_email,placeholder:"Search by name or email",autocomplete:'off',class:"search relative font-bold px-2 py-2 mb-5 border border-gray-800 rounded block w-full placeholder-gray-600 focus:outline-none focus:shadow-outline" %>
+      <div class="member-group hidden absolute top:0 bg-gray-100 py-2 inset-x-0 mx-5 border border-gray-500 rounded" >
+      </div>
     <div class="text-right">
-      <button class="font-bold text-gray-700 px-5 py-2 mx-2 bg-gray-400 rounded focus:outline-none">Done</button>
+      <%= f.submit 'Done',class:"invite-btn cursor-pointer font-bold text-gray-700 px-5 py-2 mx-2 bg-gray-400 rounded focus:outline-none",disabled: true %>
+    <% end %>
     </div>
   </div>
 </div>
 
-
->>>>>>> 創建api路徑，使用jbuilder撈資料。並新增invite.js實作邀請搜尋功能

@@ -1,0 +1,7 @@
+    <p>
+      You have successfully signed up to example.com,<%= @invitation.receiver_email %>
+    </p>
+    <p>
+      To login to the site, just follow this link:
+    </p>
+    <%= link_to 'join',"/workspaces/#{@invitation.workspace_id}/invitations/accept?token=#{@invitation.invitation_token}"%>

@@ -13,6 +13,9 @@ Rails.application.routes.draw do
     resource :users_workspaces
     resource :channels, only: %i[new create]
     resources :channels, only: [:show]
+    resource :invitations, only: [:create] do
+      get :accept
+    end
   end
 
   resources :channels, except: %i[show new create] do
@@ -26,7 +29,6 @@ Rails.application.routes.draw do
     end
   end
   # 信件測試
-
   if Rails.env.development?
      mount LetterOpenerWeb::Engine, at: "/letter_opener"
   end
