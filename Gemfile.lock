@@ -81,6 +81,8 @@ GEM
       railties (>= 4.1.0)
       responders
       warden (~> 1.2.3)
+    devise-i18n (1.9.2)
+      devise (>= 4.7.1)
     diff-lcs (1.4.4)
     erubi (1.9.0)
     factory_bot (6.1.0)
@@ -281,6 +283,7 @@ DEPENDENCIES
   byebug
   capybara (>= 2.15)
   devise (~> 4.7.2)
+  devise-i18n (~> 1.9, >= 1.9.2)
   factory_bot_rails (~> 6.1)
   faker (~> 2.13)
   figaro (~> 1.2)
