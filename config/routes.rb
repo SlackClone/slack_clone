@@ -16,6 +16,7 @@ Rails.application.routes.draw do
     resource :invitations, only: :create do
       get :accept
     end
+    resources :directmsgs, only: [:show]
   end
 
   resources :channels, except: %i[show new create] do

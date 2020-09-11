@@ -5,11 +5,11 @@
       <%= render "./shared/leftbar" %>
     </div>
     <div class="h-full col-span-10 border border-1 bg-gray-700">
-    <div class="flex-col justify-end pb-12 px-5 messages">
-      <% @channel.messages.each do |msg| %>
-        <%= render "messages/message_broadcast" , message: msg %>
-      <% end %>
-    </div>
+      <div class="flex-col justify-end pb-12 px-5 messages">
+        <% (@channel || @directmsg).messages.each do |msg| %>
+          <%= render "messages/message_broadcast" , message: msg %>
+        <% end %>
+      </div>
       <%= render "./shared/msgform" %>
     </div>  
   </div>  
