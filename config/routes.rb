@@ -29,6 +29,11 @@ Rails.application.routes.draw do
       resources :users_workspaces, only: [:index]
     end
   end
+
+  resources :directmsgs, only: [:show] do
+    resources :messages, only: [:create]
+  end
+
   # 信件測試
   if Rails.env.development?
      mount LetterOpenerWeb::Engine, at: "/letter_opener"

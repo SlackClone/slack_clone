@@ -2,14 +2,23 @@ class MessagesController < ApplicationController
   before_action :authenticate_user!
 
   def create
-    
-    @channel = Channel.find(params[:channel_id])
-    @message = @channel.messages.new(message_params)
     # debugger
-    if @message.save
-      SendMessageJob.perform_later(@message)
+    if params[:channel_id]
+      @channel = Channel.find(params[:channel_id])
+      @message = @channel.messages.new(message_params)
+      channel_id = params[:channel_id]
+      if @message.save
+        SendChannelMessageJob.perform_later(@message, channel_id)
+      end
+    else
+      @directmsg = Directmsg.find(params[:directmsg_id])
+      @message = @directmsg.messages.new(message_params)
+      directmsg_id = params[:directmsg_id]
+      if @message.save
+        SendDirectMessageJob.perform_later(@message, directmsg_id)
+      end
     end
-
+    
   end  
 
 

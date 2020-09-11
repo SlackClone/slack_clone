@@ -10,7 +10,11 @@
           <%= render "messages/message_broadcast" , message: msg %>
         <% end %>
       </div>
-      <%= render "./shared/msgform" %>
+      <% if @channel %>
+        <%= render "./shared/msgform" %>
+      <% else %>
+        <%= render "./shared/msgform_direct" %>
+      <% end %>
     </div>  
   </div>  
 </div>

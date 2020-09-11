@@ -8,6 +8,7 @@ consumer.subscriptions.create("ChannelsChannel", {
   },
   
   received(data) {
+    console.log(data)
     const messageContainer = document.querySelector('.messages')
     messageContainer.innerHTML = messageContainer.innerHTML + data.message
   }

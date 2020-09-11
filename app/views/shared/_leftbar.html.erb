@@ -28,6 +28,8 @@
 <div class="w-full">
   <p class="font-medium">Direct messages</p>
   <% (@workspace.users - [current_user]).each do |user| %>
-    <%= link_to user.nickname, workspace_directmsg_path(@workspace, user.id) %>
+    <li>
+      <%= link_to user.nickname, workspace_directmsg_path(@workspace, user.id) %>
+    </li>
   <% end %>
 </div>
