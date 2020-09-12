@@ -1,0 +1,5 @@
+zh-TW:
+  controller:
+    channels:
+      create: '成功建立聊天室'
+      

@@ -75,17 +75,4 @@ zh-TW:
     attributes:
       user:
         nickname: '暱稱'
-    errors:
-      models:
-        user:
-          attributes:
-            email:
-              blank: '不可為空'
-            password: 
-              blank: '不可為空'
-              too_short: '密碼輸入過短!'
-            nickname:
-              blank: '不可為空'
-            password_confirmation:
-              confirmation: '兩次密碼輸入不同，請重新輸入'
               

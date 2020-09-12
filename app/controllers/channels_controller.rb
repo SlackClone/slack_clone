@@ -10,7 +10,7 @@ class ChannelsController < ApplicationController
     @channel.users << current_user
 
     if @channel.save
-      redirect_to workspace_channel_path(@workspace, @channel), notice: "Chatroom was successfully created."
+      redirect_to workspace_channel_path(@workspace, @channel), notice: I18n.t('controller.channels.create')
     else
       render :new
     end
