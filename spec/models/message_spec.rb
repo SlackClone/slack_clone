@@ -6,6 +6,6 @@ RSpec.describe Message, type: :model do
   end
 
   describe 'association' do
-    it { should belong_to(:channel) }
+    it { should belong_to(:messageable) }
   end
 end
