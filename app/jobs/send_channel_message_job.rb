@@ -6,7 +6,9 @@ class SendChannelMessageJob < ApplicationJob
       message: ApplicationController.render(
                 partial: 'messages/message_broadcast',
                 locals: { message: message }
-              )
+              ),
+      user: "#{message.user.nickname}",
+      from: "#{message.channel.name}"
     }
   end
 end

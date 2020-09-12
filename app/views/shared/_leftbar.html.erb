@@ -15,14 +15,15 @@
     <%= link_to t(".channel.new"), new_workspace_channels_path(workspace_id: @workspace.id) %>
   </p>
     <% @channels.each do |channel| %>
-      <li data-controller="channels" data-channels-id="<%= channel.id %>">
+      <div data-controller="channels" data-channels-id="<%= channel.id %>">
+        <span>#</span>
         <%= link_to channel.name, workspace_channel_path(@workspace, channel) %>
         <% if channel.users.include?(current_user) %>
           <button data-action="click->channels#removeChannel" data-target="channels.symbol">-</button>
         <% else %>
           <button data-action="click->channels#addChannel" data-target="channels.symbol">+</button>
         <% end %>
-      </li>
+      </div>
     <% end %>
 </div>
 <div class="w-full">
