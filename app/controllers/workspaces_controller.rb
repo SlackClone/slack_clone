@@ -22,6 +22,7 @@ class WorkspacesController < ApplicationController
   end
 
   def show
+    @invitation = Invitation.new
     @joined_channel = UsersChannel.where(user_id: current_user.id).where(channel_id: @workspace.channels.ids)
   end
 
