@@ -4,8 +4,7 @@
     <div class="bg-light_sladock text-white col-span-2 px-2" data-controller="unread-msgs">
       <%= render "./shared/leftbar" %>
     </div>
-
-    <div class="h-full col-span-10 border border-1 bg-gray-700" data-controller="subscribe"  data-subscribe-id="<%= @workspace.id %>" >
+    <div class="h-full col-span-10 border border-1 bg-gray-700" data-controller="subscribe"  data-subscribe-id="<%= @workspace.id %>" data-subscribe-channel="<%= @channel.id %>">
       <div class="pb-12 px-5 messages" data-target="subscribe.messages">
         <% (@channel || @directmsg).messages.order(:created_at).each do |msg| %>
           <%= render "messages/message_broadcast" , message: msg %>

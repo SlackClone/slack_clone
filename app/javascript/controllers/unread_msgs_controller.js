@@ -1,13 +1,13 @@
-import { Controller } from "stimulus"
-import consumer from "channels/consumer"
+// import { Controller } from "stimulus"
+// import consumer from "channels/consumer"
 
-export default class extends Controller {
-  static targets = ["messages", "newMessage"]
+// export default class extends Controller {
+//   static targets = ["messages", "newMessage"]
 
-  connect() {
-    this.unread = consumer.subscriptions.create({channel: "Channelschannel"})
-  }
-  disconnect(){
+//   connect() {
+//     this.unread = consumer.subscriptions.create({channel: "Channelschannel"})
+//   }
+//   disconnect(){
     
-  }
-}
+//   }
+// }
