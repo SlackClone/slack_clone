@@ -28,7 +28,6 @@ ActiveRecord::Schema.define(version: 2020_09_10_074501) do
     t.index ["workspace_id"], name: "index_channels_on_workspace_id"
   end
 
-<<<<<<< HEAD
   create_table "directmsgs", force: :cascade do |t|
     t.string "name"
     t.datetime "deleted_at"
@@ -38,8 +37,6 @@ ActiveRecord::Schema.define(version: 2020_09_10_074501) do
     t.index ["workspace_id"], name: "index_directmsgs_on_workspace_id"
   end
 
-=======
->>>>>>> add workspace_id to Directmsg
   create_table "invitations", force: :cascade do |t|
     t.string "receiver_email"
     t.string "invitation_token"
@@ -53,26 +50,15 @@ ActiveRecord::Schema.define(version: 2020_09_10_074501) do
     t.index ["workspace_id"], name: "index_invitations_on_workspace_id"
   end
 
-  create_table "directmsgs", force: :cascade do |t|
-    t.string "name"
-    t.datetime "deleted_at"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
   create_table "messages", force: :cascade do |t|
     t.text "content"
     t.datetime "deleted_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "user_id", null: false
-<<<<<<< HEAD
     t.string "messageable_type", null: false
     t.bigint "messageable_id", null: false
     t.index ["messageable_type", "messageable_id"], name: "index_messages_on_messageable_type_and_messageable_id"
-=======
-    t.index ["channel_id"], name: "index_messages_on_channel_id"
->>>>>>> add workspace_id to Directmsg
     t.index ["user_id"], name: "index_messages_on_user_id"
   end
 
