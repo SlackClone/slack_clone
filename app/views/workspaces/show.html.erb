@@ -3,7 +3,7 @@
     <%= render "./shared/header" %>
     <div class="chatroom grid grid-cols-12">
       <div class="bg-light_sladock text-white col-span-2 h-screen_94">
-        <h1><%= t(".name",name:@workspace.name) %></h1>
+        <h1><%= t(".name",name: @workspace.name) %></h1>
         <%= link_to t(".create_channel"), new_workspace_channels_path(@workspace.id) %>
         <h2><%= t(".all_channels",name:@workspace.name) %></h2>
       <div>
