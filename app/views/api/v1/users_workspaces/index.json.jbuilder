@@ -1,2 +1,2 @@
 
-json.array! @user,:email,:nickname,:workspace_ids
+json.array! @users,:email,:nickname,:workspace_ids

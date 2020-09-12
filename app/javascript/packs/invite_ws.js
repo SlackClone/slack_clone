@@ -1,22 +1,20 @@
-
-window.addEventListener('DOMContentLoaded', function(){
+window.addEventListener('DOMContentLoaded', () => {
   if (document.querySelector('.invite-ws-btn')) {
     //索取workspaceId
     const workspaceId = window.location.href.match(/\d*$/)
-    const url = `http://localhost:3000//api/v1/users_workspaces.json?workspace=${workspaceId[0]}`
+    const url = `/api/v1/users_workspaces.json?workspace=${workspaceId[0]}`
     const inviteBtn = document.querySelector('.invite-btn')
     const users = []
     fetch(url)
-    .then(blob => blob.json())
-    .then(data => users.push(...data))
-  
+      .then(blob => blob.json())
+      .then(data => users.push(...data))
     const memberGroup = document.querySelector('.member-group')
     //點選按鈕後會顯示DIV
-    document.querySelector('.invite-ws-btn').addEventListener('click', function(){
+    document.querySelector('.invite-ws-btn').addEventListener('click', () => {
       document.querySelector('.add-people').classList.remove('hidden')
     })
     //點選按鈕後會顯示XX會取消DIV
-    document.querySelector('.invite-cancel-btn').addEventListener('click', function(){
+    document.querySelector('.invite-cancel-btn').addEventListener('click', () => {
       document.querySelector('.add-people').classList.add('hidden')
     })
     //INPUT事件
@@ -26,13 +24,12 @@ window.addEventListener('DOMContentLoaded', function(){
     function displayMatches() {
       const matchArray = findMatches(this.value,users)
       const html = matchArray.map(place => {
-        const regex = new RegExp(this.value, 'g')
-        const nickname = place.nickname.replace(regex, `<span class="hl">${this.value}</span>`)
-        return `
-          <div class="bg-gray-200 flex justify-between items-center px-3">
-            <p class="name font-bold">${nickname}</p>
-            <span class="text-xs text-gray-600">Already in this channel</span>
-          </div> `
+      const nickname = place.nickname
+      return `
+        <div class="bg-gray-200 flex justify-between items-center px-3">
+          <p class="name font-bold"><span class="hl">${nickname}</span></p>
+          <span class="text-xs text-gray-600">Already in this channel</span>
+        </div> `
       }).join('')
       
       //如果INPUT的值不為空而且html不為空的時候顯示memberGroup
@@ -45,17 +42,20 @@ window.addEventListener('DOMContentLoaded', function(){
         inviteBtn.removeAttribute('disabled')
         inviteBtn.value = 'Add'
         inviteBtn.classList.add('bg-blue-500','text-white')
-        inviteBtn.addEventListener('click',function(){
+        inviteBtn.addEventListener('click', () => {
           document.querySelector('.add-people').classList.add('hidden')
         })
         //如果INPUT的值不符合EMAIL格式的話顯示memberGroup而且HTML為空的時候隱藏memberGroup且顯示找不到的SPAN
       } else if (!searchInput.value.match(/^[^@\s]+@[^@\s]+\.[^@\s]+$/) && html == '') {
         memberGroup.classList.remove('hidden')
-        memberGroup.innerHTML = `<span class="hl">No one found matching ${searchInput.value}</span>`
+        memberGroup.innerHTML = `<span>No one found matching ${searchInput.value}</span>`
       } else {
         //輸入然後再一次清空的時候將CLASS加回去
         memberGroup.classList.add('hidden')
         memberGroup.innerHTML = ''
+        inviteBtn.classList.remove('bg-blue-500','text-white')
+        inviteBtn.value = 'Done'
+        inviteBtn.setAttribute('disabled','')
       }
     }
     // 找到符合規則的user

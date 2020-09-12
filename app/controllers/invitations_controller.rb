@@ -10,15 +10,12 @@ class InvitationsController < ApplicationController
     if @invitation.save
       MyMailer.invite(@invitation).deliver_now
       redirect_to workspaces_path, notice: "邀請成功"
-    else
-      puts @invitation.errors.full_messages
-      puts "something goes wrong"
     end
   end
 
   def accept
     if find_invitation && current_user.email == find_receiver_email
-      if @workspace.users.find_by(email: find_receiver_email) == nil
+      unless @workspace.users.find_by(email: find_receiver_email)
         @workspace.users << User.find_by(email: find_receiver_email)
         find_invitation.touch(:accept_at)
         redirect_to @workspace,notice: "歡迎#{find_receiver_email}"
@@ -39,10 +36,10 @@ private
   end
 
   def find_receiver_email
-    Invitation.find_by(invitation_token: params[:token]).receiver_email
+    Invitation.find_by(invitation_token: params[:token]).try(:receiver_email)
   end
 
   def find_invitation
-    Invitation.find_by(invitation_token: params[:token])
+    Invitation.find_by(invitation_token: params[:token]) if params[:token]
   end
 end

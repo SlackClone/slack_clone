@@ -48,10 +48,8 @@
   <h2>請先加入workspace</h2>
 <% end %>
 <%# button顯示 %>
-<button class="invite-ws-btn h-8 w-8 text-gray-600 rounded hover:bg-gray-100 hover:text-gray-900 active:bg-gray-400 focus:outline-none">
-<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z" />
-</svg>
+<button class="invite-ws-btn h-8 w-8  rounded hover:bg-gray-100 hover:stroke-gray active:bg-gray-400 focus:outline-none">
+  <%= inline_svg_pack_tag( "media/images/invite.svg" , class: "stroke-current text-gray-600 hover:stroke-gray") %>
 </button>
 
 <div class="add-people absolute w-full h-full top-0 bg-black bg-opacity-25 hidden flex justify-center items-center">

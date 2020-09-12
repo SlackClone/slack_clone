@@ -418,6 +418,7 @@ module.exports = {
     }),
     stroke: {
       current: "currentColor",
+      gray: "#1a202c"
     },
     strokeWidth: {
       0: "0",
@@ -751,7 +752,7 @@ module.exports = {
     position: ['responsive'],
     resize: ['responsive'],
     space: ['responsive'],
-    stroke: ['responsive'],
+    stroke: ['responsive', 'hover', 'focus'],
     strokeWidth: ['responsive'],
     tableLayout: ['responsive'],
     textAlign: ['responsive'],
