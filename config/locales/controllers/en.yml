@@ -1,0 +1,11 @@
+en:
+  channels:
+    create: "Create channels successfully!"
+  invitations:
+    create: "Invite %{receiver}!"
+    accept: "Welcome %{new_member}!"
+  users_workspaces:
+    create: "Ensure joined"
+    destroy: "Ensure leaved" 
+  workspaces:
+    create: "Welcome to %{workspace}"

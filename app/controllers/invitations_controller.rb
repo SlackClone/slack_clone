@@ -9,7 +9,7 @@ class InvitationsController < ApplicationController
     )
     if @invitation.save
       MyMailer.invite(@invitation).deliver_now
-      redirect_to workspaces_path, notice: "邀請成功"
+      redirect_to workspaces_path, notice: I18n.t("invitations.create",receiver: @invitation.receiver_email)
     end
   end
 
@@ -18,7 +18,7 @@ class InvitationsController < ApplicationController
       unless @workspace.users.find_by(email: find_receiver_email)
         @workspace.users << User.find_by(email: find_receiver_email)
         find_invitation.touch(:accept_at)
-        redirect_to @workspace,notice: "歡迎#{find_receiver_email}"
+        redirect_to @workspace,notice: I18n.t("invitations.accept",new_member: find_receiver_email)
       end
     else
       redirect_to workspaces_path

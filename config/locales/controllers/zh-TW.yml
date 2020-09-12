@@ -1,5 +1,11 @@
 zh-TW:
-  controller:
-    channels:
-      create: '成功建立聊天室'
-      
+  channels:
+    create: "成功建立聊天室"
+  invitations:
+    create: "邀請%{receiver}加入"
+    accept: "歡迎%{new_member}"
+  users_workspaces:
+    create: "確認加入"
+    destroy: "確認離開" 
+  workspaces:
+    create: "歡迎加入 %{workspace}"

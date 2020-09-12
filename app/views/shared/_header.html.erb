@@ -5,7 +5,7 @@
         <svg class="h-8 w-8 pr-2" fill="none" viewBox="0 0 24 24" stroke="white">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
         </svg>
-        <input class="w-3/4 h-6 rounded bg-light_sladock " type="text" placeholder="Search">
+        <input class="w-3/4 h-6 rounded bg-light_sladock " type="text" placeholder=<%= t("header.search.placeholder") %> >
         <svg class="h-8 w-8 pl-2" viewBox="0 0 20 20" fill="white">
           <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd" />
         </svg>
@@ -21,15 +21,15 @@
           <div class="rounded-md bg-white shadow-xs" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
             <div class="pl-2 py-1 flex ">
               <img src="https://ca.slack-edge.com/T018LF2LHK3-U018XMDF20Y-g206a10ded6a-32" alt="" >
-              <a href="#" class="block px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 hover:text-gray-900 focus:outline-none focus:bg-gray-100 focus:text-gray-900" role="menuitem">Status</a>
+              <a href="#" class="block px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 hover:text-gray-900 focus:outline-none focus:bg-gray-100 focus:text-gray-900" role="menuitem"><%= t("header.profile.status") %></a>
             </div>
             <div class="border-t border-gray-100"></div>
             <div class="py-1">
-              <a href="#" class="block px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 hover:text-gray-900 focus:outline-none focus:bg-gray-100 focus:text-gray-900" role="menuitem">Edit profile</a>
+              <a href="#" class="block px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 hover:text-gray-900 focus:outline-none focus:bg-gray-100 focus:text-gray-900" role="menuitem"><%= t("header.profile.edit") %></a>
             </div>
             <div class="border-t border-gray-100"></div>
             <div class="py-1">
-              <%= link_to 'sign out',destroy_user_session_path,method:'DELETE',class: 'block px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 hover:text-gray-900 focus:outline-none focus:bg-gray-100 focus:text-gray-900" role="menuitem' %>
+              <%= link_to t("header.profile.sign_out"), destroy_user_session_path, method: "DELETE", class: "block px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 hover:text-gray-900 focus:outline-none focus:bg-gray-100 focus:text-gray-900",role: "menuitem" %>
             </div>
           </div>
         </div>
