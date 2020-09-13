@@ -14,15 +14,23 @@ export default class extends Controller {
       )
     }
   disconnect(){
-    
+    consumer.subscriptions.remove(this.subscription)
   }
   subscribe(){
-    console.log("hi")
+    console.log("Notification On")
   }
   unsubscribe(){
-
   }
   notification(data){
-    console.log("really?")
+    const title = `New message in ${data.from}`
+    const body = `a message from ${data.user}`
+    const channelId = `${data.id}`
+    const sharpSignal = document.getElementById(`${channelId}`)
+    
+    sharpSignal.classList.add("bg-red-400")
+    
+    if (Notification.permission =="granted"){
+      new Notification(title, {body: body})
+    }
   }
 }

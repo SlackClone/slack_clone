@@ -9,6 +9,7 @@ class MessagesController < ApplicationController
       channel_id = params[:channel_id]
       if @message.save
         SendChannelMessageJob.perform_later(@message, channel_id)
+        ActionCable.server.broadcast "notification:#{@channel.id}", {from: @channel.name, user: current_user.nickname, id: @channel.id}
       end
     else
       @directmsg = Directmsg.find(params[:directmsg_id])
@@ -17,8 +18,6 @@ class MessagesController < ApplicationController
       if @message.save
         SendDirectMessageJob.perform_later(@message, directmsg_id)
       end
-    end
-    
   end  
 
 
