@@ -1,9 +1,9 @@
 FactoryBot.define do
   factory :invitation do
-    receiver_email { "MyString" }
-    invitation_token { "MyString" }
-    user_id { nil }
-    workspace_id { nil }
-    accept_at { "2020-09-10 10:35:46" }
+    association :user
+    association :workspace
+    receiver_email { Faker::Internet.email }
+    invitation_token { Faker::Lorem.characters(number: 20) }
+    accept_at { deleted_at { Faker::Date.in_date_period } }
   end
 end
