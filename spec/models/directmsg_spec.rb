@@ -1,5 +1,14 @@
 require 'rails_helper'
 
 RSpec.describe Directmsg, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  describe 'validations' do
+    it { should validate_presence_of(:name) }
+  end
+
+  describe 'association' do
+    it { should have_many(:users_directmsgs) }
+    it { should have_many(:users) }
+    it { should have_many(:messages) }
+    it { should belong_to(:workspace) }
+  end
 end
