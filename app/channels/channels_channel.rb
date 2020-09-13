@@ -8,4 +8,8 @@ class ChannelsChannel < ApplicationCable::Channel
   def unsubscribed
     stop_all_streams
   end
+
+  def update_enter_time
+    @channel_user.touch(:last_enter_at)
+  end
 end

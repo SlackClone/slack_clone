@@ -1,7 +1,7 @@
 <div>
   <%= render "./shared/header" %>
   <div class="chatroom grid grid-cols-12">
-    <div class="bg-light_sladock text-white col-span-2 px-2" data-controller="unread-msgs">
+    <div class="bg-light_sladock text-white col-span-2 px-2" data-controller="notification" data-notification-workspace="<%= @workspace.id %>" data-notification-id="<%= @channel.id %>">
       <%= render "./shared/leftbar" %>
     </div>
     <div class="h-full col-span-10 border border-1 bg-gray-700" data-controller="subscribe"  data-subscribe-id="<%= @workspace.id %>" data-subscribe-channel="<%= @channel.id %>">

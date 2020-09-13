@@ -1,4 +1,11 @@
 <div>
+  <% if !@divide_exist && @last_enter_at && @last_enter_at < message.created_at %>
+    <% @divide_exist = true %>
+    <div class='flex text-right divide'>
+      <span class='h-0 border-b-0 border-t-2 block w-full border-red-600 my-auto'></span>
+      <span class="pl-3">new</span>
+    </div>
+  <% end%>
   <div class="author font-bold">
     <%= message.user.nickname %>
   </div>
