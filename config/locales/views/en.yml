@@ -1,30 +1,33 @@
 en:
-  header:
-    search:
-      placeholder: 'Search'
-    profile:
-      status: 'Status'
-      edit: 'Edit profile'
-      sign_out: 'Sign out'
-  leftbar:
-    sidebar:
-      threads: 'Threads'
-      Mentions: 'Mentions & reactions'
-      save: 'Saved items'
-      more: '...More'
-      shared: 'Shared'
-    channel:
-      name: 'Channel'
-      new: 'new a channel'
-      direct: 'Direct messages'
-  msgform:
-    placeholder: 'Please enter a messages'
-  channel:
+  shared:
+    header:
+      search:
+        placeholder: 'Search'
+      profile:
+        status: 'Status'
+        edit: 'Edit profile'
+        sign_out: 'Sign out'
+    leftbar:
+      sidebar:
+        threads: 'Threads'
+        Mentions: 'Mentions & reactions'
+        save: 'Saved items'
+        more: '...More'
+        shared: 'Shared'
+      channel:
+        name: 'Channel'
+        new: 'New a channel'
+        direct: 'Direct messages'
+    msgform:
+      placeholder: 'Please enter a messages'
+    msgform_direct:
+      placeholder: 'Please enter a messages'
+  channels:
     new:
       name: 'Channel name'
       topic: 'Topic'
       description: 'Description'
-  workspace:
+  workspaces:
     index:
       all_workspaces: 'Display all workspaces:'
       join: 'Join workspace'
@@ -41,17 +44,12 @@ en:
       join_channel: 'Join Channel'
       leave_channel: 'Leave Channel'
       your_channels: 'Your own channels'
-    error:
+    notification:
       messages:
         join: 'Please enther in workspace'
   invite:
     add_people: 'Add people'
     placeholder: 'Search by email or name'
-    done: 'Done'
-  form:
-    submit: 'Submit'
-  index:
-    back: 'Back to index'
-
+    send: 'Send'
       
       

@@ -1,30 +1,33 @@
 zh-TW:
-  header:
-    search:
-      placeholder: '搜尋'
-    profile:
-      status: '狀態'
-      edit: '編輯個人資料'
-      sign_out: '登出'
-  leftbar:
-    sidebar:
-      threads: 'Threads'
-      mentions: 'Mentions & reactions'
-      save: '資料存放區'
-      more: '...看更多'
-      shared: '已分享'
-    channel:
-      name: '聊天室'
-      new: '建立新聊天室'
-      direct: '一對一聊天'
-  msgform:
-    placeholder: '請輸入訊息'
-  channel:
+  shared:
+    header:
+      search:
+        placeholder: '搜尋'
+      profile:
+        status: '狀態'
+        edit: '編輯個人資料'
+        sign_out: '登出'
+    leftbar:
+      sidebar:
+        threads: 'Threads'
+        mentions: 'Mentions & reactions'
+        save: '資料存放區'
+        more: '...看更多'
+        shared: '已分享'
+      channel:
+        name: '頻道名稱'
+        new: '建立新聊天室'
+        direct: '一對一聊天'
+    msgform:
+      placeholder: '請輸入訊息'
+    msgform_direct:
+      placeholder: '請輸入訊息'
+  channels:
     new:
       name: '頻道名稱'
       topic: '標題'
       description: '頻道描述'
-  workspace:
+  workspaces:
     index:
       all_workspaces: '以下顯示所有的workspaces:'
       join: '加入workspace'
@@ -41,16 +44,12 @@ zh-TW:
       join_channel: '加入聊天室'
       leave_channel: '離開聊天室'
       your_channels: '以下顯示已加入的聊天室'
-    error:
+    notification:
       messages:
         join: '請先加入workspace'
   invite:
     add_people: '邀請成員加入'
     placeholder: '依信箱或暱稱搜尋'
-    done: '請輸入'
-  form:
-    submit: '送出'
-  index:
-    back: '回首頁'
-      
+    send: '發送'
+
       

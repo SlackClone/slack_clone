@@ -1,0 +1,7 @@
+zh-TW:
+  utilities:
+    submit: '送出'
+    back_home: '回首頁'
+    messages: 
+      delete: "確定要刪除嗎？"
+  

@@ -5,10 +5,10 @@
     <div class="bg-light_sladock col-span-2">
       <%= form_with(model: @workspace, url: workspaces_path) do |f| %>
   <div>
-    <%= f.label :name,t("workspace.new.name"), class:"text-white font-bold"%>
-    <%= f.text_field :name, placeholder: t("workspace.new.placeholder")%>
+    <%= f.label :name,t(".name"), class:"text-white font-bold"%>
+    <%= f.text_field :name, placeholder: t(".placeholder")%>
   </div>
-    <%= f.submit t("form.submit") %>
+    <%= f.submit t("utilities.submit") %>
   <% end %>
   </div>
     <div class="col-span-10 border border-1">

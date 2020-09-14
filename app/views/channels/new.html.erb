@@ -4,18 +4,18 @@
     <div class="bg-light_sladock col-span-2">
       <%= form_with(model: @channel, url:workspace_channels_path(id: @channel.workspace_id), local:true) do |f| %>
       <div class="field">
-        <%= f.label :name, t("channel.new.name"), class: "text-white font-bold" %>
+        <%= f.label :name, t(".name"), class: "text-white font-bold" %>
         <%= f.text_field :name %>
       </div>
       <div class="field">
-        <%= f.label :topic, t("channel.new.topic"), class: "text-white font-bold" %>
+        <%= f.label :topic, t(".topic"), class: "text-white font-bold" %>
         <%= f.text_field :topic %>
       </div>
       <div class="field">
-        <%= f.label :description, t("channel.new.description"), class: "text-white font-bold" %>
+        <%= f.label :description, t(".description"), class: "text-white font-bold" %>
         <%= f.text_field :description %>
       </div>
-        <%= f.submit t("form.submit") %>
+        <%= f.submit t("utilities.submit") %>
       <% end %>
     </div>
     <div class=" col-span-10 border border-1">

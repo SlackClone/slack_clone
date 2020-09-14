@@ -18,12 +18,14 @@ class InvitationsController < ApplicationController
       unless @workspace.users.find_by(email: find_receiver_email)
         @workspace.users << User.find_by(email: find_receiver_email)
         find_invitation.touch(:accept_at)
+        # sign_in user
         redirect_to @workspace,notice: I18n.t("invitations.accept",new_member: find_receiver_email)
       end
     else
       redirect_to workspaces_path
     end
   end
+
 
 private
 

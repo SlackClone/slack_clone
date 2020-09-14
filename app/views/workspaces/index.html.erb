@@ -3,15 +3,15 @@
   <%= render "./shared/header" %>
   <div class="chatroom grid grid-cols-12">
     <div class="bg-light_sladock text-white col-span-2">
-        <h3><%= t("workspace.index.all_workspaces") %></h3>
+        <h3><%= t(".all_workspaces") %></h3>
         <% @workspaces.each do |workspace| %>
           <p>
             <%= link_to workspace.name, workspace_path(workspace.id) %>
-            <%= link_to t("workspace.index.join"), workspace_users_workspaces_path(workspace.id), method:"post", remote: true %>
-            <%= link_to t("workspace.index.leave"), workspace_users_workspaces_path(workspace.id), method:"delete", remote: true %>
+            <%= link_to t(".join"), workspace_users_workspaces_path(workspace.id), method:"post", remote: true %>
+            <%= link_to t(".leave"), workspace_users_workspaces_path(workspace.id), method:"delete", remote: true %>
           </p>
         <% end %>
-        <h3><%= t("workspace.index.your_workspaces") %></h3>
+        <h3><%= t(".your_workspaces") %></h3>
         <% @joined_workspace.each do |workspace| %>
           <p>
             <%= link_to workspace.workspace.name, workspace_path(workspace.workspace.id)%>

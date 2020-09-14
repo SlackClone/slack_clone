@@ -1,0 +1,7 @@
+en:
+  utilities:
+    submit: 'submit'
+    back_home: 'Home'
+    messages: 
+      delete: "Are you sure you want to delete?"
+  
