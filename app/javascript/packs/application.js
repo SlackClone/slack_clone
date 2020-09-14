@@ -9,6 +9,7 @@ require("@rails/activestorage").start()
 require("channels")
 require("stylesheets")
 import "./invite_ws.js"
+import "./invite_ch.js"
 import "tailwindcss/base";
 import "tailwindcss/components";
 import "tailwindcss/utilities";

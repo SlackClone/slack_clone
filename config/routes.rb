@@ -25,7 +25,9 @@ Rails.application.routes.draw do
   end
 
   resources :channels, except: %i[show new create] do
-    resource :users_channels
+    resource :users_channels do 
+      post :invite
+    end
     resources :messages
   end
   
