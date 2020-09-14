@@ -6,6 +6,9 @@ class ChannelsChannel < ApplicationCable::Channel
         stream_from "channels:#{channel.id}"
       # end
     end
+    current_user.directmsgs.each do |directmsg|
+        stream_from "directmsgs:#{directmsg.id}"
+    end
   end
 
   def unsubscribed

@@ -5,4 +5,5 @@ class Workspace < ApplicationRecord
   has_many :users_workspaces
   has_many :users, through: :users_workspaces
   has_many :invitations
+  has_many :directmsgs
 end

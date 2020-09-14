@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_10_023546) do
+ActiveRecord::Schema.define(version: 2020_09_10_074501) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,7 +24,17 @@ ActiveRecord::Schema.define(version: 2020_09_10_023546) do
     t.datetime "deleted_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.boolean "direct_msg", default: false
     t.index ["workspace_id"], name: "index_channels_on_workspace_id"
+  end
+
+  create_table "directmsgs", force: :cascade do |t|
+    t.string "name"
+    t.datetime "deleted_at"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "workspace_id", null: false
+    t.index ["workspace_id"], name: "index_directmsgs_on_workspace_id"
   end
 
   create_table "invitations", force: :cascade do |t|
@@ -42,12 +52,13 @@ ActiveRecord::Schema.define(version: 2020_09_10_023546) do
 
   create_table "messages", force: :cascade do |t|
     t.text "content"
-    t.bigint "channel_id", null: false
     t.datetime "deleted_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "user_id", null: false
-    t.index ["channel_id"], name: "index_messages_on_channel_id"
+    t.string "messageable_type", null: false
+    t.bigint "messageable_id", null: false
+    t.index ["messageable_type", "messageable_id"], name: "index_messages_on_messageable_type_and_messageable_id"
     t.index ["user_id"], name: "index_messages_on_user_id"
   end
 
@@ -78,6 +89,15 @@ ActiveRecord::Schema.define(version: 2020_09_10_023546) do
     t.index ["user_id"], name: "index_users_channels_on_user_id"
   end
 
+  create_table "users_directmsgs", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "directmsg_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["directmsg_id"], name: "index_users_directmsgs_on_directmsg_id"
+    t.index ["user_id"], name: "index_users_directmsgs_on_user_id"
+  end
+
   create_table "users_workspaces", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "workspace_id", null: false
@@ -98,10 +118,11 @@ ActiveRecord::Schema.define(version: 2020_09_10_023546) do
   add_foreign_key "channels", "workspaces"
   add_foreign_key "invitations", "users"
   add_foreign_key "invitations", "workspaces"
-  add_foreign_key "messages", "channels"
   add_foreign_key "messages", "users"
   add_foreign_key "users_channels", "channels"
   add_foreign_key "users_channels", "users"
+  add_foreign_key "users_directmsgs", "directmsgs"
+  add_foreign_key "users_directmsgs", "users"
   add_foreign_key "users_workspaces", "users"
   add_foreign_key "users_workspaces", "workspaces"
 end
