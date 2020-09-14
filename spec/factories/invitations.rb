@@ -4,6 +4,6 @@ FactoryBot.define do
     association :workspace
     receiver_email { Faker::Internet.email }
     invitation_token { Faker::Lorem.characters(number: 20) }
-    accept_at { deleted_at { Faker::Date.in_date_period } }
+    accept_at { Faker::Date.in_date_period }
   end
 end
