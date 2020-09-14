@@ -52,6 +52,7 @@ group :development, :test do
   gem 'net-ssh', '~> 6.1'
   gem 'ed25519', '1.2'
   gem 'bcrypt_pbkdf', '1.0'
+  gem 'hirb', '~> 0.7.3'
 end
 
 group :development do
