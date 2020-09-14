@@ -5,7 +5,7 @@ export default class extends Controller {
   static targets = []
 
   connect() {
-    this.subscription = consumer.subscriptions.create({channel: "NotificationChannel", id: this.data.get("id"), workspaceId: this.data.get("workspace")},
+    this.subscription = consumer.subscriptions.create({channel: "NotificationChannel", channelId: this.data.get("channel"), workspaceId: this.data.get("workspace"), directId: this.data.get("direct")},
         {
           connected: this.subscribe.bind(this),       
           disconnected: this.unsubscribe.bind(this),
@@ -22,15 +22,22 @@ export default class extends Controller {
   unsubscribe(){
   }
   notification(data){
-    const title = `New message in ${data.from}`
+    const channelTitle = `New message in ${data.from}`
+    const directMsgTitle = `New message from ${data.from}`
     const body = `a message from ${data.user}`
-    const channelId = `${data.id}`
-    const sharpSignal = document.getElementById(`${channelId}`)
-    
-    sharpSignal.classList.add("bg-red-400")
+    const channelId = `${data.channel_id}`
+    const directMsgId = `${data.direct_msg_id}`
+    const newMsgMark = document.getElementById(`${channelId}`)
+    // sharpSignal.classList.add("bg-red-400")
     
     if (Notification.permission =="granted"){
-      new Notification(title, {body: body})
+      if (directMsgId === 'undefined'){
+        console.log("someone?")
+        new Notification(channelTitle, {body: body})
+      }else if (channelId === 'undefined'){
+        console.log("anyone?")
+        new Notification(directMsgTitle)
+      }
     }
   }
 }

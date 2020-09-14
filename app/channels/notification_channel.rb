@@ -1,12 +1,18 @@
 class NotificationChannel < ApplicationCable::Channel
   def subscribed
     stop_all_streams
-    current_channel = Channel.find(params[:id])
+
     current_workspace = Workspace.find(params[:workspaceId])
     join_channels = current_workspace.channels & current_user.channels
-    (join_channels-[current_channel]).each do |channel|
-      stream_from "notification:#{channel.id}"
-    end
+    other_members = Directmsg.includes(:users_directmsgs).where(:users_directmsgs => {:user => current_user}, :directmsgs => {:workspace => current_workspace})
+
+      join_channels.each do |channel|
+        stream_for channel
+      end
+
+      other_members.each do |directmsg|
+        stream_for directmsg
+      end
   end
 
   def unsubscribed

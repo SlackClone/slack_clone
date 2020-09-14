@@ -16,8 +16,8 @@
   </p>
     <% @channels.each do |channel| %>
       <div data-controller="channels" data-channels-id="<%= channel.id %>">
-        <span id="<%= channel.id %>" >#</span>
-        <%= link_to channel.name, workspace_channel_path(@workspace, channel) %>
+        <span>#</span>
+        <%= link_to channel.name, workspace_channel_path(@workspace, channel), id: channel.id %>
         <% if channel.users.include?(current_user) %>
           <button data-action="click->channels#removeChannel" data-target="channels.symbol">-</button>
         <% else %>

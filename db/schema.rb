@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_13_034808) do
+ActiveRecord::Schema.define(version: 2020_09_14_163120) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -51,14 +51,12 @@ ActiveRecord::Schema.define(version: 2020_09_13_034808) do
 
   create_table "messages", force: :cascade do |t|
     t.text "content"
-    t.bigint "channel_id", null: false
     t.datetime "deleted_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "user_id", null: false
     t.string "messageable_type", null: false
     t.bigint "messageable_id", null: false
-    t.index ["channel_id"], name: "index_messages_on_channel_id"
     t.index ["messageable_type", "messageable_id"], name: "index_messages_on_messageable_type_and_messageable_id"
     t.index ["user_id"], name: "index_messages_on_user_id"
   end
@@ -96,6 +94,7 @@ ActiveRecord::Schema.define(version: 2020_09_13_034808) do
     t.bigint "directmsg_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.datetime "last_enter_at"
     t.index ["directmsg_id"], name: "index_users_directmsgs_on_directmsg_id"
     t.index ["user_id"], name: "index_users_directmsgs_on_user_id"
   end
@@ -120,7 +119,6 @@ ActiveRecord::Schema.define(version: 2020_09_13_034808) do
   add_foreign_key "channels", "workspaces"
   add_foreign_key "invitations", "users"
   add_foreign_key "invitations", "workspaces"
-  add_foreign_key "messages", "channels"
   add_foreign_key "messages", "users"
   add_foreign_key "users_channels", "channels"
   add_foreign_key "users_channels", "users"
