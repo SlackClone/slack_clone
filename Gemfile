@@ -53,6 +53,7 @@ group :development, :test do
   gem 'ed25519', '1.2'
   gem 'bcrypt_pbkdf', '1.0'
   gem 'hirb', '~> 0.7.3'
+  gem 'foreman', '~> 0.87.2'
 end
 
 group :development do
