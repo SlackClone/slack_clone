@@ -12,6 +12,8 @@ Rails.application.routes.draw do
     get :validate
   end
   
+  # get '/message/share/:id', to: 'channels#share', as:'channel_share_message'
+  # post '/message/share/:id/add', to: 'channels#add', as:'channel_share'
   
   root to: 'pages#index'
   resources :workspaces do
@@ -38,6 +40,11 @@ Rails.application.routes.draw do
   resources :directmsgs, only: [:show] do
     resources :messages, only: [:create]
   end
+  resources :messages, only: [:show] do 
+    post 'share'
+    post 'add'
+  end
+  # 信件測試
 
   # 信件測試
   if Rails.env.development?
