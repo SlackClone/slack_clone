@@ -9,7 +9,6 @@ export default class extends Controller {
     this.subscription = consumer.subscriptions.create({channel: "ChannelsChannel", id: this.data.get("channel")},
       {
         connected: this.subscribe.bind(this),
-        disconnect: this.unsubscribe.bind(this),
         received: this.messaging.bind(this)
       })
     }
@@ -18,9 +17,6 @@ export default class extends Controller {
   }
   subscribe(){
     console.log(`You are in workspace NO.${this.data.get("id")}`)
-  }
-  unsubscribe(){
-
   }
   messaging(data){
     if(document.hidden){
