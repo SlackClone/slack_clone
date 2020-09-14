@@ -7,7 +7,9 @@ require("@rails/ujs").start()
 // require("turbolinks").start()         
 require("@rails/activestorage").start()
 require("channels")
-// require("stylesheets")
+require("stylesheets")
+require("@fortawesome/fontawesome-free")
+
 import "./invite_ws.js"
 import "./info.js"
 import "tailwindcss/base";
