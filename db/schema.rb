@@ -24,7 +24,6 @@ ActiveRecord::Schema.define(version: 2020_09_10_074501) do
     t.datetime "deleted_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.boolean "direct_msg", default: false
     t.index ["workspace_id"], name: "index_channels_on_workspace_id"
   end
 
