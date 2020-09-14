@@ -10,8 +10,10 @@ class InvitationsController < ApplicationController
       )
       if @invitation.save
         MyMailer.invite(@invitation).deliver_now
-        redirect_to workspaces_path, notice: I18n.t("invitations.create",receiver: @invitation.receiver_email)
+        redirect_to workspace_path(@workspace.id), notice: I18n.t("invitations.create",receiver: @invitation.receiver_email)
       end
+    else 
+      redirect_to workspace_path(@workspace.id), notice: "已經在WS瞜"
     end
   end
 
