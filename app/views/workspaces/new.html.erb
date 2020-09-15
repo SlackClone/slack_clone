@@ -3,8 +3,8 @@
   <%= render "./shared/header" %>
   <div class="chatroom grid grid-cols-12">
     <div class="bg-light_sladock col-span-2">
-      <%= form_with(model: @workspace, url: workspaces_path, local:true) do |f| %>
-  <div>
+      <%= form_with(model: @workspace, url: workspaces_path,local: true)do |f| %>
+    <div>
     <%= f.label :name,t(".name"), class:"text-white font-bold"%>
     <%= f.text_field :name, placeholder: t(".placeholder")%>
   </div>

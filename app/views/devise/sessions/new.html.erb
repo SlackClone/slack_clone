@@ -1,26 +1,35 @@
-<h2><%= t('.sign_in') %></h2>
+<%# render nav導覽列 %>
+<%= render './shared/nav' %>
+<div class="container mx-auto flex flex-col items-center text-center">
+<div class="sign_in max-w-lg">
+  <h2 class="text-5xl font-bold mb-2">Let’s find your team</h2>
+  <p class="mb-6">Start by choosing the Google account or email you use for work</p>
 
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "current-password" %>
-  </div>
-
-  <% if devise_mapping.rememberable? %>
-    <div class="field">
-      <%= f.check_box :remember_me %>
-      <%= f.label :remember_me %>
+  <div class="btn-group py-6 max-w-sm mx-auto">
+    <%= render "devise/shared/links" %>
+    <div class="HR mb-6 flex items-center">
+      <hr class="flex-grow"><p class="px-2">OR</p><hr class="flex-grow">
     </div>
-  <% end %>
-
-  <div class="actions">
-    <%= f.submit t('.sign_in') %>
+    <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+      <div class="field">
+        <%= f.email_field :email, autofocus: true, autocomplete: "email",placeholder: "name@work-email.com",class: "w-full py-2 px-2 mb-6 border border-gray-700 rounded focus:outline-none focus:shadow-outline" %>
+      </div>
+      <div class="field">
+        <%= f.password_field :password, autocomplete: "current-password",placeholder: "password",class: "w-full py-2 px-2 mb-6 border border-gray-700 rounded focus:outline-none focus:shadow-outline" %>
+      </div>
+      <% if devise_mapping.rememberable? %>
+        <div class="text-sm flex justify-between">
+          <div class="field">
+            <%= f.check_box :remember_me %>
+            <%= f.label :remember_me %>
+          </div>
+          <%= link_to t("devise.passwords.forgot_your_password"), new_password_path(resource_name) %>
+        </div>
+      <% end %>
+      <div class="actions">
+        <%= f.submit t('.sign_in'),class: " text-white font-bold bg-deep_sladock w-full py-2 border border-gray-400 rounded hover:bg-sladock transition-all duration-100"%>
+      </div>
+    <% end %>
   </div>
-<% end %>
+</div>
 
-<%= render "devise/shared/links" %>

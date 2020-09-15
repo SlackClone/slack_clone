@@ -43,6 +43,7 @@ zh-TW:
       send_paranoid_instructions: "如果我們有您的信箱，您將會收到一封內含可重新設定密碼連結的電子郵件。"
       updated: "您的密碼已被修改，您現在已經登入。"
       updated_not_active: "您的密碼已被修改。"
+      forgot_your_password: '忘記密碼?'
     registrations:
       destroyed: "再會！您的帳號已被取消。有緣再會。"
       signed_up: "註冊成功，歡迎！"
@@ -52,7 +53,7 @@ zh-TW:
       update_needs_confirmation: "您已經成功的更新帳號資訊，但我們仍需確認您的電子信箱，請至新信箱收信並點擊連結以確認您的新電子郵件帳號。"
       updated: "您已經成功的更新帳號資訊。"
       updated_but_not_signed_in: "您已經成功的更新帳號資訊。但因為您變更了密碼，請重新登入。"
-      signed_in_with_google: "用google繼續登入"
+      signed_in_with_google: "使用Google登入"
     sessions:
       signed_in: "成功登入了。"
       signed_out: "成功登出了。"

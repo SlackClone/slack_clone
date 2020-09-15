@@ -9,7 +9,7 @@ zh-TW:
         sign_out: '登出'
     leftbar:
       sidebar:
-        threads: 'Threads'
+        threads: '訊息串'
         mentions: 'Mentions & reactions'
         save: '資料存放區'
         more: '...看更多'

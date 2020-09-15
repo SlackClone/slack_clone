@@ -1,0 +1,40 @@
+ <%# nav導覽列 %>
+<div class="  bg-white border-b border-gray-400">
+  <nav class="container mx-auto py-3 flex items-center justify-between">
+    <h1 class="w-1/12">
+      <%= link_to image_pack_tag("Slack_logo_new.png"),pages_path %>
+    </h1>
+      <div>
+      <% if user_signed_in? %>
+        <%= link_to 'LUNCH SLADOCK',workspaces_path,class:'px-2 py-3 bg-sladock text-white rounded transition-all duration-500 hover:bg-hoversladock' %>
+        <span><%= link_to 'sign_out' ,destroy_user_session_path, method:'DELETE' %></span>
+    <% else %>
+        <span><%= link_to 'sign_in' ,new_user_session_path %></span>
+        <%= link_to 'GET STARTED',login_pages_path,class:'px-2 py-3 bg-sladock text-white rounded transition-all duration-500 hover:bg-hoversladock' %>
+      </div>
+    <% end %>
+  </nav>
+</div>
+<%# Section-1 Slack is where work happens %>
+<section class="py-12 bg-orange-100"> 
+  <div class="container mx-auto grid grid-cols-5">
+    <div class="col-span-2 flex items-center">
+      <div class="text mr-16">
+        <h2 class="text-6_2xl font-bold leading-tight">Slack is where work happens</h2>
+        <p class="text-lg mt-4 mb-8">With channels in Slack, you and your team know where to go to ask questions, share updates and stay in the loop.</p>
+        <div class="btn-group mb-4">
+          <button class="px-10 py-4 bg-sladock text-white rounded transition-all duration-500 hover:bg-deep_sladock"><%= link_to 'TRY FOR FREE' ,new_user_session_path %></button>
+          
+          <button class="px-10 py-4  text-sladock rounded shadow-slashadow box-border border-sladock transition-all duration-100 hover:border "><a href="#">CONTACT SALES</a></button>
+        </div>
+          <%# <p class="text-sm">Need to create a workspace? <%= link_to 'Get-started',new_user_registration_path,class:'font-bold border-b border-blue-800 text-blue-800 transition-all duration-100 hover:border-b-2' </p>%>
+      </div>
+    </div>
+    <div class="col-span-3">
+      <video autoplay loop muted playsinline>
+      <%# 暫時先使用官網的影片連結，不知道怎麼使用webpack讀取影片 %>
+      <source src="https://a.slack-edge.com/9b527/marketing/img/homepage/hp-prospect/hero/desktop/mp4/hero-image.mp4" type="video/mp4"> 
+      </video>
+    </div>
+  </div>
+</section>
