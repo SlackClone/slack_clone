@@ -1,11 +1,14 @@
 
 <%= form_with model: @new_message ,url:message_add_path(@message), class: " border border-gray-500 flex flex-col", local: "true" do |f| %>
-
   <%= f.label :channel_id %>
-  <%= f.select (:channel_id), Channel.all.collect { |channel| [ channel.id ] }, include_blank: true  %>
+  <%= f.number_field :channel_id %>
   <%= f.label :content %>
   <%= f.text_area :content, size: "30x12" %>
   <%= f.label :text %>
   <%= @message.content %>
   <%= f.submit "share" %>
 <% end %>
+
+
+
+
