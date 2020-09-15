@@ -4,15 +4,15 @@
   </h3> 
 </div>
 <div class="w-full bg-white border "></div>
-<div class="w-full">Threads</div>
-<div class="w-full">Mentions & reactions</div>
-<div class="w-full">Saved items</div>
-<div class="w-full">More</div>
-<div class="w-full">Shared</div>
+<div class="w-full"><%= t(".sidebar.threads") %></div>
+<div class="w-full"><%= t(".sidebar.mentions") %></div>
+<div class="w-full"><%= t(".sidebar.save") %></div>
+<div class="w-full"><%= t(".sidebar.more") %></div>
+<div class="w-full"><%= t(".sidebar.shared") %></div>
 <div class="w-full">
   <p class="font-medium flex justify-between">
-    Channels
-    <%= link_to "new a channel", new_workspace_channels_path(workspace_id: @workspace.id) %>
+    <%= t(".channel.name") %>
+    <%= link_to t(".channel.new"), new_workspace_channels_path(workspace_id: @workspace.id) %>
   </p>
     <% @channels.each do |channel| %>
       <li data-controller="channels" data-channels-id="<%= channel.id %>">
@@ -26,10 +26,11 @@
     <% end %>
 </div>
 <div class="w-full">
-  <p class="font-medium">Direct messages</p>
+  <p class="font-medium"><%= t(".channel.direct") %></p>
   <% (@workspace.users - [current_user]).each do |user| %>
     <li>
       <%= link_to user.nickname, workspace_directmsg_path(@workspace, user.id) %>
     </li>
   <% end %>
 </div>
+

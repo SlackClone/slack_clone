@@ -1,0 +1,55 @@
+en:
+  shared:
+    header:
+      search:
+        placeholder: 'Search'
+      profile:
+        status: 'Status'
+        edit: 'Edit profile'
+        sign_out: 'Sign out'
+    leftbar:
+      sidebar:
+        threads: 'Threads'
+        Mentions: 'Mentions & reactions'
+        save: 'Saved items'
+        more: '...More'
+        shared: 'Shared'
+      channel:
+        name: 'Channel'
+        new: 'New a channel'
+        direct: 'Direct messages'
+    msgform:
+      placeholder: 'Please enter a messages'
+    msgform_direct:
+      placeholder: 'Please enter a messages'
+  channels:
+    new:
+      name: 'Channel name'
+      topic: 'Topic'
+      description: 'Description'
+  workspaces:
+    index:
+      all_workspaces: 'Display all workspaces:'
+      join: 'Join workspace'
+      leave: 'Leave workspace'
+      your_workspaces: 'Your own workspaces'
+    new:
+      name: 'Workspace Name:'
+      placeholder: 'Please enter workspace name'
+    show:
+      name: 'Workspace Name：%{name}'
+      create_channel: 'Create Channel'
+      all_channels: 'Display channels in %{name} workspace'
+      delete_channel: 'Delete Channel'
+      join_channel: 'Join Channel'
+      leave_channel: 'Leave Channel'
+      your_channels: 'Your own channels'
+    notification:
+      messages:
+        join: 'Please enther in workspace'
+  invite:
+    add_people: 'Add people'
+    placeholder: 'Search by email or name'
+    send: 'Send'
+      
+      

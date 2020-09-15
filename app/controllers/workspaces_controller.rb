@@ -15,7 +15,7 @@ class WorkspacesController < ApplicationController
     @workspace = Workspace.new(workspace_params)  
     @workspace.users << current_user
     if @workspace.save
-      redirect_to workspace_path(@workspace.id), notice: "Welcome to #{@workspace.name}"
+      redirect_to workspace_path(@workspace.id), notice: I18n.t("workspaces.create",workspace: @workspace.name)
     else
       render :new
     end
