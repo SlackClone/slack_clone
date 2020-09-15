@@ -6,6 +6,7 @@ Rails.application.routes.draw do
     registrations:'users/registrations'
   }
   
+<<<<<<< HEAD
   resource :pages do
     get :index
     get :login
@@ -14,6 +15,10 @@ Rails.application.routes.draw do
   
   # get '/message/share/:id', to: 'channels#share', as:'channel_share_message'
   # post '/message/share/:id/add', to: 'channels#add', as:'channel_share'
+=======
+  resource :pages, only: [:show]
+    
+>>>>>>> 05a3f19... share feature
   
   root to: 'pages#index'
   resources :workspaces do
@@ -44,6 +49,7 @@ Rails.application.routes.draw do
     post 'share'
     post 'add'
   end
+  
   # 信件測試
 
   # 信件測試

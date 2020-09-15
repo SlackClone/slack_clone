@@ -25,10 +25,13 @@ class MessagesController < ApplicationController
   def share
     @message = Message.find(params[:message_id])
     @new_message = Message.new
+    @channel = @message.channel_id
   end
 
   def add
-    @channel = Channel.find(params[:message][:channel_id])
+    message = Message.find(params[:message_id])
+    @channel = message.channel
+    @channels = @channel.workspace.channels.where.not(id: @channel.id)
     @old_message = Message.find(params[:message_id])
     @new_message = Message.new(share_msg_params)
     @new_message.content = share_msg_params[:content].to_s + @old_message.content
@@ -40,7 +43,6 @@ class MessagesController < ApplicationController
     end
   end
   
-
   private
   def message_params
     params.require(:message).permit(:content).merge(user: current_user)
