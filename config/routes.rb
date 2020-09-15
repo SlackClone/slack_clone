@@ -65,6 +65,11 @@ Rails.application.routes.draw do
 
   end
   
+  # webhook endpoint
+  namespace :webhook do
+    post '/github', to: 'github#payload'
+  end
+
   # 信件測試
   if Rails.env.development? || Rails.env.staging?
      mount LetterOpenerWeb::Engine, at: "/letter_opener"
