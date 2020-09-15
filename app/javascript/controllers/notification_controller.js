@@ -27,15 +27,12 @@ export default class extends Controller {
     const body = `a message from ${data.user}`
     const channelId = `${data.channel_id}`
     const directMsgId = `${data.direct_msg_id}`
-    const newMsgMark = document.getElementById(`${channelId}`)
-    // sharpSignal.classList.add("bg-red-400")
+    
     
     if (Notification.permission =="granted"){
       if (directMsgId === 'undefined'){
-        console.log("someone?")
         new Notification(channelTitle, {body: body})
       }else if (channelId === 'undefined'){
-        console.log("anyone?")
         new Notification(directMsgTitle)
       }
     }
