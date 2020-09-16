@@ -10,6 +10,9 @@ class DirectmsgsController < ApplicationController
     @users_direct = current_user.users_directmsgs.find_by(directmsg: @directmsg)
     @last_enter_at = @users_direct&.last_enter_at || @directmsg.created_at
     @users_direct&.touch(:last_enter_at)
+    users_msg = current_user.directmsgs.joins(:users_directmsgs, :messages)
+    debugger
+    # .where(:messages => {:content => "asdf"})
     render 'channels/show'
   end
 end

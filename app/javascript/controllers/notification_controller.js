@@ -27,7 +27,8 @@ export default class extends Controller {
     const body = `a message from ${data.user}`
     const channelId = `${data.channel_id}`
     const directMsgId = `${data.direct_msg_id}`
-    
+    const unreadMark = document.querySelector(`[channel_id='${channelId}']`) || document.querySelector(`[direct_id='${directMsgId}']`)
+    console.log(unreadMark)
     
     if (Notification.permission =="granted"){
       if (directMsgId === 'undefined'){
@@ -36,5 +37,9 @@ export default class extends Controller {
         new Notification(directMsgTitle)
       }
     }
+
+    
+
+
   }
 }
