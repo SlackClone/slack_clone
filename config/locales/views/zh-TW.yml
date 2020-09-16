@@ -9,7 +9,7 @@ zh-TW:
         sign_out: '登出'
     leftbar:
       sidebar:
-        threads: 'Threads'
+        threads: '訊息串'
         mentions: 'Mentions & reactions'
         save: '資料存放區'
         more: '...看更多'
@@ -29,10 +29,12 @@ zh-TW:
       description: '頻道描述'
   workspaces:
     index:
-      all_workspaces: '以下顯示所有的workspaces:'
-      join: '加入workspace'
-      leave: '離開workspace'
-      your_workspaces: '以下顯示您所加入的workspaces'
+      join: '你所加入的有以下:'
+      your_workspaces: '你的workspaces'
+      different_team: '為其他團隊創建一個新的workspace?'
+      create: '建立一個全新的workspace'
+      create_btn: '+ workspace'
+      launch: '進入'
     new:
       name: 'Workspace名稱:'
       placeholder: '請輸入workspace名稱'
@@ -47,6 +49,9 @@ zh-TW:
     notification:
       messages:
         join: '請先加入workspace'
+  pages:
+    login:
+
   invite:
     add_people: '邀請成員加入'
     placeholder: '依信箱或暱稱搜尋'

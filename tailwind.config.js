@@ -5,6 +5,14 @@ module.exports = {
   important: false,
   separator: ":",
   theme: {
+    extend: {
+      fontSize: {
+          '6_2xl': '3.2rem',
+      },
+      boxShadow: {
+        slashadow: 'inset 0 0 0 1px #611f69',
+      }
+    },
     screens: {
       sm: "640px",
       md: "768px",
@@ -19,7 +27,8 @@ module.exports = {
       light_sladock: "#480c44",
       black: "#000",
       white: "#fff",
-
+      googleblue: '#4284F4',
+      light_gray: '#F8F8F8',
       gray: {
         100: "#f7fafc",
         200: "#edf2f7",
@@ -307,6 +316,8 @@ module.exports = {
       ...theme("spacing"),
       full: "100%",
       screen: "100vh",
+      screen_90: "90vh",
+      screen_94: "94vh",
     }),
     inset: {
       0: "0",
@@ -363,6 +374,7 @@ module.exports = {
       "5xl": "64rem",
       "6xl": "72rem",
       full: "100%",
+      400: '400px',
       ...breakpoints(theme("screens")),
     }),
     minHeight: {
@@ -703,7 +715,7 @@ module.exports = {
     borderOpacity: ['responsive', 'hover', 'focus'],
     borderRadius: ['responsive'],
     borderStyle: ['responsive'],
-    borderWidth: ['responsive'],
+    borderWidth: ['responsive', 'hover', 'focus'],
     boxShadow: ['responsive', 'hover', 'focus'],
     boxSizing: ['responsive'],
     container: ['responsive'],
@@ -783,7 +795,7 @@ module.exports = {
     rotate: ['responsive', 'hover', 'focus'],
     translate: ['responsive', 'hover', 'focus'],
     skew: ['responsive', 'hover', 'focus'],
-    transitionProperty: ['responsive'],
+    transitionProperty: ['responsive', 'motion-safe', 'motion-reduce'],
     transitionTimingFunction: ['responsive'],
     transitionDuration: ['responsive'],
     transitionDelay: ['responsive'],

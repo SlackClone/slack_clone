@@ -1,32 +1,43 @@
-
-<div>
-  <%= render "./shared/header" %>
-  <div class="chatroom grid grid-cols-12">
-    <div class="bg-light_sladock text-white col-span-2">
-        <h3><%= t(".all_workspaces") %></h3>
-        <% @workspaces.each do |workspace| %>
-          <p>
-            <%= link_to workspace.name, workspace_path(workspace.id) %>
-            <%= link_to t(".join"), workspace_users_workspaces_path(workspace.id), method:"post", remote: true %>
-            <%= link_to t(".leave"), workspace_users_workspaces_path(workspace.id), method:"delete", remote: true %>
-          </p>
-        <% end %>
-        <h3><%= t(".your_workspaces") %></h3>
-        <% @joined_workspace.each do |workspace| %>
-          <p>
-            <%= link_to workspace.workspace.name, workspace_path(workspace.workspace.id)%>
-          </p>
-        <% end %>
-    </div>
-    <div class=" col-span-10 border border-1">
-    </div>  
-  </div>
-  <div class="chatroom grid grid-cols-12 h-10 border border-1 ">
-    <div class="bg-light_sladock text-white col-span-2">
-    </div>
-    <div class=" col-span-10">
-    </div>  
-  </div>
-
-
+<div class="bg-white border-b border-gray-400">
+  <nav class="py-1">
+    <h1 class="w-1/12">
+      <%= link_to image_pack_tag("Slack_logo_new.png"),pages_path %>
+    </h1>
 </div>
+<body class="bg-light_gray">
+  <div class="container mx-auto">
+    <div class="max-w-lg mx-auto">
+      <div class="join-ws my-10">
+        <h3 class="font-bold text-2xl mb-3"><%= t(".your_workspaces") %></h3>
+        <p class="text-sm text-gray-700 border-b border-gray-400 pb-5"><%= t(".join") %></p>
+          <% @joined_workspace.each do |workspace| %>
+            <div class="relative flex justify-between items-center border-b border-gray-400 py-3">
+              <div class="w-10 h-10 bg-gray-400 mr-2 absolute top-auto left-0"></div>
+              <div class="ws w-full z-10">
+              <%= link_to workspace.workspace.name, workspace_path(workspace.workspace.id),class:"block py-5 pl-12"%>
+              </div>
+              <%= link_to t(".launch"),workspace_path(workspace.workspace.id),class:"z-10 text-sm font-bold bg-white border border-gray-500 rounded py-2 px-3 absolute top-auto right-0 hover:bg-gray-200 transition-all duration-100" %>
+            </div>
+          <% end %>
+      </div>
+      <div class="create-ws my-10">
+        <h3 class="font-bold text-2xl mb-3"><%= t(".create") %></h3>
+        <p class="text-sm text-gray-700 mb-4"><%= t(".different_team") %></p>
+        <%= link_to t(".create_btn"),new_workspace_path,class:"z-10 text-sm font-bold bg-white border border-gray-500 rounded py-2 px-3 hover:bg-gray-200 transition-all duration-100" %>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<div class="">
+<h3><%= t(".all_workspaces") %></h3>
+<% @workspaces.each do |workspace| %>
+  <p>
+    <%= link_to workspace.name, workspace_path(workspace.id) %>
+    <%= link_to '加入', workspace_users_workspaces_path(workspace.id), method:"post", remote: true %>
+    <%= link_to '離開', workspace_users_workspaces_path(workspace.id), method:"delete", remote: true %>
+  </p>
+<% end %>
+</div>
+

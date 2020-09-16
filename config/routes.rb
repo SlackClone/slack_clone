@@ -1,14 +1,19 @@
 Rails.application.routes.draw do
 
    devise_for :users, controllers: {
+    confirmations: 'users/confirmations',
     omniauth_callbacks: "users/omniauth_callbacks",
     registrations:'users/registrations'
   }
   
-  resource :pages, only: [:show]
+  resource :pages do
+    get :index
+    get :login
+    get :validate
+  end
   
   
-  root to: 'workspaces#index'
+  root to: 'pages#index'
   resources :workspaces do
     resource :users_workspaces
     resource :channels, only: %i[new create]

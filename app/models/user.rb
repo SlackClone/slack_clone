@@ -27,16 +27,22 @@ class User < ApplicationRecord
         google_uid: access_token.uid,
         google_token: access_token.credentials.token
       )
+      existing_user.skip_confirmation!
+      existing_user.save
       existing_user
     else
-      User.create(
-        # name: data["name"],
+      new_user = User.create(
+        nickname: data["name"],
         email: data["email"],
         password: Devise.friendly_token[0,20],
         google_token: access_token.credentials.token,
         google_uid: access_token.uid
       )
+      new_user.skip_confirmation!
+      new_user.save
+      new_user
     end
+    
   end
 
   
