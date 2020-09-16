@@ -11,7 +11,6 @@ module ApplicationCable
 
     def find_verified_user
       if current_user = env["warden"].user
-        puts env["warden"]
         current_user
       else
         reject_unauthorized_connection

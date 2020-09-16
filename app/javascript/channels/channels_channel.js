@@ -1,15 +1,15 @@
-import consumer from "./consumer"
+// import consumer from "./consumer"
 
-consumer.subscriptions.create("ChannelsChannel", {
-  connected() {
-  },
+// consumer.subscriptions.create({channel: "ChannelsChannel"}, {
+//   connected() {
+//     console.log(this)
+//   },
   
-  disconnected() {
-  },
+//   disconnected() {
+//   },
   
-  received(data) {
-    // console.log(data)
-    const messageContainer = document.querySelector('.messages')
-    messageContainer.innerHTML = messageContainer.innerHTML + data.message
-  }
-});
+//   received(data) {
+//     const messageContainer = document.querySelector('.messages')
+//     messageContainer.innerHTML = messageContainer.innerHTML + data.message
+//   }
+// });

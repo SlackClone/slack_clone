@@ -1,17 +1,25 @@
 class ChannelsChannel < ApplicationCable::Channel
   def subscribed
-    current_user.channels.each do |channel|
-      # current_workspace = Workspace.find(params[:workspace_id])
-      # if current_workspace.channels.include?(channel)
-        stream_from "channels:#{channel.id}"
-      # end
+    stop_all_streams
+    if params[:channelId] != "0"
+      @channel_user = current_user.users_channels.find_by(channel_id: params[:channelId])
+      
+      channel = Channel.find_by(id: params[:channelId])
+      stream_for channel
+    elsif params[:directId] != "0"
+      @channel_user = current_user.users_directmsgs.find_by(directmsg_id: params[:directId])
+      
+      directmsg = Directmsg.find_by(id: params[:directId])
+      stream_for directmsg
     end
-    current_user.directmsgs.each do |directmsg|
-        stream_from "directmsgs:#{directmsg.id}"
-    end
+    
   end
 
   def unsubscribed
     stop_all_streams
+  end
+
+  def update_enter_time
+    @channel_user.touch(:last_enter_at)
   end
 end

@@ -21,7 +21,9 @@ class ChannelsController < ApplicationController
     @channel = @workspace.channels.find(params[:id])
     @message = Message.new
     @channels = @workspace.channels
-    @workspace_member = @workspace.users
+    @channel_user = current_user.users_channels.find_by(channel: @channel)
+    @last_enter_at = @channel_user&.last_enter_at || @channel.created_at
+    @channel_user&.touch(:last_enter_at)
   end
 
   def destroy
