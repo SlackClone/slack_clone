@@ -19,8 +19,7 @@ export default class extends Controller {
     console.log(`You are in workspace NO.${this.data.get("id")}`)
   }
   messaging(data){
-    console.log(document.visibilityState)
-    if(document.visibilityState == "hidden"){
+    if(document.hidden){
       let divideElement = document.querySelector(".divide")
       if (!divideElement){
         this.messagesTarget.insertAdjacentHTML('beforeend', `<div class='flex text-right divide'><span class='h-0 border-b-0 border-t-2 block flex-grow border-red-600 my-auto'></span><span class="pl-3">new</span></div>`)
