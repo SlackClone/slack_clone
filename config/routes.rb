@@ -65,9 +65,9 @@ Rails.application.routes.draw do
 
   end
   
-  # webhook endpoint
+  # webhook endpoint, /webhook/channels/:id/github
   namespace :webhook do
-    post '/github', to: 'github#payload'
+    post 'channels/:id/github', to: 'github#payload'
   end
 
   # 信件測試
