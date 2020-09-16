@@ -10,7 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+
 ActiveRecord::Schema.define(version: 2020_09_30_125937) do
+
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -74,6 +76,8 @@ ActiveRecord::Schema.define(version: 2020_09_30_125937) do
     t.bigint "messageable_id", null: false
     t.integer "share_message_id"
     t.jsonb "emoji_data", default: {}
+    t.string "ancestry"
+    t.index ["ancestry"], name: "index_messages_on_ancestry"
     t.index ["messageable_type", "messageable_id"], name: "index_messages_on_messageable_type_and_messageable_id"
     t.index ["user_id"], name: "index_messages_on_user_id"
   end

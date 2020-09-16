@@ -58,6 +58,7 @@ GEM
       zeitwerk (~> 2.2, >= 2.2.2)
     addressable (2.7.0)
       public_suffix (>= 2.0.2, < 5.0)
+<<<<<<< HEAD
     airbrussh (1.4.0)
       sshkit (>= 1.6.1, != 1.7.0)
     aws-eventstream (1.1.0)
@@ -78,8 +79,16 @@ GEM
       aws-eventstream (~> 1, >= 1.0.2)
     bcrypt (3.1.16)
     bcrypt_pbkdf (1.0.0)
+=======
+    ancestry (3.1.0)
+      activerecord (>= 4.2.0)
+    bcrypt (3.1.15)
+    bcrypt (3.1.15-java)
+>>>>>>> WIP
     bindex (0.8.1)
     bootsnap (1.4.8)
+      msgpack (~> 1.0)
+    bootsnap (1.4.8-java)
       msgpack (~> 1.0)
     builder (3.2.4)
     byebug (11.1.3)
@@ -130,6 +139,9 @@ GEM
     faraday (1.0.1)
       multipart-post (>= 1.2, < 3)
     ffi (1.13.1)
+    ffi (1.13.1-java)
+    ffi (1.13.1-x64-mingw32)
+    ffi (1.13.1-x86-mingw32)
     figaro (1.2.0)
       thor (>= 0.14.0, < 2)
     foreman (0.87.2)
@@ -174,14 +186,27 @@ GEM
     mini_portile2 (2.4.0)
     minitest (5.14.2)
     msgpack (1.3.3)
+    msgpack (1.3.3-java)
+    msgpack (1.3.3-x64-mingw32)
+    msgpack (1.3.3-x86-mingw32)
     multi_json (1.15.0)
     multi_xml (0.6.0)
     multipart-post (2.1.1)
+<<<<<<< HEAD
     net-scp (3.0.0)
       net-ssh (>= 2.6.5, < 7.0.0)
     net-ssh (6.1.0)
     nio4r (2.5.4)
+=======
+    nio4r (2.5.2)
+    nio4r (2.5.2-java)
+>>>>>>> WIP
     nokogiri (1.10.10)
+      mini_portile2 (~> 2.4.0)
+    nokogiri (1.10.10-java)
+    nokogiri (1.10.10-x64-mingw32)
+      mini_portile2 (~> 2.4.0)
+    nokogiri (1.10.10-x86-mingw32)
       mini_portile2 (~> 2.4.0)
     oauth2 (1.4.4)
       faraday (>= 0.8, < 2.0)
@@ -201,8 +226,12 @@ GEM
       omniauth (~> 1.9)
     orm_adapter (0.5.0)
     pg (1.2.3)
+    pg (1.2.3-x64-mingw32)
+    pg (1.2.3-x86-mingw32)
     public_suffix (4.0.5)
     puma (4.3.6)
+      nio4r (~> 2.0)
+    puma (4.3.5-java)
       nio4r (~> 2.0)
     rack (2.2.3)
     rack-proxy (0.6.5)
@@ -268,6 +297,8 @@ GEM
       sassc-rails (~> 2.1, >= 2.1.1)
     sassc (2.4.0)
       ffi (~> 1.9)
+    sassc (2.4.0-x64-mingw32)
+      ffi (~> 1.9)
     sassc-rails (2.1.2)
       railties (>= 4.0.0)
       sassc (>= 2.0)
@@ -300,11 +331,14 @@ GEM
       activerecord (>= 5)
     thor (1.0.1)
     thread_safe (0.3.6)
+    thread_safe (0.3.6-java)
     tilt (2.0.10)
     tzinfo (1.2.7)
       thread_safe (~> 0.1)
     warden (1.2.9)
       rack (>= 2.0.9)
+    tzinfo-data (1.2020.1)
+      tzinfo (>= 1.0.0)
     web-console (4.0.4)
       actionview (>= 6.0.0)
       activemodel (>= 6.0.0)
@@ -320,17 +354,30 @@ GEM
       railties (>= 4.2)
     websocket-driver (0.7.3)
       websocket-extensions (>= 0.1.0)
+    websocket-driver (0.7.3-java)
+      websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
     xpath (3.2.0)
       nokogiri (~> 1.8)
     zeitwerk (2.4.0)
 
 PLATFORMS
+  java
   ruby
+  x64-mingw32
+  x86-mingw32
+  x86-mswin32
 
 DEPENDENCIES
+<<<<<<< HEAD
   aws-sdk-s3 (~> 1.81)
+=======
+<<<<<<< HEAD
+>>>>>>> WIP
   bcrypt_pbkdf (= 1.0)
+=======
+  ancestry (~> 3.1)
+>>>>>>> WIP
   bootsnap (>= 1.4.2)
   byebug
   capistrano (= 3.14.1)
