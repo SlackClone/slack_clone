@@ -1,8 +1,6 @@
-  <div class="">
-    <h3 class="chatroomName">
-      <%= @workspace.name %>
-    </h3> 
-  </div>  
+  <h3 class="chatroomName">
+    <%= @workspace.name %>
+  </h3> 
   <div class="w-full bg-white border"></div>
   <div class="w-full"><%= t(".sidebar.threads") %></div>
   <div class="w-full"><%= t(".sidebar.mentions") %></div>
@@ -24,6 +22,7 @@
           <button data-action="click->channels#addChannel" data-target="channels.symbol">+</button>
         <% end %>
       </div>
+     <% end %>
   <div class="w-full">
     <p class="font-medium"><%= t(".channel.direct") %></p>
     <% (@workspace.users - [current_user]).each do |user| %>

@@ -19,10 +19,11 @@ export default class extends Controller {
     console.log(`You are in workspace NO.${this.data.get("id")}`)
   }
   messaging(data){
-    if(document.hidden){
+    console.log(document.visibilityState)
+    if(document.visibilityState == "hidden"){
       let divideElement = document.querySelector(".divide")
       if (!divideElement){
-        this.messagesTarget.insertAdjacentHTML('beforeend', `<div class='flex text-right divide'><span class='h-0 border-b-0 border-t-2 block w-full border-red-600 my-auto'></span><span class="pl-3">new</span></div>`)
+        this.messagesTarget.insertAdjacentHTML('beforeend', `<div class='flex text-right divide'><span class='h-0 border-b-0 border-t-2 block flex-grow border-red-600 my-auto'></span><span class="pl-3">new</span></div>`)
       }
     }else{
       this.subscription.perform("update_enter_time")

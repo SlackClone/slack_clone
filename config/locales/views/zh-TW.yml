@@ -34,7 +34,7 @@ zh-TW:
       different_team: '為其他團隊創建一個新的workspace?'
       create: '建立一個全新的workspace'
       create_btn: '+ workspace'
-
+      launch: '進入'
     new:
       name: 'Workspace名稱:'
       placeholder: '請輸入workspace名稱'

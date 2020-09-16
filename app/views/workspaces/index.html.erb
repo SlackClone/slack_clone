@@ -16,7 +16,7 @@
               <div class="ws w-full z-10">
               <%= link_to workspace.workspace.name, workspace_path(workspace.workspace.id),class:"block py-5 pl-12"%>
               </div>
-              <%= link_to 'Launch',workspace_path(workspace.workspace.id),class:"z-10 text-sm font-bold bg-white border border-gray-500 rounded py-2 px-3 absolute top-auto right-0 hover:bg-gray-200 transition-all duration-100" %>
+              <%= link_to t(".launch"),workspace_path(workspace.workspace.id),class:"z-10 text-sm font-bold bg-white border border-gray-500 rounded py-2 px-3 absolute top-auto right-0 hover:bg-gray-200 transition-all duration-100" %>
             </div>
           <% end %>
       </div>
@@ -30,13 +30,13 @@
 </section>
 
 
-<div class="hidden">
+<div class="">
 <h3><%= t(".all_workspaces") %></h3>
 <% @workspaces.each do |workspace| %>
   <p>
     <%= link_to workspace.name, workspace_path(workspace.id) %>
-    <%= link_to t(".join"), workspace_users_workspaces_path(workspace.id), method:"post", remote: true %>
-    <%= link_to t(".leave"), workspace_users_workspaces_path(workspace.id), method:"delete", remote: true %>
+    <%= link_to '加入', workspace_users_workspaces_path(workspace.id), method:"post", remote: true %>
+    <%= link_to '離開', workspace_users_workspaces_path(workspace.id), method:"delete", remote: true %>
   </p>
 <% end %>
 </div>
