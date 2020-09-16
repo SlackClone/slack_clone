@@ -25,21 +25,20 @@ export default class extends Controller {
     const channelTitle = `New message in ${data.from}`
     const directMsgTitle = `New message from ${data.from}`
     const body = `a message from ${data.user}`
-    const channelId = `${data.channel_id}`
-    const directMsgId = `${data.direct_msg_id}`
-    const unreadMark = document.querySelector(`[channel_id='${channelId}']`) || document.querySelector(`[direct_id='${directMsgId}']`)
-    console.log(unreadMark)
-    
-    if (Notification.permission =="granted"){
-      if (directMsgId === 'undefined'){
+    const channelId = this.data.get("channel")
+    const directMsgId = this.data.get("direct")
+    const userNow = this.data.get("user")
+    console.log(directMsgId)
+    console.log(channelId)
+    if (userNow === data.user || userNow === data.from){
+      return
+    }else{
+      if (directMsgId === "0"){
         new Notification(channelTitle, {body: body})
-      }else if (channelId === 'undefined'){
+      }else if (channelId === "0"){
         new Notification(directMsgTitle)
+      }else{
       }
     }
-
-    
-
-
   }
 }

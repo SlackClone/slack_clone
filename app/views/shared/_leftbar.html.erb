@@ -13,7 +13,7 @@
       <%= link_to t(".channel.new"), new_workspace_channels_path(workspace_id: @workspace.id) %>
     </p>
     <% @channels.each do |channel| %>
-      <div data-controller="channels notification" data-channels-id="<%= channel.id %>">
+      <div data-controller="channels" data-channels-id="<%= channel.id %>">
         <span>#</span>
         <%= link_to channel.name, workspace_channel_path(@workspace, channel), channel_id: channel.id %>
         <% if channel.users.include?(current_user) %>

@@ -19,12 +19,14 @@ class ChannelsController < ApplicationController
 
   def show
     @channel = Channel.find(params[:id])
-    @workspace = Workspace.find(params[:workspace_id])
     @message = Message.new
     @channels = @workspace.channels
+    @messages = @channel.messages
+    @user_now = current_user.nickname
     @channel_user = current_user.users_channels.find_by(channel: @channel)
     @last_enter_at = @channel_user&.last_enter_at || @channel.created_at
     @channel_user&.touch(:last_enter_at)
+    # user.directmsgs.first.messages.where("created_at > ?", user.directmsgs.first.users_directmsgs.find_by(user_id: user.id).last_enter_at)
   end
 
   def destroy
