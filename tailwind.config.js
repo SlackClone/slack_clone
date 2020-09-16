@@ -28,6 +28,7 @@ module.exports = {
       black: "#000",
       white: "#fff",
       googleblue: '#4284F4',
+      light_gray: '#F8F8F8',
       gray: {
         100: "#f7fafc",
         200: "#edf2f7",
@@ -315,6 +316,8 @@ module.exports = {
       ...theme("spacing"),
       full: "100%",
       screen: "100vh",
+      screen_90: "90vh",
+      screen_94: "94vh",
     }),
     inset: {
       0: "0",
