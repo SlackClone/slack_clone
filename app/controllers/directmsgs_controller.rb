@@ -12,6 +12,7 @@ class DirectmsgsController < ApplicationController
     @users_direct = current_user.users_directmsgs.find_by(directmsg: @directmsg)
     @last_enter_at = @users_direct&.last_enter_at || @directmsg.created_at
     @users_direct&.touch(:last_enter_at)
+    current_user.directmsgs.find(@directmsg.id).messages.where("created_at > ?", current_user.directmsgs.first.users_directmsgs.find_by(user_id: user.id).last_enter_at)
     
     # last_msg_time = current_user.directmsgs.first.messages.maximum(:created_at)
     

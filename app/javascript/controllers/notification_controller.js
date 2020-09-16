@@ -22,22 +22,21 @@ export default class extends Controller {
   unsubscribe(){
   }
   notification(data){
-    const channelTitle = `New message in ${data.from}`
-    const directMsgTitle = `New message from ${data.from}`
+    const channelTitle = `New message in ${data.channel_id}`
+    const directMsgTitle = `New message from ${data.user}`
     const body = `a message from ${data.user}`
-    const channelId = this.data.get("channel")
-    const directMsgId = this.data.get("direct")
+    const channelId = data.channel_id
+    const directMsgId = data.direct_msg_id
     const userNow = this.data.get("user")
-    console.log(directMsgId)
-    console.log(channelId)
+    console.log(typeof directMsgId)
+    console.log(typeof channelId)
     if (userNow === data.user || userNow === data.from){
       return
     }else{
-      if (directMsgId === "0"){
+      if (typeof directMsgId === "undefined"){
         new Notification(channelTitle, {body: body})
-      }else if (channelId === "0"){
+      }else if (typeof channelId === "undefined"){
         new Notification(directMsgTitle)
-      }else{
       }
     }
   }
