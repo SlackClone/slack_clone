@@ -1,13 +1,19 @@
 window.addEventListener('DOMContentLoaded', () => {
   if (document.querySelector('.invite-ws-btn')) {
     const form = document.forms['invite-form']
+    const background = document.querySelector('.add-people')
     // 點選按鈕後會顯示DIV
     document.querySelector('.invite-ws-btn').addEventListener('click', () => {
-      document.querySelector('.add-people').classList.remove('hidden')
+      background.classList.remove('hidden')
     })
     //點選按鈕後會顯示XX會取消DIV
     document.querySelector('.invite-cancel-btn').addEventListener('click', () => {
-      document.querySelector('.add-people').classList.add('hidden')
+      background.classList.add('hidden')
+    })
+    background.addEventListener('click', (e) => {
+      if (e.target === background) {
+        background.classList.add('hidden')
+      }
     })
     const searchInput = form[1]
     const inviteBtn = form[2]
@@ -18,7 +24,7 @@ window.addEventListener('DOMContentLoaded', () => {
         inviteBtn.value = 'Add'
         inviteBtn.classList.add('bg-green-500')
         form.addEventListener('submit', ()=>{
-          document.querySelector('.add-people').classList.add('hidden')
+          background.classList.add('hidden')
         })
       }
       //恢復樣式

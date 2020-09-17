@@ -51,6 +51,14 @@ class ChannelsController < ApplicationController
                                                   .present?
     end
     
+  
+    @channel_users = @channel.users.map{|user| [user.nickname,user.email] }
+    @users = (@channel_users + @workspace.users.map{|user| [user.nickname,user.email] })
+    @workspace_users = @users - (@channel_users & @workspace.users.map{|user| [user.nickname,user.email] })
+    respond_to do |format|
+      format.html 
+      format.json {render json: @workspace_users} 
+    end
   end
 
   def destroy

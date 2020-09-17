@@ -33,16 +33,8 @@
     <% end %>
   </div>
 </div>
-<div class="w-full">
-  <p class="font-medium"><%= t("leftbar.channel.direct") %></p>
-  <% (@workspace.users - [current_user]).each do |user| %>
-    <li>
-      <%= link_to user.nickname, workspace_directmsg_path(@workspace, user.id) %>
-    </li>
-  <% end %>
-</div>
   <%# button顯示 %>
-<button class="invite-ch-btn h-8 w-8  rounded hover:bg-gray-100 hover:stroke-gray active:bg-gray-400 focus:outline-none">
+<button class="invite-ch-btn h-8 w-8  rounded hover:bg-gray-100 hover:stroke-gray active:bg-gray-400 focus:outline-none" data-id=<%= @workspace.id%> data-channelId=<%=@channel.id%>>
   <%= inline_svg_pack_tag( "media/images/invite-ch.svg" , class: "stroke-current text-gray-600 hover:stroke-gray") %>
       <%= image_pack_tag("invite-ch.svg") %>
 </button>

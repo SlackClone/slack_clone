@@ -46,7 +46,7 @@
         <h5 class="font-bold"><%= t("invite.add_people") %></h5>
       <button class="invite-cancel-btn font-bold text-gray-600 focus:outline-none">X</button>
       </div>
-      <span class="text-xs text-gray-600">#student</span>
+      <span class="text-xs text-gray-600">#<%= @workspace.name %></span>
       <%= form_with(model:@invitation,url:workspace_invitations_path(@workspace),method: "POST",local: true) do |f| %>
         <%= f.text_field :receiver_email,placeholder:t("invite.placeholder"),autocomplete:"off",class:"search relative font-bold px-2 py-2 mb-5 border border-gray-800 rounded block w-full placeholder-gray-600 focus:outline-none focus:shadow-outline" %>
         <div class="member-group hidden absolute top:0 bg-gray-100 py-2 inset-x-0 mx-5 border border-gray-500 rounded" >

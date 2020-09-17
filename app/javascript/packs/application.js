@@ -14,6 +14,8 @@ import "tailwindcss/base";
 import "tailwindcss/components";
 import "tailwindcss/utilities";
 import "../stylesheets/Frontend/shared"
+import "controllers"
+import './select2.js'
 import $ from 'jquery';
 window.jQuery = $
 window.$ = $
@@ -37,4 +39,4 @@ import "./share-btn"
 //
 const images = require.context('../images', true)
 const imagePath = (name) => images(name, true)
-import "controllers"
+

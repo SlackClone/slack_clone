@@ -1,6 +1,7 @@
 class UsersChannelsController < ApplicationController
   before_action :find_channel,:find_workspace
   def create
+    byebug
     @channel.users_channels.where(user_id: current_user.id).first_or_create
   end
   
@@ -9,10 +10,8 @@ class UsersChannelsController < ApplicationController
   end
 
   def invite
-    if find_workspace_user && !find_channel_user
       @channel.users_channels.create(user_id: find_workspace_user.id)
       redirect_to workspace_channel_path(@workspace,@channel),notice: I18n.t("users_channels.invite",user: params[:name])
-    end
     
   end
   
