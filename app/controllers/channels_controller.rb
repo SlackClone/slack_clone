@@ -1,6 +1,6 @@
 class ChannelsController < ApplicationController
   before_action :authenticate_user!
-  before_action :find_workspace, except:[:destroy, :share, :add]
+  before_action :find_workspace, except:[:destroy]
   def new
     @channel = Channel.new
   end
@@ -18,7 +18,8 @@ class ChannelsController < ApplicationController
   end
 
   def show
-    @channel = @workspace.channels.find(params[:id])
+    @channel = Channel.find(params[:id])
+    @workspace = Workspace.find(params[:workspace_id])
     @message = Message.new
     @channels = @workspace.channels
     @channel_user = current_user.users_channels.find_by(channel: @channel)
@@ -45,7 +46,4 @@ class ChannelsController < ApplicationController
     @workspace = Workspace.find(params[:workspace_id])
   end
 
-  def message_params
-    params.require(:message).permit(:content).merge(user: current_user)
-  end
 end

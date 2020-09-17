@@ -15,3 +15,18 @@ $(document).ready(function () {
   });
 
 });
+
+
+
+document.querySelectorAll('.share-btn').forEach((e)=>{
+  e.addEventListener('click', function (e) {
+    let shareContent = e.target.parentNode.querySelector('.content').textContent
+    let selectMessage = document.querySelector('.select-message')
+    let input = document.getElementById('message_id')
+    input.value = this.dataset.id
+    selectMessage.textContent = shareContent
+  })
+})
+
+
+

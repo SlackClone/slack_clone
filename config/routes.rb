@@ -40,13 +40,12 @@ Rails.application.routes.draw do
   resources :directmsgs, only: [:show] do
     resources :messages, only: [:create]
   end
+
   resources :messages, only: [:show] do 
     post 'share'
     post 'add'
   end
   
-  # 信件測試
-
   # 信件測試
   if Rails.env.development?
      mount LetterOpenerWeb::Engine, at: "/letter_opener"
