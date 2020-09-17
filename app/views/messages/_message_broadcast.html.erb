@@ -1,5 +1,4 @@
-<<<<<<< HEAD
-<% if !@divide_exist && @last_enter_at && (@last_enter_at < message.created_at) %>
+  <% if !@divide_exist && @last_enter_at && (@last_enter_at < message.created_at) %>
   <% @divide_exist = true %>
   <div class='flex text-right divide'>
     <span class='h-0 border-b-0 border-t-2 block flex-grow border-red-600 my-auto'></span>
@@ -8,12 +7,10 @@
 <% end%>
 <div class="messages_child pl-5">
   <div class="author font-bold">
-=======
 <div class="flex justify-between">
   <div class="txt flex">
     <div class="author">
->>>>>>> 19f1d94... share btn style
-    <%= message.user.nickname %>
+      <%= message.user.nickname %>
     </div>
     <div class="createtime">
       <%= message.created_at.strftime("%I:%M") %>
@@ -26,6 +23,7 @@
     <%= link_to 'share', message_share_path(message.id), method: "post"%>
   </button>
 </div>
-
+</div>
+</div>
 
 
