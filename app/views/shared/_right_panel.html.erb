@@ -1,0 +1,38 @@
+<div class="thread-title">
+  <h1>Thread</h1>
+  <p>Channel: <%= @channel.name %></p>
+</div>
+<br>
+<div class="parent-message">
+  <div class="author font-bold">
+    <%= @thread.user.nickname %>
+  </div>
+  <div class="createtime">
+    <%= @thread.created_at %>
+  </div>
+  <div class="content">
+    <%= @thread.content %>
+  </div>
+</div>
+
+<h2>
+  ===== 有 <%= @thread.children.count %> 則回覆 =====
+</h2>
+
+<div class="children-message">
+  <% @thread.children.each do |thread| %>
+    <div class="author font-bold">
+    <%= thread.user.nickname %>
+    </div>
+    <div class="createtime">
+      <%= thread.created_at %>
+    </div>
+    <div class="content">
+      <%= thread.content %>
+    </div>
+  <% end %>
+</div>
+
+<div class="thread-form">
+  <%= render 'threads/threadform' %>
+</div>

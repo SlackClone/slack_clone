@@ -93,3 +93,10 @@ en:
     index:
       title: "File browser"
       upload: "Upload a File"
+  invite:
+    add_people: "Add people"
+    placeholder: "Search by email or name"
+    send: "Send"
+  threads:
+    threadform:
+      placeholder: "Please enter a message"

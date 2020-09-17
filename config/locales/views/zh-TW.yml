@@ -94,3 +94,10 @@ zh-TW:
     index:
       title: "資料存放區"
       upload: "上傳"
+  invite:
+    add_people: "邀請成員加入"
+    placeholder: "依信箱或暱稱搜尋"
+    send: "發送"
+  threads:
+    threadform:
+      placeholder: "請輸入訊息"
