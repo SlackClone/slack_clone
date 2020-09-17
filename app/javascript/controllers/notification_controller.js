@@ -22,14 +22,14 @@ export default class extends Controller {
   unsubscribe(){
   }
   notification(data){
-    const channelTitle = `New message in ${data.channel_id}`
+    const channelTitle = `New message in ${data.channel_name}`
     const directMsgTitle = `New message from ${data.user}`
     const body = `a message from ${data.user}`
     const channelId = data.channel_id
     const directMsgId = data.direct_msg_id
     const userNow = this.data.get("user")
-    console.log(typeof directMsgId)
-    console.log(typeof channelId)
+    const channelName = document.querySelector(`[channel_id="${data.channel_id}"]`)
+
     if (userNow === data.user || userNow === data.from){
       return
     }else{
@@ -39,5 +39,6 @@ export default class extends Controller {
         new Notification(directMsgTitle)
       }
     }
+    channelName.classList.add("font-bold")
   }
 }

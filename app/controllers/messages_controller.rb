@@ -14,10 +14,12 @@ class MessagesController < ApplicationController
     else
       @directmsg = Directmsg.find(params[:directmsg_id])
       @message = @directmsg.messages.new(message_params)
+      user_count = @directmsg.workspace.users.count
       directmsg_id = params[:directmsg_id]
       if @message.save
         SendDirectMessageJob.perform_later(@message, directmsg_id)
         NotificationChannel.broadcast_to @directmsg, {user: current_user.nickname, direct_msg_id: @directmsg.id}
+        UnreadChannel.broadcast_to @directmsg, {user: current_user.id}
       end
     end
   end  

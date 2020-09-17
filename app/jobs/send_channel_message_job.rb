@@ -8,8 +8,9 @@ class SendChannelMessageJob < ApplicationJob
                 partial: 'messages/message_broadcast',
                 locals: { message: message }
               ),
-      user: "#{message.user.nickname}",
-      from: "#{message.messageable.name}"
+      user: message.user.nickname,
+      user_id: message.user.id,
+      channel_id: message.messageable_id
     }
   end
 end

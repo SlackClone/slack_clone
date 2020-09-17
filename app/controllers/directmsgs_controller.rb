@@ -8,15 +8,21 @@ class DirectmsgsController < ApplicationController
     @workspace = Workspace.find(params[:workspace_id])
     @channels = @workspace.channels
     @message = Message.new
-    @user_now = current_user.nickname
     @users_direct = current_user.users_directmsgs.find_by(directmsg: @directmsg)
     @last_enter_at = @users_direct&.last_enter_at || @directmsg.created_at
+    # 查詢私訊未讀訊息數量 
+    direct_channel = current_user.directmsgs
+    @unread_msg_count = []
+    direct_channel.each do |dc|
+      @unread_msg_count << dc.messages.where("created_at > ?", dc.users_directmsgs.find_by(user_id: current_user.id).last_enter_at).count
+    end
+    # 查詢聊天室是否有未讀訊息
+    added_channel = current_user.channels
+    @unread_msg_bol =[]
+    added_channel.each do |ac|
+      @unread_msg_bol << ac.messages.where("created_at > ?", ac.users_channels.find_by(user_id: current_user.id).last_enter_at).present?
+    end
     @users_direct&.touch(:last_enter_at)
-    current_user.directmsgs.find(@directmsg.id).messages.where("created_at > ?", current_user.directmsgs.first.users_directmsgs.find_by(user_id: user.id).last_enter_at)
-    
-    # last_msg_time = current_user.directmsgs.first.messages.maximum(:created_at)
-    
-    # byebug
     render 'channels/show'
   end
 end

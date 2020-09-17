@@ -6,10 +6,10 @@ class SendDirectMessageJob < ApplicationJob
     ChannelsChannel.broadcast_to @channel, {
       message: ApplicationController.render(
                 partial: 'messages/message_broadcast',
-                locals: { message: message }
+                locals: { message: message}
               ),
-      user: "#{message.user.nickname}"
-      # from: "#{message.messageable.name}"
+      user: "#{message.user.nickname}",
+      user_id: "#{message.user.id}"
     }
   end
 end
