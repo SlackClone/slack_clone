@@ -18,9 +18,12 @@
         <%= message.content %>
       </div>
     </div>
-  <button class="btn btn-blue">
-    <%= link_to 'share', message_share_path(message.id), method: "post"%>
-  </button>
+    <% if message.message_id.present? %>
+      <div>
+        <%= message.message.content %>
+      </div>
+    <% end %>
+    <button class="share-btn btn btn-blue" data-id="<%= message.id %>"> share</button> 
   </div>
 </div>
 

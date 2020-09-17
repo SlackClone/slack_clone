@@ -25,21 +25,18 @@ class MessagesController < ApplicationController
   def share
     @message = Message.find(params[:message_id])
     @new_message = Message.new
-    @channel = @message.channel_id
   end
 
   def add
-    message = Message.find(params[:message_id])
-    @channel = message.channel
+    @channel = Channel.find(params[:message][:messageable_id])
     @channels = @channel.workspace.channels.where.not(id: @channel.id)
-    @old_message = Message.find(params[:message_id])
-    @new_message = Message.new(share_msg_params)
-    @new_message.content = share_msg_params[:content].to_s + @old_message.content
+    @new_message = @channel.messages.new(share_msg_params)
+    logger.info share_msg_params
     if @new_message.save
-      SendMessageJob.perform_later(@new_message)
-      redirect_to workspace_channel_path(@channel.workspace.id,params[:message][:channel_id])
+      SendChannelMessageJob.perform_later(@new_message)
+      redirect_to workspace_channel_path(@channel.workspace.id, @channel)
     else
-      render :share
+      redirect_to root_path
     end
   end
   
@@ -49,6 +46,6 @@ class MessagesController < ApplicationController
   end
 
   def share_msg_params
-    params.require(:message).permit(:channel_id, :content).merge(user: current_user)
+    params.require(:message).permit(:messageable_id, :message_id, :content).merge(user: current_user)
   end
 end
