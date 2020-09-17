@@ -6,24 +6,23 @@
   </div>
 <% end%>
 <div class="messages_child pl-5">
-  <div class="author font-bold">
-<div class="flex justify-between">
-  <div class="txt flex">
-    <div class="author">
-      <%= message.user.nickname %>
+  <div class="flex justify-between">
+    <div class="txt flex">
+      <div class="author font-bold">
+        <%= message.user.nickname %>
+      </div>
+      <div class="createtime">
+        <%= message.created_at.strftime("%I:%M") %>
+      </div>
+      <div class="content">
+        <%= message.content %>
+      </div>
     </div>
-    <div class="createtime">
-      <%= message.created_at.strftime("%I:%M") %>
-    </div>
-    <div class="content">
-      <%= message.content %>
-    </div>
-  </div>
   <button class="btn btn-blue">
     <%= link_to 'share', message_share_path(message.id), method: "post"%>
   </button>
+  </div>
 </div>
-</div>
-</div>
+
 
 
