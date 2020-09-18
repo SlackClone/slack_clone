@@ -17,6 +17,7 @@ class User < ApplicationRecord
   has_many :users_directmsgs
   has_many :directmsgs, through: :users_directmsgs
   has_one :profile
+  has_many :webhook_records
 
   def self.find_for_google_oauth2(access_token, signed_in_resource=nil)
     data = access_token.info
