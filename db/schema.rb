@@ -139,6 +139,19 @@ ActiveRecord::Schema.define(version: 2020_10_07_092858) do
     t.index ["workspace_id"], name: "index_users_workspaces_on_workspace_id"
   end
 
+  create_table "webhook_records", force: :cascade do |t|
+    t.string "repo_name"
+    t.string "secret"
+    t.string "payload_url"
+    t.bigint "user_id", null: false
+    t.bigint "channel_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.string "webhook_name"
+    t.index ["channel_id"], name: "index_webhook_records_on_channel_id"
+    t.index ["user_id"], name: "index_webhook_records_on_user_id"
+  end
+
   create_table "workspaces", force: :cascade do |t|
     t.string "name"
     t.datetime "deleted_at"
@@ -160,4 +173,6 @@ ActiveRecord::Schema.define(version: 2020_10_07_092858) do
   add_foreign_key "users_directmsgs", "users"
   add_foreign_key "users_workspaces", "users"
   add_foreign_key "users_workspaces", "workspaces"
+  add_foreign_key "webhook_records", "channels"
+  add_foreign_key "webhook_records", "users"
 end
