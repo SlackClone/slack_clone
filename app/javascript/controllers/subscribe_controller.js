@@ -19,7 +19,6 @@ export default class extends Controller {
     console.log(`Messaging channel opened in workspace NO.${this.data.get("id")}`)
   }
   messaging(data){
-    const channelName = document.querySelector(`[channel_id="${data.channel_id}"]`)
     if(document.hidden){
       let divideElement = document.querySelector(".divide")
       if (!divideElement){
@@ -29,10 +28,6 @@ export default class extends Controller {
       this.subscription.perform("update_enter_time")
     }
     this.messagesTarget.insertAdjacentHTML("beforeend", data.message)
-    // if(this.data.get("recipient") !== data.user_id){
-    //   channelName.classList.add("text-red-500")
-    // }
-    
   }
   clearMsg(){
     this.newMessageTarget.reset()
