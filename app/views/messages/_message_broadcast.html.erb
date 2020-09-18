@@ -6,7 +6,7 @@
   </div>
 <% end%>
 <div class="messages_child pl-5">
-  <div class="flex justify-between hover:bg-gray-100">
+  <div class="flex justify-between hover:bg-gray-100 relative">
     <div class="txt flex">
       <div class="author font-bold mr-2">
         <%= message.user.nickname %>
@@ -25,11 +25,7 @@
         </div>
       </div>
     </div>
-    
-    <div class="share-btn" ,data-id="<%= message.id %>"> <%= inline_svg_pack_tag( "media/images/share.svg", class: "h-6 w-6") %>
-    </div> 
+    <button class= "share-btn btn btn-blue absolute right-0  mr-10 -mt-3" data-id="<%= message.id %>">share</button>
   </div>
 </div>
-
-
 
