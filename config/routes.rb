@@ -42,8 +42,9 @@ Rails.application.routes.draw do
   end
 
   resources :messages, only: [:show] do 
-    post 'share'
-    post 'add'
+    collection do
+      post 'add'
+    end
   end
   
   # 信件測試

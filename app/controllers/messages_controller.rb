@@ -22,21 +22,16 @@ class MessagesController < ApplicationController
     end
   end  
 
-  def share
-    @message = Message.find(params[:message_id])
-    @new_message = Message.new
-  end
 
   def add
-    @channel = Channel.find(params[:message][:messageable_id])
-    @channels = @channel.workspace.channels.where.not(id: @channel.id)
+    @channel = Channel.find(share_msg_params[:messageable_id])
     @new_message = @channel.messages.new(share_msg_params)
-    logger.info share_msg_params
     if @new_message.save
       SendChannelMessageJob.perform_later(@new_message)
-      redirect_to workspace_channel_path(@channel.workspace.id, @channel)
+      @result = true
     else
-      redirect_to root_path
+      @message = ''
+      render 'add'
     end
   end
   

@@ -4,3 +4,11 @@
   .btn-blue {
     @apply bg-blue-500 text-white;
   }
+
+.txtcolumn .share-btn{
+  display: none;
+}
+
+.txtcolumn:hover .share-btn{
+  display: block;
+}

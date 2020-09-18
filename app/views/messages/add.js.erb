@@ -1,0 +1,5 @@
+<% if @result %>
+location.href = '<%= workspace_channel_path(@channel.workspace.id, @channel) %>'
+<% else %>
+  alert('<%=@message%>')
+<% end %>
