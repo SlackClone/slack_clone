@@ -27,6 +27,3 @@ document.querySelectorAll('.share-btn').forEach((e)=>{
     selectMessage.textContent = shareContent
   })
 })
-
-
-

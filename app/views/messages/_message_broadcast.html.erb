@@ -6,24 +6,28 @@
   </div>
 <% end%>
 <div class="messages_child pl-5">
-  <div class="flex justify-between">
+  <div class="flex justify-between hover:bg-gray-100">
     <div class="txt flex">
-      <div class="author font-bold">
+      <div class="author font-bold mr-2">
         <%= message.user.nickname %>
       </div>
-      <div class="createtime">
-        <%= message.created_at.strftime("%I:%M") %>
-      </div>
-      <div class="content">
-        <%= message.content %>
+      <div class="share-msg flex-col">
+        <div class="createtime mr-2">
+          <%= message.created_at.strftime("%I:%M") %>
+        </div>
+        <% if message.message_id.present? %>
+        <div>
+          <%= message.message.content %>
+        </div>
+        <% end %>
+        <div class="content">
+            <%= message.content %>
+        </div>
       </div>
     </div>
-    <% if message.message_id.present? %>
-      <div>
-        <%= message.message.content %>
-      </div>
-    <% end %>
-    <button class="share-btn btn btn-blue" data-id="<%= message.id %>"> share</button> 
+    
+    <div class="share-btn" ,data-id="<%= message.id %>"> <%= inline_svg_pack_tag( "media/images/share.svg", class: "h-6 w-6") %>
+    </div> 
   </div>
 </div>
 
