@@ -23,22 +23,37 @@ export default class extends Controller {
   }
   notification(data){
     const channelTitle = `New message in ${data.channel_name}`
-    const directMsgTitle = `New message from ${data.user}`
-    const body = `a message from ${data.user}`
+    const directMsgTitle = `New message from ${data.user_nickname}`
+    const body = `a message from ${data.user_nickname}`
     const channelId = data.channel_id
     const directMsgId = data.direct_msg_id
     const userNow = this.data.get("user")
     const channelName = document.querySelector(`[channel_id="${data.channel_id}"]`)
+    const recipientElement = document.querySelector(`[unread-id="${data.user_id}"]`)
+    console.log(recipientElement)
 
-    if (userNow === data.user || userNow === data.from){
+    if (userNow === data.user_nickname || userNow === data.from){
       return
     }else{
       if (typeof directMsgId === "undefined"){
+        // 瀏覽器訊息通知
         new Notification(channelTitle, {body: body})
+        // 聊天室群組字體提示
+        channelName.classList.add("font-bold")
       }else if (typeof channelId === "undefined"){
+        // 瀏覽器訊息通知
         new Notification(directMsgTitle)
+        // 私聊未讀訊息則數顯示
+        if (!!recipientElement){
+        // 若一開始為空字串，直接指定為1
+          if (recipientElement.innerHTML == ""){
+            recipientElement.classList.add("text-red-300")
+            recipientElement.innerHTML = 1 
+          }else{
+            recipientElement.innerHTML = parseInt(recipientElement.innerHTML) + 1
+          }
+        }
       }
     }
-    channelName.classList.add("font-bold")
   }
 }

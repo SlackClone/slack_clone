@@ -12,10 +12,10 @@
       <%= t(".channel.name") %>
       <%= link_to t(".channel.new"), new_workspace_channels_path(workspace_id: @workspace.id) %>
     </p>
-    <% @channels.each_with_index do |channel, index| %>
+    <% @channels.each do |channel| %>
       <div data-controller="channels" data-channels-id="<%= channel.id %>">
         <span>#</span>
-        <%= link_to channel.name, workspace_channel_path(@workspace, channel), channel_id: channel.id, class: @unread_msg_bol[index] ? "font-bold" : "" %>
+        <%= link_to channel.name, workspace_channel_path(@workspace, channel), channel_id: channel.id, class: @unread_msg_bol[channel.id] ? "font-bold" : "" %>
         <% if channel.users.include?(current_user) %>
           <button data-action="click->channels#removeChannel" data-target="channels.symbol">-</button>
         <% else %>
@@ -25,10 +25,10 @@
      <% end %>
   <div class="w-full">
     <p class="font-medium" data-controller="unread-msg" data-unread-msg-workspace="<%= @workspace.id %>"><%= t(".channel.direct") %></p>
-    <% (@workspace.users - [current_user]).each_with_index do |user, index| %>
+    <% (@workspace.users - [current_user]).each do |user| %>
       <p class="flex justify-between">
         <%= link_to user.nickname, workspace_directmsg_path(@workspace, user.id) %>
-        <span class="count text-red-300" unread-id="<%= user.id %>"><%= @unread_msg_count[index] > 0 ? @unread_msg_count[index] : "" %></span>
+        <span class="count text-red-300" unread-id="<%= user.id %>"><%= @unread_msg_count["#{user.id}"] > 0 ? @unread_msg_count["#{user.id}"] : "" %></span>
       </p>
     <% end %>
   </div>

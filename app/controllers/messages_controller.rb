@@ -8,18 +8,18 @@ class MessagesController < ApplicationController
       @message = @channel.messages.new(message_params)
       channel_id = params[:channel_id]
       if @message.save
-        SendChannelMessageJob.perform_later(@message, channel_id)
-        NotificationChannel.broadcast_to @channel, {channel_name: @channel.name, user: current_user.nickname, channel_id: @channel.id}
+        # 第三個參數為是否為私訊
+        sending_message(@message, channel_id, false)
+        sending_notice(@channel, current_user, false)
       end
     else
       @directmsg = Directmsg.find(params[:directmsg_id])
       @message = @directmsg.messages.new(message_params)
-      user_count = @directmsg.workspace.users.count
       directmsg_id = params[:directmsg_id]
       if @message.save
-        SendDirectMessageJob.perform_later(@message, directmsg_id)
-        NotificationChannel.broadcast_to @directmsg, {user: current_user.nickname, direct_msg_id: @directmsg.id}
-        UnreadChannel.broadcast_to @directmsg, {user: current_user.id}
+        # 第三個參數為是否為私訊
+        sending_message(@message, directmsg_id, true)
+        sending_notice(@directmsg, current_user, true)
       end
     end
   end  
@@ -44,5 +44,13 @@ class MessagesController < ApplicationController
 
   def share_msg_params
     params.require(:message).permit(:messageable_id, :share_message_id, :content).merge(user: current_user)
+  end
+  
+  def sending_message(message, channel_id, direct_or_not)
+    SendMessageJob.perform_later(message, channel_id, direct_or_not)
+  end
+
+  def sending_notice(channel, sender, direct_or_not)
+    SendNotificationJob.perform_later(channel, sender, direct_or_not)
   end
 end

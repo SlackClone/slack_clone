@@ -3,7 +3,6 @@ import Rails from "@rails/ujs";
 
 export default class extends Controller {
   static targets = [ 'symbol' ]
-  
   addChannel(){
     let element = this.symbolTarget
     let channel_id = this.element.getAttribute("data-channels-id")
