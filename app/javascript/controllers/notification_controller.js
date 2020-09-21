@@ -30,9 +30,8 @@ export default class extends Controller {
     const userNow = this.data.get("user")
     const channelName = document.querySelector(`[channel_id="${data.channel_id}"]`)
     const recipientElement = document.querySelector(`[unread-id="${data.user_id}"]`)
-    console.log(recipientElement)
-
-    if (userNow === data.user_nickname || userNow === data.from){
+   
+    if (userNow === data.user_nickname){
       return
     }else{
       if (typeof directMsgId === "undefined"){

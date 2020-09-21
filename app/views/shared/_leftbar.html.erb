@@ -28,7 +28,7 @@
     <% (@workspace.users - [current_user]).each do |user| %>
       <p class="flex justify-between">
         <%= link_to user.nickname, workspace_directmsg_path(@workspace, user.id) %>
-        <span class="count text-red-300" unread-id="<%= user.id %>"><%= @unread_msg_count["#{user.id}"] > 0 ? @unread_msg_count["#{user.id}"] : "" %></span>
+        <span class="count text-red-300" unread-id="<%= user.id %>"><%= @unread_msg_count["#{user.id}"] != nil && @unread_msg_count["#{user.id}"] > 0 ? @unread_msg_count["#{user.id}"] : "" %></span>
       </p>
     <% end %>
   </div>
