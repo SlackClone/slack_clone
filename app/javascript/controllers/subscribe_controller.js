@@ -8,6 +8,7 @@ export default class extends Controller {
   static targets = ["messages", "newMessage" ]
 
   connect() {
+    console.log(this.data.get("direct"))
     Notification.requestPermission()
 
     this.subscription = consumer.subscriptions.create({channel: "ChannelsChannel", channelId: this.data.get("channel"), directId: this.data.get("direct")},

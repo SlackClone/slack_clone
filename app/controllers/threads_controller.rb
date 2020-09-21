@@ -1,8 +1,10 @@
 class ThreadsController < ApplicationController
   def show
-    @thread = Message.find(params[:id])
-    @workspace = Workspace.find(params[:workspace_id])
+    # debugger
+    @thread = Message.find(params[:message_id])
+    # @workspace = Workspace.find(params[:workspace_id])
     @channel = Channel.find(params[:channel_id])
+    @workspace = @channel.workspace
     @channels = @workspace.channels
     @message = Message.new
     @channel_user = current_user.users_channels.find_by(channel: @channel)

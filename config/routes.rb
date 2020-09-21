@@ -22,7 +22,7 @@ Rails.application.routes.draw do
     resource :users_workspaces
     resource :channels, only: %i[new create]
     resources :channels, only: [:show] do
-      resources :threads, only: [:show]
+      # resources :threads, only: [:show]
     end
     resource :invitations, only: :create do
       get :accept
@@ -44,7 +44,7 @@ Rails.application.routes.draw do
       post :invite
     end
     resources :messages do
-      resources :threads, only: [:create]
+      resource :threads, only: [:create, :show]
     end
   end
   

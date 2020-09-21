@@ -48,8 +48,8 @@
           </div>
           <div class="thread">
           <div class="thread-btn">
-            <%= link_to workspace_channel_thread_path(@workspace, message.messageable_id, message) do %>
-              <i class="far fa-comment-dots" style="color:white"></i>
+            <%= link_to channel_message_threads_path(message.messageable_id, message.id) do %>
+              <i class="far fa-comment-dots"></i>
             <% end %>
             <% if message.children.count > 0 %>
               有 <%= message.children.count %> 則回覆
