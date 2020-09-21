@@ -15,7 +15,7 @@
     <% @channels.each do |channel| %>
       <div data-controller="channels" data-channels-id="<%= channel.id %>">
         <span>#</span>
-        <%= link_to channel.name, workspace_channel_path(@workspace, channel), id: channel.id %>
+        <%= link_to channel.name, workspace_channel_path(@workspace, channel), channel_id: channel.id, class: @unread_msg_bol[channel.id] ? "font-bold" : "" %>
         <% if channel.users.include?(current_user) %>
           <button data-action="click->channels#removeChannel" data-target="channels.symbol">-</button>
         <% else %>
@@ -24,11 +24,12 @@
       </div>
      <% end %>
   <div class="w-full">
-    <p class="font-medium"><%= t(".channel.direct") %></p>
+    <p class="font-medium" data-controller="unread-msg" data-unread-msg-workspace="<%= @workspace.id %>"><%= t(".channel.direct") %></p>
     <% (@workspace.users - [current_user]).each do |user| %>
-      <li>
+      <p class="flex justify-between">
         <%= link_to user.nickname, workspace_directmsg_path(@workspace, user.id) %>
-      </li>
+        <span class="count text-red-300" unread-id="<%= user.id %>"><%= @unread_msg_count["#{user.id}"] != nil && @unread_msg_count["#{user.id}"] > 0 ? @unread_msg_count["#{user.id}"] : "" %></span>
+      </p>
     <% end %>
   </div>
 </div>

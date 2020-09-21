@@ -16,7 +16,7 @@ export default class extends Controller {
     consumer.subscriptions.remove(this.subscription)
   }
   subscribe(){
-    console.log(`You are in workspace NO.${this.data.get("id")}`)
+    console.log(`Messaging channel opened in workspace NO.${this.data.get("id")}`)
   }
   messaging(data){
     if(document.hidden){
@@ -30,7 +30,6 @@ export default class extends Controller {
     this.messagesTarget.insertAdjacentHTML("beforeend", data.message)
   }
   clearMsg(){
-    console.log("clear")
     this.newMessageTarget.reset()
   }
 }

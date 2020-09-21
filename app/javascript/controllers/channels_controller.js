@@ -8,7 +8,7 @@ export default class extends Controller {
     let element = this.symbolTarget
     let channel_id = this.element.getAttribute("data-channels-id")
     Rails.ajax({
-      url: `/channels/${channel_id}/users_channels.json`,
+      url: `/channels/${channel_id}/users_channels`,
       type: 'post',
       success: () => {
         element.textContent = "-"
@@ -24,7 +24,7 @@ export default class extends Controller {
     let element = this.symbolTarget
     let channel_id = this.element.getAttribute("data-channels-id")
     Rails.ajax({
-      url: `/channels/${channel_id}/users_channels.json`,
+      url: `/channels/${channel_id}/users_channels`,
       type: 'delete',
       success: () => {
         element.textContent = "+"
