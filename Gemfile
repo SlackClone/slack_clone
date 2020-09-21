@@ -12,7 +12,6 @@ gem 'rails', '~> 6.0.3', '>= 6.0.3.2'
 # Use postgresql as the database for Active Record
 gem 'pg', '>= 0.18', '< 2.0'
 # Use Puma as the app server
-gem 'puma', '~> 4.1'
 # Use SCSS for stylesheets
 gem 'sass-rails', '>= 6'
 # Transpile app-like JavaScript. Read more: https://github.com/rails/webpacker
@@ -43,6 +42,13 @@ group :development, :test do
   gem 'factory_bot_rails', '~> 6.1'
   gem 'faker', '~> 2.13'
   gem 'shoulda-matchers', '~> 4.4', '>= 4.4.1'
+  gem 'capistrano', '3.14.1'
+  gem 'capistrano-bundler', '2.0'
+  gem 'capistrano-rails', '1.6'
+  gem 'capistrano-passenger', '0.2.0'
+  gem 'net-ssh', '~> 6.1'
+  gem 'ed25519', '1.2'
+  gem 'bcrypt_pbkdf', '1.0'
 end
 
 group :development do
