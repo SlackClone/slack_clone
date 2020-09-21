@@ -41,6 +41,6 @@ class MessagesController < ApplicationController
   end
 
   def share_msg_params
-    params.require(:message).permit(:messageable_id, :message_id, :content).merge(user: current_user)
+    params.require(:message).permit(:messageable_id, :share_message_id, :content).merge(user: current_user)
   end
 end

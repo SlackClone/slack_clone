@@ -23,7 +23,7 @@ document.querySelectorAll('.share-btn').forEach((e)=>{
     let shareContent = e.target.parentNode.querySelector('.content').textContent
     let selectMessage = document.querySelector('.select-message')
     selectMessage.textContent = shareContent
-    let input = document.getElementById('message_id')
+    let input = document.getElementById('share_message_id')
     input.value = this.dataset.id
   })
 })

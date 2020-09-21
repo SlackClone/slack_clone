@@ -18,9 +18,9 @@
          <div class="content">
             <%= message.content %>
          </div>
-        <% if message.message_id.present? %>
+        <% if message.share_message_id.present? %>
           <div  class="border-l-4 m-2">
-            <span class="ml-2"> <%= message.message.content %> </span>
+            <span class="ml-2"> <%= message.share_message.content %> </span>
           </div> 
         <% end %>
        
