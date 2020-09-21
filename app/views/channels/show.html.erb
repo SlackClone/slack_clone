@@ -4,7 +4,7 @@
     <div class="bg-light_sladock text-white col-span-2 px-2 overflow-auto h-screen -mb-10" data-controller="notification" data-notification-workspace="<%= @workspace.id %>" data-notification-channel="<%= @channel&.id || 0 %>" data-notification-direct="<%= @directmsg&.id || 0 %>">
       <%= render "./shared/leftbar" %>
     </div>
-    <div class="messages_area break-all flex flex-col-reverse col-span-10 border border-1 bg-gray-300 overflow-auto h-screen_90" data-controller="subscribe"  data-subscribe-id="<%= @workspace.id %>" data-subscribe-channel="<%= @channel&.id || 0 %>" data-subscribe-direct="<%= @directmsg&.id || 0 %>">
+    <div class="messages_area break-all flex flex-col-reverse col-span-10 border border-1 bg-white overflow-auto h-screen_90 " data-controller="subscribe"  data-subscribe-id="<%= @workspace.id %>" data-subscribe-channel="<%= @channel&.id || 0 %>" data-subscribe-direct="<%= @directmsg&.id || 0 %>">
       <div class="pb-5 messages" data-target="subscribe.messages">
         <% (@channel || @directmsg).messages.order(:created_at).each do |msg| %>
           <%= render "messages/message_broadcast" , message: msg %>
@@ -15,6 +15,42 @@
         <% else %>
           <%= render "./shared/msgform_direct" %>
         <% end %>
-    </div>  
+    </div> 
+      <div class="w-full h-full absolute hidden popup bg-black bg-opacity-25">
+        <%= form_with model: @message, url: add_messages_path(locale: 'zh-TW'), method: 'post', class:"w-full max-w-lg border-2 rounded-lg bg-white relative m-auto" do |f|%>
+          <div class="flex flex-wrap mb-6">
+            <div class="w-full flex share-title justify-between">
+              <p class="text-2xl font-bold mt-3 ml-1"> Share this message</p>
+              <div class="cancel-img mt-4 mr-2">
+                <%= inline_svg_pack_tag("media/images/cancel.svg", class:"h-8 w-8 pr-2 cancel") %>
+              </div>
+            </div>
+            <div class="w-full px-3 mt-4">
+              <%= f.label :messageable_id, "Share with", class:"block tracking-wide text-black-700 text-xl font-bold mb-2" %>
+              <%= f.select :messageable_id, options_for_select(@channels.map { |channel| [channel.name, channel.id] }), class:"appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" %>
+            </div>
+          </div>
+          <div class="flex flex-wrap mb-6">
+            <div class="w-full px-3">
+                <%= f.label :content, "Message", class:"block tracking-wide text-black-700 text-xl font-bold mb-2" %>
+                <%= f.text_area :content,placeholder: 'Add some message, if you\'d like', size: "20x10",class:"textArea no-resize appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 h-48 resize-none" %>
+            </div>
+          </div>
+          <%= f.hidden_field :share_message_id, value: '', id: 'share_message_id' %>
+          <div class="flex flex-wrap mb-6 px-3 mt-4">
+            <div class="w-full px-3 border-l-4 select-message">
+            </div>
+          </div>
+          <div class="flex flex-row-reverse mb-4 mr-2">
+            <%= f.submit "share", class:"share-submit shadow bg-teal-400 hover:bg-teal-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded" %>
+          </div>
+        <% end %> 
+      </div>
+      
+    
   </div>  
+  
 </div>
+
+
+

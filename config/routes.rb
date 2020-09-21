@@ -12,7 +12,7 @@ Rails.application.routes.draw do
     get :validate
   end
   
-  
+
   root to: 'pages#index'
   resources :workspaces do
     resource :users_workspaces
@@ -39,6 +39,12 @@ Rails.application.routes.draw do
     resources :messages, only: [:create]
   end
 
+  resources :messages, only: [:show] do 
+    collection do
+      post 'add'
+    end
+  end
+  
   # 信件測試
   if Rails.env.development?
      mount LetterOpenerWeb::Engine, at: "/letter_opener"

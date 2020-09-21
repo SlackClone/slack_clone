@@ -23,8 +23,24 @@ class MessagesController < ApplicationController
   end  
 
 
+  def add
+    @channel = Channel.find(share_msg_params[:messageable_id])
+    @new_message = @channel.messages.new(share_msg_params)
+    if @new_message.save
+      SendChannelMessageJob.perform_later(@new_message)
+      @result = true
+    else
+      @message = ''
+      render 'add'
+    end
+  end
+  
   private
   def message_params
     params.require(:message).permit(:content).merge(user: current_user)
+  end
+
+  def share_msg_params
+    params.require(:message).permit(:messageable_id, :share_message_id, :content).merge(user: current_user)
   end
 end

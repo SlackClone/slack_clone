@@ -12,6 +12,7 @@ import "./invite_ws.js"
 import "tailwindcss/base";
 import "tailwindcss/components";
 import "tailwindcss/utilities";
+import "../stylesheets/Frontend/shared"
 import $ from 'jquery';
 window.jQuery = $
 window.$ = $
@@ -24,6 +25,10 @@ $(document).ready(function () {
     $('.open').slideToggle();
   });
 });
+
+
+
+import "./share-btn"
 
 // Uncomment to copy all static images under ../images to the output folder and reference
 // them with the image_pack_tag helper in views (e.g <%= image_pack_tag 'rails.png' %>)
