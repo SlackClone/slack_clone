@@ -40,3 +40,9 @@ yarn-debug.log*
 /config/database.yml
 /config/credentials/development.key.yml
 /config/credentials/development.enc.yml
+
+# ngrok.sh backup file before modfied it
+config/environments/development.rb.bak
+
+# Get & set ngork hostname to config/development.rb automatically
+ngrok.sh
