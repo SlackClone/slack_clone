@@ -4,7 +4,7 @@
       <h5 class="font-bold text-2xl"><%= t(".create") %></h5>
       <button class="create-cancel-btn font-bold text-gray-600 focus:outline-none">X</button>
     </div>
-  <p class="text-sm text-gray-600 mb-5"><%= t(".communicates") %></p>
+    <p class="text-sm text-gray-600 mb-5"><%= t(".communicates") %></p>
     <%= form_with(model: channel, url:workspace_channels_path(id: channel.workspace_id),method:'POST',local:true) do |f| %>
     <div class="field">
       <%= f.label :name, t(".name"), class: "font-bold" %>
@@ -17,7 +17,6 @@
     </div>
       <%= f.submit t("utilities.submit"),class:"cursor-pointer block font-bold text-gray-700 px-5 py-2 mt-3 ml-auto bg-gray-400 rounded focus:outline-none" %>
     <% end %>
-    </div> 
   </div>
 </div>
 

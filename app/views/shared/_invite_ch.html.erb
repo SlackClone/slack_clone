@@ -5,14 +5,13 @@
       <button class="invite-cancel-btn font-bold text-gray-600 focus:outline-none">X</button>
     </div>
     <span class="text-xs text-gray-600">#<%= @channel.name %></span>
-      <%= form_with(url: invite_channel_users_channels_path(@channel.id),method: "POST",local: true) do |f| %>
-        <select name="users_channels[name][]" id="user_list" multiple="true" style="width: 100%">
-          <%= options_for_select(@workspace_users)%>
-        </select>
-        <%= f.submit t(".send") ,class:"invite-btn cursor-pointer block font-bold text-gray-700 px-5 py-2 mt-3 ml-auto bg-gray-400 rounded focus:outline-none",disabled: true %>
-      <% end %>
-      <div class="search-data hidden absolute top:0 bg-gray-100 py-2 inset-x-0 mx-5 border border-gray-500 rounded" >
-      </div>
+    <%= form_with(url: invite_channel_users_channels_path(@channel.id),method: "POST",local: true) do |f| %>
+      <select name="users_channels[name][]" id="user_list" multiple="true" style="width: 100%">
+        <%= options_for_select(@workspace_users)%>
+      </select>
+      <%= f.submit t(".send") ,class:"invite-btn cursor-pointer block font-bold text-gray-700 px-5 py-2 mt-3 ml-auto bg-gray-400 rounded focus:outline-none",disabled: true %>
+    <% end %>
+    <div class="search-data hidden absolute top:0 bg-gray-100 py-2 inset-x-0 mx-5 border border-gray-500 rounded" >
     </div>
   </div>
 </div>
