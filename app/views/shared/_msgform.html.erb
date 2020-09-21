@@ -1,4 +1,6 @@
-  <%= form_with(model: @message, url:channel_messages_path(@channel) ,class:"flex bg-gray-200 appearance-none border-2 border-gray-200 rounded text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500", id:"new_message",data:{action: "ajax:success->subscribe#clearMsg", target: "subscribe.newMessage"}) do |f| %>
-      <%= f.text_field :content, class:"flex-grow min-w-0", placeholder: t(".placeholder") %>
-      <%= f.submit t("utilities.submit"), class:"bg-gray-500 shadow bg-purple-500 hover:bg-purple-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded" %>
+  <%= form_with(model: @message, url:channel_messages_path(@channel) ,class:"relative flex bg-gray-200 appearance-none border-2 border-gray-200 rounded text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500 relative", id:"new_message",data:{action: "ajax:success->subscribe#clearMsg", target: "subscribe.newMessage"}) do |f| %>
+    <%= f.text_field :content, class:"flex-grow min-w-0", placeholder: t(".placeholder") %>
+    <%= f.submit t("utilities.submit"), class:"bg-gray-500 shadow bg-purple-500 hover:bg-purple-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded" %>
+        <input type="file" id="upload-input" class="hidden">
+    <%= inline_svg_pack_tag("media/images/uploaded.svg",class: "upload-btn text-gray-500 w-6 cursor-pointer absolute top-7/10 left-0") %>
   <% end %>

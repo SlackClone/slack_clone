@@ -2,7 +2,7 @@ class ChannelsController < ApplicationController
   before_action :authenticate_user!
   before_action :find_workspace, except:[:destroy]
   def new
-    @channel = Channel.new
+    
   end
   
   def create
@@ -19,6 +19,7 @@ class ChannelsController < ApplicationController
 
   def show
     @channel = Channel.find(params[:id])
+    @new_channel = Channel.new
     @message = Message.new
     @channels = @workspace.channels
     @messages = @channel.messages
@@ -28,6 +29,7 @@ class ChannelsController < ApplicationController
     @last_enter_at = @channel_user&.last_enter_at || @channel.created_at
     # 更新使用者進入這個channel的時間
     @channel_user&.touch(:last_enter_at)
+<<<<<<< HEAD
 <<<<<<< HEAD
 
     # 查詢私訊未讀訊息數量 
@@ -61,6 +63,9 @@ class ChannelsController < ApplicationController
       format.json {render json: @workspace_users} 
     end
 =======
+=======
+
+>>>>>>> 將channel new改為彈跳視窗
     @invitation = Invitation.new
     channel_users_for_select2
 >>>>>>> 修改ws_new頁面、修改聊天室畫面、修改邀請code、修改錯誤訊息、增加i18n

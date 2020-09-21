@@ -2,7 +2,7 @@
   <div>
     <%= render "./shared/header" %>
     <div class="chatroom grid grid-cols-12">
-      <div class="bg-light_sladock text-white col-span-2 h-screen_94">
+      <div class="bg-light_sladock text-white col-span-2 h-screen_94 overflow-y-scroll">
         <h1><%= t(".name",name: @workspace.name) %></h1>
         <%= link_to t(".create_channel"), new_workspace_channels_path(@workspace.id) %>
         <h2><%= t(".all_channels",name: @workspace.name) %></h2>
@@ -27,8 +27,6 @@
           <div>
             <%= link_to t("utilities.back_home"), root_path %>
           </div>
-        <%= link_to "中文版", :controller => controller_name, :action => action_name, :locale => "zh-TW" %>
-        <%= link_to "English", :controller => controller_name, :action => action_name, :locale => "en" %>
       </div>
       <div class=" col-span-10 border border-1">
       </div>  

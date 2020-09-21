@@ -32,9 +32,13 @@ en:
       placeholder: 'Please enter a messages'
   channels:
     new:
-      name: 'Channel name'
-      topic: 'Topic'
+      create: 'Create a channel'
+      name: 'Name'
       description: 'Description'
+      communicates: 'Channels are where your team communicates. They’re best when organized around a topic — #marketing, for example.'
+      name_placeholder: 'enter a channel name'
+      desc_placeholder: 'enter description'
+      about: 'What’s this channel about?'
   workspaces:
     index:
       join: 'Join workspace'

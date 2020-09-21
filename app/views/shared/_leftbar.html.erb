@@ -1,15 +1,17 @@
-  <p class="truncate"><%= t(".sidebar.threads") %></p>
-  <p class="truncate"><%= t(".sidebar.mentions") %></p>
-  <p class="truncate"><%= t(".sidebar.save") %></p>
-  <p class="truncate"><%= t(".sidebar.more") %></p>
-  <p class="truncate"><%= t(".sidebar.shared") %></p>
+<div class="left-bar ">
+  <p class="truncate pl-10 py-1 hover:bg-deep_sladock"><%= t(".sidebar.threads") %></p>
+  <p class="truncate pl-10 py-1 hover:bg-deep_sladock"><%= t(".sidebar.mentions") %></p>
+  <p class="truncate pl-10 py-1 hover:bg-deep_sladock"><%= t(".sidebar.save") %></p>
+  <p class="truncate pl-10 py-1 hover:bg-deep_sladock"><%= t(".sidebar.more") %></p>
+  <p class="truncate pl-10 py-1 hover:bg-deep_sladock"><%= t(".sidebar.shared") %></p>
   <div class="w-full">
-    <div class="font-medium flex justify-between">
-      <p class="truncate"><%= t(".channel.name") %></p>
-      <%= link_to t(".channel.new"), new_workspace_channels_path(workspace_id: @workspace.id) %>
+    <div class="font-medium flex justify-between items-center pl-10 py-1">
+      <p class="ch-name truncate"><%= t(".channel.name") %></p> 
+      <%= link_to '+', new_workspace_channels_path(workspace_id: @workspace.id),class: 'create-ch-btn text-2xl' %>
+    </div>
     </div>
     <% @channels.each do |channel| %>
-      <div data-controller="channels" data-channels-id="<%= channel.id %>" class='truncate'>
+      <div data-controller="channels" data-channels-id="<%= channel.id %>" class='truncate pl-10 py-1 hover:bg-deep_sladock'>
         <span>#</span>
         <%= link_to channel.name, workspace_channel_path(@workspace, channel), channel_id: channel.id, class: @unread_msg_bol[channel.id] ? "font-bold" : "" %>
         <% if channel.users.include?(current_user) %>
@@ -20,9 +22,9 @@
       </div>
      <% end %>
   <div class="w-full">
-    <p class="font-medium truncate" data-controller="unread-msg" data-unread-msg-workspace="<%= @workspace.id %>"><%= t(".channel.direct") %></p>
+    <p class="font-medium truncate pl-10 py-1"><%= t(".channel.direct") %></p>
     <% (@workspace.users - [current_user]).each do |user| %>
-      <p class="flex justify-between">
+      <p class="truncate pl-10 py-1 hover:bg-deep_sladock">
         <%= link_to user.nickname, workspace_directmsg_path(@workspace, user.id) %>
         <span class="count text-red-300" unread-id="<%= user.id %>"><%= @unread_msg_count["#{user.id}"] != nil && @unread_msg_count["#{user.id}"] > 0 ? @unread_msg_count["#{user.id}"] : "" %></span>
       </p>
@@ -34,3 +36,4 @@
   <%= inline_svg_pack_tag( "media/images/invite.svg" , class: "stroke-current text-gray-600 hover:stroke-gray") %>
 </button>
 <%= render "./shared/invite_ws" %>
+<%= render './shared/language' %>

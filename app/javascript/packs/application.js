@@ -16,6 +16,7 @@ import "tailwindcss/utilities";
 import "../stylesheets/Frontend/shared"
 import "controllers"
 import './select2.js'
+import './create_ch.js'
 import $ from 'jquery';
 window.jQuery = $
 window.$ = $
@@ -37,13 +38,14 @@ $(document).ready(function () {
   })
 });
 
+$('.upload-btn').click(()=>{
+  $('#upload-input').trigger('click')
+})
 
-<<<<<<< HEAD
+
 
 import "./share-btn"
 
-=======
->>>>>>> 修改ws_new頁面、修改聊天室畫面、修改邀請code、修改錯誤訊息、增加i18n
 // Uncomment to copy all static images under ../images to the output folder and reference
 // them with the image_pack_tag helper in views (e.g <%= image_pack_tag 'rails.png' %>)
 // or the `imagePath` JavaScript helper below.

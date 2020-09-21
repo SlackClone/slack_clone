@@ -32,9 +32,14 @@ zh-TW:
       placeholder: '請輸入訊息'
   channels:
     new:
-      name: '頻道名稱'
-      topic: '標題'
-      description: '頻道描述'
+      create: '建立聊天室'      
+      name: '聊天室名稱'
+      description: '聊天室描述'
+      communicates: '聊天室的建立是為了團隊能夠有更良好的溝通，創建的名稱最好與團隊息息相關'
+      placeholder: ''
+      name_placeholder: '輸入聊天室名稱'
+      desc_placeholder: '輸入關於此聊天室的描述'      
+      about: '這個聊天室是關於?'
   workspaces:
     index:
       join: '你所加入的有以下:'

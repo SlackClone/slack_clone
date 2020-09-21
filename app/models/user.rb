@@ -19,7 +19,6 @@ class User < ApplicationRecord
 
   def self.find_for_google_oauth2(access_token, signed_in_resource=nil)
     data = access_token.info
-    byebug
     user = User.find_by(:google_token => access_token.credentials.token, :google_uid => access_token.uid )    
     return user if user.present?
     existing_user = User.find_by(:email => data["email"])
