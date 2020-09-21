@@ -1,19 +1,15 @@
-  <h3 class="chatroomName">
-    <%= @workspace.name %>
-  </h3> 
-  <div class="w-full bg-white border"></div>
-  <div class="w-full"><%= t(".sidebar.threads") %></div>
-  <div class="w-full"><%= t(".sidebar.mentions") %></div>
-  <div class="w-full"><%= t(".sidebar.save") %></div>
-  <div class="w-full"><%= t(".sidebar.more") %></div>
-  <div class="w-full"><%= t(".sidebar.shared") %></div>
+  <p class="truncate"><%= t(".sidebar.threads") %></p>
+  <p class="truncate"><%= t(".sidebar.mentions") %></p>
+  <p class="truncate"><%= t(".sidebar.save") %></p>
+  <p class="truncate"><%= t(".sidebar.more") %></p>
+  <p class="truncate"><%= t(".sidebar.shared") %></p>
   <div class="w-full">
-    <p class="font-medium flex justify-between">
-      <%= t(".channel.name") %>
+    <div class="font-medium flex justify-between">
+      <p class="truncate"><%= t(".channel.name") %></p>
       <%= link_to t(".channel.new"), new_workspace_channels_path(workspace_id: @workspace.id) %>
-    </p>
+    </div>
     <% @channels.each do |channel| %>
-      <div data-controller="channels" data-channels-id="<%= channel.id %>">
+      <div data-controller="channels" data-channels-id="<%= channel.id %>" class='truncate'>
         <span>#</span>
         <%= link_to channel.name, workspace_channel_path(@workspace, channel), channel_id: channel.id, class: @unread_msg_bol[channel.id] ? "font-bold" : "" %>
         <% if channel.users.include?(current_user) %>
@@ -24,7 +20,7 @@
       </div>
      <% end %>
   <div class="w-full">
-    <p class="font-medium" data-controller="unread-msg" data-unread-msg-workspace="<%= @workspace.id %>"><%= t(".channel.direct") %></p>
+    <p class="font-medium truncate" data-controller="unread-msg" data-unread-msg-workspace="<%= @workspace.id %>"><%= t(".channel.direct") %></p>
     <% (@workspace.users - [current_user]).each do |user| %>
       <p class="flex justify-between">
         <%= link_to user.nickname, workspace_directmsg_path(@workspace, user.id) %>
@@ -33,8 +29,8 @@
     <% end %>
   </div>
 </div>
-  <%# button顯示 %>
-<button class="invite-ch-btn h-8 w-8  rounded hover:bg-gray-100 hover:stroke-gray active:bg-gray-400 focus:outline-none" data-id=<%= @workspace.id%> data-channelId=<%=@channel.id%>>
-  <%= inline_svg_pack_tag( "media/images/invite-ch.svg" , class: "stroke-current text-gray-600 hover:stroke-gray") %>
-      <%= image_pack_tag("invite-ch.svg") %>
+<%# button顯示 %>
+<button class="invite-ws-btn h-8 w-8  rounded hover:bg-gray-100 hover:stroke-gray active:bg-gray-400 focus:outline-none">
+  <%= inline_svg_pack_tag( "media/images/invite.svg" , class: "stroke-current text-gray-600 hover:stroke-gray") %>
 </button>
+<%= render "./shared/invite_ws" %>

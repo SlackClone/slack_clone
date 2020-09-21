@@ -9,7 +9,7 @@ require("@rails/activestorage").start()
 require("channels")
 require("stylesheets")
 import "./invite_ws.js"
-import "./invite_ch.js"
+import "./info.js"
 import "tailwindcss/base";
 import "tailwindcss/components";
 import "tailwindcss/utilities";
@@ -24,15 +24,26 @@ window.$ = $
 
 $(document).ready(function () {
   $('.clickopen').click(function (event) {
-    event.preventDefault();
     $('.open').slideToggle();
-  });
+    event.stopPropagation();
+   })
+   $('.open').click(function(event){
+    event.stopPropagation();
+    });
+  $('html').click(function(e) {
+    if(e.target != $('.open')){
+    $('.open').slideUp();
+    }
+  })
 });
 
 
+<<<<<<< HEAD
 
 import "./share-btn"
 
+=======
+>>>>>>> 修改ws_new頁面、修改聊天室畫面、修改邀請code、修改錯誤訊息、增加i18n
 // Uncomment to copy all static images under ../images to the output folder and reference
 // them with the image_pack_tag helper in views (e.g <%= image_pack_tag 'rails.png' %>)
 // or the `imagePath` JavaScript helper below.

@@ -18,6 +18,14 @@ en:
         name: 'Channel'
         new: 'New a channel'
         direct: 'Direct messages'
+    invite_ws:
+      invite: 'Invite people to %{name}'
+      placeholder: 'Please enter a email'
+      send: 'send'
+    invite_ch:
+      invite: 'Add people'
+      placeholder: 'who want to invite?'
+      send: 'send'        
     msgform:
       placeholder: 'Please enter a messages'
     msgform_direct:
@@ -29,12 +37,16 @@ en:
       description: 'Description'
   workspaces:
     index:
-      all_workspaces: 'Display all workspaces:'
       join: 'Join workspace'
-      leave: 'Leave workspace'
       your_workspaces: 'Your own workspaces'
+      different_team: 'Looking to create a brand new workspace for a different team?'  
+      create: 'Create a new workspace'
+      create_btn: '+ create a new workspace'
+      launch: 'Launch'          
     new:
-      name: 'Workspace Name:'
+      step: 'Step 1 of 3'
+      name: 'What’s the name of your company or team?'
+      name_detail: This will be the name of your Slack workspace — choose something that your team will recognize.
       placeholder: 'Please enter workspace name'
     show:
       name: 'Workspace Name：%{name}'
@@ -47,9 +59,5 @@ en:
     notification:
       messages:
         join: 'Please enther in workspace'
-  invite:
-    add_people: 'Add people'
-    placeholder: 'Search by email or name'
-    send: 'Send'
       
       

@@ -3,30 +3,28 @@ import 'select2'
 import 'select2/dist/css/select2.css'
 
 
-// $(document).ready(function() {
-//   var sdata = [
-//     {id: 1, text:'OPS-COFFEE-1'},
-//     {id: 2, text:'OPS-COFFEE-2'},
-//     {id: 3, text:'OPS-COFFEE-3'}
-// ]
-//   $('.js-data-example-ajax').select2({
-//     data: sdata
-//   });
+$(document).ready(function() {
+  $('#user_list').select2({
+    placeholder: "輸入欲邀請成員",
+    allowClear: true
+  })
 
+  $('#user_list').on("change", function() {
+    if($('#user_list').select2("val") != []) {
+      $('.invite-btn').val('add')
+      $('.invite-btn').removeAttr('disabled')
+      $('.invite-btn').addClass('bg-blue-500','text-white')
+    }
+  })
+  $('.invite-ch-btn').click(() => {
+    $('.ch-background').removeClass('hidden')
+  })
+  $('.invite-cancel-btn').click(() => {
+    $('.ch-background').addClass('hidden')
+  })
+  $('.ch-background').click((e) => {
+    if (e.target === $('.ch-background')[0])
+    $('.ch-background').addClass('hidden')
+  })
 
-
-
-  
-//   const cc = document.querySelector('.invite-cc')
-//   const dd = []
-
-//     $('.js-data-example-ajax').on('change',function searchUser(){
-//       const choice = document.querySelectorAll('.select2-selection__choice')
-//       choice.forEach((e)=> dd.push(e.title) )
-//     })
-//     cc.addEventListener('click', function(){
-//       dd
-//       dd.length = 0
-//     })
-// });
-
+})

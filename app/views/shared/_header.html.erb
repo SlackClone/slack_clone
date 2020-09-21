@@ -1,35 +1,40 @@
 
-<div class="header bg-deep_sladock h-10 border border-1 sticky top-0 w-full">
-    <div class="pt-1 grid grid-cols-4">
-      <div class="w-full search-area flex items-center col-start-2 col-end-4 ">
-        <%= inline_svg_pack_tag( "media/images/histroy.svg", class: "h-8 w-8 pr-2") %>
-        <input class="w-3/4 h-6 rounded bg-light_sladock " type="text" placeholder=<%= t(".search.placeholder") %> >
-        <%= inline_svg_pack_tag( "media/images/problem.svg", class: "h-8 w-8 pr-2") %>
+<div class="header bg-deep_sladock h-10 border-b border-sladock_border sticky top-0 w-full">
+  <div class="pt-1 grid grid-cols-4">
+    <div class="w-full search-area flex items-center col-start-2 col-end-4 ">
+      <%= inline_svg_pack_tag( "media/images/histroy.svg", class: "h-8 w-8 pr-2") %>
+      <input class="w-3/4 h-6 rounded bg-light_sladock" type="text" 
+      placeholder=<%= t(".search.placeholder") %>>
+      <%= inline_svg_pack_tag( "media/images/problem.svg", class: "h-8 w-8 pr-2") %>
+    </div>
+    <div class="profile pr-2 col-span-1 ml-auto">
+      <div class="clickopen relative">
+        <span class="rounded-md shadow-sm">
+          <img img src="https://ca.slack-edge.com/T018LF2LHK3-U018XMDF20Y-g206a10ded6a-32" class="leading-5 transition ease-in-out duration-150" id="options-menu" aria-haspopup="true" aria-expanded="true">
+        </span>
       </div>
-      <div class="profile pr-2 col-span-1 ml-auto">
-       <div>
-        <div class="clickopen relative">
-          <span class="rounded-md shadow-sm">
-            <img img src="https://ca.slack-edge.com/T018LF2LHK3-U018XMDF20Y-g206a10ded6a-32" class="leading-5 transition ease-in-out duration-150" id="options-menu" aria-haspopup="true" aria-expanded="true">
-          </span>
-        </div>
-        <div class="mt-2 w-56 rounded-md shadow-lg hidden open absolute right-0">
-          <div class="rounded-md bg-white shadow-xs" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
-            <div class="pl-2 py-1 flex ">
-              <img src="https://ca.slack-edge.com/T018LF2LHK3-U018XMDF20Y-g206a10ded6a-32" alt="" >
-              <a href="#" class="block px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 hover:text-gray-900 focus:outline-none focus:bg-gray-100 focus:text-gray-900" role="menuitem"><%= t(".profile.status") %></a>
-            </div>
-            <div class="border-t border-gray-100"></div>
-            <div class="py-1">
-              <a href="#" class="block px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 hover:text-gray-900 focus:outline-none focus:bg-gray-100 focus:text-gray-900" role="menuitem"><%= t(".profile.edit") %></a>
-            </div>
-            <div class="border-t border-gray-100"></div>
-            <div class="py-1">
-              <%= link_to t(".profile.sign_out"), destroy_user_session_path, method: "DELETE", class: "block px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 hover:text-gray-900 focus:outline-none focus:bg-gray-100 focus:text-gray-900",role: "menuitem" %>
-            </div>
+      <div class="open mt-2 w-56 rounded-md shadow-lg hidden absolute right-0">
+        <div class="rounded-md bg-white shadow-xs" role="menu" aria-orientation="vertical"   aria-labelledby="options-menu">
+          <div class="pl-2 py-1 flex ">
+            <img src="https://ca.slack-edge.com/T018LF2LHK3-U018XMDF20Y-g206a10ded6a-32" alt="" >
+            <a href="#" class="block px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100        hover:text-gray-900 focus:outline-none focus:bg-gray-100 focus:text-gray-900" role="menuitem">
+              <%= t(".profile.status") %>
+            </a>
+          </div>
+          <div class="border-t border-gray-100"></div>
+          <div class="py-1">
+            <a href="#" class="edit_profile block px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 hover:text-gray-900 focus:outline-none focus:bg-gray-100 focus:text-gray-900" role="menuitem">
+              <%= t(".profile.edit") %>
+            </a>
+          </div>
+          <div class="border-t border-gray-100"></div>
+          <div class="py-1">
+            <%= link_to t(".profile.sign_out"), destroy_user_session_path, method: "DELETE", class: "block px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 hover:text-gray-900 focus:outline-none focus:bg-gray-100 focus:text-gray-900",role: "menuitem" 
+            %>
           </div>
         </div>
       </div>
-      </div>
+    </div>
     </div>
   </div>
+</div>

@@ -29,6 +29,8 @@ module.exports = {
       white: "#fff",
       googleblue: '#4284F4',
       light_gray: '#F8F8F8',
+      sladock_border:"rgb(82,38,83)",
+      ws_name_purple: "#522754",
       gray: {
         100: "#f7fafc",
         200: "#edf2f7",
@@ -316,7 +318,8 @@ module.exports = {
       ...theme("spacing"),
       full: "100%",
       screen: "100vh",
-      screen_90: "90vh",
+      chat_full: "calc(100vh - 9rem)",
+      left_full: "calc(100vh - 6.5rem)",
       screen_94: "94vh",
     }),
     inset: {
@@ -382,10 +385,14 @@ module.exports = {
       0: "0",
       full: "100%",
       screen: "100vh",
+      left_full: "calc(100vh - 6.5rem)",
     },
     minWidth: {
       0: "0",
       full: "100%",
+      "1/2": "50%",
+      "1/4": "25%",
+      "200": "200px"
     },
     objectPosition: {
       bottom: "bottom",

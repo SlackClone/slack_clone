@@ -28,6 +28,7 @@ class ChannelsController < ApplicationController
     @last_enter_at = @channel_user&.last_enter_at || @channel.created_at
     # 更新使用者進入這個channel的時間
     @channel_user&.touch(:last_enter_at)
+<<<<<<< HEAD
 
     # 查詢私訊未讀訊息數量 
     direct_channel = current_user.directmsgs
@@ -59,6 +60,10 @@ class ChannelsController < ApplicationController
       format.html 
       format.json {render json: @workspace_users} 
     end
+=======
+    @invitation = Invitation.new
+    channel_users_for_select2
+>>>>>>> 修改ws_new頁面、修改聊天室畫面、修改邀請code、修改錯誤訊息、增加i18n
   end
 
   def destroy
@@ -79,5 +84,18 @@ class ChannelsController < ApplicationController
   def find_workspace
     @workspace = Workspace.find(params[:workspace_id])
   end
+<<<<<<< HEAD
 
+=======
+  
+  def channel_users_for_select2
+    @channel_users = @channel.users.map{|user| [user.nickname,user.email] }
+    @users = (@channel_users + @workspace.users.map{|user| [user.nickname,user.email] })
+    @workspace_users = @users - (@channel_users & @workspace.users.map{|user| [user.nickname,user.email] })
+    respond_to do |format|
+      format.html 
+      format.json {render json: @workspace_users} 
+    end
+  end
+>>>>>>> 修改ws_new頁面、修改聊天室畫面、修改邀請code、修改錯誤訊息、增加i18n
 end

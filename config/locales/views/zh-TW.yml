@@ -18,6 +18,14 @@ zh-TW:
         name: '頻道名稱'
         new: '建立新聊天室'
         direct: '一對一聊天'
+    invite_ws:
+      invite: '邀請成員加入%{name}'
+      placeholder: '依信箱或暱稱搜尋'
+      send: '發送'
+    invite_ch:
+      invite: '邀請成員加入'
+      placeholder: '選擇欲邀請成員'
+      send: '邀請發送'
     msgform:
       placeholder: '請輸入訊息'
     msgform_direct:
@@ -36,8 +44,14 @@ zh-TW:
       create_btn: '+ workspace'
       launch: '進入'
     new:
-      name: 'Workspace名稱:'
+      step: '步驟 1'
+      name: '為Workspace建立名稱'
+      name_detail: '這將會是你的workspace名稱，請取一個較容易辨別是你們團隊的名稱。'      
       placeholder: '請輸入workspace名稱'
+      errors:
+        messages:
+          blank: 'Type the name of your team or company — we’ll use this as the name of your new Slack workspace.'
+          exist: '%{name} has already exist'
     show:
       name: 'Workspace名稱：%{name}'
       create_channel: '創立聊天室'
@@ -49,12 +63,3 @@ zh-TW:
     notification:
       messages:
         join: '請先加入workspace'
-  pages:
-    login:
-
-  invite:
-    add_people: '邀請成員加入'
-    placeholder: '依信箱或暱稱搜尋'
-    send: '發送'
-
-      

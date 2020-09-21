@@ -1,6 +1,4 @@
-<%= form_with(model: @message, url:directmsg_messages_path(@directmsg) , class: "fixed bottom-0 bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500", id:"new_message", data:{action: "ajax:success->subscribe#clearMsg", target: "subscribe.newMessage"}) do |f| %>
-  <div class="flex">
-    <%= f.text_field :content, class:"w-9/12", placeholder: t(".placeholder") %>
-    <%= f.submit t("utilities.submit"), class:"w-1/12 bg-gray-500 shadow bg-purple-500 hover:bg-purple-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded" %>
-  </div>
+<%= form_with(model: @message, url:directmsg_messages_path(@directmsg) , class: "flex bg-gray-200 appearance-none border-2 border-gray-200 rounded text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500", id:"new_message", data:{action: "ajax:success->subscribe#clearMsg", target: "subscribe.newMessage"}) do |f| %>
+  <%= f.text_field :content, class:"flex-grow min-w-0", placeholder: t(".placeholder") %>
+  <%= f.submit t("utilities.submit"), class:"bg-gray-500 shadow bg-purple-500 hover:bg-purple-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded" %>
 <% end %>

@@ -1,7 +1,6 @@
 class UsersChannelsController < ApplicationController
   before_action :find_channel,:find_workspace
   def create
-    byebug
     @channel.users_channels.where(user_id: current_user.id).first_or_create
   end
   
@@ -10,9 +9,12 @@ class UsersChannelsController < ApplicationController
   end
 
   def invite
-      @channel.users_channels.create(user_id: find_workspace_user.id)
-      redirect_to workspace_channel_path(@workspace,@channel),notice: I18n.t("users_channels.invite",user: params[:name])
-    
+    params["users_channels"]["name"].each do |user|
+      @user = User.find_by(email: user)
+      @channel.users << @user
+      @channel.save
+    end
+    redirect_to workspace_channel_path(@workspace,@channel),notice: I18n.t("users_channels.invite",user: params["users_channels"]["name"].join(","))
   end
   
   private
@@ -22,11 +24,5 @@ class UsersChannelsController < ApplicationController
 
   def find_workspace
     @workspace = Workspace.find(@channel.workspace_id)
-  end
-  def find_workspace_user
-    @workspace.users.find_by(email: params[:name]) || @workspace.users.find_by(nickname: params[:name])
-  end
-  def find_channel_user
-    @channel.users.find_by(email: params[:name]) || @workspace.users.find_by(nickname: params[:name])
   end
 end

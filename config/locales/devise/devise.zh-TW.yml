@@ -43,7 +43,7 @@ zh-TW:
       send_paranoid_instructions: "如果我們有您的信箱，您將會收到一封內含可重新設定密碼連結的電子郵件。"
       updated: "您的密碼已被修改，您現在已經登入。"
       updated_not_active: "您的密碼已被修改。"
-      forgot_your_password: '忘記密碼?'
+      forgot_your_password: "忘記密碼?"
     registrations:
       destroyed: "再會！您的帳號已被取消。有緣再會。"
       signed_up: "註冊成功，歡迎！"
@@ -58,6 +58,11 @@ zh-TW:
       signed_in: "成功登入了。"
       signed_out: "成功登出了。"
       already_signed_out: "成功登出了。"
+      new:
+        sign_up: "註冊"
+        no_account: "沒有帳號嗎?"
+        find: "找尋你的團隊"
+        login: '使用email登入或google登入'
     unlocks:
       send_instructions: "您將在幾分鐘後收到一封電子郵件，內有將帳號解除鎖定的步驟說明。"
       send_paranoid_instructions: "如果您的帳號已存在，您的電子信箱將會收到如何解鎖帳號的指示。"
@@ -75,5 +80,5 @@ zh-TW:
   activerecord:
     attributes:
       user:
-        nickname: '暱稱'
+        nickname: "暱稱"
               
