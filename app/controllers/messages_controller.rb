@@ -29,7 +29,8 @@ class MessagesController < ApplicationController
     @channel = Channel.find(share_msg_params[:messageable_id])
     @new_message = @channel.messages.new(share_msg_params)
     if @new_message.save
-      SendChannelMessageJob.perform_later(@new_message)
+      sending_message(@new_message, @channel, false)
+      sending_notice(@channel, current_user, false)
       @result = true
     else
       @message = ''
@@ -45,7 +46,7 @@ class MessagesController < ApplicationController
   def share_msg_params
     params.require(:message).permit(:messageable_id, :share_message_id, :content).merge(user: current_user)
   end
-  
+
   def sending_message(message, channel_id, direct_or_not)
     SendMessageJob.perform_later(message, channel_id, direct_or_not)
   end

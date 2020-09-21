@@ -30,8 +30,9 @@ export default class extends Controller {
     const userNow = this.data.get("user")
     const channelName = document.querySelector(`[channel_id="${data.channel_id}"]`)
     const recipientElement = document.querySelector(`[unread-id="${data.user_id}"]`)
-   
+    // console.log(data)
     if (userNow === data.user_nickname){
+      console.log("Hihihi")
       return
     }else{
       if (typeof directMsgId === "undefined"){
@@ -40,6 +41,7 @@ export default class extends Controller {
         // 聊天室群組字體提示
         channelName.classList.add("font-bold")
       }else if (typeof channelId === "undefined"){
+        console.log(123)
         // 瀏覽器訊息通知
         new Notification(directMsgTitle)
         // 私聊未讀訊息則數顯示

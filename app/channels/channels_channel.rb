@@ -6,11 +6,14 @@ class ChannelsChannel < ApplicationCable::Channel
       
       channel = Channel.find_by(id: params[:channelId])
       stream_for channel
+
     elsif params[:directId] != "0"
       @channel_user = current_user.users_directmsgs.find_by(directmsg_id: params[:directId])
       
       directmsg = Directmsg.find_by(id: params[:directId])
       stream_for directmsg
+      # byebug
+
     end
     
   end

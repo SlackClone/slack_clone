@@ -3,8 +3,10 @@ class DirectmsgsController < ApplicationController
 
   def show
     users = [current_user, User.find(params[:id])]
+  
     @directmsg = Directmsg.create_or_find(users,params[:workspace_id])
     @messages = @directmsg.messages
+
     @workspace = Workspace.find(params[:workspace_id])
     @channels = @workspace.channels
     @message = Message.new
@@ -13,7 +15,7 @@ class DirectmsgsController < ApplicationController
     
     # 更新使用者進入這個channel的時間
     @users_direct&.touch(:last_enter_at)
-    
+    # byebug
     # 查詢私訊未讀訊息數量 
     direct_channel = current_user.directmsgs
     @unread_msg_count = {}
