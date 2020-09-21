@@ -46,7 +46,8 @@
               <%= render './shared/reaction', message: message %>
             </div>
           </div>
-          <div class="thread">
+        </div>
+        <div class="thread">
           <div class="thread-btn">
             <%= link_to channel_message_threads_path(message.messageable_id, message.id) do %>
               <i class="far fa-comment-dots"></i>
