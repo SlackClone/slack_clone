@@ -22,14 +22,17 @@ class InvitationsController < ApplicationController
     session[:email] = find_receiver_email
     session[:workspace_id] = @workspace.id
     session[:token] = params[:token]
-    cookies[:accept] = @workspace.id
-    return redirect_to new_user_registration_path if !User.find_by(email: find_receiver_email)
-    if find_invitation
-    return redirect_to workspaces_path if @workspace.users.find_by(email: find_receiver_email)
-      @workspace.users << User.find_by(email: find_receiver_email)
+    cookies[:workspace] = @workspace.id
+    session[:channel] = @workspace.channels.find_by(name: "general").id
+
+    return redirect_to new_user_registration_path if !find_user
+    if find_invitation && find_general_channel.users.where.not(id: find_user)
+      @workspace.users << find_user
+      find_general_channel.users << find_user
       find_invitation.touch(:accept_at)
-      sign_in(User.find_by(email: find_receiver_email))
-      redirect_to workspace_path(@workspace),notice: I18n.t("invitations.accept",new_member: find_receiver_email)
+      sign_in(find_user)
+      redirect_to workspace_channel_path(@workspace, find_general_channel),
+        notice: I18n.t("invitations.accept",new_member: find_receiver_email)
     end
   end
 
@@ -50,5 +53,13 @@ private
 
   def find_invitation
     Invitation.find_by(invitation_token: params[:token]) if params[:token]
+  end
+
+  def find_general_channel
+    @workspace.channels.find_by(name: "general")
+  end
+
+  def find_user
+    User.find_by(email: find_receiver_email)
   end
 end

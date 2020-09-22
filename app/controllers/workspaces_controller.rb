@@ -15,7 +15,6 @@ class WorkspacesController < ApplicationController
     @workspace = Workspace.new(workspace_params)  
     @workspace.users << current_user
     if @workspace.save
-      
       @channel = @workspace.channels.create(name:"general")
       @channel.users << current_user
       redirect_to workspace_channel_path(@workspace, @channel), notice: I18n.t("workspaces.create",workspace: @workspace.name)
