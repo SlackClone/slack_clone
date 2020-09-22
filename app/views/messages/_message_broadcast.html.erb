@@ -20,7 +20,8 @@
          </div>
         <% if message.share_message_id.present? %>
           <div  class="border-l-4 m-2">
-            <span class="ml-2"> <%= message.share_message.content %> </span>
+            <div class="ml-2 font-bold"> <%= message.share_message.user.nickname %> </div>
+            <div class="ml-2"> <%= message.share_message.content %> </div>
           </div> 
         <% end %>
        
