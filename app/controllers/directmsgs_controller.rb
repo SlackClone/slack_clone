@@ -6,11 +6,12 @@ class DirectmsgsController < ApplicationController
   
     @directmsg = Directmsg.create_or_find(users,params[:workspace_id])
     @messages = @directmsg.messages
-
+    @directmsg_user_name = @directmsg.users.find_by(id: params[:id]).nickname
     @workspace = Workspace.find(params[:workspace_id])
     @channels = @workspace.channels
     @message = Message.new
     @new_channel = Channel.new
+    @invitation = Invitation.new
     @users_direct = current_user.users_directmsgs.find_by(directmsg: @directmsg)
     @last_enter_at = @users_direct&.last_enter_at || @directmsg.created_at
     
