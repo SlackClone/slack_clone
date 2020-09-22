@@ -1,0 +1,11 @@
+.errors_messages+.errors_messages::before {
+  content:"、";
+}
+.field_with_errors {
+  color: red;
+  display: inline;
+}
+.field_with_errors input{
+  color:black;
+  border: 1px solid red;
+}

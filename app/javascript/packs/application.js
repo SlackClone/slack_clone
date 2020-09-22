@@ -9,10 +9,14 @@ require("@rails/activestorage").start()
 require("channels")
 require("stylesheets")
 import "./invite_ws.js"
+import "./info.js"
 import "tailwindcss/base";
 import "tailwindcss/components";
 import "tailwindcss/utilities";
-import "../stylesheets/Frontend/shared"
+import "stylesheets"
+import "controllers"
+import './select2.js'
+import './create_ch.js'
 import $ from 'jquery';
 window.jQuery = $
 window.$ = $
@@ -21,12 +25,22 @@ window.$ = $
 
 $(document).ready(function () {
   $('.clickopen').click(function (event) {
-    event.preventDefault();
     $('.open').slideToggle();
-  });
+    event.stopPropagation();
+   })
+   $('.open').click(function(event){
+    event.stopPropagation();
+    });
+  $('html').click(function(e) {
+    if(e.target != $('.open')){
+    $('.open').slideUp();
+    }
+  })
 });
 
-
+$('.upload-btn').click(()=>{
+  $('#upload-input').trigger('click')
+})
 
 import "./share-btn"
 
@@ -36,4 +50,4 @@ import "./share-btn"
 //
 const images = require.context('../images', true)
 const imagePath = (name) => images(name, true)
-import "controllers"
+

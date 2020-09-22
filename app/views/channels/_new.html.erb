@@ -1,0 +1,22 @@
+<div class="create-ch-bg absolute w-full h-full top-0 bg-black bg-opacity-25 flex hidden justify-center items-center">
+  <div class="px-6 py-4 bg-white shadow-2xl w-1/3 h-1/3 rounded relative">
+    <div class="flex justify-between items-center mb-5">
+      <h5 class="font-bold text-2xl"><%= t(".create") %></h5>
+      <button class="create-cancel-btn font-bold text-gray-600 focus:outline-none">X</button>
+    </div>
+    <p class="text-sm text-gray-600 mb-5"><%= t(".communicates") %></p>
+    <%= form_with(model: channel, url:workspace_channels_path(id: channel.workspace_id),method:'POST',local:true) do |f| %>
+    <div class="field">
+      <%= f.label :name, t(".name"), class: "font-bold" %>
+      <%= f.text_field :name,placeholder:t(".name_placeholder"),autocomplete:"off",class:"search relative font-bold px-2 py-2 mb-5 border border-gray-800 rounded block w-full placeholder-gray-600 focus:outline-none focus:shadow-outline" %>
+    </div>
+    <div class="field mb-5">
+      <%= f.label :description, t(".description"), class: "font-bold" %>
+      <%= f.text_field :description,placeholder:t(".desc_placeholder"),autocomplete:"off",class:"search relative font-bold px-2 py-2 border border-gray-800 rounded block w-full placeholder-gray-600 focus:outline-none focus:shadow-outline" %>
+      <span class="text-xs text-gray-600"><%= t(".about") %></span>
+    </div>
+      <%= f.submit t("utilities.submit"),class:"cursor-pointer block font-bold text-gray-700 px-5 py-2 mt-3 ml-auto bg-gray-400 rounded focus:outline-none" %>
+    <% end %>
+  </div>
+</div>
+

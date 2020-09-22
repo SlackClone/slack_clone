@@ -1,9 +1,9 @@
 <%# render nav導覽列 %>
 <%= render './shared/nav' %>
 <div class="container mx-auto flex flex-col items-center text-center">
-<div class="sign_in max-w-lg">
-  <h2 class="text-5xl font-bold mb-2">Let’s find your team</h2>
-  <p class="mb-6">Start by choosing the Google account or email you use for work</p>
+<div class="sign_in max-w-lg min-w-1/2">
+  <h2 class="text-5xl font-bold mb-2"><%= t(".find") %> </h2>
+  <p class="mb-3"><%= t(".login") %> </p>
 
   <div class="btn-group py-6 max-w-sm mx-auto">
     <%= render "devise/shared/links" %>
@@ -30,6 +30,9 @@
         <%= f.submit t('.sign_in'),class: " text-white font-bold bg-deep_sladock w-full py-2 border border-gray-400 rounded hover:bg-sladock transition-all duration-100"%>
       </div>
     <% end %>
+    <div><%= t(".no_account") %>
+      <%= link_to t(".sign_up"), new_registration_path(resource_name) %><br />
+    </div>
   </div>
 </div>
 

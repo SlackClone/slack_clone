@@ -9,3 +9,5 @@ zh-TW:
     destroy: "確認離開" 
   workspaces:
     create: "歡迎加入 %{workspace}"
+  users_channels:
+    invite: "已邀請%{user}加入"

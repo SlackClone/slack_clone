@@ -2,7 +2,7 @@ class ChannelsController < ApplicationController
   before_action :authenticate_user!
   before_action :find_workspace, except:[:destroy]
   def new
-    @channel = Channel.new
+    
   end
   
   def create
@@ -19,16 +19,15 @@ class ChannelsController < ApplicationController
 
   def show
     @channel = Channel.find(params[:id])
+    @new_channel = Channel.new
     @message = Message.new
     @channels = @workspace.channels
     @messages = @channel.messages
-    
-    # byebug
     @channel_user = current_user.users_channels.find_by(channel: @channel)
     @last_enter_at = @channel_user&.last_enter_at || @channel.created_at
+    
     # 更新使用者進入這個channel的時間
     @channel_user&.touch(:last_enter_at)
-
     # 查詢私訊未讀訊息數量 
     direct_channel = current_user.directmsgs
     @unread_msg_count = {}
@@ -40,7 +39,6 @@ class ChannelsController < ApplicationController
                                                     dc.users_directmsgs.find_by(user_id: current_user.id).last_enter_at)
                                                     .count
     end
-
     # 查詢聊天室是否有未讀訊息
     added_channel = current_user.channels
     @unread_msg_bol ={}
@@ -50,7 +48,8 @@ class ChannelsController < ApplicationController
                                                   ac.users_channels.find_by(user_id: current_user.id).last_enter_at)
                                                   .present?
     end
-    
+    @invitation = Invitation.new
+    channel_users_for_select2
   end
 
   def destroy
@@ -71,5 +70,13 @@ class ChannelsController < ApplicationController
   def find_workspace
     @workspace = Workspace.find(params[:workspace_id])
   end
-
+  def channel_users_for_select2
+    @channel_users = @channel.users.map{|user| [user.nickname,user.email] }
+    @users = (@channel_users + @workspace.users.map{|user| [user.nickname,user.email] })
+    @workspace_users = @users - (@channel_users & @workspace.users.map{|user| [user.nickname,user.email] })
+    respond_to do |format|
+      format.html 
+      format.json {render json: @workspace_users} 
+    end
+  end
 end

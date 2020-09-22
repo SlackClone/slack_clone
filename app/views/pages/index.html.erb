@@ -7,7 +7,7 @@
 <div>
       <% if user_signed_in? %>
         <%= link_to 'LUNCH SLADOCK',workspaces_path,class:'px-2 py-3 bg-sladock text-white rounded transition-all duration-500 hover:bg-hoversladock' %>
-        <span><%= link_to 'sign_out' ,destroy_user_session_path, method:'DELETE' %></span>
+        <span><%= link_to 'sign_out' ,destroy_user_session_path %></span>
     <% else %>
         <span><%= link_to 'sign_in' ,new_user_session_path %></span>
         <%= link_to 'GET STARTED',login_pages_path,class:'px-2 py-3 bg-sladock text-white rounded transition-all duration-500 hover:bg-hoversladock' %>
@@ -31,10 +31,7 @@
       </div>
     </div>
     <div class="col-span-3">
-      <video autoplay loop muted playsinline>
-      <%# 暫時先使用官網的影片連結，不知道怎麼使用webpack讀取影片 %>
-      <source src="https://a.slack-edge.com/9b527/marketing/img/homepage/hp-prospect/hero/desktop/mp4/hero-image.mp4" type="video/mp4"> 
-      </video>
+      <%= video_tag "hero-image.mp4",autoplay:"autoplay",loop:"loop",muted:"muted",playsinline:"playsinline" %>
     </div>
   </div>
 </section>

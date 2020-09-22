@@ -50,6 +50,11 @@ en:
       signed_in: "Signed in successfully."
       signed_out: "Signed out successfully."
       already_signed_out: "Signed out successfully."
+      new:
+        sign_up: "sign up"
+        no_account: "Don't have an account?"
+        find: "Let’s find your team"
+        login: "Start by choosing the Google account or email you use for work" 
     unlocks:
       send_instructions: "You will receive an email with instructions for how to unlock your account in a few minutes."
       send_paranoid_instructions: "If your account exists, you will receive an email with instructions for how to unlock it in a few minutes."
@@ -64,3 +69,7 @@ en:
       not_saved:
         one: "1 error prohibited this %{resource} from being saved:"
         other: "%{count} errors prohibited this %{resource} from being saved:"
+  activerecord:
+    attributes:
+      user:
+        nickname: "nickname"        

@@ -25,16 +25,12 @@ Rails.application.routes.draw do
   end
 
   resources :channels, except: %i[show new create] do
-    resource :users_channels
+    resource :users_channels do 
+      post :invite
+    end
     resources :messages
   end
   
-  namespace :api do
-    namespace :v1 do
-      resources :users_workspaces, only: [:index]
-    end
-  end
-
   resources :directmsgs, only: [:show] do
     resources :messages, only: [:create]
   end
