@@ -56,7 +56,9 @@
     </div>
   </div>    
   <%= render './shared/shareform' %>
-  <%= render './shared/right_info' %>
+  <% if @thread %>
+    <%= render './shared/right_info' %>
+  <% end %>
   <% if @channel %>
     <%= render './shared/invite_ch' %>
   <% end %>
