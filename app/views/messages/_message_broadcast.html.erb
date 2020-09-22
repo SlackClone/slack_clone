@@ -26,7 +26,9 @@
        
       </div>
     </div>
+    <% if controller_name != "directmsgs"%>
     <button class= "share-btn btn btn-blue absolute right-0  mr-10 -mt-3" data-id="<%= message.id %>">share</button>
+    <%end%>
   </div>
 </div>
 
