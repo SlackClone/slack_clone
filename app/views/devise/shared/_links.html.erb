@@ -20,8 +20,8 @@
 
 <%- if devise_mapping.omniauthable? && controller_name != 'passwords'%>
   <%- resource_class.omniauth_providers.each do |provider| %>
-    <button class="w-full py-2 mb-6 border-2 text-googleblue border-googleblue font-bold rounded hover:shadow-md">
-      <%= link_to t('devise.registrations.signed_in_with_google', provider: OmniAuth::Utils.camelize(provider)), omniauth_authorize_path(resource_name, provider) %>
+    <button class="w-full mb-6 border-2 text-googleblue border-googleblue font-bold rounded hover:shadow-md">
+      <%= link_to t('devise.registrations.signed_in_with_google', provider: OmniAuth::Utils.camelize(provider)), omniauth_authorize_path(resource_name, provider),class:"w-full py-2 block" %>
     </button>
   <% end %>
 <% end %>
