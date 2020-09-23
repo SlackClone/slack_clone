@@ -1,4 +1,6 @@
 class ThreadsController < ApplicationController
+  before_action :authenticate_user!
+
   def show
     # debugger
     @thread = Message.find(params[:message_id])
@@ -40,13 +42,24 @@ class ThreadsController < ApplicationController
   def create
     @channel = Channel.find(params[:channel_id])
     @thread = @channel.messages.new(thread_params)
+    channel_id = params[:channel_id]
     if @thread.save
-      # redirect_to workspace_channel_thread_path
+      sending_thread_message(@thread, channel_id, false, true)
+      sending_notice(@channel, current_user, false, true)
     end
   end
 
   private
+
   def thread_params
     params.require(:message).permit(:content).merge(user: current_user, parent_id: params[:message_id])
+  end
+
+  def sending_thread_message(message, channel_id, direct_or_not, thread_or_not)
+    SendThreadMessageJob.perform_later(message, channel_id, direct_or_not, thread_or_not)
+  end
+
+  def sending_notice(channel, sender, direct_or_not)
+    SendNotificationJob.perform_later(channel, sender, direct_or_not)
   end
 end

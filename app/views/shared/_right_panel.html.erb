@@ -3,33 +3,15 @@
   <p>Channel: <%= @channel.name %></p>
 </div>
 <br>
-<div class="parent-message">
-  <div class="author font-bold">
-    <%= @thread.user.nickname %>
-  </div>
-  <div class="createtime">
-    <%= @thread.created_at %>
-  </div>
-  <div class="content">
-    <%= @thread.content %>
-  </div>
-</div>
+<%= render 'threads/thread_messages', thread: @thread %>
 
 <h2>
   ===== 有 <%= @thread.children.count %> 則回覆 =====
 </h2>
 
-<div class="children-message">
+<div class="pb-5 messages" data-target="subscribe.threads">
   <% @thread.children.each do |thread| %>
-    <div class="author font-bold">
-    <%= thread.user.nickname %>
-    </div>
-    <div class="createtime">
-      <%= thread.created_at %>
-    </div>
-    <div class="content">
-      <%= thread.content %>
-    </div>
+    <%= render 'threads/thread_messages', thread: thread %>
   <% end %>
 </div>
 
