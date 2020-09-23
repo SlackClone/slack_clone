@@ -45,7 +45,7 @@ group :development, :test do
   gem 'shoulda-matchers', '~> 4.4', '>= 4.4.1'
   gem 'capistrano', '3.14.1'
   gem 'capistrano-bundler', '2.0'
-  gem 'capistrano-rails', '1.6'
+  gem 'capistrano-rails', '1.6.1'
   gem 'capistrano-passenger', '0.2.0'
   gem 'net-ssh', '~> 6.1'
   gem 'ed25519', '1.2'
