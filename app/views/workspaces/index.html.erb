@@ -14,9 +14,10 @@
             <div class="relative flex justify-between items-center border-b border-gray-400 py-3">
               <div class="w-10 h-10 bg-gray-400 mr-2 absolute top-auto left-0"></div>
               <div class="ws w-full z-10">
-              <%= link_to workspace.workspace.name, workspace_path(workspace.workspace.id),class:"block py-5 pl-12"%>
+              <%= link_to workspace.workspace.name, workspace_channel_path(workspace.workspace,Workspace.find(workspace.workspace_id).channels.find_by(name: "general")),class:"block py-5 pl-12"%>
               </div>
-              <%= link_to t(".launch"),workspace_path(workspace.workspace.id),class:"z-10 text-sm font-bold bg-white border border-gray-500 rounded py-2 px-3 absolute top-auto right-0 hover:bg-gray-200 transition-all duration-100" %>
+               
+              <%= link_to t(".launch"),workspace_channel_path(workspace.workspace,Workspace.find(workspace.workspace_id).channels.find_by(name: "general")),class:"z-10 text-sm font-bold bg-white border border-gray-500 rounded py-2 px-3 absolute top-auto right-0 hover:bg-gray-200 transition-all duration-100" %>
             </div>
           <% end %>
       </div>
