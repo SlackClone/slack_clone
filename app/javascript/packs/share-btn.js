@@ -17,13 +17,12 @@ window.initShare = function () {
     // 顯示 popup
     $('.popup').show()
   })
-  $('.cancel').click(function (event) {
-    event.preventDefault()
-    $('.popup').hide()
-  })
 }
 
 $(document).ready(function () {
   window.initShare()
+  $('.cancel').click(function (event) {
+    event.preventDefault()
+    $('.popup').hide()
+  })
 })
-

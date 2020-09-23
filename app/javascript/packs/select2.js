@@ -9,6 +9,12 @@ $(document).ready(function() {
     allowClear: true
   })
 
+  $('#message_messageable_id').select2({
+    closeOnSelect: false
+
+  })
+
+
   $('#user_list').on("change", function() {
     if($('#user_list').select2("val") != []) {
       $('.invite-btn').val('add')
@@ -28,5 +34,8 @@ $(document).ready(function() {
   })
 
 })
+
+
+
 
 
