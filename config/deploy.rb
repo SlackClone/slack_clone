@@ -43,4 +43,8 @@ set :keep_releases, 5
 # set :ssh_options, verify_host_key: :secure
 
 # Choose & deploy specific branch each time
-ask :branch
+# ask :branch
+
+set :branch, ENV.fetch("CAPISTRANO_BRANCH", "develop")
+# Using following command to deploy specific branch
+# CAPISTRANO_BRANCH=my-feature cap staging deploy
