@@ -1,4 +1,5 @@
 <%= render "./shared/header" %>
+<<<<<<< HEAD
 <div class="chatroom flex overflow-hidden ">
   <div class="leftbar flex flex-col">
     <%= render "./shared/leftbar", workspace: @workspace, 
@@ -23,6 +24,30 @@
       <div class="pb-5 messages" data-target="subscribe.messages">
         <% @messages.order(:created_at).each do |msg| %>
           <%= render "messages/message_broadcast" , message: msg %>
+=======
+<div class="chatroom flex">
+    <div class="leftbar flex flex-col">
+      <div class="box-border border-b bg-light_sladock border-sladock_border h-16 flex items-center pl-10">
+        <h3 class="chatroomName text-white font-bold text-lg">
+          <%= @workspace.name %>
+        </h3> 
+        <%= image_tag @workspace.image_url %>
+      </div>
+      <div class="bg-light_sladock text-white overflow-y-auto min-w-200 h-left_full" style="width: 300px" data-controller="notification" data-notification-workspace="<%= @workspace.id %>" data-notification-channel="<%= @channel&.id || 0 %>" data-notification-direct="<%= @directmsg&.id || 0 %>" data-notification-user="<%= current_user.nickname %>">
+        <%= render "./shared/leftbar" %>
+      </div>
+    </div>  
+    <div class="flex flex-col flex-grow min-w-0 min-h-0">
+      <%# 上方白色區塊顯示頻道名稱與邀請按鈕 %>
+      <div class="box-border border-b border-gray-400 h-16 font-bold flex justify-between items-center">
+        #<%=  @channel.try(:name) || @directmsg_user_name %>
+          <%# button %>  
+        <% if @channel %>
+          <button class="invite-ch-btn h-8 w-8 rounded hover:bg-gray-100 hover:stroke-gray active:bg-gray-400 focus:outline-none">
+            <%= inline_svg_pack_tag( "media/images/invite-ch.svg" , class: "stroke-current text-gray-600 hover:stroke-gray") %>
+            <%= image_pack_tag("invite-ch.svg") %>
+          </button>
+>>>>>>> 串S3
         <% end %>
       </div>
     </div>
