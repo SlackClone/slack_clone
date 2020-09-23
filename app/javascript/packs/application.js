@@ -17,31 +17,8 @@ import "stylesheets"
 import "controllers"
 import './select2.js'
 import './create_ch.js'
-import $ from 'jquery';
-window.jQuery = $
-window.$ = $
 
-
-
-$(document).ready(function () {
-  $('.clickopen').click(function (event) {
-    $('.open').slideToggle();
-    event.stopPropagation();
-   })
-   $('.open').click(function(event){
-    event.stopPropagation();
-    });
-  $('html').click(function(e) {
-    if(e.target != $('.open')){
-    $('.open').slideUp();
-    }
-  })
-});
-
-$('.upload-btn').click(()=>{
-  $('#upload-input').trigger('click')
-})
-
+import './header-btn'
 import "./share-btn"
 
 // Uncomment to copy all static images under ../images to the output folder and reference
