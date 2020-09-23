@@ -29,7 +29,7 @@ class WorkspacesController < ApplicationController
 
   private
   def workspace_params
-    params.require(:workspace).permit(:name)
+    params.require(:workspace).permit(:name,:image)
   end
 
   def find_workspace
