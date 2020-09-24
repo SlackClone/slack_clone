@@ -54,19 +54,25 @@ export default class extends Controller {
   
   messaging(data){
     if (data.emoji === undefined){
-      // 留言回覆串
-      if (data.thread_or_not) return this.threadsTarget.insertAdjacentHTML("beforeend", data.message)
-      // 一般留言
-      if(document.hidden){
-        let divideElement = document.querySelector(".divide")
-        if (!divideElement){
-          this.messagesTarget.insertAdjacentHTML('beforeend', `<div class='flex text-right divide'><span class='h-0 border-b-0 border-t-2 block flex-grow border-red-600 my-auto'></span><span class="pl-3">new</span></div>`)
-        }
+      if (data.thread_or_not){
+        // 留言回覆串
+        // console.log(this)
+        this.threadsTarget.insertAdjacentHTML("beforeend", data.message)
+        let threadCount = this.threadsTarget.childElementCount
+        this.threadcountTarget.innerHTML = `===== 有 ${ threadCount } 則回覆 =====`
       } else {
-        this.subscription.perform("update_enter_time")   
+        // 一般留言
+        if(document.hidden){
+          let divideElement = document.querySelector(".divide")
+          if (!divideElement){
+            this.messagesTarget.insertAdjacentHTML('beforeend', `<div class='flex text-right divide'><span class='h-0 border-b-0 border-t-2 block flex-grow border-red-600 my-auto'></span><span class="pl-3">new</span></div>`)
+          }
+        }else{
+          this.subscription.perform("update_enter_time")
+        }
+        this.messagesTarget.insertAdjacentHTML("beforeend", data.message)
+        window.initShare()
       }
-      this.messagesTarget.insertAdjacentHTML("beforeend", data.message)
-      window.initShare()
     }else{
       let emoji = document.getElementById(`message-reaction-${data.id}`)
       emoji.innerHTML = data.html

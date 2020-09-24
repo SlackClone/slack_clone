@@ -45,7 +45,7 @@ class ThreadsController < ApplicationController
     channel_id = params[:channel_id]
     if @thread.save
       sending_thread_message(@thread, channel_id, false, true)
-      sending_notice(@channel, current_user, false, true)
+      sending_notice(@channel, current_user, false)
     end
   end
 
