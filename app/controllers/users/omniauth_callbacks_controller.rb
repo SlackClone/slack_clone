@@ -6,11 +6,11 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     @user = User.find_for_google_oauth2(request.env['omniauth.auth'].except('extra'), current_user)
     if @user.persisted?
       flash[:notice] = I18n.t "devise.omniauth_callbacks.success", :kind => "Google"
-      if (cookies[:accept] && session[:token])
+      if (cookies[:workspace] && session[:token] && session[:channel])
         sign_in @user, :event => :authentication
-        Workspace.find(cookies[:accept]).users << @user
+        Workspace.find(cookies[:workspace]).users << @user 
         Invitation.find_by(invitation_token: session[:token]).touch(:accept_at)
-        redirect_to workspace_path(cookies[:accept])
+        redirect_to workspace_channel_path(cookies[:workspace], session[:channel])
       else
         sign_in @user, :event => :authentication
         return redirect_to workspaces_path
