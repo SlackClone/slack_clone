@@ -64,11 +64,16 @@ Rails.application.routes.draw do
     end
 
   end
+
+  # webhooks
+  resources :webhooks
   
   # webhook endpoint, /webhook/channels/:id/github
   namespace :webhook do
     post 'channels/:id/github', to: 'github#payload'
   end
+
+
 
   # 信件測試
   if Rails.env.development? || Rails.env.staging?
