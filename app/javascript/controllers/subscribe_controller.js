@@ -5,7 +5,7 @@ import ClassicEditor from "ckeditor5-custom-build/build/ckeditor.js"
 import { EmojiButton } from '@joeattardi/emoji-button'
 
 export default class extends Controller {
-  static targets = ["messages", "newMessage", "threads"]
+  static targets = ["messages", "newMessage", "threads", "threadcount", "msglist"]
 
   connect() {
     // console.log(this) 
@@ -56,10 +56,16 @@ export default class extends Controller {
     if (data.emoji === undefined){
       if (data.thread_or_not){
         // 留言回覆串
-        // console.log(this)
+
+        // 新增留言
         this.threadsTarget.insertAdjacentHTML("beforeend", data.message)
+        // 留言串總則數更新(右側)
         let threadCount = this.threadsTarget.childElementCount
         this.threadcountTarget.innerHTML = `===== 有 ${ threadCount } 則回覆 =====`
+        // 留言串總則數更新(左側)
+        let messageId = this.threadcountTarget.getAttribute("message_id")
+        let threadOriginMsg = document.querySelector(`.messages_child[message_id="${messageId}"] .thread-count`)
+        threadOriginMsg.innerHTML = `有 ${ threadCount } 則回覆`
       } else {
         // 一般留言
         if(document.hidden){

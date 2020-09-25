@@ -5,7 +5,7 @@
 <br>
 <%= render 'threads/thread_messages', thread: @thread %>
 
-<h2 data-target="subscribe.threadcount" threadcount="<%= @thread.children.count %>">
+<h2 data-target="subscribe.threadcount" threadcount="<%= @thread.children.count %>" message_id="<%= @thread.id %>">
   ===== 有 <%= @thread.children.count %> 則回覆 =====
 </h2>
 

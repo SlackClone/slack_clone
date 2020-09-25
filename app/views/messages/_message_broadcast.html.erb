@@ -5,7 +5,7 @@
     <span class="pl-3">new</span>
   </div>
 <% end%>
-<div class="messages_child">
+<div class="messages_child" data-target="subscribe.msglist" message_id="<%= message.id %>">>
   <div class="flex justify-between hover:bg-gray-100 relative txtcolumn pl-2" data-controller="emoji" data-emoji-id =<%= message.id %>>
     <div class="txt flex w-full my-1">
       <div class="w-12 h-12 ml-1 flex items-center">
@@ -52,9 +52,11 @@
             <%= link_to channel_message_threads_path(message.messageable_id, message.id) do %>
               <i class="far fa-comment-dots"></i>
             <% end %>
-            <% if message.children.count > 0 %>
-              有 <%= message.children.count %> 則回覆
-            <% end %>
+            <div class="thread-count">
+              <% if message.children.count > 0 %>
+                有 <%= message.children.count %> 則回覆
+              <% end %>
+            </div>
           </div>
         </div>
       </div>
