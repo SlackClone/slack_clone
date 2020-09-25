@@ -3,9 +3,7 @@ const purgecss = require('@fullhuman/postcss-purgecss')({
 
   // Specify the paths to all of the template files in your project
   content: [
-    './src/**/*.html.erb',
-    './src/**/*.css',
-    './src/**/*.vue',
+    './app/**/*.html.erb',
     // etc.
   ],
 
@@ -33,9 +31,10 @@ module.exports = {
       },
       stage: 3
     }),
-    ...process.env.RAILS_ENV === 'production'
-    ? [purgecss]
-    : []
+    purgecss
+    // ...process.env.RAILS_ENV === 'production'
+    // ? [purgecss]
+    // : []
   ]
 }
 

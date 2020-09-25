@@ -38,5 +38,13 @@ yarn-debug.log*
 # Ignore application configuration
 /config/application.yml
 /config/database.yml
-/config/credentials/development.key.yml
-/config/credentials/development.enc.yml
+
+# Ignore credentails and related file
+/config/credentials.yml.enc
+/config/master.key
+
+# ngrok.sh backup file before modfied it
+config/environments/development.rb.bak
+
+# Get & set ngork hostname to config/development.rb automatically
+ngrok.sh

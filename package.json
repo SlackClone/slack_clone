@@ -8,12 +8,12 @@
     "@rails/webpacker": "4.3.0",
     "select2": "^4.0.13",
     "stimulus": "^1.1.1",
+    "jquery": "^3.5.1",
     "tailwindcss": "^1.7.6",
     "turbolinks": "^5.2.0"
   },
   "version": "0.1.0",
   "devDependencies": {
-    "jquery": "^3.5.1",
     "webpack-dev-server": "^3.11.0"
   }
 }
