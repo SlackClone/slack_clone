@@ -47,7 +47,9 @@ Rails.application.routes.draw do
   resources :messages, only: [:show] do 
     collection do
       post 'add'
+      post 'emoji'
     end
+
   end
   
   # 信件測試
