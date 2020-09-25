@@ -7,6 +7,9 @@ class MessagesController < ApplicationController
       @channel = Channel.find(params[:channel_id])
       @message = @channel.messages.new(message_params)
       channel_id = params[:channel_id]
+      # call derivatives processor
+      @message.document_derivatives! if message_params[:document] != "" && (message_params[:document].content_type.include? "image")
+      # byebug
       if @message.save
         # 第三個參數為是否為私訊
         sending_message(@message, channel_id, false)
@@ -16,6 +19,8 @@ class MessagesController < ApplicationController
       @directmsg = Directmsg.find(params[:directmsg_id])
       @message = @directmsg.messages.new(message_params)
       directmsg_id = params[:directmsg_id]
+      # call derivatives processor
+      @message.document_derivatives! if message_params[:document] != "" && (message_params[:document].content_type.include? "image")
       if @message.save
         # 第三個參數為是否為私訊
         sending_message(@message, directmsg_id, true)
@@ -40,7 +45,7 @@ class MessagesController < ApplicationController
   
   private
   def message_params
-    params.require(:message).permit(:content).merge(user: current_user)
+    params.require(:message).permit(:content, :document).merge(user: current_user)
   end
 
   def share_msg_params

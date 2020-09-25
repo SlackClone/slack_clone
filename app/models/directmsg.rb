@@ -3,7 +3,8 @@ class Directmsg < ApplicationRecord
   
   has_many :users_directmsgs
   has_many :users, through: :users_directmsgs
-  has_many :messages, :as => :messageable
+  has_many :messages, as: :messageable
+  # has_many :uploadedfiles, as: :uploadable
 
   belongs_to :workspace
 
