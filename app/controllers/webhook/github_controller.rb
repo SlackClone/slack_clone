@@ -2,9 +2,9 @@ class Webhook::GithubController < ActionController::API
 
   def payload
     # 測試用的 secrets
-    # github_secrets = [44b0eb783b2ab91de6b870b9c276a0ed98edcada']
+    # github_secrets = [44b0eb783b2ab91de6b870b9c276a0ed98edcada]
 
-    # TODO: 幫使用者自動產生 secret
+    # TODO: 幫使用者自動產生 secret => webhooks_controller => new/edit page
     # generate_github_secret = SecureRandom.hex(20) 
 
     # Get repository name from incoming payload
