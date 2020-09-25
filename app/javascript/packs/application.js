@@ -20,8 +20,12 @@ import './create_ch.js'
 
 import './header-btn'
 import "./share-btn"
+<<<<<<< HEAD
 import './header-btn'
 
+=======
+import "./emoji.js"
+>>>>>>> 0eb0407...  post api
 // Uncomment to copy all static images under ../images to the output folder and reference
 // them with the image_pack_tag helper in views (e.g <%= image_pack_tag 'rails.png' %>)
 // or the `imagePath` JavaScript helper below.

@@ -1,6 +1,6 @@
 class MessagesController < ApplicationController
   before_action :authenticate_user!
-
+  require'json'
   def create
     # debugger
     if params[:channel_id]
@@ -36,6 +36,15 @@ class MessagesController < ApplicationController
       @message = ''
       render 'add'
     end
+  end
+
+  def emoji
+    @message = Message.find(params[:msg])
+    emoji_data = JSON.parse(@message.emoji_data)
+    emoji_data = {
+      emoji:[current_user.id]
+    }
+
   end
   
   private
