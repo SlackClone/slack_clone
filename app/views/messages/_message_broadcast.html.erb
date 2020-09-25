@@ -6,7 +6,7 @@
   </div>
 <% end%>
 <div class="messages_child">
-  <div class="flex justify-between hover:bg-gray-100 relative txtcolumn mt-2 mb-2">
+  <div class="flex justify-between hover:bg-gray-100 relative txtcolumn mt-2 mb-2" data-controller="emoji">
     <div class="txt flex pl-5">
       <div class="author font-bold mr-2">
         <%= message.user.nickname %>
@@ -32,11 +32,21 @@
             <div class="ml-2"> <%= message.share_message.content %> </div>
           </div> 
         <% end %>
+        <div class="reaction-emoji" data-target="emoji.reaction">
+          <% message.emoji.data.each do |key,value|%>
+          <span><%= key %></span>
+          <span><%= value.length %></span>
+          <% end %>
+        </div>
       </div>
     </div>
-    <% if controller_name != "directmsgs"%>
-    <button class= "share-btn btn btn-blue absolute right-0  mr-10 -mt-3" data-id="<%= message.id %>" data-message="<%= message.content %>">share</button>
-    <%end%>
+    <div class="react-bar absolute right-0  mr-10 -mt-3 flex">
+      <div class="emoji-trigger" data-action="click->emoji#click">Emoji</div>
+      <% if controller_name != "directmsgs"%>
+        <button class= "share-btn btn btn-blue" data-id="<%= message.id %>">share</button>
+      <% end %>
+    </div>
   </div>
 </div>
+
 

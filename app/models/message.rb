@@ -9,3 +9,21 @@ class Message < ApplicationRecord
   has_many :attachfiles, through: :message_files
   accepts_nested_attributes_for :attachfiles, allow_destroy: true
 end
+end
+
+
+def toggle_emoji(emoji,user_id)
+
+  if emoji_data[emoji].present?
+    # someone cliked this emoji
+    if emoji_data[emoji].include?(user.id)
+      # user clicked thsi emoji , so delete it
+      emoji_data[emoji].delete(user.id)
+      #使用者沒按過，把他加入
+      emoji_data[emoji] << user.id
+    end
+  else
+    emoji_delete[emoji] = [user.id]
+  end
+  save
+end
