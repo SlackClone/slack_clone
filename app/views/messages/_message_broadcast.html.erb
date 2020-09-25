@@ -18,15 +18,18 @@
          <div class="content">
             <%= message.content %>
          </div>
-        <% if message.share_message_id.present? %>
-          <div  class="border-l-4 m-2">
-            <span class="ml-2"> <%= message.share_message.content %> </span>
+          <% if message.share_message_id.present? %>
+            <div class="m-2 border-l-4 border-gray-600">
+            <div class="ml-2 font-bold"> <%= message.share_message.user.nickname %> </div>
+            <div class="ml-2"> <%= message.share_message.content %> </div>
           </div> 
         <% end %>
        
       </div>
     </div>
-    <button class= "share-btn btn btn-blue absolute right-0  mr-10 -mt-3" data-id="<%= message.id %>">share</button>
+    <% if controller_name != "directmsgs"%>
+    <button class= "share-btn btn btn-blue absolute right-0  mr-10 -mt-3" data-id="<%= message.id %>" data-message="<%= message.content %>">share</button>
+    <%end%>
   </div>
 </div>
 
