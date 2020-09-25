@@ -1,0 +1,15 @@
+<h2>Webhooks</h2>
+
+<div>Webhooks</div>
+
+<div class="text-blue-700"">
+  <%= link_to "new", new_webhook_path =%>
+</div>
+
+<ul>
+  <% @webhooks.each do |webhook| %>
+  <li>
+    <%= webhook.webhook_name %>
+  </li>
+  <% end %>
+</ul>

@@ -1,0 +1,41 @@
+<h2>Add new webhook</h2>
+<div>
+  <% if @webhook.errors %>
+    <ul>
+      <% @webhook.errors.full_messages.each do |message| %>
+        <li>
+          <%= message %>
+        </li>
+      <% end %>
+    </ul>
+  <% end %>
+</div>
+
+<%= form_with(model: @webhook, url: webhooks_path, local: true) do |form| %>
+  <div>
+    <%= form.label :webhook_name, "Webhook Name" %>
+    <%= form.text_field :webhook_name, class: "border-2" %>
+  </div>
+
+  <div>
+    <%= form.label :repo_name, "Repository Name" %>
+    <%= form.text_field :repo_name, class: "border-2" %>
+  </div>
+
+  <div>
+    <%= form.label :secret, "secret" %>
+    <%= form.text_field :secret, class: "border-2" %>
+  </div>
+
+  <div>
+    <%= form.label :payload_url, "paylaod url" %>
+    <%= form.text_field :payload_url, class: "border-2" %>
+  </div>
+
+  <div>
+    <%= form.label :channel_id, "channel name" %>
+    <%= form.select :channel_id, @user_channels.map { |channel| [channel.name, channel.id] } %>
+  </div>
+
+  <%= form.submit "新增" %>
+<% end %>
