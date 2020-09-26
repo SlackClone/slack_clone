@@ -58,9 +58,9 @@ GEM
       zeitwerk (~> 2.2, >= 2.2.2)
     addressable (2.7.0)
       public_suffix (>= 2.0.2, < 5.0)
-<<<<<<< HEAD
     airbrussh (1.4.0)
       sshkit (>= 1.6.1, != 1.7.0)
+<<<<<<< HEAD
     aws-eventstream (1.1.0)
     aws-partitions (1.374.0)
     aws-sdk-core (3.107.0)
@@ -80,11 +80,12 @@ GEM
     bcrypt (3.1.16)
     bcrypt_pbkdf (1.0.0)
 =======
+=======
+>>>>>>> fix conflict
     ancestry (3.1.0)
       activerecord (>= 4.2.0)
-    bcrypt (3.1.15)
-    bcrypt (3.1.15-java)
->>>>>>> WIP
+    bcrypt (3.1.16)
+    bcrypt_pbkdf (1.0.0)
     bindex (0.8.1)
     bootsnap (1.4.8)
       msgpack (~> 1.0)
@@ -192,15 +193,10 @@ GEM
     multi_json (1.15.0)
     multi_xml (0.6.0)
     multipart-post (2.1.1)
-<<<<<<< HEAD
     net-scp (3.0.0)
       net-ssh (>= 2.6.5, < 7.0.0)
     net-ssh (6.1.0)
     nio4r (2.5.4)
-=======
-    nio4r (2.5.2)
-    nio4r (2.5.2-java)
->>>>>>> WIP
     nokogiri (1.10.10)
       mini_portile2 (~> 2.4.0)
     nokogiri (1.10.10-java)
@@ -229,9 +225,9 @@ GEM
     pg (1.2.3-x64-mingw32)
     pg (1.2.3-x86-mingw32)
     public_suffix (4.0.5)
-    puma (4.3.6)
-      nio4r (~> 2.0)
     puma (4.3.5-java)
+      nio4r (~> 2.0)
+    puma (4.3.6)
       nio4r (~> 2.0)
     rack (2.2.3)
     rack-proxy (0.6.5)
@@ -370,14 +366,17 @@ PLATFORMS
 
 DEPENDENCIES
 <<<<<<< HEAD
+<<<<<<< HEAD
   aws-sdk-s3 (~> 1.81)
 =======
 <<<<<<< HEAD
 >>>>>>> WIP
   bcrypt_pbkdf (= 1.0)
 =======
+=======
+>>>>>>> fix conflict
   ancestry (~> 3.1)
->>>>>>> WIP
+  bcrypt_pbkdf (= 1.0)
   bootsnap (>= 1.4.2)
   byebug
   capistrano (= 3.14.1)
