@@ -59,10 +59,13 @@
   <% if @thread %>
     <%= render './shared/right_info' %>
   <% end %>
-  <% if @channel %>
+  <% if @channel && @thread.nil? %>
     <%= render './shared/invite_ch' %>
   <% end %>
 </div>
-<%= render './channels/new', channel: @new_channel %>
-<%= render './profiles/edit.html.erb' %>
+<% if @thread.nil? %>
+  <%= render './channels/new', channel: @new_channel %>
+  <%= render './profiles/edit.html.erb' %>
+<% end %>
+
  

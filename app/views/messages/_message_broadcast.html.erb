@@ -47,16 +47,14 @@
             </div>
           </div>
         </div>
-        <div class="thread">
-          <div class="thread-btn">
-            <%= link_to channel_message_threads_path(message.messageable_id, message.id) do %>
-              <i class="far fa-comment-dots"></i>
+        <div class="thread-btn flex">
+          <%= link_to channel_message_threads_path(message.messageable_id, message.id) do %>
+            <i class="far fa-comment-dots"></i>
+          <% end %>
+          <div class="thread-count pl-2">
+            <% if message.children.count > 0 %>
+              有 <%= message.children.count %> 則回覆
             <% end %>
-            <div class="thread-count">
-              <% if message.children.count > 0 %>
-                有 <%= message.children.count %> 則回覆
-              <% end %>
-            </div>
           </div>
         </div>
       </div>
