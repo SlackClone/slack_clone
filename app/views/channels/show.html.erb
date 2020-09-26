@@ -21,7 +21,7 @@
       <%# 訊息區 %>
       <div class="messages_area break-all flex flex-col-reverse overflow-y-auto h-chat_full flex-grow border border-1 bg-gray-300" data-controller="subscribe"  data-subscribe-id="<%= @workspace.id %>" data-subscribe-channel="<%= @channel&.id || 0 %>" data-subscribe-direct="<%= @directmsg&.id || 0 %>">
         <div class="pb-5 messages" data-target="subscribe.messages">
-          <% (@channel || @directmsg).messages.order(:created_at).each do |msg| %>
+          <% @messages.order(:created_at).each do |msg| %>
             <%= render "messages/message_broadcast" , message: msg %>
           <% end %>
         </div>

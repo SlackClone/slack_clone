@@ -2,15 +2,15 @@ class MessagesController < ApplicationController
   before_action :authenticate_user!
 
   def create
-    # debugger
     if params[:channel_id]
       @channel = Channel.find(params[:channel_id])
       @message = @channel.messages.new(message_params)
-      # @file = @message.attachfiles.new()
       channel_id = params[:channel_id]
+
       # call derivatives processor
-      @message.attachfiles[0].document_derivatives! if  @message.attachfiles.empty? != true && (@message.attachfiles[0].document.mime_type.include? "image")
-      # byebug
+      @message.attachfiles.each do |file|
+        file.document_derivatives! if !file.nil? && (file.document.mime_type.include? "image")
+      end
       if @message.save
         # 第三個參數為是否為私訊
         sending_message(@message, channel_id, false)
@@ -20,8 +20,11 @@ class MessagesController < ApplicationController
       @directmsg = Directmsg.find(params[:directmsg_id])
       @message = @directmsg.messages.new(message_params)
       directmsg_id = params[:directmsg_id]
+
       # call derivatives processor
-      # @message.document_derivatives! if message_params[:document] != "" && (message_params[:document].content_type.include? "image")
+      @message.attachfiles.each do |file|
+        file.document_derivatives! if !file.nil? && (file.document.mime_type.include? "image")
+      end
       if @message.save
         # 第三個參數為是否為私訊
         sending_message(@message, directmsg_id, true)

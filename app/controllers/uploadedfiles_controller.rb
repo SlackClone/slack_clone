@@ -30,7 +30,7 @@ class UploadedfilesController < ApplicationController
     end
     @invitation = Invitation.new
     @files = []
-    added_channel.each do |channel|
+    (added_channel+direct_channel).each do |channel|
       channel.messages.each do |message|
         message.attachfiles.each do |file|
           next if file.document_data.nil?
@@ -38,6 +38,7 @@ class UploadedfilesController < ApplicationController
         end
       end
     end
+
   end
 
   def create
