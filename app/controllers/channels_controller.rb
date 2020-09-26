@@ -21,6 +21,7 @@ class ChannelsController < ApplicationController
     @channel = Channel.find(params[:id])
     @new_channel = Channel.new
     @message = Message.new
+    @message.attachfiles.build
     @channels = @workspace.channels
     @messages = @channel.messages
     @channel_user = current_user.users_channels.find_by(channel: @channel)

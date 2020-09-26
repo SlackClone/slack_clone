@@ -6,7 +6,5 @@ class Channel < ApplicationRecord
   has_many :users_channels
   has_many :users, through: :users_channels
   has_many :messages, as: :messageable
-  # has_many :uploadedfiles, as: :uploadable
-
   belongs_to :workspace
 end

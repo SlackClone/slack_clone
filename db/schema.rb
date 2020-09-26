@@ -10,10 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_24_045053) do
+ActiveRecord::Schema.define(version: 2020_09_26_153449) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "attachfiles", force: :cascade do |t|
+    t.text "document_data", null: false
+    t.bigint "message_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["message_id"], name: "index_attachfiles_on_message_id"
+  end
 
   create_table "channels", force: :cascade do |t|
     t.string "name"
@@ -58,7 +66,6 @@ ActiveRecord::Schema.define(version: 2020_09_24_045053) do
     t.string "messageable_type", null: false
     t.bigint "messageable_id", null: false
     t.integer "share_message_id"
-    t.text "document_data"
     t.index ["messageable_type", "messageable_id"], name: "index_messages_on_messageable_type_and_messageable_id"
     t.index ["user_id"], name: "index_messages_on_user_id"
   end
@@ -118,6 +125,7 @@ ActiveRecord::Schema.define(version: 2020_09_24_045053) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  add_foreign_key "attachfiles", "messages"
   add_foreign_key "channels", "workspaces"
   add_foreign_key "invitations", "users"
   add_foreign_key "invitations", "workspaces"

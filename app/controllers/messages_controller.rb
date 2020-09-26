@@ -6,9 +6,10 @@ class MessagesController < ApplicationController
     if params[:channel_id]
       @channel = Channel.find(params[:channel_id])
       @message = @channel.messages.new(message_params)
+      # @file = @message.attachfiles.new()
       channel_id = params[:channel_id]
       # call derivatives processor
-      @message.document_derivatives! if message_params[:document] != "" && (message_params[:document].content_type.include? "image")
+      @message.attachfiles[0].document_derivatives! if  @message.attachfiles.empty? != true && (@message.attachfiles[0].document.mime_type.include? "image")
       # byebug
       if @message.save
         # 第三個參數為是否為私訊
@@ -20,7 +21,7 @@ class MessagesController < ApplicationController
       @message = @directmsg.messages.new(message_params)
       directmsg_id = params[:directmsg_id]
       # call derivatives processor
-      @message.document_derivatives! if message_params[:document] != "" && (message_params[:document].content_type.include? "image")
+      # @message.document_derivatives! if message_params[:document] != "" && (message_params[:document].content_type.include? "image")
       if @message.save
         # 第三個參數為是否為私訊
         sending_message(@message, directmsg_id, true)
@@ -45,7 +46,7 @@ class MessagesController < ApplicationController
   
   private
   def message_params
-    params.require(:message).permit(:content, :document).merge(user: current_user)
+    params.require(:message).permit(:content, attachfiles_attributes: [:document]).merge(user: current_user)
   end
 
   def share_msg_params

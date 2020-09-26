@@ -5,6 +5,7 @@ class UploadedfilesController < ApplicationController
     @workspace = Workspace.find(params[:workspace_id])
     @new_channel = Channel.new
     @message = Message.new
+    @message.attachfiles.build
     @channels = @workspace.channels
     
     # 查詢私訊未讀訊息數量 
@@ -28,27 +29,25 @@ class UploadedfilesController < ApplicationController
                                                   .present?
     end
     @invitation = Invitation.new
-    @files_channel = []
+    @files = []
     added_channel.each do |channel|
       channel.messages.each do |message|
-        next if message.document_data.nil?
-        @files_channel << message
+        message.attachfiles.each do |file|
+          next if file.document_data.nil?
+          @files << file
+        end
       end
     end
-    # byebug
-  end
-
-  def new
-    # @message = Message.new
   end
 
   def create
     @message = Message.new(file_params)
-    # file_params.messageable_type = "Channel"
-    @message.messageable_type = "Channel"
+    # 要上傳到哪個channel
     @channel = Channel.find(@message.messageable_id)
-    @message.document_derivatives! if file_params[:document] != "" && (file_params[:document].content_type.include? "image")
-    # byebug 
+
+    @message.messageable_type = "Channel"
+    @message.attachfiles[0].document_derivatives! if  @message.attachfiles.empty? != true && (@message.attachfiles[0].document.mime_type.include? "image")
+
     if @message.save
       sending_message(@message, @message.messageable_id, false)
       sending_notice(@channel, current_user, false)
@@ -56,23 +55,11 @@ class UploadedfilesController < ApplicationController
     else
       render :create
     end
-
-    # @channel = Channel.find(params[:channel_id])
-    #   @message = @channel.messages.new(message_params)
-    #   channel_id = params[:channel_id]
-    #   # call derivatives processor
-    #   @message.document_derivatives! if message_params[:document] != "" && (message_params[:document].content_type.include? "image")
-    #   # byebug
-    #   if @message.save
-    #     # 第三個參數為是否為私訊
-    #     sending_message(@message, channel_id, false)
-    #     sending_notice(@channel, current_user, false)
-    #   end
   end
 
   private
   def file_params
-    params.require(:message).permit(:messageable_id, :content, :document).merge(user: current_user)
+    params.require(:message).permit(:messageable_id, :content, attachfiles_attributes: [:document]).merge(user: current_user)
   end
 
   def find_workspace

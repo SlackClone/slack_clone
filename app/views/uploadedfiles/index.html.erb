@@ -14,16 +14,16 @@
       </div>
       <%# 檔案區 %>
       <div class="messages_area break-all flex flex-wrap overflow-y-auto h-chat_full flex-grow border border-1 bg-gray-300 pl-5 pt-5">
-        <% @files_channel.each do |file| %>
+        <% @files.each do |file| %>
           <div class="file-zone border-gray-600 border-solid border mx-1 rounded w-auto">
             <div class="flex flex-wrap mx-auto justify-center overflow-hidden h-48 rounded">
               <%= image_tag file.document.url, class: "w-full" if file.document.mime_type.include? "image" %>
             </div>
             <div class="truncate">
-              <%= file.document.metadata["filename"] %>
+              <%= file.document.metadata["filename"] %> 
             </div>
             <div class="">
-              <%= file.user.nickname %>
+              <%= file.message.user.nickname %>
             </div>
             <div class="hidden">
               <%= file.document.download_url(host: "http://localhost:3000/") %>
@@ -57,9 +57,9 @@
             <%= f.text_area :content,placeholder: 'Add some message, if you\'d like', size: "20x10",class:"textArea no-resize appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 h-48 resize-none" %>
         </div>
       </div>
-      <%# <%= f.hidden_field :document, value: @message.cached_document_data%> 
-      <%= f.file_field :document %>
-
+      <%= f.fields_for :attachfiles do |file| %>
+        <%= file.file_field :document %>
+      <% end %>
       <div class="flex flex-row-reverse mb-4 mr-2">
         <%= f.submit "upload", class:"share-submit shadow bg-teal-400 hover:bg-teal-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded" %>
       </div>

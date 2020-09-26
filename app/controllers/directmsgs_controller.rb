@@ -10,6 +10,7 @@ class DirectmsgsController < ApplicationController
     @workspace = Workspace.find(params[:workspace_id])
     @channels = @workspace.channels
     @message = Message.new
+    @message.attachfiles.build
     @new_channel = Channel.new
     @invitation = Invitation.new
     @users_direct = current_user.users_directmsgs.find_by(directmsg: @directmsg)

@@ -1,6 +1,7 @@
 <%= form_with(model: @message, url:directmsg_messages_path(@directmsg) , class: "flex bg-gray-200 appearance-none border-2 border-gray-200 rounded text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500", id:"new_message", data:{action: "ajax:success->subscribe#clearMsg", target: "subscribe.newMessage"}) do |f| %>
   <%= f.text_field :content, class:"flex-grow min-w-0", placeholder: t(".placeholder"),autocomplete: "off" %>
-  <%= f.hidden_field :document, value: @message.cached_document_data%>
-  <%= f.file_field :document %>
+    <%= f.fields_for :attachfiles do |file| %>
+      <%= file.file_field :document %>
+    <% end %>
   <%= f.submit t("utilities.submit"), class:"bg-gray-500 shadow bg-purple-500 hover:bg-purple-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded" %>
 <% end %>
