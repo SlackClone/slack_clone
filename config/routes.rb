@@ -38,6 +38,9 @@ Rails.application.routes.draw do
   resources :messages, only: [:show] do 
     collection do
       post 'add'
+    end
+
+    member do
       post 'emoji'
     end
 

@@ -1,0 +1,3 @@
+var el = document.getElementById(`message-reaction-${@message.id}`)
+var partial = "<%= j render('reaction', message: @message)%>"
+el.innerHTML = partial

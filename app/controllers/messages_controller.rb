@@ -39,13 +39,9 @@ class MessagesController < ApplicationController
   end
 
   def emoji
-    @message = Message.find(params[:msg])
-    emoji_data = JSON.parse(@message.emoji_data)
-    emoji_data = {
-      emoji:[current_user.id]
-    }
-
+    
   end
+
   
   private
   def message_params
