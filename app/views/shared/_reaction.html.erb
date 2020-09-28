@@ -1,18 +1,6 @@
 
-<% message.emoji_data.each do |key, value| %>
-  <button class="emoji_key"><%= key %></button>
+<% message.emoji_data.compact.each do |key, value| %>
+  <!-- <button class="emoji_key"><%= key %></button> -->
+  <%= button_to key, emoji_message_path(message.id, emoji: key), remote: true, class: value.include?(current_user.id) ? 'mine' : '' %>
   <span><%= value.length %></span>
 <% end %>
-
-
-let emojiKey = document.querySelector('.emoji_key')
-let value = 0
-let valueTotal = value.length
-
-emoji_key.addEventListener('click',function(){
-
-})
-
-for(let i=0; i<valueTotal; i++){
-  valueTotal+
-}
