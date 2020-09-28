@@ -9,19 +9,20 @@ export default class extends Controller {
     const picker = new EmojiButton({
       autoHide: true,
       showCategoryButtons: false	
-      
-
     })
     picker.togglePicker(target)
     picker.on('emoji', selection => {
-      console.log('selected')
-      console.log('selection')
-      // 怎麼顯示 emoji
-      this.reactionTarget.innerHTML = selection.emoji
+      console.log("selected");
+      console.log("selection");
+      this.reactionTarget.innerHTML = selection.emoji;
+    })
+  }
+}
 
-      // let emoji = e.target.textContent
+
+// let emoji = e.target.textContent
       // let id = e.target.dataset.id
-    
+
       // Rails.ajax({
       //   url: `messages/${id}/emoji`,
       //   type: 'post',
@@ -35,8 +36,3 @@ export default class extends Controller {
       //   error: (err) => {
       //     console.log(err);
       //   }
-      // })
-
-    })
-  }
-}

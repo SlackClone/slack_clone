@@ -32,17 +32,22 @@
           </div> 
         <% end %>       
         <div class="reaction-emoji" data-target="emoji.reaction">
-          <div id="message-reaction-<%= message.id %>">
+          <div id="message-reaction-<%= message.id %>" class="flex">
             <%= render './shared/reaction', message: message %>
            </div>
         </div>
       </div>
     </div>
     <div class="react-bar absolute right-0  mr-10 -mt-3 flex">
+<<<<<<< HEAD
       <button class="emoji-trigger" data-action="click-> emoji#click" ">Emoji</button>
       <% if controller_name != "directmsgs"%>
         <button class= "share-btn btn btn-blue" data-id="<%= message.id %>">share</button>
       <% end %>
+=======
+      <button data-action="click-> emoji#click" >Emoji</button>
+      <button class= "share-btn btn btn-blue" data-id=<%= message.id %>>share</button>
+>>>>>>> 4a8ef79...  emoji partial
     </div>
   </div>
 </div>
