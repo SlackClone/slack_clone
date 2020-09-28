@@ -37,7 +37,7 @@
           </div> 
         <% end %>       
         <div class="reaction-emoji" data-target="emoji.reaction">
-          <div id="message-reaction-<%= message.id %>">
+          <div id="message-reaction-<%= message.id %>" class="flex">
             <%= render './shared/reaction', message: message %>
            </div>
         </div>
