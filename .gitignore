@@ -24,6 +24,7 @@
 /public/uploads
 /public/assets
 .byebug_history
+/spec/factories/*.jpg
 
 # Ignore master key for decrypting credentials and more.
 /config/master.key
