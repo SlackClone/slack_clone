@@ -16,6 +16,7 @@ class User < ApplicationRecord
   has_many :invitations
   has_many :users_directmsgs
   has_many :directmsgs, through: :users_directmsgs
+  has_one :profile
 
   def self.find_for_google_oauth2(access_token, signed_in_resource=nil)
     data = access_token.info

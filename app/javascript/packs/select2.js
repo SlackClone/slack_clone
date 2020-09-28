@@ -1,7 +1,6 @@
 import $ from "jquery"
 import 'select2'
 
-
 $(document).ready(function() {
   $('#user_list').select2({
     placeholder: "輸入欲邀請成員",

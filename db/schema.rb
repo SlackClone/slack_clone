@@ -78,6 +78,16 @@ ActiveRecord::Schema.define(version: 2020_09_30_125937) do
     t.index ["user_id"], name: "index_messages_on_user_id"
   end
 
+  create_table "profiles", force: :cascade do |t|
+    t.string "full_name"
+    t.text "avatar_data"
+    t.string "phone_number"
+    t.bigint "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_profiles_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -140,6 +150,7 @@ ActiveRecord::Schema.define(version: 2020_09_30_125937) do
   add_foreign_key "message_files", "attachfiles"
   add_foreign_key "message_files", "messages"
   add_foreign_key "messages", "users"
+  add_foreign_key "profiles", "users"
   add_foreign_key "users_channels", "channels"
   add_foreign_key "users_channels", "users"
   add_foreign_key "users_directmsgs", "directmsgs"

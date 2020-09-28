@@ -1,5 +1,4 @@
 class Workspace < ApplicationRecord
-  include ImageUploader::Attachment(:image) # adds an `image` virtual attribute
   validates :name, presence: true, uniqueness: true
 
   has_many :channels
@@ -7,4 +6,5 @@ class Workspace < ApplicationRecord
   has_many :users, through: :users_workspaces
   has_many :invitations
   has_many :directmsgs
+  include ImageUploader::Attachment(:image) # adds an `image` virtual attribute
 end

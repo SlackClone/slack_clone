@@ -65,6 +65,7 @@ Rails.application.configure do
   config.action_mailer.smtp_settings = config_for(:email).symbolize_keys
 
   config.action_mailer.delivery_method = :letter_opener_web
+  # config.action_mailer.delivery_method = :smtp # 真正寄信
 
 
 end

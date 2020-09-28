@@ -1,12 +1,15 @@
 Rails.application.routes.draw do
   
-  
   devise_for :users, controllers: {
     confirmations: 'users/confirmations',
     omniauth_callbacks: "users/omniauth_callbacks",
     registrations:'users/registrations'
   }
-  
+
+
+
+    get '/users/profiles/edit', to: 'profiles#edit', as: 'edit_profiles'
+    resource :profiles, path: "/users/profiles/:id", except: [:edit]
   resource :pages do
     get :index
     get :login
@@ -18,7 +21,8 @@ Rails.application.routes.draw do
   resources :workspaces do
     resource :users_workspaces
     resource :channels, only: %i[new create]
-    resources :channels, only: [:show]
+    resources :channels, only: [:show] do
+    end
     resource :invitations, only: :create do
       get :accept
     end
