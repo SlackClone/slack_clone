@@ -1,4 +1,5 @@
 import { Controller } from 'stimulus'
+import Rails from "@rails/ujs";
 import { EmojiButton } from '@joeattardi/emoji-button'
 
 export default class extends Controller {
@@ -6,33 +7,24 @@ export default class extends Controller {
   
   click (event){
     const target = event.currentTarget
+    const id = target.dataset.id
     const picker = new EmojiButton({
       autoHide: true,
       showCategoryButtons: false	
     })
     picker.togglePicker(target)
     picker.on('emoji', selection => {
-      console.log("selected");
-      console.log("selection");
-      this.reactionTarget.innerHTML = selection.emoji;
+      console.log("selection", selection);
+      const emoji = selection.emoji
+      // this.reactionTarget.innerHTML = selection.emoji;
+
+      let formData = new FormData()
+      formData.append('emoji', emoji)
+      Rails.ajax({
+        url: `/messages/${id}/emoji`,
+        type: 'post',
+        data: formData
+      })
     })
   }
 }
-
-
-// let emoji = e.target.textContent
-      // let id = e.target.dataset.id
-
-      // Rails.ajax({
-      //   url: `messages/${id}/emoji`,
-      //   type: 'post',
-      //   data: {
-      //     emoji: emoji,
-      //     id: id
-      //   },
-      //     success: () => {
-      //     element.setAttribute("data-action", "click-> emoji#click")   
-      //   },
-      //   error: (err) => {
-      //     console.log(err);
-      //   }

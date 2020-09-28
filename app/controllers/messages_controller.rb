@@ -45,6 +45,8 @@ class MessagesController < ApplicationController
   end
 
   def emoji
+    @message = Message.find(params[:id])
+    @message.toggle_emoji(params[:emoji], current_user.id)
     
   end
 
