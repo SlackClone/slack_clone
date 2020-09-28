@@ -1,9 +1,14 @@
 <div class="profile-background absolute w-full h-full top-0 bg-black bg-opacity-25 hidden flex justify-center items-center">
+<<<<<<< HEAD
   <div class="profile-form bg-white shadow-2xl w-5/12 h-11/12 rounded relative">
+=======
+  <div class=" bg-white shadow-2xl w-5/12 h-11/12 rounded relative">
+>>>>>>> 上傳圖片完成
     <div class="flex justify-between items-center mb-8 p-5">
       <h5 class="font-bold text-xl">Edit your profile</h5>
       <button class="profile-cancel-btn font-bold text-gray-600 focus:outline-none">X</button>
     </div>
+<<<<<<< HEAD
     <%= form_with(url:profiles_path(current_user),method: 'PATCH',id: "profile_form") do |f|%>
     <div class="grid grid-cols-3 px-6">
       <div class="col-span-2 mr-5">
@@ -68,3 +73,34 @@
   </div>
 </div>
 
+=======
+      <%= form_with(url:profiles_path(current_user),method: 'PATCH',id: "profile_form") do |f|%>
+      <div class="flex px-6">
+        <div class="flex-grow mr-5">
+          <%= f.label :full_name,class: "font-bold text-sm mb-2" %>
+          <%= f.text_field "profile[full_name]",autocomplete:"off",class:"full_name relative font-bold px-2 py-2 mb-5 border border-gray-800 rounded block w-full placeholder-gray-600 focus:outline-none focus:shadow-outline" %>
+          <%= f.label :phone_number,class: "font-bold text-sm mb-2" %>
+          <%= f.text_field "profile[phone_number]",autocomplete:"off",class:"phone_number relative font-bold px-2 py-2 border border-gray-800 rounded block w-full placeholder-gray-600 focus:outline-none focus:shadow-outline" %>
+          <span class="text-xs text-gray-500">enter a phone number</span>        
+        </div>
+        <div>
+          <% if has_avatar?(current_user) %>
+            <%= image_tag current_user.profile.avatar_url, class: "rounded-full" %>
+          <% else %>
+            <img src="https://www.nicepng.com/png/full/136-1366211_group-of-10-guys-login-user-icon-png.png" alt="" class="w-1/2">
+          <% end %>
+          <%= f.label :avatar,class: "font-bold text-sm mb-2" %>   
+          <%= f.hidden_field "profile[avatar]" %>
+          <%= f.file_field "profile[avatar]",id:"avatar",class:'hidden' %>
+          <div class="avatar-btn border border-gray-600 py-2 px-5 font-bold rounded block">Upload an image
+          </div>
+        </div>
+      </div>
+      <div class="border-t border-gray-600 flex p-5 justify-end">
+        <button class="profile-cancel-btn cursor-pointer block font-bold text-gray-700 px-5 py-2 mr-3 bg-gray-400 rounded focus:outline-none">Cancel</button>
+        <%= f.submit 'Send' ,class:"profile-btn cursor-pointer block font-bold text-gray-700 px-5 py-2 bg-gray-400 rounded focus:outline-none" %>
+      </div>
+    <% end %>
+  </div>
+</div>
+>>>>>>> 上傳圖片完成

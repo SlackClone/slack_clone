@@ -1,0 +1,9 @@
+<%= form_with(model: @profile, url:workspace_channel_profiles_path(@workspace,@channel,@user),method: 'POST',local: true) do |f|%>
+  <%= f.label :full_name %>
+  <%= f.text_field :full_name %>
+  <%= f.label :avatar %>
+  <%= f.file_field :avatar_data %>
+  <%= f.label :phone_number %>
+  <%= f.text_field :phone_number %>
+  <%= f.submit %>
+<% end %>

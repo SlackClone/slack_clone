@@ -24,6 +24,7 @@
               255
             </div>              
 <<<<<<< HEAD
+<<<<<<< HEAD
           </div>         
           <%= image_tag @workspace.image_url if @workspace.cached_image_data %>
           <%= f.hidden_field :image, value: @workspace.cached_image_data %>
@@ -32,6 +33,11 @@
           <%= image_tag f.object.image_url if f.object.cached_image_data %>
           <%= f.hidden_field :image, value: f.object.cached_image_data %>
 >>>>>>> 串S3
+=======
+          </div>         
+          <%= image_tag @workspace.image_url if @workspace.cached_image_data %>
+          <%= f.hidden_field :image, value: @workspace.cached_image_data %>
+>>>>>>> 上傳圖片完成
           <%= f.file_field :image %>  
           <%= f.submit t("utilities.submit"),
               class:"create-ws-btn cursor-pointer block font-bold text-white px-20 py-2 mb-5 mr-auto bg-green-800 rounded focus:outline-none"
