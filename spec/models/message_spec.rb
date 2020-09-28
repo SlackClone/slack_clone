@@ -7,5 +7,6 @@ RSpec.describe Message, type: :model do
 
   describe 'association' do
     it { should belong_to(:messageable) }
+    it { should have_many(:attachfiles) }
   end
 end
