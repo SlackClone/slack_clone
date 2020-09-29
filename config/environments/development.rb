@@ -68,5 +68,5 @@ Rails.application.configure do
   # config.action_mailer.delivery_method = :smtp # 真正寄信
 
   # for test webhook
-  config.hosts << "0bf986159e1f.ngrok.io"
+  config.hosts << "d05eb2c02897.ngrok.io"
 end

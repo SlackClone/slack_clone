@@ -378,6 +378,7 @@ DEPENDENCIES
   foreman (~> 0.87.2)
   hirb (~> 0.7.3)
   image_processing (~> 1.2)
+  hirb (~> 0.7.3)
   inline_svg (~> 1.7, >= 1.7.1)
   jbuilder (~> 2.7)
   letter_opener_web (~> 1.4)

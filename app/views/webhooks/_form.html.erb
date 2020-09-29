@@ -1,0 +1,30 @@
+<%#= form_with(model: webhook, url: webhooks_path, local: true) do |form| %>
+
+<div class="w-full max-w-xs container mx-auto">
+  
+  <% path = defined?(url) ? url : webhooks_path %>
+  <%= form_for(webhook, url: path) do |form| %>
+    <%= form.label :webhook_name, "Webhook Name", class: "block text-gray-700 font-bold" %>
+    <%= form.text_field :webhook_name, class: "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-2", placeholder: "Webhook name" %>
+
+    <%= form.label :repo_name, "Repository Name", class: "block text-gray-700 font-bold" %>
+    <%= form.text_field :repo_name, class: "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-2", placeholder: "Github full repository name" %>
+
+    <%= form.label :channel_id, "Channel Name", class: "inline-block text-gray-700 font-bold" %>
+    <%= form.select(:channel_id, user_channels.map { |channel| [ channel.name, channel.id ] }, {}, { class: "border-2 rounded" }) %>
+
+
+    <%= form.label :payload_url, "Paylaod URL", class: "block text-gray-700 font-bold" %>
+    <%= form.text_field :payload_url, class: "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-2" %>
+
+    <%= form.label :secret, "Secret", class: "block text-gray-700 font-bold" %>
+    <div class="flex items-center mb-4">
+    <%= form.text_field :secret, class: "flex-grow inline-block shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mr-2" %>
+    <button id="generate_secret" class="inline-block bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-2 border border-blue-500 hover:border-transparent rounded">Generate</button>
+    </div>
+
+    <div>
+      <%= form.submit class: "bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded" %>
+    </div>
+  <% end %>
+</div>

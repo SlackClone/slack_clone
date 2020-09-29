@@ -2,6 +2,7 @@ class Webhook::GithubController < ActionController::API
 
   def payload
     # 測試用的 secrets
+    # https://d05eb2c02897.ngrok.io/webhooks
     # github_secrets = [44b0eb783b2ab91de6b870b9c276a0ed98edcada]
 
     # TODO: 幫使用者自動產生 secret => webhooks_controller => new/edit page
@@ -10,6 +11,7 @@ class Webhook::GithubController < ActionController::API
     # Get repository name from incoming payload
     json_body = JSON.parse(params[:payload])
     user_repository_name = json_body["repository"]["full_name"]
+    # byebug
     
     # find reposity name form model
     if check_repo_name_exist?(user_repository_name)
@@ -62,7 +64,7 @@ end
       @message = @channel.messages.new(user_id: bot_id, content: payload_content)
  
       if @message.save
-        SendChannelMessageJob.perform_later(@message, @channel.id)
+        SendMessageJob.perform_later(@message, @channel.id, false)
       else
         # TODO: false condition
       end

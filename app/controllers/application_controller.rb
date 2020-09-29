@@ -12,4 +12,6 @@ class ApplicationController < ActionController::Base
     workspace_channel_path(session[:workspace_id], session[:channel]) if session[:workspace_id] && session[:channel]
     workspaces_path
   end
+
+  
 end
