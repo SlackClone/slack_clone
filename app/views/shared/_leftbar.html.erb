@@ -20,10 +20,10 @@
           <%= link_to '+', new_workspace_channels_path(workspace_id: workspace.id),class: 'create-ch-btn text-2xl pr-5' %>
         </div>
       </div>
-      <% channels.each do |channel| %>
+      <% channels.where.not(id: nil).each do |channel| %>
         <div data-controller="channels" data-channels-id="<%= channel.id %>" class='truncate pl-10 py-1 hover:bg-deep_sladock'>
           <span>#</span>
-          <%= link_to channel.name, workspace_channel_path(workspace, channel), channel_id: channel.id, class: unread_msg_bol[channel.id] ? " font-bold" : "" %>
+          <%= link_to channel.name, workspace_channel_path(workspace, channel), channel_id: channel.id, class: unread_msg_bol[channel.id] ? "font-bold channel-each" : "channel-each", data: { target: "thread.channels" } %>
           <% if channel.users.include?(current_user) %>
             <button data-action="click->channels#removeChannel" data-target="channels.symbol">-</button>
           <% else %>

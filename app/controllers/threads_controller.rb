@@ -3,16 +3,34 @@ class ThreadsController < ApplicationController
 
   def show
     # debugger
+    if params[:channel_id]
+      # channel
+      @channel = Channel.find(params[:channel_id])
+      type = "Channel"
+      @channel_user = current_user.users_channels.find_by(channel: @channel)
+      @last_enter_at = @channel_user&.last_enter_at || @channel.created_at
+      @channel_user&.touch(:last_enter_at)
+    else
+      # directmsg
+      @directmsg = Directmsg.find(params[:directmsg_id])
+      type = "Directmsg"
+      @directmsg_user = current_user.users_directmsgs.find_by(directmsg: @directmsg)
+      @last_enter_at = @directmsg_user&.last_enter_at || @directmsg.created_at
+      @directmsg_user&.touch(:last_enter_at)
+    end
+    
+    puts type
     @thread = Message.find(params[:message_id])
-    # @workspace = Workspace.find(params[:workspace_id])
-    @channel = Channel.find(params[:channel_id])
-    @messages = @channel.messages
-    @workspace = @channel.workspace
+    # debugger
+    
+    @messages = (@channel || @directmsg).messages
+    @workspace = (@channel || @directmsg).workspace
     @channels = @workspace.channels
+    # debugger
     @message = Message.new
-    @channel_user = current_user.users_channels.find_by(channel: @channel)
-    @last_enter_at = @channel_user&.last_enter_at || @channel.created_at
-    @channel_user&.touch(:last_enter_at)
+    @new_channel = @workspace.channels.new
+    @workspace_users = @workspace.users
+    
 
     # 查詢私訊未讀訊息數量 
     direct_channel = current_user.directmsgs

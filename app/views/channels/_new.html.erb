@@ -5,7 +5,7 @@
       <button class="create-cancel-btn font-bold text-gray-600 focus:outline-none">X</button>
     </div>
     <p class="text-sm text-gray-600 mb-5"><%= t(".communicates") %></p>
-    <%= form_with(model: channel, url:workspace_channels_path(id: channel.workspace_id),method:'POST',local:true) do |f| %>
+    <%= form_with(model: channel, url:workspace_channels_path(workspace),method:'POST',local:true) do |f| %>
     <div class="field">
       <%= f.label :name, t(".name"), class: "font-bold" %>
       <%= f.text_field :name,placeholder:t(".name_placeholder"),autocomplete:"off",class:"search relative font-bold px-2 py-2 mb-5 border border-gray-800 rounded block w-full placeholder-gray-600 focus:outline-none focus:shadow-outline" %>

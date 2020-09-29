@@ -1,36 +1,35 @@
-// import { Controller } from "stimulus"
-// import consumer from "channels/consumer"
+import { Controller } from "stimulus"
 
-// export default class extends Controller {
-//   static targets = ["messages", "newMessage"]
+export default class extends Controller {
+  static targets = ["channels"]
+  connect() {
+    this.show()
+  }
+  show() {
+    // 開關右側
+    const rightInfo = document.querySelector(".right_info")
 
-//   connect() {
-//     console.log(this.data.get("direct"))
-//     Notification.requestPermission()
-//     this.subscription = consumer.subscriptions.create({channel: "ChannelsChannel", channelId: this.data.get("channel"), directId: this.data.get("direct")},
-//       {
-//         connected: this.subscribe.bind(this),
-//         received: this.messaging.bind(this)
-//       })
-//     }
-//   disconnect(){
-//     consumer.subscriptions.remove(this.subscription)
-//   }
-//   subscribe(){
-//     console.log(`Messaging channel opened in workspace NO.${this.data.get("id")}`)
-//   }
-//   messaging(data){
-//     if(document.hidden){
-//       let divideElement = document.querySelector(".divide")
-//       if (!divideElement){
-//         this.messagesTarget.insertAdjacentHTML('beforeend', `<div class='flex text-right divide'><span class='h-0 border-b-0 border-t-2 block flex-grow border-red-600 my-auto'></span><span class="pl-3">new</span></div>`)
-//       }
-//     }else{
-//       this.subscription.perform("update_enter_time")
-//     }
-//     this.messagesTarget.insertAdjacentHTML("beforeend", data.message)
-//   }
-//   clearMsg(){
-//     this.newMessageTarget.reset()
-//   }
-// }
+    rightInfo.classList.toggle("hidden")  
+
+    // 更改左邊 channel 網址
+    const threadCount = document.getElementById("thread-count")
+    const messageId = threadCount.getAttribute("message_id")
+    const channelId = threadCount.getAttribute("channel_id")
+    const allChannel = document.querySelectorAll(".channel-each")
+    allChannel.forEach((a) => {
+      a.setAttribute('href', `/channels/${ channelId }/messages/${ messageId }/threads`)
+    });
+    document.history.pushState('', '', `/channels/${ channelId }/messages/${ messageId }/threads`)
+    
+    // console.log(messageId)
+    // console.log(channelId)
+    // console.log(`/channels/${ channelId }/messages/${ messageId }/threads`)
+    // this.channelsTarget.
+    // getAttribute('href') = `/channels/${ channelId }/messages/${ messageId }/threads`
+
+    console.log(this.channelsTarget.getAttribute('href'))
+
+    
+
+  }
+}

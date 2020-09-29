@@ -49,7 +49,9 @@ Rails.application.routes.draw do
   end
   
   resources :directmsgs, only: [:show] do
-    resources :messages, only: [:create]
+    resources :messages, only: [:create] do
+      resource :threads, only: [:create, :show]
+    end
   end
 
   resources :messages, only: [:show] do 
