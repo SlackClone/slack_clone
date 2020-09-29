@@ -19,11 +19,55 @@ import './select2.js'
 import './create_ch.js'
 
 import './header-btn'
-import './share-btn'
-
+import "./share-btn"
+import './header-btn'
+import ClassicEditor from 'ckeditor5-custom-build/build/ckeditor.js'
 // Uncomment to copy all static images under ../images to the output folder and reference
 // them with the image_pack_tag helper in views (e.g <%= image_pack_tag 'rails.png' %>)
 // or the `imagePath` JavaScript helper below.
 //
 const images = require.context('../images', true)
 const imagePath = (name) => images(name, true)
+
+ClassicEditor
+			.create( document.querySelector( '.editor' ), {	
+				toolbar: {
+					items: [
+						'bold',
+						'underline',
+						'italic',
+						'strikethrough',
+						'code',
+						'link',
+						'bulletedList',
+						'numberedList',
+						'blockQuote',
+						'codeBlock',
+						'|',
+						'CKFinder',
+						'undo',
+						'redo',
+						'|'
+					]
+				},
+				language: 'en',
+				image: {
+					toolbar: [
+						'imageTextAlternative',
+						'imageStyle:full',
+						'imageStyle:side'
+					]
+				},
+				licenseKey: '',
+				
+			} )
+			.then( editor => {
+				window.editor = editor;
+	
+			} )
+			.catch( error => {
+				console.error( 'Oops, something went wrong!' );
+				console.error( 'Please, report the following error on https://github.com/ckeditor/ckeditor5/issues with the build id and the error stack trace:' );
+				console.warn( 'Build id: 4ozor8y2k6gc-3tl4u0tlpo5k' );
+				console.error( error );
+			} );
