@@ -22,6 +22,7 @@
           <% if message.attachfiles.empty? != true %>
             <% message.attachfiles.each do |file|%>
               <%= image_tag file.document(:small).url if file.document.mime_type.include? "image" %>
+              <%= link_to file.document.metadata["filename"], file.document.download_url(host: "http://localhost:3000/"), download:"" unless file.document.mime_type.include? "image"%>
             <% end %>
           <% end %>
         </div>

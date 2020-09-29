@@ -16,17 +16,20 @@
       <div class="messages_area break-all flex flex-wrap overflow-y-auto h-chat_full flex-grow border border-1 bg-gray-300 pl-5 pt-5">
         <% @files.each do |file| %>
           <div class="file-zone border-gray-600 border-solid border mx-1 rounded w-auto">
-            <div class="flex flex-wrap mx-auto justify-center overflow-hidden h-48 rounded">
+            <div class="flex flex-wrap mx-auto justify-center overflow-hidden h-48 rounded relative z-10">
               <%= image_tag file.document.url, class: "w-full" if file.document.mime_type.include? "image" %>
+              <%= image_pack_tag "media/images/PDF_file_icon.png" if file.document.mime_type.include? "pdf" %>
+              <div class="">
+                <a href="<%= file.document.download_url(host: "http://localhost:3000/") %>" download= "" class= "absolute right-0" >
+                  <i class="fas fa-cloud-download-alt"></i>
+                </a> 
+              </div>
             </div>
             <div class="truncate">
               <%= file.document.metadata["filename"] %> 
             </div>
             <div class="">
               <%= file.message.user.nickname %>
-            </div>
-            <div class="hidden">
-              <%= file.document.download_url(host: "http://localhost:3000/") %>
             </div>
           </div>
         <% end %>
@@ -38,7 +41,7 @@
     <%= render './shared/invite_ch' %>
   <% end %>
   <div class="w-full h-full absolute hidden bg-black bg-opacity-25" data-target="uploadfile.newForm">
-    <%= form_with model: @message, url:workspace_uploadedfiles_path(@workspace), method: 'post', class:"w-full max-w-lg border-2 rounded-lg bg-white relative m-auto", data:{action: "ajax:success->uploadfile#submitForm"} do |f|%>
+    <%= form_with model: @message, url:workspace_uploadedfiles_path(@workspace), method: 'post', class:"w-full max-w-lg border-2 rounded-lg bg-white relative m-auto z-10", data:{action: "ajax:success->uploadfile#submitForm"} do |f|%>
       <div class="flex flex-wrap mb-6">
         <div class="w-full flex share-title justify-between">
           <p class="text-2xl font-bold mt-3 ml-1">Upload the file</p>
@@ -48,7 +51,8 @@
         </div>
         <div class="w-full px-3 mt-4">
           <%= f.label :messageable_id, "Upload to", class:"block tracking-wide text-black-700 text-xl font-bold mb-2" %>
-          <%= f.select :messageable_id, options_for_select(@channels.map { |channel| [channel.name, channel.id] }), class:"appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" %>
+          
+          <%= f.select :messageable_id, options_for_select((@direct_id_nickname + @channel_id_name).map { |channel| [channel[1], channel[0]] }), class:"appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" %>
         </div>
       </div>
       <div class="flex flex-wrap mb-6">

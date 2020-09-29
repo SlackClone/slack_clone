@@ -9,7 +9,7 @@ class MessagesController < ApplicationController
 
       # call derivatives processor
       @message.attachfiles.each do |file|
-        file.document_derivatives! if !file.nil? && (file.document.mime_type.include? "image")
+        file.document_derivatives! if file.present? && (file.document.mime_type.include? "image")
       end
       if @message.save
         # 第三個參數為是否為私訊
@@ -23,7 +23,7 @@ class MessagesController < ApplicationController
 
       # call derivatives processor
       @message.attachfiles.each do |file|
-        file.document_derivatives! if !file.nil? && (file.document.mime_type.include? "image")
+        file.document_derivatives! if file.present? && (file.document.mime_type.include? "image")
       end
       if @message.save
         # 第三個參數為是否為私訊

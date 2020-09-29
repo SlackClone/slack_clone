@@ -8,10 +8,11 @@ class UploadedfilesController < ApplicationController
     @message.attachfiles.build
     @channels = @workspace.channels
     
+    
     # 查詢私訊未讀訊息數量 
-    direct_channel = current_user.directmsgs
+    @direct_channel = current_user.directmsgs
     @unread_msg_count = {}
-    direct_channel.each do |dc|
+    @direct_channel.each do |dc|
       # 由私訊的name("DM:X-Y")拿出recipient的id
       user_id = (dc.name.split(":").last.split("-")-["#{current_user.id}"]).first
       # 將recipient的id當key，未讀訊息數目當value
@@ -20,17 +21,29 @@ class UploadedfilesController < ApplicationController
                                                     .count
     end
     # 查詢聊天室是否有未讀訊息
-    added_channel = current_user.channels
+    @added_channel = current_user.channels
     @unread_msg_bol ={}
-    added_channel.each do |ac|
+    @added_channel.each do |ac|
       # 將channel的id當key，是否有未讀訊息當做value
       @unread_msg_bol[ac.id] = ac.messages.where("created_at > ?", 
                                                   ac.users_channels.find_by(user_id: current_user.id).last_enter_at)
                                                   .present?
     end
     @invitation = Invitation.new
+    @channel_id_name = @added_channel.map { |channel| [channel.id, channel.name] }
+    @direct_id_nickname = @direct_channel.map {|channel| 
+                                    [ 
+                                      channel.id, 
+                                      User.find(
+                                        (channel.name.split(":").last.split("-")-["#{current_user.id}"]).join(""))
+                                        .nickname
+                                    ]
+                                  }
+    # byebug
+    @current_channel = @added_channel + @direct_channel
+    
     @files = []
-    (added_channel+direct_channel).each do |channel|
+    (@added_channel + @direct_channel).each do |channel|
       channel.messages.each do |message|
         message.attachfiles.each do |file|
           next if file.document_data.nil?
@@ -47,7 +60,11 @@ class UploadedfilesController < ApplicationController
     @channel = Channel.find(@message.messageable_id)
 
     @message.messageable_type = "Channel"
-    @message.attachfiles[0].document_derivatives! if  @message.attachfiles.empty? != true && (@message.attachfiles[0].document.mime_type.include? "image")
+    
+
+    @message.attachfiles.each do |file|
+      file.document_derivatives! if !file.nil? && (file.document.mime_type.include? "image")
+    end
 
     if @message.save
       sending_message(@message, @message.messageable_id, false)
