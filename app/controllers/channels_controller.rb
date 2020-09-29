@@ -1,6 +1,8 @@
 class ChannelsController < ApplicationController
   before_action :authenticate_user!
   before_action :find_workspace, except:[:destroy]
+  before_action :store_user_loaction, only: [:show]
+  
   def new
   end
   # 拿到特定ws的所有user
@@ -71,14 +73,23 @@ class ChannelsController < ApplicationController
   end
 
   private
-  def channel_params
-    params.require(:channel).permit(:name, :topic, :description)
-  end
+    def channel_params
+      params.require(:channel).permit(:name, :topic, :description)
+    end
 
-  def find_workspace
-    @workspace = Workspace.find(params[:workspace_id])
-  end
-  def channel_users_for_select2
-    @users = (@workspace.users - @channel.users).map{|user| [user.nickname,user.email]}
-  end
+    def find_workspace
+      @workspace = Workspace.find(params[:workspace_id])
+    end
+
+    def channel_users_for_select2
+      @users = (@workspace.users - @channel.users).map{|user| [user.nickname,user.email]}
+    end
+
+    def store_user_loaction
+      # 在 session 記錄 user 進入 webhook 設定頁面前的 workspace_id 與 channel_id
+      # 讓使用者進入 webhook 設定頁面後，不新增 webhook 的情況下，可以回到 channel show 的頁面
+      session[:workspace_id] = params[:workspace_id]
+      session[:channel_id] = params[:id]
+    end
+
 end

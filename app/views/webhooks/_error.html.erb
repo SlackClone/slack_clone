@@ -1,0 +1,11 @@
+<div>
+  <% if webhook.errors %>
+    <ul>
+      <% webhook.errors.full_messages.each do |message| %>
+        <li>
+          <%= message %>
+        </li>
+      <% end %>
+    </ul>
+  <% end %>
+</div>
