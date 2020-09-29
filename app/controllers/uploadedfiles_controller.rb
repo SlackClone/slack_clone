@@ -8,7 +8,6 @@ class UploadedfilesController < ApplicationController
     @message.attachfiles.build
     @channels = @workspace.channels
     
-    
     # 查詢私訊未讀訊息數量 
     @direct_channel = current_user.directmsgs
     @unread_msg_count = {}
@@ -30,15 +29,14 @@ class UploadedfilesController < ApplicationController
                                                   .present?
     end
     @invitation = Invitation.new
-    @channel_id_name = @added_channel.map { |channel| [channel.id, channel.name] }
+    @channel_id_name = @added_channel.map { |channel| [channel.name, channel.id, {channel_type:"Channel"}] }
     @direct_id_nickname = @direct_channel.map {|channel| 
-                                    [ 
-                                      channel.id, 
-                                      User.find(
-                                        (channel.name.split(":").last.split("-")-["#{current_user.id}"]).join(""))
-                                        .nickname
-                                    ]
-                                  }
+                [  
+                  User.find((channel.name.split(":").last.split("-")-["#{current_user.id}"]).join("")).nickname,
+                  channel.id,
+                  {channel_type: "Directmsg"}
+                ]
+              }
     # byebug
     @current_channel = @added_channel + @direct_channel
     
@@ -56,19 +54,22 @@ class UploadedfilesController < ApplicationController
 
   def create
     @message = Message.new(file_params)
-    # 要上傳到哪個channel
-    @channel = Channel.find(@message.messageable_id)
 
-    @message.messageable_type = "Channel"
-    
-
-    @message.attachfiles.each do |file|
-      file.document_derivatives! if !file.nil? && (file.document.mime_type.include? "image")
+    if file_params["messageable_type"] == "channel"
+      @channel = Channel.find(@message.messageable_id)
+      direct_or_not = false
+    else
+      @channel = Directmsg.find(@message.messageable_id)
+      direct_or_not = true
     end
 
+    @message.attachfiles.each do |file|
+      file.document_derivatives! if !file.present? && (file.document.mime_type.include? "image")
+    end
+byebug
     if @message.save
-      sending_message(@message, @message.messageable_id, false)
-      sending_notice(@channel, current_user, false)
+      sending_message(@message, @message.messageable_id, direct_or_not)
+      sending_notice(@channel, current_user, direct_or_not)
       redirect_to workspace_uploadedfiles_path(@workspace)
     else
       render :create
@@ -77,7 +78,7 @@ class UploadedfilesController < ApplicationController
 
   private
   def file_params
-    params.require(:message).permit(:messageable_id, :content, attachfiles_attributes: [:document]).merge(user: current_user)
+    params.require(:message).permit(:messageable_id, :messageable_type, :content, attachfiles_attributes: [:document]).merge(user: current_user)
   end
 
   def find_workspace

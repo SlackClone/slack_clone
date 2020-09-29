@@ -1,23 +1,22 @@
 import { Controller } from "stimulus"
-// import Rails from "@rails/ujs";
-// const event = new CustomEvent("new-file-click")
-// window.dispatchEvent(event)
+import $ from "jquery"
+
 export default class extends Controller {
-  static targets = [ "newForm" ]
+  static targets = [ "newForm", "messageable" ]
   
   connect(){
-    console.log("upload ready!")
-    console.log(this.newFormTarget)
+    $('.file-share').on("change", () => {
+      let s= $("#message_messageable_id").val();
+      let e = $(`[value="${s}"]`)
+      this.messageableTarget.value = e.attr("channel_type")
+    })
   }
-
   newFormShowUp(){
     this.newFormTarget.classList.remove("hidden")
   }
   submitForm(){
-    console.log("hidden")
     this.newFormTarget.classList.add("hidden")
   }
-
   closeForm(){
     this.newFormTarget.classList.add("hidden")
   }
