@@ -17,7 +17,6 @@ export default class extends Controller {
       console.log("selection", selection);
       const emoji = selection.emoji
       // this.reactionTarget.innerHTML = selection.emoji;
-
       let formData = new FormData()
       formData.append('emoji', emoji)
       Rails.ajax({

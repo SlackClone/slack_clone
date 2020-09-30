@@ -19,10 +19,13 @@ export default class extends Controller {
     console.log(`Messaging channel opened in workspace NO.${this.data.get("id")}`)
   }
   messaging(data){
-    if(document.hidden){
-      let divideElement = document.querySelector(".divide")
-      if (!divideElement){
-        this.messagesTarget.insertAdjacentHTML('beforeend', `<div class='flex text-right divide'><span class='h-0 border-b-0 border-t-2 block flex-grow border-red-600 my-auto'></span><span class="pl-3">new</span></div>`)
+      if (document.hidden) {
+        let divideElement = document.querySelector(".divide")
+        if (!divideElement) {
+          this.messagesTarget.insertAdjacentHTML('beforeend', `<div class='flex text-right divide'><span class='h-0 border-b-0 border-t-2 block flex-grow border-red-600 my-auto'></span><span class="pl-3">new</span></div>`)
+        }
+      } else {
+        this.subscription.perform("update_enter_time")
       }
     }else{
       this.subscription.perform("update_enter_time")
@@ -33,4 +36,4 @@ export default class extends Controller {
   clearMsg(){
     this.newMessageTarget.reset()
   }
-}
+
