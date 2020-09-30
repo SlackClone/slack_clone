@@ -23,7 +23,12 @@ Rails.application.routes.draw do
       get :accept
     end
     resources :directmsgs, only: [:show]
-    resources :uploadedfiles, only: %i[index create]
+    resources :uploadedfiles, only: %i[index create] do 
+      member do
+        post :share
+      end
+    end
+    
   end
 
   mount Shrine.download_endpoint => "/attachments"
