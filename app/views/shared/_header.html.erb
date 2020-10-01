@@ -10,13 +10,19 @@
     <div class="profile pr-2 col-span-1 ml-auto">
       <div class="clickopen relative">
         <span class="rounded-md shadow-sm">
-          <img img src="https://ca.slack-edge.com/T018LF2LHK3-U018XMDF20Y-g206a10ded6a-32" class="leading-5 transition ease-in-out duration-150" id="options-menu" aria-haspopup="true" aria-expanded="true">
+    
+          <%= image_tag (current_user.profile.avatar_url(:small) || 'https://ca.slack-edge.com/T018LF2LHK3-U018XMDF20Y-g206a10ded6a-32'),class:"leading-5 transition ease-in-out duration-150 avatar_small","aria-haspopup": true,"aria-expanded": true,id: "options-menu" %> 
+      
         </span>
       </div>
       <div class="open mt-2 w-56 rounded-md shadow-lg hidden absolute right-0 z-40">
         <div class="rounded-md bg-white shadow-xs" role="menu" aria-orientation="vertical"   aria-labelledby="options-menu">
           <div class="pl-2 py-1 flex ">
-            <img src="https://ca.slack-edge.com/T018LF2LHK3-U018XMDF20Y-g206a10ded6a-32" alt="" >
+            <% if current_user.profile.avatar_url(:small) %>
+              <%= image_tag current_user.profile.avatar_url(:small),class:"leading-5 transition ease-in-out duration-150 avatar_small","aria-haspopup": true,"aria-expanded": true %> 
+            <% else %>        
+              <img src="https://ca.slack-edge.com/T018LF2LHK3-U018XMDF20Y-g206a10ded6a-32" class="leading-5 transition ease-in-out duration-150 origin_avatar" id="options-menu" aria-haspopup="true" aria-expanded="true">
+            <% end %>
             <a href="#" class="block px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100        hover:text-gray-900 focus:outline-none focus:bg-gray-100 focus:text-gray-900" role="menuitem">
               <%= t(".profile.status") %>
             </a>

@@ -9,7 +9,10 @@ Rails.application.routes.draw do
 
 
     get '/users/profiles/edit', to: 'profiles#edit', as: 'edit_profiles'
-    resource :profiles, path: "/users/profiles/:id", except: [:edit]
+    get '/users/profiles/avatar',to: 'profiles#avatar_url', as: 'avatar_url_profiles'
+    resource :profiles, path: "/users/profiles/:id", except: [:edit,:avatar_url] do 
+      patch :update_avatar
+    end
   resource :pages do
     get :index
     get :login
