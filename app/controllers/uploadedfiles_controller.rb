@@ -29,7 +29,7 @@ class UploadedfilesController < ApplicationController
                                                   .present?
     end
     @invitation = Invitation.new
-    @channel_id_name = @added_channel.map { |channel| [channel.name, channel.id, {channel_type:"Channel"}] }
+    @channel_id_name = @added_channel.map { |channel| [channel.name, channel.id, {channel_type: "Channel"}] }
     @direct_id_nickname = @direct_channel.map {|channel| 
                 [  
                   User.find((channel.name.split(":").last.split("-")-["#{current_user.id}"]).join("")).nickname,
@@ -49,7 +49,8 @@ class UploadedfilesController < ApplicationController
         end
       end
     end
-
+    @old_message = Message.new
+    @old_message.attachfiles.build
   end
 
   def create
@@ -77,7 +78,14 @@ class UploadedfilesController < ApplicationController
   end
 
   def share
-    @message = Message.new
+    @message = Attachfile.find(params[:id]).messages
+    respond_to do |format|
+      format.json { render json: { message: @message.content, document: @message.attachfiles[0].document_url } }
+    end
+  end
+
+  def update
+    # @message = 
   end
 
   private

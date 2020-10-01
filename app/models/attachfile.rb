@@ -1,5 +1,6 @@
 class Attachfile < ApplicationRecord
   include DocumentUploader::Attachment(:document)
   validates :document_data, presence: true
-  belongs_to :message
+  has_many :message_files
+  has_many :messages, through: :message_files
 end
