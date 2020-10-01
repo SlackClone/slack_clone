@@ -27,6 +27,10 @@ class ProfilesController < ApplicationController
     @profile.update(avatar_data: nil)
   end
   
+  def update_avatar
+    byebug
+    avatar_derivatives
+  end
   private
   def find_user
     @user = User.find(params[:id])
