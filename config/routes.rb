@@ -23,7 +23,7 @@ Rails.application.routes.draw do
       get :accept
     end
     resources :directmsgs, only: [:show]
-    resources :uploadedfiles, only: %i[index create update] do 
+    resources :uploadedfiles, only: %i[index create] do 
       member do
         post :share
       end

@@ -15,9 +15,9 @@
       <%# 檔案區 %>
       <div class="file_area break-all flex flex-wrap overflow-y-auto h-chat_full flex-grow border border-1 bg-gray-300 pl-5 pt-5" workspace_id="<%= @workspace.id %>">
         <% @files.each do |file| %>
-          <div class="file-zone border-gray-600 border-solid border mx-1 rounded w-auto">
+          <div class="file-zone border-gray-600 border-solid border mx-1 rounded">
             <div class="flex flex-wrap mx-auto justify-center overflow-hidden h-48 rounded relative z-10">
-              <%= image_tag file.document.url, class: "w-full" if file.document.mime_type.include? "image" %>
+              <%= image_tag file.document.url, class: "" if file.document.mime_type.include? "image" %>
               <%= image_pack_tag "media/images/PDF_file_icon.png" if file.document.mime_type.include? "pdf" %>
               <div class="absolute right-0">
                 <a href="<%= file.document.download_url(host: "http://localhost:3000/") %>" download= "">
@@ -32,7 +32,7 @@
               <%= file.document.metadata["filename"] %> 
             </div>
             <div class="">
-              <%= file.message.user.nickname %>
+              <%= file.messages.first.user.nickname %> 
             </div>
           </div>
         <% end %>
@@ -44,12 +44,8 @@
     <%= render './shared/invite_ch' %>
   <% end %>
 
-  <div class="w-full h-full absolute hidden bg-black bg-opacity-25 file-share" data-target="uploadfile.shareForm">
-    <%= render './shared/sharefileform', message: @old_message %>
-  </div>
-
-  <div class="w-full h-full absolute hidden bg-black bg-opacity-25 file-upload" data-target="uploadfile.newForm">
-    <%= render './shared/sharefileform', message: @message %>
+  <div class="w-full h-full absolute hidden bg-black bg-opacity-25 d-file-upload" data-target="uploadfile.uploadForm">
+    <%= render './shared/sharefileform', message: @message, workspace: @workspace %>
   </div>
 
 </div>

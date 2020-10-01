@@ -1,5 +1,6 @@
 class UploadedfilesController < ApplicationController
-  before_action :find_workspace, only: %i[index create share]
+  before_action :find_workspace, only: %i[index create share update]
+  before_action :authenticate_user!
 
   def index
     @workspace = Workspace.find(params[:workspace_id])
@@ -41,56 +42,81 @@ class UploadedfilesController < ApplicationController
     @current_channel = @added_channel + @direct_channel
     
     @files = []
-    (@added_channel + @direct_channel).each do |channel|
-      channel.messages.each do |message|
-        message.attachfiles.each do |file|
-          next if file.document_data.nil?
-          @files << file
-        end
-      end
-    end
-    @old_message = Message.new
-    @old_message.attachfiles.build
+    @files = Attachfile.all
+    # (@added_channel + @direct_channel).each do |channel|
+    #   channel.messages.each do |message|
+    #     message.attachfiles.each do |file|
+    #       next if file.document_data.nil?
+    #       @files << file
+    #     end
+    #   end
+    # end
+    # byebug
   end
 
   def create
     @message = Message.new(file_params)
-
-    if file_params["messageable_type"] == "channel"
+    
+    # 上傳到channel
+    if file_params["messageable_type"] == "Channel"
       @channel = Channel.find(@message.messageable_id)
       direct_or_not = false
+    # 上傳到私訊
     else
       @channel = Directmsg.find(@message.messageable_id)
       direct_or_not = true
     end
-
+    
+    # 壓縮圖片
     @message.attachfiles.each do |file|
       file.document_derivatives! if file.present? && (file.document.mime_type.include? "image")
     end
-    
+
     if @message.save
-      sending_message(@message, @message.messageable_id, direct_or_not)
+      sending_message(@message, @channel.id, direct_or_not)
       sending_notice(@channel, current_user, direct_or_not)
       redirect_to workspace_uploadedfiles_path(@workspace)
     else
       render :create
     end
+
   end
 
   def share
-    @message = Attachfile.find(params[:id]).messages
-    respond_to do |format|
-      format.json { render json: { message: @message.content, document: @message.attachfiles[0].document_url } }
-    end
-  end
+    @message = Message.new(share_file_params)
 
-  def update
-    # @message = 
+    # 分享到channel
+    if @message.messageable_type == "Channel"
+      @channel = Channel.find(@message.messageable_id)
+      direct_or_not = false
+    # 分享到私訊
+    elsif @message.messageable_type == "Directmsg"
+      @channel = Directmsg.find(@message.messageable_id)
+      direct_or_not = true
+    end
+
+
+    if @message.save
+      @file = MessageFile.new(message_id: @message.id, attachfile_id: params[:id])
+      if @file.save
+        sending_message(@message, @message.messageable_id, direct_or_not)
+        sending_notice(@channel, current_user, direct_or_not)
+        redirect_to workspace_uploadedfiles_path(@workspace)
+      else
+        # render :add
+      end
+    else
+    end
+
   end
 
   private
   def file_params
     params.require(:message).permit(:messageable_id, :messageable_type, :content, attachfiles_attributes: [:document]).merge(user: current_user)
+  end
+
+  def share_file_params
+    params.require(:message).permit(:messageable_id, :messageable_type, :content).merge(user: current_user)
   end
 
   def find_workspace

@@ -2,37 +2,34 @@ class MessagesController < ApplicationController
   before_action :authenticate_user!
 
   def create
-    if params[:channel_id]
+    # 若是聊天室訊息
+    if params[:channel_id]  
       @channel = Channel.find(params[:channel_id])
       @message = @channel.messages.new(message_params)
       channel_id = params[:channel_id]
+      direct_or_not = false
+    #若是私訊訊息
+    else  
+      @channel = Directmsg.find(params[:directmsg_id])
+      @message = @channel.messages.new(message_params)
+      channel_id = params[:directmsg_id]
+      direct_or_not = true
+    end
 
-      # call derivatives processor
+    # 有夾帶檔案的話
+    if @message.attachfiles.present?
+      # 壓縮圖片
       @message.attachfiles.each do |file|
-        file.document_derivatives! if file.present? && (file.document.mime_type.include? "image")
-      end
-      if @message.save
-        # 第三個參數為是否為私訊
-        sending_message(@message, channel_id, false)
-        sending_notice(@channel, current_user, false)
-      end
-    else
-      @directmsg = Directmsg.find(params[:directmsg_id])
-      @message = @directmsg.messages.new(message_params)
-      directmsg_id = params[:directmsg_id]
-
-      # call derivatives processor
-      @message.attachfiles.each do |file|
-        file.document_derivatives! if file.present? && (file.document.mime_type.include? "image")
-      end
-      if @message.save
-        # 第三個參數為是否為私訊
-        sending_message(@message, directmsg_id, true)
-        sending_notice(@directmsg, current_user, true)
+        file.document_derivatives! if file.document.mime_type.include? "image"
       end
     end
-  end  
 
+    if @message.save
+      # 第三個參數為是否為私訊
+      sending_message(@message, channel_id, direct_or_not)
+      sending_notice(@channel, current_user, direct_or_not)
+    end
+  end  
 
   def add
     @channel = Channel.find(share_msg_params[:messageable_id])

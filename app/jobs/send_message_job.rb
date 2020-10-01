@@ -6,7 +6,7 @@ class SendMessageJob < ApplicationJob
       # 私訊
       @channel = Directmsg.find(channel_id)
       ChannelsChannel.broadcast_to @channel, {
-        message: ApplicationController.render(partial: 'messages/message_broadcast',locals: { message: message}),
+        message: ApplicationController.render(partial: 'messages/message_broadcast',locals: { message: message }),
         user: message.user.nickname,
         user_id: message.user.id,
         channel_id: message.messageable_id
