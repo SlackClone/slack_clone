@@ -6,7 +6,7 @@
   </div>
 <% end%>
 <div class="messages_child">
-  <div class="flex justify-between hover:bg-gray-100 relative txtcolumn mt-2 mb-2" data-controller="emoji" data-id =<%= message.id %>>
+  <div class="flex justify-between hover:bg-gray-100 relative txtcolumn mt-2 mb-2" data-controller="emoji" data-emoji-id =<%= message.id %>>
     <div class="txt flex pl-5">
       <div class="author font-bold mr-2">
         <%= message.user.nickname %>
@@ -32,7 +32,7 @@
           </div> 
         <% end %>       
         <div class="reaction-emoji" data-target="emoji.reaction">
-          <div id="message-reaction-<%= message.id %>" class="flex">
+          <div id="message-reaction-<%= message.id %>" class="flex added-emoji">
             <%= render './shared/reaction', message: message %>
            </div>
         </div>
@@ -55,5 +55,11 @@
     </div>
   </div>
 </div>
+<template>
+    <form action="/message/emoji">
+      <input type="submit">
+    </form>
 
+    
+</template>
 
