@@ -1,23 +1,35 @@
 import { Controller } from "stimulus"
 import consumer from "channels/consumer"
+import $ from "jquery"
 
 export default class extends Controller {
   static targets = ["messages", "newMessage"]
 
   connect() {
     Notification.requestPermission()
+
     this.subscription = consumer.subscriptions.create({channel: "ChannelsChannel", channelId: this.data.get("channel"), directId: this.data.get("direct")},
       {
         connected: this.subscribe.bind(this),
         received: this.messaging.bind(this)
       })
-    }
+  }
+
   disconnect(){
     consumer.subscriptions.remove(this.subscription)
   }
+
   subscribe(){
+    $('.centered').attr('class', 'w-full px-3 mb-2')
+    $('.ck-editor').attr('class', 'flex flex-col-reverse flex-grow')
+    $('.ck-editor__editable').attr('name', 'message[content]')
+    // $('.ck-toolbar__items').addClass("relative")
+    $('.ck-toolbar__items').append('<i class="fas fa-paper-plane ck ck-button " type="button"></i>')
+    console.log($('.ck-toolbar__items')[0])
+    
     console.log(`Messaging channel opened in workspace NO.${this.data.get("id")}`)
   }
+
   messaging(data){
     if (data.emoji === undefined){
       if (document.hidden) {
