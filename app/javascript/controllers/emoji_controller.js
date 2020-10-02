@@ -2,6 +2,7 @@ import { Controller } from 'stimulus'
 import Rails from "@rails/ujs";
 import { EmojiButton } from '@joeattardi/emoji-button'
 
+
 export default class extends Controller {
   static targets = ['reaction']
   
@@ -14,7 +15,7 @@ export default class extends Controller {
     })
     picker.togglePicker(target)
     picker.on('emoji', selection => {
-      console.log("selection", selection);
+      // console.log("selection", selection);
       const emoji = selection.emoji
       // this.reactionTarget.innerHTML = selection.emoji;
       let formData = new FormData()
@@ -26,4 +27,5 @@ export default class extends Controller {
       })
     })
   }
+
 }

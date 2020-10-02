@@ -47,22 +47,26 @@ class MessagesController < ApplicationController
   def emoji
     @message = Message.find(params[:id])
     @message.toggle_emoji(params[:emoji], current_user.id)
-# byebug
+    html = render(partial:"./shared/reaction", locals: {message: @message})
     if @message.messageable_type == "Channel"
       @channel = Channel.find(@message.messageable_id)
       ChannelsChannel.broadcast_to @channel, {
-        emoji: params[:emoji],
+        id: @message.id,
+        emoji: @message.emoji_data,
         user: @message.user.nickname,
         user_id: @message.user.id,
-        channel_id: @message.messageable_id
+        channel_id: @message.messageable_id,
+        html: html
       }
     elsif @message.messageable_type == "Directmsg"
       @channel = Directmsg.find(@message.messageable_id)
       ChannelsChannel.broadcast_to @channel, {
-        emoji: params[:emoji],
+        id: @message.id,
+        emoji: @message.emoji_data,
         user: @message.user.nickname,
         user_id: @message.user.id,
-        channel_id: @message.messageable_id
+        channel_id: @message.messageable_id,
+        html: html
       }
     end
     
