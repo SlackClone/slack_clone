@@ -15,10 +15,7 @@ class ProfilesController < ApplicationController
     @profile.update(profile_params)
     current_user.update(nickname: params[:user][:nickname])
     avatar_derivatives
-    render file: "app/javascript/packs/new.js"
-    # app\views\profiles\_edit.html.erb
-    # app\new.js
-
+    render file: "app/javascript/packs/reset_profile.js"
   end
 
   def avatar_url
