@@ -28,7 +28,6 @@ class ProfilesController < ApplicationController
   end
   
   def update_avatar
-    byebug
     avatar_derivatives
   end
   private

@@ -16,8 +16,12 @@ Rails.application.routes.draw do
     get :login
     get :validate
   end
+<<<<<<< HEAD
   
   
+=======
+
+>>>>>>> 完成草稿
   root to: 'pages#index'
   resources :workspaces do
     resource :users_workspaces
@@ -34,6 +38,7 @@ Rails.application.routes.draw do
       end
     end
     
+    resource :draft, only: [:show]
   end
 
   mount Shrine.download_endpoint => "/attachments"

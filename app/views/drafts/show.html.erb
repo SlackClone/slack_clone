@@ -1,0 +1,61 @@
+<%= render "./shared/header" %>
+<div class="chatroom flex">
+    <div class="leftbar flex flex-col">
+      <div class="box-border border-b bg-light_sladock border-sladock_border h-16 flex items-center pl-10">
+        <h3 class="chatroomName text-white font-bold text-lg">
+          <%= @workspace.name %>
+        </h3>
+        <button class="bg-white h-10 w-10 rounded-full text-black ml-auto mr-5">
+          <%= inline_svg_pack_tag("media/images/draft.svg",class: "w-5 stroke-current text-black mx-auto") %>
+        </button>        
+      </div>
+      <div class="bg-light_sladock text-white overflow-y-auto min-w-200 h-left_full" style="width: 300px" data-controller="notification" data-notification-workspace="<%= @workspace.id %>" data-notification-channel="<%= @channel&.id || 0 %>" data-notification-direct="<%= @directmsg&.id || 0 %>" data-notification-user="<%= current_user.nickname %>">
+        <%= render "./shared/leftbar" %>
+      </div>
+    </div>  
+    <div class="flex flex-col flex-grow min-w-0 min-h-0">
+      <%# 上方白色區塊顯示頻道名稱與邀請按鈕 %>
+      <div class="box-border border-b border-gray-400 h-16 font-bold flex flex-col justify-center pl-3">
+        Drafts
+        <p class="count-draft text-xs text-gray-500"></p>
+      </div>
+      <%# 訊息區 %>
+      <div class="draft-area break-all overflow-y-auto h-chat_full flex-grow border border-1 bg-gray-300">
+      </div>
+    </div>    
+
+  <%= render './shared/right_info' %>
+  <% if @channel %>
+    <%= render './shared/invite_ch' %>
+  <% end %>
+</div>
+<%= render './channels/new', channel: @new_channel %>
+<%= render './profiles/edit.html.erb' %>
+
+<%# 草考插入區塊 %>
+<template id="draft-group">
+  <div class="box relative">
+    <a href="#" class="block bg-white rounded-lg my-5 mx-5 p-3 shadow-sm border hover:shadow-md">
+      <div class="flex justify-between mb-2">
+        <p class="font-bold">#channelID</p>
+        <div>
+          <span class="text-xs text-gray-500">time</span>
+          <span class="text-xs text-light_pink font-bold">Drafts</span>
+        </div>   
+      </div>
+      <p class="content text-sm">drafts</p>      
+    </a>
+    <div class="draft-des-group absolute top-15 right-3 bg-white rounded-lg border-2 z-10 shadow-sm
+    hidden">
+      <div class="flex items-center">
+        <span class="draft-delete">
+          <%= inline_svg_pack_tag("media/images/trash.svg",class: " w-8 p-2 stroke-current cursor-pointer hover:bg-gray-200") %>
+        </span>
+        <a href="#" class="draft-edit hover:bg-gray-200">
+          <%= inline_svg_pack_tag("media/images/pencil.svg",class: "w-8 p-2 stroke-current") %>
+        </a>
+          <%= inline_svg_pack_tag("media/images/plane.svg",class: "w-8 p-2 stroke-current cursor-pointer transform rotate-90  hover:bg-gray-200") %>
+      </div>
+    </div>  
+  </div>
+</template>

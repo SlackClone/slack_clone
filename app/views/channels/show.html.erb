@@ -30,7 +30,10 @@
       <div class="box-border border-b bg-light_sladock border-sladock_border h-16 flex items-center pl-10">
         <h3 class="chatroomName text-white font-bold text-lg">
           <%= @workspace.name %>
-        </h3> 
+        </h3>
+        <button class="bg-white h-10 w-10 rounded-full text-black ml-auto mr-5">
+          <%= inline_svg_pack_tag("media/images/draft.svg",class: "w-5 stroke-current text-black mx-auto") %>
+        </button>        
       </div>
       <div class="bg-light_sladock text-white overflow-y-auto min-w-200 h-left_full" style="width: 300px" data-controller="notification" data-notification-workspace="<%= @workspace.id %>" data-notification-channel="<%= @channel&.id || 0 %>" data-notification-direct="<%= @directmsg&.id || 0 %>" data-notification-user="<%= current_user.nickname %>">
         <%= render "./shared/leftbar" %>

@@ -31,6 +31,7 @@ module.exports = {
       light_gray: '#ddd',
       sladock_border:"rgb(82,38,83)",
       ws_name_purple: "#522754",
+      light_pink: "#E5487E",
       gray: {
         100: "#f7fafc",
         200: "#edf2f7",
@@ -326,7 +327,9 @@ module.exports = {
       0: "0",
       auto: "auto",
       '1/2': '50%',
-      '7/10': '-70%'
+      '7/10': '-70%',
+      '15': '15%',
+      '3': '3%'
     },
     letterSpacing: {
       tighter: "-0.05em",
