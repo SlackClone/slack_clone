@@ -58,12 +58,23 @@ class ThreadsController < ApplicationController
     render 'channels/show'
   end
   def create
-    @channel = Channel.find(params[:channel_id])
-    @thread = @channel.messages.new(thread_params)
-    channel_id = params[:channel_id]
+    # byebug
+    if params[:channel_id]
+      @channel = Channel.find(params[:channel_id])
+      is_directmsg = false
+      channel_or_directmsg_id = params[:channel_id]
+    else
+      @directmsg = Directmsg.find(params[:directmsg_id])
+      is_directmsg = true
+      channel_or_directmsg_id = params[:directmsg_id]
+    end
+    @thread = (@channel || @directmsg).messages.new(thread_params)
+    # byebug
+
+
     if @thread.save
-      sending_thread_message(@thread, channel_id, false, true)
-      sending_notice(@channel, current_user, false)
+      sending_thread_message(@thread, channel_or_directmsg_id, is_directmsg, true)
+      sending_notice((@channel || @directmsg), current_user, false)
     end
   end
 

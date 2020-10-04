@@ -2,9 +2,9 @@ import { Controller } from "stimulus"
 
 export default class extends Controller {
   static targets = ["channels"]
-  connect() {
-    this.show()
-  }
+  // connect() {
+  //   this.show()
+  // }
   show() {
     // 開關右側
     const rightInfo = document.querySelector(".right_info")

@@ -66,4 +66,28 @@
   <%= render './profiles/edit.html.erb' %>
 <% end %>
 
+<% if @thread %>
+  <script>
+    console.log("right_info open")
+
+    // 打開右側
+    const rightInfo = document.querySelector(".right_info")
+    rightInfo.classList.toggle("hidden")
+    
+    const threadCount = document.getElementById("thread-count")
+    const messageId = threadCount.getAttribute("message_id")
+    // const channelId = threadCount.getAttribute("channel_id")
+    const allChannel = document.querySelectorAll(".channel-each")
+    const allDirectmsg = document.querySelectorAll(".directmsg-each")
+    allChannel.forEach((a) => {
+      let channelId = a.getAttribute("channel_id")
+      a.setAttribute('href', `/channels/${ channelId }/messages/${ messageId }/threads`)
+    });
+    allDirectmsg.forEach((a) => {
+      let directmsgId = a.getAttribute("directmsg_id")
+      a.setAttribute('href', `/directmsgs/${ directmsgId }/messages/${ messageId }/threads`)
+    });
+
+  </script>  
+<% end %>
  

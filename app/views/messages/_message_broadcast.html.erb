@@ -49,11 +49,11 @@
         </div>
         <div class="thread-btn flex">
           <% if message.messageable_type == "Channel" %>
-            <%= link_to channel_message_threads_path(message.messageable_id, message.id), data: { action: "click->thread#show"} do %>
+            <%= link_to channel_message_threads_path(message.messageable_id, message.id) do %>
               <i class="far fa-comment-dots"></i>
             <% end %>
           <% else %>
-            <%= link_to directmsg_message_threads_path(message.messageable_id, message.id), data: { action: "click->thread#show"} do %>
+            <%= link_to directmsg_message_threads_path(message.messageable_id, message.id) do %>
               <i class="far fa-comment-dots"></i>
             <% end %>
           <% end %>

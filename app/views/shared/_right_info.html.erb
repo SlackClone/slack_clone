@@ -4,12 +4,18 @@
     <div class="box-border border-b border-gray-400 h-16">
       <button class="info-cancel">X</button>
       <h1>Thread</h1>
-      <p>Channel: <%= @channel.name %></p>
+      <p>
+        <% if @thread.messageable_type == "Channel" %>
+          Channel: <%= @thread.messageable.name %>
+        <% else %>
+          <%= User.find((@thread.messageable.name.scan(/\d/) - [current_user.id])[0]).nickname %>
+        <% end %>
+      </p>
     </div>
 
     <%= render 'threads/message_broadcast', message: @thread %>
 
-    <h2 id="thread-count" data-target="subscribe.threadcount" message_id="<%= @thread.id %>" channel_id="<%= @channel.id %>">
+    <h2 id="thread-count" data-target="subscribe.threadcount" message_id="<%= @thread.id %>" channel_id="<%= @channel.try(:id) %>" directmsg_id="<%= @directmsg.try(:id) %>">
       ===== 有 <%= @thread.children.count %> 則回覆 =====
     </h2>
 
@@ -20,7 +26,11 @@
     </div>
 
     <div class="thread-form">
-      <%= render 'threads/threadform' %>
+      <% if @thread.messageable_type == "Channel" %>
+        <%= render 'threads/threadform' %>
+      <% else %>
+        <%= render 'threads/threadform_directmsg' %>
+      <% end %>
     </div>
   <% end %>
 </div>
