@@ -16,7 +16,7 @@
           <%= message.created_at.strftime("%I:%M") %>
         </div>
         <div class="content">
-            <%= message.content %>
+            <%= raw(message.content) %>
         </div>
         <div class="file">
           <% if message.attachfiles.empty? != true %>
@@ -29,7 +29,7 @@
           <% if message.share_message_id.present? %>
           <div class="m-2 border-l-4 border-gray-600">
             <div class="ml-2 font-bold"> <%= message.share_message.user.nickname %> </div>
-            <div class="ml-2"> <%= message.share_message.content %> </div>
+            <div class="ml-2"> <%= raw(message.share_message.content) %> </div>
           </div> 
         <% end %>       
         <div class="reaction-emoji" data-target="emoji.reaction">
