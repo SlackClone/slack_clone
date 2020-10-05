@@ -15,8 +15,8 @@ class DocumentUploader < Shrine
     }
   end
 
-  def generate_location(io, context)
-    "documents/#{Time.now.to_i}/#{super}"
-  end
+  # def generate_location(io, context)
+  #   "documents/#{Time.now.to_i}/#{super}"
+  # end
 
 end

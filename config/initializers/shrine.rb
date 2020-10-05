@@ -21,4 +21,5 @@ Shrine.plugin :restore_cached_data # re-extract metadata when attaching a cached
 Shrine.plugin :validation
 Shrine.plugin :validation_helpers
 Shrine.plugin :derivatives
+Shrine.plugin :determine_mime_type
 Shrine.plugin :download_endpoint, prefix: "attachments"
