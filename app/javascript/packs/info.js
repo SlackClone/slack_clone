@@ -47,6 +47,7 @@ $(document).ready(function() {
   fetch("/users/profiles/edit")
     .then(response => response.json())
     .then(({full_name,phone_number,user}) => {
+      
       $("input[name='profile[full_name]'").val(full_name)
       $("input[name='profile[phone_number]']").val(phone_number)
       $("input[name='user[nickname]']").val(user["nickname"])

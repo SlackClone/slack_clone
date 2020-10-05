@@ -7,6 +7,7 @@ class ProfilesController < ApplicationController
   end
 
   def edit
+    return render json: {user:{ nickname: current_user.nickname}} if @profile == nil
     render json: @profile.as_json(include: {user: {only: :nickname}})
   end
 
