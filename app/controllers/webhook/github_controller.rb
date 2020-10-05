@@ -24,11 +24,13 @@ class Webhook::GithubController < ActionController::API
       if signature?(payload_body, github_secret) 
         # 發送訊息匯整 & 把 hash 轉成 json 格式
         # user_event_action_type = json_body["hook"]["events"][0] 
-        user_event_action_type = ""
+        if json_body["hook"] 
+          user_event_action_type = json_body["hook"]["events"][0] 
+        else
+          user_event_action_type = json_body["commit"]["commit"]["message"]
+        end
         # byebug
-        # user_event_action_type = json_body["commit"]["commit"]["message"]
-        
-        
+
         user_repository_url = json_body["repository"]["html_url"]
         # payload_content = { user_event_action_type: user_event_action_type, 
         #                     user_repository_name: user_repository_name, 
