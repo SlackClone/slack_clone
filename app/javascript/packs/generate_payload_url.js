@@ -1,7 +1,7 @@
 window.addEventListener('DOMContentLoaded',()=>{
   if(document.querySelector('#webhook_record_channel_id')){
     // TODO: 正式環境要更改 baseURL 網址
-    let baseURL = 'https://staging.sladock.tw/webhook/channel'
+    let baseURL = 'https://staging.sladock.tw/webhook/channels'
     let select = document.querySelector('#webhook_record_channel_id')
     let payloadURL = document.querySelector('#webhook_record_payload_url')
     let generateSecret = document.querySelector('#generate_secret')
@@ -13,10 +13,10 @@ window.addEventListener('DOMContentLoaded',()=>{
     payloadURL.value=`${baseURL}/${firstChannel.value}/github`
     secret.value = makeRandomSecret(20)
 
-    generateSecret.addEventListener('click', (e)=> {
-      e.preventDefault()
-      secret.value = makeRandomSecret(20)
-    })
+    // generateSecret.addEventListener('click', (e)=> {
+    //   e.preventDefault()
+    //   secret.value = makeRandomSecret(20)
+    // })
 
 
     select.addEventListener('change',(e)=>{
@@ -27,13 +27,13 @@ window.addEventListener('DOMContentLoaded',()=>{
   }
 
 
-  function makeRandomSecret(length) {
-    var result           = '';
-    var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-    var charactersLength = characters.length;
-    for ( var i = 0; i < length; i++ ) {
-       result += characters.charAt(Math.floor(Math.random() * charactersLength));
-    }
-    return result;
- }
+//   function makeRandomSecret(length) {
+//     var result           = '';
+//     var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+//     var charactersLength = characters.length;
+//     for ( var i = 0; i < length; i++ ) {
+//        result += characters.charAt(Math.floor(Math.random() * charactersLength));
+//     }
+//     return result;
+//  }
 })
