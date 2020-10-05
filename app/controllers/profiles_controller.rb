@@ -1,6 +1,6 @@
 class ProfilesController < ApplicationController
   before_action :find_user,except:[:edit,:avatar_url]
-  before_action :find_profile,only:[:edit,:update,:destroy,:avatar_url,:update_avatar]
+  before_action :find_profile,only:[:edit,:update,:destroy,:avatar_url]
 
   def show
     @profile = Profile.find_by(user_id: params[:id])
@@ -26,10 +26,6 @@ class ProfilesController < ApplicationController
     @profile.update(avatar_data: nil)
   end
   
-  def update_avatar
-    byebug
-    avatar_derivatives
-  end
   private
   def find_user
     @user = User.find(params[:id])

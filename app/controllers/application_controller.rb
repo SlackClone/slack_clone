@@ -1,6 +1,5 @@
 class ApplicationController < ActionController::Base
   before_action :set_locale
-  helper_method :has_avatar?
   def set_locale
     # 可以將 ["en", "zh-TW"] 設定為 VALID_LANG 放到 config/environment.rb 中
     if params[:locale] && I18n.available_locales.include?( params[:locale].to_sym )

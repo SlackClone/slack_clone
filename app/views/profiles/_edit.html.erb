@@ -26,7 +26,13 @@
         <%= f.file_field "profile[avatar]",id:"avatar",class:'hidden' %>
         <div class="avatar-btn border border-gray-600 py-2 px-5 font-bold rounded cursor-pointer">Upload an image
         </div>
-          <%= link_to "remove the photo",profiles_path(current_user),method:"DELETE",class:"remove-avatar text-blue-500 text-sm cursor-pointer hidden" %>
+          <div class="remove-avatar-btn">
+          <% if current_user.profile.try(:avatar_url,(:large)) %>
+            <%= link_to "remove the photo",profiles_path(current_user),method:"DELETE",class:"remove-avatar text-blue-500 text-sm cursor-pointer" %>
+          <% else %>
+            <%= link_to "remove the photo",profiles_path(current_user),method:"DELETE",class:"remove-avatar text-blue-500 text-sm cursor-pointer hidden" %>          
+          <% end %>
+          </div>
       </div>      
     </div>
     <div class="border-t border-gray-600 flex p-5 justify-end">

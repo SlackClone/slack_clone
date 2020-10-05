@@ -10,9 +10,7 @@ Rails.application.routes.draw do
 
     get '/users/profiles/edit', to: 'profiles#edit', as: 'edit_profiles'
     get '/users/profiles/avatar',to: 'profiles#avatar_url', as: 'avatar_url_profiles'
-    resource :profiles, path: "/users/profiles/:id", except: [:edit,:avatar_url] do 
-      patch :update_avatar
-    end
+    resource :profiles, path: "/users/profiles/:id", except: [:edit,:avatar_url]
   resource :pages do
     get :index
     get :login
@@ -24,8 +22,7 @@ Rails.application.routes.draw do
   resources :workspaces do
     resource :users_workspaces
     resource :channels, only: %i[new create]
-    resources :channels, only: [:show] do
-    end
+    resources :channels, only: [:show]
     resource :invitations, only: :create do
       get :accept
     end
