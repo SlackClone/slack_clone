@@ -11,7 +11,6 @@ class Webhook::GithubController < ActionController::API
     # Get repository name from incoming payload
     json_body = JSON.parse(params[:payload])
     user_repository_name = json_body["repository"]["full_name"]
-    # byebug
     
     # find reposity name form model
     if check_repo_name_exist?(user_repository_name)
@@ -24,11 +23,11 @@ class Webhook::GithubController < ActionController::API
       # 驗證 payload
       if signature?(payload_body, github_secret) 
         # 發送訊息匯整 & 把 hash 轉成 json 格式
-        user_event_action_type = json_body["hook"]["events"][0] 
-        byebug
-        if !user_event_action_type 
-          user_event_action_type = json_body["commit"]["commit"]["message"]
-        end
+        # user_event_action_type = json_body["hook"]["events"][0] 
+        user_event_action_type = ""
+        # byebug
+        # user_event_action_type = json_body["commit"]["commit"]["message"]
+        
         
         user_repository_url = json_body["repository"]["html_url"]
         # payload_content = { user_event_action_type: user_event_action_type, 
