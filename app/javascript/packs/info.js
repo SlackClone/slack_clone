@@ -35,7 +35,7 @@ $(document).ready(function() {
   $('.profile-btn').click(()=>{    
     $('.profile-background').addClass("hidden")
   })
-  // 移除照片更換為預設照片
+  // 移除照片更換為預設照片(假象)
   $('.remove-avatar').click(()=>{
     $('.remove-avatar').addClass('hidden')
     const large_url = "https://ca.slack-edge.com/T0196R42HU4-U018Z8Q6XU5-g15b03dc0178-192"

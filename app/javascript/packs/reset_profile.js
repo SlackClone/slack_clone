@@ -6,9 +6,16 @@ var avatar_large = document.querySelector('#avatar_large')
     .then(response => response.json())
     .then(({small,medium,large }) => {
       avatar_small.forEach((e)=>{
-        e.src = small
+        if (small == null && large == null) {
+          e.src = "https://ca.slack-edge.com/T018LF2LHK3-U018XMDF20Y-g206a10ded6a-32"
+          avatar_large.src = "https://ca.slack-edge.com/T0196R42HU4-U018Z8Q6XU5-g15b03dc0178-192"
+        } else {
+          e.src = small
+          avatar_large.src = large
+          document.querySelector('.remove-avatar').classList.remove('hidden')
+        }
       })
-      avatar_large.src = large
+      
     })
   profileInfo()
 
