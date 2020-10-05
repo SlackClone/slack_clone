@@ -26,10 +26,6 @@
             <% end %>
           <% end %>
         </div>
-        <% if message.share_message_id.present? %>
-          <div class="m-2 border-l-4 border-gray-600">
-
-         </div>
           <% if message.share_message_id.present? %>
           <div class="m-2 border-l-4 border-gray-600">
             <div class="ml-2 font-bold"> <%= message.share_message.user.nickname %> </div>
@@ -44,7 +40,8 @@
       </div>
     </div>
     <div class="react-bar absolute right-0  mr-10 -mt-3 flex">
-      <button class="emoji-trigger" data-action="click-> emoji#click" data-id=<%= message.id %>>Emoji</button>
+
+      <button class="emoji-trigger" data-action="click-> emoji#click" data-id=<%= message.id %>Emoji</button>
       <% if controller_name != "directmsgs"%>
         <button class= "share-btn btn btn-blue" data-id="<%= message.id %>">share</button>
       <% end %>

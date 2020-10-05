@@ -29,8 +29,6 @@ export default class extends Controller {
       } else {
         this.subscription.perform("update_enter_time")
       }
-    }else{
-      this.subscription.perform("update_enter_time")
     }
     this.messagesTarget.insertAdjacentHTML("beforeend", data.message)
     window.initShare()
