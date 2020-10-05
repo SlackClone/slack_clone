@@ -5,7 +5,7 @@ export default class extends Controller {
   static targets = []
 
   connect() {
-    this.subscription = consumer.subscriptions.create({channel: "NotificationChannel", channelId: this.data.get("channel"), workspaceId: this.data.get("workspace"), directId: this.data.get("direct")},
+    this.subscription = consumer.subscriptions.create({channel: "NotificationChannel", workspaceId: this.data.get("workspace")},
         {
           connected: this.subscribe.bind(this),       
           disconnected: this.unsubscribe.bind(this),

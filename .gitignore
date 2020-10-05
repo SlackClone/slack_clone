@@ -17,13 +17,14 @@
 /tmp/pids/*
 !/tmp/pids/
 !/tmp/pids/.keep
-
 # Ignore uploaded files in development.
 /storage/*
 !/storage/.keep
 
+/public/uploads
 /public/assets
 .byebug_history
+/spec/factories/*.jpg
 
 # Ignore master key for decrypting credentials and more.
 /config/master.key

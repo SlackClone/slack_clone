@@ -1,0 +1,52 @@
+<%= render "./shared/header" %>
+<div class="chatroom flex" data-controller="uploadfile" >
+    <div class="leftbar flex flex-col">
+      <%= render "./shared/leftbar", workspace: @workspace,   
+                                     channels:  @channels,
+                                     unread_msg_bol: @unread_msg_bol,
+                                     unread_msg_count: @unread_msg_count %>
+    </div>  
+    <div class="flex flex-col flex-grow min-w-0 min-h-0">
+      <%# 上方白色區塊顯示頻道名稱與邀請按鈕 %>
+      <div class="box-border border-b border-gray-400 h-16 font-bold flex justify-between items-center">
+        <h3>檔案上傳區</h3>
+        <button data-action="click->uploadfile#newFormShowUp">上傳</button>
+      </div>
+      <%# 檔案區 %>
+      <div class="file_area break-all flex flex-wrap overflow-y-auto h-chat_full flex-grow border border-1 bg-gray-300 pl-5 pt-5" workspace_id="<%= @workspace.id %>">
+        <% @files.each do |file| %>
+          <div class="file-zone border-gray-600 border-solid border mx-1 rounded">
+            <div class="flex flex-wrap mx-auto justify-center overflow-hidden h-48 rounded relative z-10">
+              <%= image_tag file.document.url, class: "" if file.document.mime_type.include? "image" %>
+              <%= image_pack_tag "media/images/PDF_file_icon.png" if file.document.mime_type.include? "pdf" %>
+              <div class="absolute right-0">
+                <a href="<%= file.document.download_url(host: "http://localhost:3000/") %>" download= "">
+                  <i class="fas fa-cloud-download-alt"></i>
+                </a>
+                <a href="" data-action="click->uploadfile#shareFormShowUp" file_id="<%= file.id %>" >
+                  <i class="fas fa-share"></i>
+                </a>
+              </div>
+            </div>
+            <div class="truncate">
+              <%= file.document.metadata["filename"] %> 
+            </div>
+            <div class="">
+              <%= file.messages.first.user.nickname %> 
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>    
+    
+  <%= render './shared/right_info' %>
+  <% if @channel %>
+    <%= render './shared/invite_ch' %>
+  <% end %>
+
+  <div class="w-full h-full absolute hidden bg-black bg-opacity-25 d-file-upload" data-target="uploadfile.uploadForm">
+    <%= render './shared/sharefileform', message: @message, workspace: @workspace %>
+  </div>
+
+</div>
+<%= render './channels/new', channel: @new_channel %>

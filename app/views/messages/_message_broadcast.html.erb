@@ -1,4 +1,4 @@
-  <% if !@divide_exist && @last_enter_at && (@last_enter_at < message.created_at) %>
+<% if !@divide_exist && @last_enter_at && (@last_enter_at < message.created_at) && message.user_id != current_user.id %>
   <% @divide_exist = true %>
   <div class='flex text-right divide'>
     <span class='h-0 border-b-0 border-t-2 block flex-grow border-red-600 my-auto'></span>
@@ -15,16 +15,23 @@
         <div class="createtime mr-2">
           <%= message.created_at.strftime("%I:%M") %>
         </div>
-         <div class="content">
+        <div class="content">
             <%= message.content %>
-         </div>
-          <% if message.share_message_id.present? %>
-            <div class="m-2 border-l-4 border-gray-600">
+        </div>
+        <div class="file">
+          <% if message.attachfiles.empty? != true %>
+            <% message.attachfiles.each do |file|%>
+              <%= image_tag file.document(:small).url if file.document.mime_type.include? "image" %>
+              <%= link_to file.document.metadata["filename"], file.document.download_url(host: "http://localhost:3000/"), download:"" unless file.document.mime_type.include? "image"%>
+            <% end %>
+          <% end %>
+        </div>
+        <% if message.share_message_id.present? %>
+          <div class="m-2 border-l-4 border-gray-600">
             <div class="ml-2 font-bold"> <%= message.share_message.user.nickname %> </div>
             <div class="ml-2"> <%= message.share_message.content %> </div>
           </div> 
         <% end %>
-       
       </div>
     </div>
     <% if controller_name != "directmsgs"%>

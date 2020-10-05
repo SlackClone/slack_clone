@@ -10,6 +10,7 @@ class DirectmsgsController < ApplicationController
     @workspace = Workspace.find(params[:workspace_id])
     @channels = @workspace.channels
     @message = Message.new
+    @message.attachfiles.build
     @new_channel = Channel.new
     @invitation = Invitation.new
     @users_direct = current_user.users_directmsgs.find_by(directmsg: @directmsg)
@@ -25,8 +26,8 @@ class DirectmsgsController < ApplicationController
       # 由私訊的name("DM:X-Y")拿出recipient的id
       user_id = (dc.name.split(":").last.split("-")-["#{current_user.id}"]).first
       # 將recipient的id當key，未讀訊息數目當value
-      @unread_msg_count[user_id] = dc.messages.where("created_at > ?", 
-                                                    dc.users_directmsgs.find_by(user_id: current_user.id).last_enter_at)
+      @unread_msg_count[user_id] = dc.messages.where("created_at > ? AND user_id != ?", 
+                                                    dc.users_directmsgs.find_by(user_id: current_user.id).last_enter_at, current_user.id)
                                                     .count
     end
     
@@ -35,8 +36,8 @@ class DirectmsgsController < ApplicationController
     @unread_msg_bol ={}
     added_channel.each do |ac|
       # 將channel的id當key，是否有未讀訊息當做value
-      @unread_msg_bol[ac.id] = ac.messages.where("created_at > ?", 
-                                                  ac.users_channels.find_by(user_id: current_user.id).last_enter_at)
+      @unread_msg_bol[ac.id] = ac.messages.where("created_at > ? AND user_id != ?", 
+                                                  ac.users_channels.find_by(user_id: current_user.id).last_enter_at, current_user.id)
                                                   .present?
     end
     render 'channels/show'

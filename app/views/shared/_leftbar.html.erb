@@ -1,39 +1,46 @@
-<div class="left-bar">
-  <p class="truncate pl-10 py-1 hover:bg-deep_sladock"><%= t(".sidebar.threads") %></p>
-  <p class="truncate pl-10 py-1 hover:bg-deep_sladock"><%= t(".sidebar.mentions") %></p>
-  <p class="truncate pl-10 py-1 hover:bg-deep_sladock"><%= t(".sidebar.save") %></p>
-  <p class="truncate pl-10 py-1 hover:bg-deep_sladock"><%= t(".sidebar.more") %></p>
-  <p class="truncate pl-10 py-1 hover:bg-deep_sladock"><%= t(".sidebar.shared") %></p>
-  <div class="w-full">
-    <div class="font-medium flex justify-between items-center pl-10 py-1">
-      <p class="ch-name truncate"><%= t(".channel.name") %></p> 
-      <%= link_to '+', new_workspace_channels_path(workspace_id: @workspace.id),class: 'create-ch-btn text-2xl' %>
-    </div>
-    </div>
-    <% @channels.each do |channel| %>
-      <div data-controller="channels" data-channels-id="<%= channel.id %>" class='truncate pl-10 py-1 hover:bg-deep_sladock'>
-        <span>#</span>
-        <%= link_to channel.name, workspace_channel_path(@workspace, channel), channel_id: channel.id, class: @unread_msg_bol[channel.id] ? "font-bold" : "" %>
-        <% if channel.users.include?(current_user) %>
-          <button data-action="click->channels#removeChannel" data-target="channels.symbol">-</button>
-        <% else %>
-          <button data-action="click->channels#addChannel" data-target="channels.symbol">+</button>
-        <% end %>
+<div class="box-border border-b bg-light_sladock border-sladock_border h-16 flex items-center pl-10">
+  <h3 class="chatroomName text-white font-bold text-lg">
+    <%= workspace.name %>
+  </h3> 
+</div>
+<div class="bg-light_sladock text-white overflow-y-auto min-w-200 h-left_full" style="width: 300px" data-controller="notification" data-notification-workspace="<%= workspace.id %>" data-notification-user="<%= current_user.nickname %>">
+  <div class="left-bar">
+    <p class="truncate pl-10 py-1 hover:bg-deep_sladock"><%= t(".sidebar.threads") %></p>
+    <p class="truncate pl-10 py-1 hover:bg-deep_sladock"><%= t(".sidebar.mentions") %></p>
+    <p class="truncate pl-10 py-1 hover:bg-deep_sladock"><%= link_to t(".sidebar.save"), workspace_uploadedfiles_path(workspace) %></p>
+    <p class="truncate pl-10 py-1 hover:bg-deep_sladock"><%= t(".sidebar.more") %></p>
+    <p class="truncate pl-10 py-1 hover:bg-deep_sladock"><%= t(".sidebar.shared") %></p>
+    <div class="w-full">
+      <div class="font-medium flex justify-between items-center pl-10 py-1">
+        <p class="ch-name truncate"><%= t(".channel.name") %></p> 
+        <%= link_to '+', new_workspace_channels_path(workspace_id: workspace.id),class: 'create-ch-btn text-2xl' %>
       </div>
-     <% end %>
-  <div class="w-full">
-    <p class="font-medium truncate pl-10 py-1"><%= t(".channel.direct") %></p>
-    <% (@workspace.users - [current_user]).each do |user| %>
-      <p class="truncate pl-10 py-1 hover:bg-deep_sladock">
-        <%= link_to user.nickname, workspace_directmsg_path(@workspace, user.id) %>
-        <span class="count text-red-300" unread-id="<%= user.id %>"><%= @unread_msg_count["#{user.id}"] != nil && @unread_msg_count["#{user.id}"] > 0 ? @unread_msg_count["#{user.id}"] : "" %></span>
-      </p>
-    <% end %>
-  </div>
-</div>  
+      </div>
+      <% channels.each do |channel| %>
+        <div data-controller="channels" data-channels-id="<%= channel.id %>" class='truncate pl-10 py-1 hover:bg-deep_sladock'>
+          <span>#</span>
+          <%= link_to channel.name, workspace_channel_path(workspace, channel), channel_id: channel.id, class: unread_msg_bol[channel.id] ? " font-bold" : "" %>
+          <% if channel.users.include?(current_user) %>
+            <button data-action="click->channels#removeChannel" data-target="channels.symbol">-</button>
+          <% else %>
+            <button data-action="click->channels#addChannel" data-target="channels.symbol">+</button>
+          <% end %>
+        </div>
+      <% end %>
+    <div class="w-full">
+      <p class="font-medium truncate pl-10 py-1"><%= t(".channel.direct") %></p>
+      <% (workspace.users - [current_user]).each do |user| %>
+        <p class="truncate pl-10 py-1 hover:bg-deep_sladock">
+          <%= link_to user.nickname, workspace_directmsg_path(workspace, user.id) %>
+          <span class="count text-red-300" unread-id="<%= user.id %>"><%= unread_msg_count["#{user.id}"] != nil && unread_msg_count["#{user.id}"] > 0 ? unread_msg_count["#{user.id}"] : "" %></span>
+        </p>
+      <% end %>
+    </div>
+  </div>  
 <%# button顯示 %>
-<button class="invite-ws-btn h-8 w-8  rounded hover:bg-gray-100 hover:stroke-gray active:bg-gray-400 focus:outline-none">
-  <%= inline_svg_pack_tag( "media/images/invite.svg" , class: "stroke-current text-gray-600 hover:stroke-gray") %>
-</button>
-<%= render "./shared/invite_ws" %>
-<%= render './shared/language' %>
+  <button class="invite-ws-btn h-8 w-8  rounded hover:bg-gray-100 hover:stroke-gray active:bg-gray-400 focus:outline-none">
+    <%= inline_svg_pack_tag( "media/images/invite.svg" , class: "stroke-current text-gray-600 hover:stroke-gray") %>
+  </button>
+  <%= render "./shared/invite_ws" %>
+  <%= render './shared/language' %>
+</div>

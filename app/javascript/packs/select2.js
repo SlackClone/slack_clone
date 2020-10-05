@@ -1,6 +1,5 @@
 import $ from "jquery"
 import 'select2'
-import 'select2/dist/css/select2.css'
 
 
 $(document).ready(function() {
@@ -9,10 +8,10 @@ $(document).ready(function() {
     allowClear: true
   })
 
-  $('#message_messageable_id').select2({
-    closeOnSelect: false
+  // $('#message_messageable_id').select2({
+  //   closeOnSelect: false
 
-  })
+  // })
 
 
   $('#user_list').on("change", function() {
@@ -32,7 +31,6 @@ $(document).ready(function() {
     if (e.target === $('.ch-background')[0])
     $('.ch-background').addClass('hidden')
   })
-
 })
 
 
