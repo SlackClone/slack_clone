@@ -3,11 +3,13 @@
   "private": true,
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.14.0",
+    "@joeattardi/emoji-button": "^4.2.0",
     "@rails/actioncable": "^6.0.0",
     "@rails/activestorage": "^6.0.0",
     "@rails/ujs": "^6.0.0",
     "@rails/webpacker": "4.3.0",
     "jquery": "^3.5.1",
+    "install": "^0.13.0",
     "select2": "^4.0.13",
     "stimulus": "^1.1.1",
     "tailwindcss": "^1.7.6",

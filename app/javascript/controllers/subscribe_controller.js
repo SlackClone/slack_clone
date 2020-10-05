@@ -19,18 +19,33 @@ export default class extends Controller {
     console.log(`Messaging channel opened in workspace NO.${this.data.get("id")}`)
   }
   messaging(data){
-    if(document.hidden){
-      let divideElement = document.querySelector(".divide")
-      if (!divideElement){
-        this.messagesTarget.insertAdjacentHTML('beforeend', `<div class='flex text-right divide'><span class='h-0 border-b-0 border-t-2 block flex-grow border-red-600 my-auto'></span><span class="pl-3">new</span></div>`)
+    if (data.emoji === undefined){
+      if (document.hidden) {
+        let divideElement = document.querySelector(".divide")
+        if (!divideElement) {
+          this.messagesTarget.insertAdjacentHTML('beforeend', `<div class='flex text-right divide'><span class='h-0 border-b-0 border-t-2 block flex-grow border-red-600 my-auto'></span><span class="pl-3">new</span></div>`)
+        }
+      } else {
+        this.subscription.perform("update_enter_time")
       }
+      this.messagesTarget.insertAdjacentHTML("beforeend", data.message)
+      window.initShare()
     }else{
-      this.subscription.perform("update_enter_time")
+      // console.log(data.emoji)
+      // console.log(data.html)
+      console.log(data.id)
+      let emoji = document.getElementById(`message-reaction-${data.id}`)
+      // console.log(emoji)
+      // emoji.insertAdjacentHTML('beforeend', data.html)
+      // emoji.append(data.html)
+      emoji.innerHTML = data.html
     }
-    this.messagesTarget.insertAdjacentHTML("beforeend", data.message)
-    window.initShare()
+   }
+   clearMsg(){
+     this.newMessageTarget.reset()
+    }
   }
-  clearMsg(){
-    this.newMessageTarget.reset()
-  }
-}
+  
+
+
+

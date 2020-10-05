@@ -48,6 +48,11 @@ Rails.application.routes.draw do
     collection do
       post 'add'
     end
+
+    member do
+      post 'emoji'
+    end
+
   end
   
   # 信件測試
