@@ -38,10 +38,7 @@ export default class extends Controller {
       this.messagesTarget.insertAdjacentHTML("beforeend", data.message)
       window.initShare()
 
-      $('.text-area').remove()
-      $('.editor').remove()
-      $('.w-full.px-3.mb-2').append(`<textarea class="editor" placeholder="輸入訊息" style="display: none;"></textarea>`)
-      editor()
+      
     }else{
       // console.log(data.emoji)
       // console.log(data.html)
@@ -52,8 +49,14 @@ export default class extends Controller {
       // emoji.append(data.html)
       emoji.innerHTML = data.html
     }
-   }
   }
+  clearmsg(){
+    $('.text-area').remove()
+    $('.editor').remove()
+    $('.w-full.px-3.mb-2').append(`<textarea class="editor" placeholder="輸入訊息" style="display: none;"></textarea>`)
+    editor()
+  }
+}
 
 
 function editor(){

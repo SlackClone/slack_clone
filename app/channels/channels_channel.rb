@@ -3,7 +3,9 @@ class ChannelsChannel < ApplicationCable::Channel
     stop_all_streams
     if params[:channelId] != "0"
       @channel_user = current_user.users_channels.find_by(channel_id: params[:channelId])
-      
+      current_user.channels.each do |channel|
+        
+      end
       channel = Channel.find_by(id: params[:channelId])
       stream_for channel
     elsif params[:directId] != "0"
@@ -11,7 +13,6 @@ class ChannelsChannel < ApplicationCable::Channel
       
       directmsg = Directmsg.find_by(id: params[:directId])
       stream_for directmsg
-
     end
     
   end
