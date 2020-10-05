@@ -318,7 +318,7 @@ module.exports = {
       ...theme("spacing"),
       full: "100%",
       screen: "100vh",
-      chat_full: "calc(100vh - 9rem)",
+      chat_full: "calc(100vh - 30rem)",
       left_full: "calc(100vh - 6.5rem)",
       screen_94: "94vh",
     }),

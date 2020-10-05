@@ -2,6 +2,7 @@ class MessagesController < ApplicationController
   before_action :authenticate_user!
   require'json'
   def create
+    
     # 若是聊天室訊息
     if params[:channel_id]  
       @channel = Channel.find(params[:channel_id])
@@ -15,7 +16,7 @@ class MessagesController < ApplicationController
       channel_id = params[:directmsg_id]
       direct_or_not = true
     end
-
+    
     # 有夾帶檔案的話
     if @message.attachfiles.present?
       # 壓縮圖片

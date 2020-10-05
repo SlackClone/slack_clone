@@ -1,8 +1,10 @@
-<%= form_with(model: @message, url:channel_messages_path(@channel) ,class:"flex bg-gray-200 appearance-none border-2 border-gray-200 rounded text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500", id:"new_message",data:{action: "ajax:success->subscribe#clearMsg", target: "subscribe.newMessage"}) do |f| %>
-  <%= f.text_field :content, class:"flex-grow min-w-0", placeholder: t(".placeholder"),autocomplete: "off" %>
-    <%= f.fields_for :attachfiles do |file| %>
-      <%= file.file_field :document %>
-    <% end %>
-  <%= f.submit t("utilities.submit"), class:"bg-gray-500 shadow bg-purple-500 hover:bg-purple-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded" %>
-  <%= inline_svg_pack_tag("media/images/uploaded.svg",class: "upload-btn text-gray-500 w-6 cursor-pointer absolute top-7/10 left-0") %>
+<%= form_with(model: @message, url:channel_messages_path(@channel) ,class:"flex bg-gray-200 border-2 border-gray-200 rounded text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500", id:"new_message",data:{ target: "subscribe.newMessage"}) do |f| %>
+  <%= f.text_field :content, class:"min-w-0 flex-grow message-content hidden", placeholder: t(".placeholder"),autocomplete: "off" %> 
+  <%= f.fields_for :attachfiles do |file| %>
+    <%= file.file_field :document, class:"hidden file-upload" %>
+  <% end %>
+  <div class="centered">
+    <textarea class="editor" placeholder="輸入訊息"></textarea>
+  </div>
+  <%= f.submit t("utilities.submit"), class:"bg-gray-500 shadow bg-purple-500 hover:bg-purple-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded hidden message-submit" %>
 <% end %>

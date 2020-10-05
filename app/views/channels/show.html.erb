@@ -1,41 +1,41 @@
 <%= render "./shared/header" %>
-<div class="chatroom flex">
-    <div class="leftbar flex flex-col">
-      <%= render "./shared/leftbar", workspace: @workspace, 
-                                     channels:  @channels,
-                                     unread_msg_bol: @unread_msg_bol,
-                                     unread_msg_count: @unread_msg_count %>
-    </div>  
-    <div class="flex flex-col flex-grow min-w-0 min-h-0">
-      <%# 上方白色區塊顯示頻道名稱與邀請按鈕 %>
-      <div class="box-border border-b border-gray-400 h-16 font-bold flex justify-between items-center">
-        #<%=  @channel.try(:name) || @directmsg_user_name %>
-          <%# button %>  
-        <% if @channel %>
-          <button class="invite-ch-btn h-8 w-8 rounded hover:bg-gray-100 hover:stroke-gray active:bg-gray-400 focus:outline-none">
-            <%= inline_svg_pack_tag( "media/images/invite-ch.svg" , class: "stroke-current text-gray-600 hover:stroke-gray") %>
-            <%= image_pack_tag("invite-ch.svg") %>
-          </button>
+<div class="chatroom flex overflow-hidden ">
+  <div class="leftbar flex flex-col">
+    <%= render "./shared/leftbar", workspace: @workspace, 
+                                    channels:  @channels,
+                                    unread_msg_bol: @unread_msg_bol,
+                                    unread_msg_count: @unread_msg_count %>
+  </div>  
+  <div class="flex flex-col flex-grow min-w-0 min-h-0" data-controller="subscribe"  data-subscribe-id="<%= @workspace.id %>" data-subscribe-channel="<%= @channel&.id || 0 %>" data-subscribe-direct="<%= @directmsg&.id || 0 %>">
+    <%# 上方白色區塊顯示頻道名稱與邀請按鈕 %>
+    <div class="box-border border-b border-gray-400 h-16 font-bold flex justify-between items-center">
+      #<%=  @channel.try(:name) || @directmsg_user_name %>
+        <%# button %>  
+      <% if @channel %>
+        <button class="invite-ch-btn h-8 w-8 rounded hover:bg-gray-100 hover:stroke-gray active:bg-gray-400 focus:outline-none">
+          <%= inline_svg_pack_tag( "media/images/invite-ch.svg" , class: "stroke-current text-gray-600 hover:stroke-gray") %>
+          <%= image_pack_tag("invite-ch.svg") %>
+        </button>
+      <% end %>
+    </div>
+    <%# 訊息區 %>
+    <div class="messages_area break-all flex flex-col-reverse overflow-y-auto h-chat_full flex-grow border border-1 bg-gray-300">
+      <div class="pb-5 messages" data-target="subscribe.messages">
+        <% @messages.order(:created_at).each do |msg| %>
+          <%= render "messages/message_broadcast" , message: msg %>
         <% end %>
       </div>
-      <%# 訊息區 %>
-      <div class="messages_area break-all flex flex-col-reverse overflow-y-auto h-chat_full flex-grow border border-1 bg-gray-300" data-controller="subscribe"  data-subscribe-id="<%= @workspace.id %>" data-subscribe-channel="<%= @channel&.id || 0 %>" data-subscribe-direct="<%= @directmsg&.id || 0 %>">
-        <div class="pb-5 messages" data-target="subscribe.messages">
-          <% @messages.order(:created_at).each do |msg| %>
-            <%= render "messages/message_broadcast" , message: msg %>
-          <% end %>
-        </div>
-      </div>
-      <%# 訊息輸入框 %>
-      <div data-controller="subscribe">
-        <% if @channel %>
-          <%= render "./shared/msgform" %> 
-        <% else %>
-          <%= render "./shared/msgform_direct" %>
-        <% end %>
-      </div>
-    </div>    
-    <%= render './shared/shareform' %>
+    </div>
+    <%# 訊息輸入框 %>
+    <div class="sticky">
+      <% if @channel %>
+        <%= render "./shared/msgform" %> 
+      <% else %>
+        <%= render "./shared/msgform_direct" %>
+      <% end %>
+    </div>
+  </div>    
+  <%= render './shared/shareform' %>
 
 
   <%= render './shared/right_info' %>
