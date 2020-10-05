@@ -16,12 +16,7 @@ Rails.application.routes.draw do
     get :login
     get :validate
   end
-<<<<<<< HEAD
   
-  
-=======
-
->>>>>>> 完成草稿
   root to: 'pages#index'
   resources :workspaces do
     resource :users_workspaces

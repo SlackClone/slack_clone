@@ -1,27 +1,14 @@
 <div class="profile-background absolute w-full h-full top-0 bg-black bg-opacity-25 hidden flex justify-center items-center">
-<<<<<<< HEAD
-<<<<<<< HEAD
   <div class="profile-form bg-white shadow-2xl w-5/12 h-11/12 rounded relative">
-=======
-  <div class=" bg-white shadow-2xl w-5/12 h-11/12 rounded relative">
->>>>>>> 上傳圖片完成
-=======
-  <div class="profile-form bg-white shadow-2xl w-5/12 h-11/12 rounded relative">
->>>>>>> wip
     <div class="flex justify-between items-center mb-8 p-5">
       <h5 class="font-bold text-xl">Edit your profile</h5>
       <button class="profile-cancel-btn font-bold text-gray-600 focus:outline-none">X</button>
     </div>
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 剪裁完成，但依然有兩個小BUG尚未處理完成
     <%= form_with(url:profiles_path(current_user),method: 'PATCH',id: "profile_form") do |f|%>
     <div class="grid grid-cols-3 px-6">
       <div class="col-span-2 mr-5">
         <%= f.label :full_name,class: "font-bold text-sm mb-2" %>
         <%= f.text_field "profile[full_name]",autocomplete:"off",class:"full_name relative font-bold px-2 py-2 mb-5 border border-gray-800 rounded block w-full placeholder-gray-600 focus:outline-none focus:shadow-outline" %>
-<<<<<<< HEAD
 
         <%= f.label :nickname,class: "font-bold text-sm mb-2" %>
         <%= f.text_field "user[nickname]",class:"full_name relative font-bold px-2 py-2 mb-5 border border-gray-800 rounded block w-full placeholder-gray-600 focus:outline-none focus:shadow-outline"%>
@@ -81,73 +68,3 @@
   </div>
 </div>
 
-=======
-      <%= form_with(url:profiles_path(current_user),method: 'PATCH',id: "profile_form") do |f|%>
-      <div class="grid grid-cols-3 px-6">
-        <div class="col-span-2 mr-5">
-          <%= f.label :full_name,class: "font-bold text-sm mb-2" %>
-          <%= f.text_field "profile[full_name]",autocomplete:"off",class:"full_name relative font-bold px-2 py-2 mb-5 border border-gray-800 rounded block w-full placeholder-gray-600 focus:outline-none focus:shadow-outline" %>
-=======
->>>>>>> 剪裁完成，但依然有兩個小BUG尚未處理完成
-
-        <%= f.label :nickname,class: "font-bold text-sm mb-2" %>
-        <%= f.text_field "user[nickname]",class:"full_name relative font-bold px-2 py-2 mb-5 border border-gray-800 rounded block w-full placeholder-gray-600 focus:outline-none focus:shadow-outline"%>
-
-        <%= f.label :phone_number,class: "font-bold text-sm mb-2" %>
-        <%= f.text_field "profile[phone_number]",autocomplete:"off",class:"phone_number relative font-bold px-2 py-2 border border-gray-800 rounded block w-full placeholder-gray-600 focus:outline-none focus:shadow-outline" %>
-        <span class="text-xs text-gray-500">enter a phone number</span>        
-      </div>
-      <div class="col-span-1  flex flex-col items-center">
-        <div class="mb-2">
-          <div class="">
-            <%= image_tag (current_user.profile.try(:avatar_url,(:large)) || 'https://ca.slack-edge.com/T0196R42HU4-U018Z8Q6XU5-g15b03dc0178-192'),id: "avatar_large",class:"w-full block mx-auto" %>
-          </div>
-        </div>
-        <%= f.hidden_field "details",class:"detail" %>
-        <%= f.hidden_field "profile[avatar]" %>
-        <%= f.file_field "profile[avatar]",id:"avatar",class:'hidden' %>
-        <div class="avatar-btn border border-gray-600 py-2 px-5 font-bold rounded cursor-pointer">Upload an image
-        </div>
-        <% if has_avatar?(current_user) %>
-          <%= link_to "remove the photo",profiles_path(current_user),method:"DELETE",class:"remove-avatar text-blue-500 text-sm cursor-pointer",remote: true %>
-        <% end %>
-      </div>      
-    </div>
-    <div class="border-t border-gray-600 flex p-5 justify-end">
-      <div class="profile-cancel-btn cursor-pointer block font-bold text-gray-700 px-5 py-2 mr-3 bg-gray-400 rounded focus:outline-none">
-        Cancel
-      </div>
-      <%= f.submit 'Save' ,class:"avatar-update-btn cursor-pointer block font-bold text-gray-700 px-5 py-2 bg-gray-400 rounded focus:outline-none" %>
-    </div>
-  </div>
-  <%# 編輯照片 %>
-  <div class="resize-area hidden bg-white shadow-2xl w-5/12 h-8/12 rounded relative">
-    <div class="flex justify-between items-center mb-8 p-5">
-      <h5 class="font-bold text-xl">Crop your photo</h5>
-      <button class="profile-cancel-btn font-bold text-gray-600 focus:outline-none">X</button>
-    </div>
-    <%# 預覽小圖%>
-    <div class="mx-auto overflow-y-auto">
-        <img id="output" class="w-20">
-    </div>
-    <p class="text-xs text-gray-600">Preview</p>
-    <div class="flex items-center my-3">
-      <div class="previewBox w-10 h-10 overflow-hidden"></div>
-      <p class="font-bold"><%= current_user.nickname %></p>
-      <%# 下方BUTTON %>
-      <div class="flex ml-auto">
-        <div class="profile-cancel-btn cursor-pointer block font-bold text-gray-700 px-5 py-2 mr-3 rounded focus:outline-none border ">Cancel
-        </div>    
-        <%= f.submit 'Save' ,class:"avatar-update-btn avatar-update-btn2 cursor-pointer block font-bold text-gray-700 px-5 py-2 bg-gray-400 rounded focus:outline-none"
-        %>    
-        <% end %> 
-      </div>
-    </div>
-  </div>
-<<<<<<< HEAD
-</div>
->>>>>>> 上傳圖片完成
-=======
-</div>
-
->>>>>>> wip
