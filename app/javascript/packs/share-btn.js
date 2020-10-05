@@ -1,6 +1,4 @@
 import $ from 'jquery';
-window.jQuery = $
-window.$ = $
 
 window.initShare = function () {
   $('.share-btn').click(function (event) {
@@ -20,7 +18,18 @@ window.initShare = function () {
 $(document).ready(function () {
   window.initShare()
   $('.cancel').click(function (event) {
-    event.preventDefault()
-    $('.popup').hide()
+    event.preventDefault();
+    $('.popup').hide();
+  });
+
+});
+
+document.querySelectorAll('.share-btn').forEach((e)=>{
+  e.addEventListener('click', function (e) {
+    let shareContent = e.target.parentNode.querySelector('.content').textContent
+    let selectMessage = document.querySelector('.select-message')
+    selectMessage.textContent = shareContent
+    let input = document.getElementById('share_message_id')
+    input.value = this.dataset.id
   })
 })

@@ -24,6 +24,8 @@ class ChannelsController < ApplicationController
     @message.attachfiles.build
     @channels = @workspace.channels
     @messages = @channel.messages
+    @invitation = Invitation.new
+    channel_users_for_select2
     @channel_user = current_user.users_channels.find_by(channel: @channel)
     @last_enter_at = @channel_user&.last_enter_at || @channel.created_at
     
@@ -49,8 +51,6 @@ class ChannelsController < ApplicationController
                                                   ac.users_channels.find_by(user_id: current_user.id).last_enter_at, current_user.id)
                                                   .present?
     end
-    @invitation = Invitation.new
-    channel_users_for_select2
   end
 
   def destroy
@@ -60,8 +60,6 @@ class ChannelsController < ApplicationController
     delete_channel.destroy
     redirect_to @workspace
   end
-
-  
 
   private
   def channel_params

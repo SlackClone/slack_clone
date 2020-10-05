@@ -17,7 +17,7 @@ import "stylesheets"
 import "controllers"
 import './select2.js'
 import './create_ch.js'
-
+import './resizing.js'
 import './header-btn'
 import "./share-btn"
 import './header-btn'

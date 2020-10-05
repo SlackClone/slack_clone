@@ -11,13 +11,16 @@
     "ckeditor5-custom-build": "file:./ckeditor5",
     "jquery": "^3.5.1",
     "install": "^0.13.0",
+    "cropperjs": "^1.5.9",
     "select2": "^4.0.13",
     "stimulus": "^1.1.1",
     "tailwindcss": "^1.7.6",
-    "turbolinks": "^5.2.0"
+    "turbolinks": "^5.2.0",
+    "uppy": "^1.21.1"
   },
   "version": "0.1.0",
   "devDependencies": {
     "webpack-dev-server": "^3.11.0"
   }
+  
 }

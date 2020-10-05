@@ -7,7 +7,6 @@ export default class extends Controller {
   input(e) {
     this.outputTarget.textContent = e.target.value
     this.checkTarget.textContent = 255 - e.target.value.length
-    console.log()
     if (e.target.value) {
       this.errorTarget.textContent = ''
       document.querySelector('.field_with_errors>input').style.borderColor = 'gray'
