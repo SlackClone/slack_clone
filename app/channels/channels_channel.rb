@@ -11,7 +11,6 @@ class ChannelsChannel < ApplicationCable::Channel
       
       directmsg = Directmsg.find_by(id: params[:directId])
       stream_for directmsg
-
     end
     
   end

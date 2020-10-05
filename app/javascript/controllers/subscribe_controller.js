@@ -36,24 +36,19 @@ export default class extends Controller {
         this.subscription.perform("update_enter_time")
       }
       this.messagesTarget.insertAdjacentHTML("beforeend", data.message)
-      window.initShare()
-
-      $('.text-area').remove()
-      $('.editor').remove()
-      $('.w-full.px-3.mb-2').append(`<textarea class="editor" placeholder="輸入訊息" style="display: none;"></textarea>`)
-      editor()
+      window.initShare()      
     }else{
-      // console.log(data.emoji)
-      // console.log(data.html)
-      console.log(data.id)
       let emoji = document.getElementById(`message-reaction-${data.id}`)
-      // console.log(emoji)
-      // emoji.insertAdjacentHTML('beforeend', data.html)
-      // emoji.append(data.html)
       emoji.innerHTML = data.html
     }
-   }
   }
+  clearmsg(){
+    $('.text-area').remove()
+    $('.editor').remove()
+    $('.w-full.px-3.mb-2').append(`<textarea class="editor" placeholder="輸入訊息" style="display: none;"></textarea>`)
+    editor()
+  }
+}
 
 
 function editor(){
