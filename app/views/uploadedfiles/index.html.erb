@@ -32,7 +32,7 @@
               <%= file.document.metadata["filename"] %> 
             </div>
             <div class="">
-              <%= file.messages.first.user.nickname %> 
+              <%= file.messages.first&.user&.nickname %>
             </div>
           </div>
         <% end %>

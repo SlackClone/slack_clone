@@ -41,17 +41,7 @@ class UploadedfilesController < ApplicationController
     # byebug
     @current_channel = @added_channel + @direct_channel
     
-    @files = []
     @files = Attachfile.all
-    # (@added_channel + @direct_channel).each do |channel|
-    #   channel.messages.each do |message|
-    #     message.attachfiles.each do |file|
-    #       next if file.document_data.nil?
-    #       @files << file
-    #     end
-    #   end
-    # end
-    # byebug
   end
 
   def create

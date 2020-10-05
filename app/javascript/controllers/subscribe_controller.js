@@ -2,8 +2,7 @@ import { Controller } from "stimulus"
 import consumer from "channels/consumer"
 import $ from "jquery"
 import ClassicEditor from "ckeditor5-custom-build/build/ckeditor.js"
-window.$ = $
-console.log('!!')
+
 export default class extends Controller {
   static targets = ["messages", "newMessage" ]
 
@@ -22,7 +21,7 @@ export default class extends Controller {
   }
 
   subscribe(){
-    customEditor()
+    editor()    // create ckeditor
     console.log(`Messaging channel opened in workspace NO.${this.data.get("id")}`)
   }
   
@@ -54,9 +53,6 @@ export default class extends Controller {
       emoji.innerHTML = data.html
     }
    }
-   
-    
-   
   }
 
 
@@ -102,9 +98,11 @@ function editor(){
 
 function customEditor(){
   // 調整ckeditor格式
+  
   $('.centered').attr('class', 'w-full px-3 mb-2')
   $('.ck-editor').attr('class', 'flex flex-col-reverse text-area')
-  
+  // 避免一直生成
+
   $('.ck-toolbar_grouping >.ck-toolbar__items').append('<div class="custom-ckeditor" style="margin-left: auto; "></div>')
   $('.custom-ckeditor').append('<button class="custom_emoji ck" style="margin-right: 12px;"></button>')
   $('.custom_emoji').append('<i class="far fa-smile ck ck-icon"></i>')
@@ -129,11 +127,34 @@ function customEditor(){
   })
 
   $('.ck-editor__editable').keydown( (e) => {
-    if (e.keyCode == 13 && $('.ck-editor__editable').children()[0].tagName === "P"){
-      if (e.shiftKey){return}
-      $('.ck-editor__editable').children().find(':last-child').remove()
-      $('.message-content').val($('.ck-editor__editable').html()) 
-      $('.message-submit').trigger('click')
-    }
+    // // p
+    // if (e.keyCode == 13 && !e.shiftKey && ($('.ck-editor__editable').children()[0].tagName === 'P' || $('.ck-editor__editable').children()[0].tagName === 'BLOCKQUOTE')){
+    //   $('.ck-editor__editable').children(':last-child')[0].remove()
+    //   $('.message-content').val($('.ck-editor__editable').html()) 
+    //   $('.message-submit').trigger('click')
+    //   return
+    // }
+    // // blockquote
+    // // 跟 li 有關的
+    // if (e.keyCode == 13 && !e.shiftKey && $('.ck-editor__editable').children()[0].tagName !== "PRE"){
+    //   $('.ck-editor__editable').children().find('li:last-child')[0].remove()
+    //   $('.message-content').val($('.ck-editor__editable').html()) 
+    //   $('.message-submit').trigger('click')
+    //   return
+    // }
+    // if (e.shiftKey && ($('.ck-editor__editable').children()[0].tagName === "OL" || $('.ck-editor__editable').children()[0].tagName === "UL")){
+    //   // e.preventDefault()
+    //   // e.keyCode = 13
+    //   // $('.ck-editor__editable').children(':first-child')[0].insertAdjacentHTML('afterend', `<br>`)
+    //   // $('.ck-editor__editable').children(':first-child')[0].insertAdjacentHTML('beforeend', `<li><br data-cke-filler="true"></li>`)
+    //   return
+    // }
+    // // plain text
+    // if (e.keyCode == 13 && !e.shiftKey){
+    //   $('.ck-editor__editable').children().find('br:last-child')[0].remove()
+    //   $('.message-content').val($('.ck-editor__editable').html()) 
+    //   $('.message-submit').trigger('click')
+    //   return
+    // }
   })
 }
