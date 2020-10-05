@@ -1,8 +1,8 @@
 
 <% message.emoji_data.compact.each do |key, value| %>
   <% next if value.length == 0 %>
-  <!-- <button class="emoji_key"><%= key %></button> -->
-  <!-- <button class="emoji_value"><%= value %></button> -->
+  <!-- <button class="emoji_key"><%= key %></button>
+  <button class="emoji_value"><%= value %></button> -->
   <%= button_to key, emoji_message_path(message.id, emoji: key), remote: true, class: value.include?(current_user.id) ? 'mine' : '' %>
   <span><%= value.length %></span>
 <% end %>

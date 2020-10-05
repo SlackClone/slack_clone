@@ -19,7 +19,6 @@ export default class extends Controller {
     console.log(`Messaging channel opened in workspace NO.${this.data.get("id")}`)
   }
   messaging(data){
-    // console.log(data.emoji)
     if (data.emoji === undefined){
       if (document.hidden) {
         let divideElement = document.querySelector(".divide")
@@ -29,10 +28,9 @@ export default class extends Controller {
       } else {
         this.subscription.perform("update_enter_time")
       }
-    }
-    this.messagesTarget.insertAdjacentHTML("beforeend", data.message)
-    window.initShare()
-  }else{
+      this.messagesTarget.insertAdjacentHTML("beforeend", data.message)
+      window.initShare()
+    }else{
       console.log(data.emoji)
       console.log(data.html)
       console.log(data)
@@ -40,11 +38,13 @@ export default class extends Controller {
       console.log(emoji)
       
       emoji.innerHTML = data.html
-      
     }
-     
-  }    
-  clearMsg(){
-    this.newMessageTarget.reset()
+   }
+   clearMsg(){
+     this.newMessageTarget.reset()
+    }
   }
+  
+
+
 
