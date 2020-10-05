@@ -1,6 +1,6 @@
 import $ from "jquery"
 import 'select2'
-
+import 'select2/dist/css/select2.css';
 $(document).ready(function() {
   $('#user_list').select2({
     placeholder: "輸入欲邀請成員",

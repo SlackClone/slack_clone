@@ -13,5 +13,3 @@
  *= require_tree .
  *= require_self
  */
- @import 'select2/dist/css/select2.css';
- @import 'cropperjs/dist/cropper.css';
