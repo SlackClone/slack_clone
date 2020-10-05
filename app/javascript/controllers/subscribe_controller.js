@@ -31,12 +31,13 @@ export default class extends Controller {
       this.messagesTarget.insertAdjacentHTML("beforeend", data.message)
       window.initShare()
     }else{
-      console.log(data.emoji)
-      console.log(data.html)
-      console.log(data)
+      // console.log(data.emoji)
+      // console.log(data.html)
+      console.log(data.id)
       let emoji = document.getElementById(`message-reaction-${data.id}`)
-      console.log(emoji)
-      
+      // console.log(emoji)
+      // emoji.insertAdjacentHTML('beforeend', data.html)
+      // emoji.append(data.html)
       emoji.innerHTML = data.html
     }
    }
