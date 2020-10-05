@@ -1,6 +1,5 @@
 var avatar_small = document.querySelectorAll('.avatar_small')
 var avatar_large = document.querySelector('#avatar_large')
-  console.log('c')
   document.querySelector('#profile_form').reset()
   fetch("/users/profiles/avatar")
     .then(response => response.json())

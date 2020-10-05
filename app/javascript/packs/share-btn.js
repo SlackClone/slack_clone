@@ -1,6 +1,4 @@
 import $ from 'jquery';
-window.jQuery = $
-window.$ = $
 
 window.initShare = function () {
   $('.share-btn').click(function (event) {

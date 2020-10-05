@@ -40,7 +40,6 @@ window.addEventListener('DOMContentLoaded',function(){
     }
   })
   document.querySelector('.avatar-update-btn2').addEventListener('click',()=>{
-    console.log('b')
     setTimeout(()=>{
       CROPPER.destroy()
     },2000)
