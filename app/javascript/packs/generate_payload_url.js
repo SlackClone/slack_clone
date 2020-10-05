@@ -11,13 +11,12 @@ window.addEventListener('DOMContentLoaded',()=>{
     let secret = document.querySelector('#webhook_record_secret')
         
     payloadURL.value=`${baseURL}/${firstChannel.value}/github`
-    secret.value = makeRandomSecret(20)
+    // secret.value = makeRandomSecret(20)
 
     // generateSecret.addEventListener('click', (e)=> {
     //   e.preventDefault()
     //   secret.value = makeRandomSecret(20)
     // })
-
 
     select.addEventListener('change',(e)=>{
       channelID  = e.target.value
@@ -25,7 +24,6 @@ window.addEventListener('DOMContentLoaded',()=>{
     })
 
   }
-
 
 //   function makeRandomSecret(length) {
 //     var result           = '';
