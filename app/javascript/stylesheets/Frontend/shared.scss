@@ -2,7 +2,7 @@
     @apply font-bold py-2 px-2 rounded;
   }
   .btn-blue {
-    @apply bg-blue-500 text-white;
+    @apply bg-blue-400 text-white;
   }
 
 .txtcolumn .react-bar{
@@ -16,3 +16,15 @@
 .select2-container .select2-selection--single .select2-selection__rendered{
   width: 300px;
 }
+
+.react-bar {
+  position: absolute;
+  right: 0;
+  margin-right: 10px;
+  margin-top: -3px;
+  display: flex;
+  width: 100px;
+  border: 1px solid white;
+  background-color: white;
+  border-radius: 3px;
+} 
