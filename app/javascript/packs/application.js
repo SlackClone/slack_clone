@@ -19,16 +19,8 @@ import './select2.js'
 import './create_ch.js'
 
 import './header-btn'
-import "./share-btn"
-<<<<<<< HEAD
-<<<<<<< HEAD
+import './share-btn'
 
-
-=======
-import "./emoji.js"
->>>>>>> efd0130... fixed conflict
-=======
->>>>>>> 1d461a5... fixed error
 // Uncomment to copy all static images under ../images to the output folder and reference
 // them with the image_pack_tag helper in views (e.g <%= image_pack_tag 'rails.png' %>)
 // or the `imagePath` JavaScript helper below.
