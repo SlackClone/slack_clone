@@ -25,9 +25,11 @@ class Webhook::GithubController < ActionController::API
         # 發送訊息匯整 & 把 hash 轉成 json 格式
         # user_event_action_type = json_body["hook"]["events"][0] 
         if json_body["hook"] 
-          user_event_action_type = json_body["hook"]["events"][0] 
-        else
+          user_event_action_type = "Test webhook"
+        elsif json_body["commit"]["commit"]["message"]
           user_event_action_type = json_body["commit"]["commit"]["message"]
+        else
+          user_event_action_type = "No Commit Message"
         end
         # byebug
 
