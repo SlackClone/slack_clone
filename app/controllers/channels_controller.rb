@@ -61,8 +61,6 @@ class ChannelsController < ApplicationController
     redirect_to @workspace
   end
 
-  
-
   private
   def channel_params
     params.require(:channel).permit(:name, :topic, :description)
