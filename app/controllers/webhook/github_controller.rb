@@ -11,7 +11,6 @@ class Webhook::GithubController < ActionController::API
     # Get repository name from incoming payload
     json_body = JSON.parse(params[:payload])
     user_repository_name = json_body["repository"]["full_name"]
-    # byebug
     
     # find reposity name form model
     if check_repo_name_exist?(user_repository_name)
