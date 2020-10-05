@@ -13,7 +13,7 @@ import "./info.js"
 import "tailwindcss/base";
 import "tailwindcss/components";
 import "tailwindcss/utilities";
-// import "stylesheets"
+import "stylesheets"
 import "controllers"
 import './select2.js'
 import './create_ch.js'
