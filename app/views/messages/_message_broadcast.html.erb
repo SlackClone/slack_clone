@@ -15,7 +15,7 @@
       <div class="items-start w-full mx-3">
         <span class="font-bold pr-1 author"><%= message.user.nickname %></span>
         <span class="createtime text-xs text-gray-700">
-          <%= message.created_at.strftime("%I:%M") %>
+          <%= message.created_at.strftime("%H:%M") %>
         </span>
         <div class="flex-col share-msg">
           <div class="content text-md text-gray-800"><%= raw(message.content) %>
