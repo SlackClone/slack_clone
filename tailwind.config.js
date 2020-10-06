@@ -22,13 +22,13 @@ module.exports = {
     colors: {
       transparent: "transparent",
       current: "currentColor",
-      sladock: "#611f69",
+      sladock: "#138184",
       deep_sladock: "#350e36",
-      light_sladock: "#480c44",
-      black: "#000",
+      light_sladock: "#26bec9",
+      black: "#333",
       white: "#fff",
       googleblue: '#4284F4',
-      light_gray: '#F8F8F8',
+      light_gray: '#ddd',
       sladock_border:"rgb(82,38,83)",
       ws_name_purple: "#522754",
       gray: {

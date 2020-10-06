@@ -28,3 +28,38 @@
   background-color: white;
   border-radius: 3px;
 } 
+
+.indexBtn{
+  margin-right: 1rem;
+  margin-top: 6rem;
+  margin-bottom: 20px;
+  border: 2px;
+  padding: 0.75rem;
+  text-align: center;
+  font-size: 1.5rem;
+  border-radius:0.25rem ;
+  display: block;
+  width: 75%;
+  background-color: #26bec9;
+  color: #fff;
+}
+
+@screen sm{
+  .indexBtn {
+    color: #fff;
+    margin-top: 10px;
+    font-size: 1rem;
+    width: auto;
+    @apply bg-sladock;
+  }
+  .signinBtn , .signoutBtn {
+    background: none;
+    color: #000;
+  }
+}
+
+.footerContent{
+  text-align: center;
+  font-size: 20px;
+  color: #fff;
+}

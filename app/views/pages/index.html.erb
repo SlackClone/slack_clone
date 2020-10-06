@@ -1,37 +1,37 @@
  <%# nav導覽列 %>
-<div class="bg-white border-b border-gray-400">
-  <nav class="container mx-auto py-3 flex items-center justify-between">
-    <h1 class="w-1/12">
-      <%= link_to image_pack_tag("media/images/Slack_logo_new.png"),pages_path %>
+<div class="bg-white border-none sm:border-b border-gray-400">
+  <nav class="container mx-auto py-3 flex items-center justify-between flex-wrap">
+    <h1 class="w-full sm:w-1/6">
+      <%= link_to image_pack_tag("media/images/Sladock_logo.png"),pages_path %>
     </h1>
-<div>
+    <div class="w-full sm:w-auto flex flex-col sm:flex-row items-center">
       <% if user_signed_in? %>
-        <%= link_to 'LUNCH SLADOCK',workspaces_path,class:'px-2 py-3 bg-sladock text-white rounded transition-all duration-500 hover:bg-hoversladock' %>
-        <span><%= link_to 'sign_out' ,destroy_user_session_path %></span>
-    <% else %>
-        <span><%= link_to 'sign_in' ,new_user_session_path %></span>
-        <%= link_to 'GET STARTED',login_pages_path,class:'px-2 py-3 bg-sladock text-white rounded transition-all duration-500 hover:bg-hoversladock' %>
-      </div>
-    <% end %>
+        <span class="indexBtn"><%= link_to 'TRY FOR FREE',workspaces_path%></span>
+        <span class="indexBtn signoutBtn"><%= link_to 'SIGN OUT' ,destroy_user_session_path %></span>
+      <% else %>
+        <span class="indexBtn signinBtn"><%= link_to 'SIGN IN' ,new_user_session_path %></span>
+        <span class="indexBtn "><%= link_to 'TRY FOR FREE',login_pages_path %></span>
+      <% end %>
+    </div>
   </nav>
 </div>
 <%# Section-1 Slack is where work happens %>
-<section class="py-12 bg-orange-100"> 
+<section class="py-20 bg-orange-100 hidden sm:block"> 
   <div class="container mx-auto grid grid-cols-5">
     <div class="col-span-2 flex items-center">
       <div class="text mr-16">
-        <h2 class="text-6_2xl font-bold leading-tight">Slack is where work happens</h2>
-        <p class="text-lg mt-4 mb-8">With channels in Slack, you and your team know where to go to ask questions, share updates and stay in the loop.</p>
+        <h3 class="text-6_2xl font-bold leading-tight">SlaDock is where magic happens</h2>
+        <p class="text-lg mt-4 mb-8 light_gray">With channels in SlaDock, you and your team can work effectively.</p>
         <div class="btn-group mb-4">
-          <button class="px-10 py-4 bg-sladock text-white rounded transition-all duration-500 hover:bg-deep_sladock"><%= link_to 'TRY FOR FREE' ,new_user_session_path %></button>
-          
-          <button class="px-10 py-4  text-sladock rounded shadow-slashadow box-border border-sladock transition-all duration-100 hover:border "><a href="#">CONTACT SALES</a></button>
+          <button class="px-10 py-4 bg-sladock text-white rounded"><%= link_to 'TRY FOR FREE' ,workspaces_path %></button>
         </div>
-          <%# <p class="text-sm">Need to create a workspace? <%= link_to 'Get-started',new_user_registration_path,class:'font-bold border-b border-blue-800 text-blue-800 transition-all duration-100 hover:border-b-2' </p>%>
       </div>
     </div>
-    <div class="col-span-3">
-      <%= video_tag "hero-image.mp4",autoplay:"autoplay",loop:"loop",muted:"muted",playsinline:"playsinline" %>
+    <div class="col-span-3 flex items-center">
+      <%= link_to image_pack_tag("media/images/indexImg.jpg"),pages_path %>
     </div>
   </div>
 </section>
+<footer class="w-full hidden sm:block py-2 bg-light_gray">
+<p class="text-center"> <i class="far fa-copyright"></i>2020 "SlaDock" All rights reserved.</p>
+</footer>
