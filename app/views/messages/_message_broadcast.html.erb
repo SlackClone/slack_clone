@@ -39,10 +39,10 @@
         </div>
       </div>
     </div>
-    <div class="react-bar absolute right-0  mr-10 -mt-3 flex">
-      <button class="emoji-trigger" data-action="click-> emoji#click" data-id=<%= message.id %>>Emoji</button>
+    <div class="react-bar ">
+      <button class="emoji-trigger btn-blue btn" data-action="click-> emoji#click" data-id=<%= message.id %>><i class="far fa-laugh-wink"></i></button>
       <% if controller_name != "directmsgs"%>
-      <button class= "share-btn btn btn-blue" data-id="<%= message.id %>">share</button>
+      <button class= "share-btn btn btn-blue" data-id="<%= message.id %>"><i class="far fa-share-square"></i></button>
       <% end %>
     </div>
   </div>
