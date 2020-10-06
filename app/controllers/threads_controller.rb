@@ -17,6 +17,8 @@ class ThreadsController < ApplicationController
       @directmsg_user = current_user.users_directmsgs.find_by(directmsg: @directmsg)
       @last_enter_at = @directmsg_user&.last_enter_at || @directmsg.created_at
       @directmsg_user&.touch(:last_enter_at)
+
+      @directmsg_user_name = @directmsg.users.find_by(id: params[:directmsg_id]).nickname
     end
     
     puts type
@@ -58,7 +60,7 @@ class ThreadsController < ApplicationController
     render 'channels/show'
   end
   def create
-    # byebug
+    
     if params[:channel_id]
       @channel = Channel.find(params[:channel_id])
       is_directmsg = false

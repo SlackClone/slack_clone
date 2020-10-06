@@ -20,7 +20,7 @@
     </h2>
 
     <div class="children-message" data-target="subscribe.threads">
-      <% @thread.children.each do |thread| %>
+      <% @thread.children.order(:created_at).each do |thread| %>
         <%= render 'threads/message_broadcast', message: thread %>
       <% end %>
     </div>

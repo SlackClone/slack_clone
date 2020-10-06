@@ -12,6 +12,12 @@ class ChannelsChannel < ApplicationCable::Channel
       directmsg = Directmsg.find_by(id: params[:directId])
       stream_for directmsg
     end
+
+    if params[:messageId] != "0" 
+      thread = Message.find(params[:messageId]).messageable
+      return if thread == channel || thread == directmsg
+      stream_for thread
+    end
     
   end
 

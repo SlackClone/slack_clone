@@ -10,8 +10,7 @@ export default class extends Controller {
   connect() {
     // console.log(this) 
     Notification.requestPermission()
-
-    this.subscription = consumer.subscriptions.create({channel: "ChannelsChannel", channelId: this.data.get("channel"), directId: this.data.get("direct")},
+    this.subscription = consumer.subscriptions.create({channel: "ChannelsChannel", channelId: this.data.get("channel"), directId: this.data.get("direct"), messageId: this.data.get("thread")},
       {
         connected: this.subscribe.bind(this),
         received: this.messaging.bind(this)

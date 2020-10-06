@@ -1,6 +1,6 @@
 
 <div class="">
-  <%= form_with(model: @message, url:directmsg_message_threads_path(@directmsg, @thread), id:"new_thread", class: "border-2 border-gray-200 rounded w-full text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500") do |f| %>
+  <%= form_with(model: @message, url:directmsg_message_threads_path(@thread.messageable_id, @thread), id:"new_thread", class: "border-2 border-gray-200 rounded w-full text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500") do |f| %>
     <div class="flex">
       <%= f.text_field :content, placeholder: t(".placeholder"), id: "thread-form-content" %>
       <%= f.submit t("utilities.submit"), class: "ml-auto bg-gray-500 shadow bg-purple-500 hover:bg-purple-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded" %>
