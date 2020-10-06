@@ -6,32 +6,36 @@ window.addEventListener('DOMContentLoaded',function(){
   if(localStorage.drafts && localStorage.drafts != "[]"){
     btn.classList.remove('hidden')
   } 
-  if(document.forms["new_message"]) {
+  if(document.querySelector('.centered')) {
     const msgForm = document.forms["new_message"]
-    const msgInput = msgForm.elements[1]
-    const msgSubmit = msgForm.elements[2]
     const chId = msgForm.dataset.cid
     const wsId = msgForm.dataset.wid
     const name = msgForm.dataset.name
     const locationUrl = window.location.href
+    const ckText = document.querySelector('.centered')
     //監聽表單input有的話就將此訊息保留在localStorge
-    msgForm.addEventListener('input',()=>{
+    ckText.addEventListener('keyup',()=>{
+      const ckInput = document.querySelector('.ck-content')
       const date = new Date()
       const newDraft = {
         wid: wsId,
         cid: chId,
         name: name,
         category: categoryUrl(locationUrl),
-        value: msgInput.value,
+        value: ckInput.textContent,
         time: `${date.getHours()}:${date.getMinutes()}`
       }
-      // 更新localStorage
-      updateRecords(newDraft)
+      console.log(newDraft)
+        // 更新localStorage
+        updateRecords(newDraft)      
     })
-    // 如果localStorage裡有東西的話就將value塞給表單的input，跳回來input原本的值不會不見
     if (findRecord()){
-      msgInput.value = findRecord().value
+      setTimeout(()=>{
+    // 如果localStorage裡有東西的話就將value塞給表單的input，跳回來input原本的值不會不見
+        document.querySelector('.ck-content').children[0].textContent = findRecord().value
+      },500)
     }
+
     // 監聽所有物件的點擊事件，判斷input有值的話只要點擊其他地方，草稿區的BTN就會出現
     document.addEventListener('click',()=>{
       if(localStorage.drafts != "[]"){
@@ -55,8 +59,7 @@ window.addEventListener('DOMContentLoaded',function(){
       let entry = findRecord()
       // 如果那筆資料存在於 localStorage ，那就更新那筆資料的 value
       if (entry) {
-        // debugger
-        entry.value = msgInput.value
+        entry.value = document.querySelector('.ck-content').textContent
          // 如果那筆資料存在於 localStorage ，但value是空的就刪除那筆
         if(entry.value == ""){
           for(let i=0;i<records.length;i++){
@@ -99,7 +102,6 @@ window.addEventListener('DOMContentLoaded',function(){
     content.textContent = records.value
     channelId.textContent = `#${records.name}`
     box.forEach((e)=>{e.dataset.name = records.name})
-    // `${a.getHours()}:${a.getMinutes()}`
     time.textContent = records.time
     return document.importNode(template.content,true)
   }
@@ -134,7 +136,6 @@ window.addEventListener('DOMContentLoaded',function(){
   document.querySelectorAll('.draft-delete').forEach((e)=>{
     e.addEventListener('click',(e)=>{
       const box = e.target.parentNode.parentNode.parentNode.parentNode
-      console.log(box)
       let removeRecord = JSON.parse(localStorage.getItem('drafts')) || []
       removeRecord = removeRecord.filter((e)=> {return e.name != box.dataset.name })
       localStorage.setItem('drafts',JSON.stringify(removeRecord))
