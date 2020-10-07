@@ -21,6 +21,7 @@ export default class extends Controller {
   }
 
   subscribe(){
+    if ($('.text-area').length === 1) {return} 
     editor()    // create ckeditor
     console.log(`Messaging channel opened in workspace NO.${this.data.get("id")}`)
   }
