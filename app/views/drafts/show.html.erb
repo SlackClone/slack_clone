@@ -1,13 +1,9 @@
 <%= render "./shared/header" %>
 <div class="chatroom flex">
-    <div class="leftbar flex flex-col">
-      <div class="bg-light_sladock text-white overflow-y-auto min-w-200 h-full" style="width: 300px" data-controller="notification" data-notification-workspace="<%= @workspace.id %>" data-notification-channel="<%= @channel&.id || 0 %>" data-notification-direct="<%= @directmsg&.id || 0 %>" data-notification-user="<%= current_user.nickname %>">
-        <%= render "./shared/leftbar", workspace: @workspace, 
-                                       channels:  @channels,
-                                       unread_msg_bol: @unread_msg_bol,
-                                       unread_msg_count: @unread_msg_count %>
-      </div>
-    </div>  
+  <%= render "./shared/leftbar", workspace: @workspace, 
+                                 channels:  @channels,
+                                 unread_msg_bol: @unread_msg_bol,
+                                 unread_msg_count: @unread_msg_count %>
     <div class="flex flex-col flex-grow min-w-0 min-h-0">
       <%# 上方白色區塊顯示頻道名稱與邀請按鈕 %>
       <div class="box-border border-b border-gray-400 h-16 font-bold flex flex-col justify-center pl-3">

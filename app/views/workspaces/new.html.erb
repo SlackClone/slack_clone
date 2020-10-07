@@ -10,9 +10,15 @@
     </div>
     <div class="flex flex-col flex-grow min-w-0 min-h-0 ml-10">
       <div class=" max-w-2xl py-5">
-        <p class=" text-xs my-3"><%= t(".step") %></p>
-        <h3 class="text-5xl font-bold leading-tight"><%= t(".name") %></h3>
-        <p class="text-sm mt-3 mb-5"><%= t(".name_detail") %></p>
+        <p class=" text-xs my-3">
+          <%= t(".step") %>
+        </p>
+        <h3 class="text-5xl font-bold leading-tight">
+          <%= t(".name") %>
+        </h3>
+        <p class="text-sm mt-3 mb-5">
+          <%= t(".name_detail") %>
+        </p>
         <%= form_with(model: @workspace, url: workspaces_path, local: true, class: "text-xl") do |f| %>
           <div class="relative">
             <%= f.text_field :name, 
@@ -23,21 +29,9 @@
             <div class="hidden check-word absolute inset-y-0 right-0 flex items-center mr-3 text-gray-700" data-target="hello.check">
               255
             </div>              
-<<<<<<< HEAD
-<<<<<<< HEAD
           </div>         
           <%= image_tag @workspace.image_url if @workspace.cached_image_data %>
           <%= f.hidden_field :image, value: @workspace.cached_image_data %>
-=======
-          </div>
-          <%= image_tag f.object.image_url if f.object.cached_image_data %>
-          <%= f.hidden_field :image, value: f.object.cached_image_data %>
->>>>>>> 串S3
-=======
-          </div>         
-          <%= image_tag @workspace.image_url if @workspace.cached_image_data %>
-          <%= f.hidden_field :image, value: @workspace.cached_image_data %>
->>>>>>> 上傳圖片完成
           <%= f.file_field :image %>  
           <%= f.submit t("utilities.submit"),
               class:"create-ws-btn cursor-pointer block font-bold text-white px-20 py-2 mb-5 mr-auto bg-green-800 rounded focus:outline-none"

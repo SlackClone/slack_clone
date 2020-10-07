@@ -21,8 +21,7 @@ Rails.application.routes.draw do
   resources :workspaces do
     resource :users_workspaces
     resource :channels, only: %i[new create]
-    resources :channels, only: [:show] do
-    end
+    resources :channels, only: [:show] 
     resource :invitations, only: :create do
       get :accept
     end
