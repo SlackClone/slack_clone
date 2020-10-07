@@ -18,7 +18,9 @@ class ThreadsController < ApplicationController
       @last_enter_at = @directmsg_user&.last_enter_at || @directmsg.created_at
       @directmsg_user&.touch(:last_enter_at)
 
-      @directmsg_user_name = @directmsg.users.find_by(id: params[:directmsg_id]).nickname
+      # byebug
+      @directmsg_user_name = User.find((Directmsg.find(params[:directmsg_id]).name.split(":")[1].split("-") - [current_user.id.to_s])[0]).nickname
+
     end
     
     puts type

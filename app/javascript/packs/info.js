@@ -3,6 +3,36 @@ $(document).ready(function() {
   // 關閉右側INFO
   $('.info-cancel').click(()=>{
     $('.info').addClass('hidden')
+
+    // 拿到現在所在 workspace_id
+    let workspaceId = $('.current-worksapce').attr('workspace_id')
+    
+    // 拿到現在所在 channel or directmsg id
+    let currentChannel = $('.current-channel-or-directmsg').attr('channel_id')
+    let currentDirectmsg = $('.current-channel-or-directmsg').attr('directmsg_anther_user_id')
+    
+    console.log($('.directmsg-each'))
+    // channel url 改回原本的
+    $('.channel-each').each((index, channel) => {
+      // console.log($(channel))
+      let channelId = $(channel).attr('channel_id')
+
+      $(channel).attr('href', `/workspaces/${workspaceId}/channels/${channelId}`)
+      // channel.setAttribute('href', `/workspaces/${workspaceId}/channels/${channelId}`)
+    })
+    // directmsg url 改回原本的
+    $('.directmsg-each').each((index, directmsg) => {
+      $(directmsg).attr('href', `/workspaces/${workspaceId}/directmsgs/${currentDirectmsg}`)
+    })
+
+    // 改現在上方網址
+    if (currentChannel == 0) {
+      // 現在在 directmsg 
+      window.history.pushState('', '', `/workspaces/${workspaceId}/directmsgs/${currentDirectmsg}`)
+    } else {
+      // 現在在 channel 
+      window.history.pushState('', '', `/workspaces/${workspaceId}/channels/${currentChannel}`)
+    }
   })
   // 開啟編輯彈跳視窗 
   $('.edit_profile').click(()=>{

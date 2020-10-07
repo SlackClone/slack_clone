@@ -8,7 +8,7 @@
         <% if @thread.messageable_type == "Channel" %>
           Channel: <%= @thread.messageable.name %>
         <% else %>
-          <%= User.find((@thread.messageable.name.scan(/\d/) - [current_user.id])[0]).nickname %>
+          <%= User.find( (@thread.messageable.name.split(":")[1].split("-") - [current_user.id.to_s])[0]).nickname %>
         <% end %>
       </p>
     </div>
