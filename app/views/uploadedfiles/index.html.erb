@@ -16,7 +16,7 @@
       <div class="file_area break-all flex flex-wrap overflow-y-auto h-chat_full flex-grow border border-1 bg-gray-300 pl-5 pt-5" workspace_id="<%= @workspace.id %>">
         <% @files.each do |file| %>
           <div class="file-zone border-gray-600 border-solid border mx-1 rounded">
-            <div class="flex flex-wrap mx-auto justify-center overflow-hidden h-48 rounded relative z-10">
+            <div class="flex flex-wrap mx-auto justify-center overflow-hidden h-48 rounded relative">
               <%= image_tag file.document.url, class: "" if file.document.mime_type.include? "image" %>
               <%= image_pack_tag "media/images/PDF_file_icon.png" if file.document.mime_type.include? "pdf" %>
               <div class="absolute right-0">
