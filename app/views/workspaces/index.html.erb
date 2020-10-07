@@ -1,13 +1,13 @@
-<div class="bg-white border-b border-gray-400">
-  <nav class="py-1">
-    <h1 class="w-1/12">
-      <%= link_to image_pack_tag("media/images/Slack_logo_new.png"),pages_path %>
+<div class="bg-white">
+  <nav class="py-4 border-b light-gray">
+    <h1 class="w-1/2 sm:w-1/6">
+      <%= link_to image_pack_tag("media/images/Sladock_logo.png"),pages_path %>
     </h1>
+  </nav>
 </div>
-<body class="bg-light_gray">
-  <div class="container mx-auto">
-    <div class="max-w-lg mx-auto">
-      <div class="join-ws my-10">
+  <div class="bg-divider">
+    <div class=" container mx-auto max-w-lg">
+      <div class="join-ws py-8">
         <h3 class="font-bold text-2xl mb-3"><%= t(".your_workspaces") %></h3>
         <p class="text-sm text-gray-700 border-b border-gray-400 pb-5"><%= t(".join") %></p>
           <% @joined_workspace.each do |workspace| %>
@@ -24,15 +24,13 @@
             </div>
           <% end %>
       </div>
-      <div class="create-ws my-10">
+      <div class="create-ws pb-8">
         <h3 class="font-bold text-2xl mb-3"><%= t(".create") %></h3>
         <p class="text-sm text-gray-700 mb-4"><%= t(".different_team") %></p>
         <%= link_to t(".create_btn"),new_workspace_path,class:"z-10 text-sm font-bold bg-white border border-gray-500 rounded py-2 px-3 hover:bg-gray-200 transition-all duration-100" %>
       </div>
     </div>
   </div>
-</section>
-
 
 <div class="">
 <h3><%= t(".all_workspaces") %></h3>

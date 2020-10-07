@@ -1,15 +1,18 @@
-<%# render nav導覽列 %>
-<%= render './shared/nav' %>
+<nav class="container mx-auto mt-4 py-4 flex items-center justify-center">
+    <h1 class="w-1/4">
+      <%= link_to image_pack_tag("media/images/Sladock_logo.png"),pages_path %>
+    </h1>
+</nav>
   <%# get_started %>
 <div class="group container mx-auto mb-10 flex justify-center flex-wrap ">
-  <div class="sign_in px-10 py-16 max-w-400 border border-r-0  border-gray-400 rounded-l">
-    <h2 class="text-3xl font-bold leading-tight mb-3">Try Slack with your team, for free</h2>
-    <p class="mb-6">Create a brand-new workspace for you and your team.</p>
+  <div class="sign_in px-10 py-16 max-w-400 border border-gray-400 rounded-l">
+    <h2 class="text-3xl font-bold leading-tight mb-3">Try Sladock with your team, for free</h2>
+    <p class="mb-6">Start to work with your team, create a workspace.</p>
     <%= link_to 'Sign up', new_user_registration_path,class: "block text-center text-sladock font-bold w-full py-2 border border-gray-400 rounded hover:bg-gray-100 transition-all duration-100"%>
   </div>
-  <div class="get_started px-10 py-16 max-w-400 bg-deep_sladock text-white rounded-r">
-    <h2 class="text-3xl font-bold leading-tight mb-3">Is your team already using Slack?</h2>
-    <p class="mb-6">Find and sign in to your team’s existing workspace.</p>
+  <div class="get_started px-10 py-16 max-w-400 bg-sladock text-white rounded-r">
+    <h2 class="text-3xl font-bold leading-tight mb-3">Joining an existing workspace.</h2>
+    <p class="mb-6">Sign in and join your team's workspace.</p>
     <%= link_to 'Sign in to Slack', new_user_session_path,class:"block text-center text-sladock font-bold bg-white w-full py-2 border border-gray-400 rounded hover:bg-gray-100 transition-all duration-100" %>
   </div>
 </div>
@@ -19,9 +22,11 @@
 </div>
 <%# get_started_tip %>
 <div class="get_started_tip container mx-auto flex max-w-xl">
-  <div class="text py-5 pr-3 flex flex-wrap">
-    <p class="text-sm font-bold mb-2">What’s a Slack workspace?</p>
-    <p class="text-sm">Each company that uses Slack has a workspace of their own. It’s where all of their conversations and files are kept, and it can only be joined by invitation.</p>
+  <div class="text py-5 pr-3 flex flex-wrap justify-center sm:block">
+    <p class="text-sm font-bold mb-2">What’s a Sladock workspace?</p>
+    <p class="text-sm ">By Invitation Only. The Sladock workspaces are available only to those who were invited</p>
   </div>
-  <%= image_pack_tag("media/images/get-started-workspace-tip-9764b79.png") %>
+  <div class="hidden sm:block">
+    <%= image_pack_tag("media/images/get-started-workspace-tip-9764b79.png")%>
+  </div>
 </div>

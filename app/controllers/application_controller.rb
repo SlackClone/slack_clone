@@ -10,6 +10,6 @@ class ApplicationController < ActionController::Base
 
   def after_sign_in_path_for(resource)
     workspace_channel_path(session[:workspace_id], session[:channel]) if session[:workspace_id] && session[:channel]
-    root_path
+    workspaces_path
   end
 end
