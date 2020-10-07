@@ -34,12 +34,15 @@ export default class extends Controller {
     if (userNow === data.user_nickname){
       return
     }else{
-      if (typeof directMsgId === "undefined"){
+      if (typeof directMsgId === "undefined" && channelId != this.data.get("channel")){
+        // console.log(channelId !== this.data.get("channel"))
+        // console.log(typeof channelId)
+        // console.log(typeof this.data.get("channel"))
         // 瀏覽器訊息通知
         new Notification(channelTitle, {body: body})
         // 聊天室群組字體提示
         channelName.classList.add("font-bold")
-      }else if (typeof channelId === "undefined"){
+      }else if (typeof channelId === "undefined" && directMsgId != this.data.get("channel")){
         // 瀏覽器訊息通知
         new Notification(directMsgTitle)
         // 私聊未讀訊息則數顯示

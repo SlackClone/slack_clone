@@ -1,4 +1,4 @@
-<% if !@divide_exist && @last_enter_at && (@last_enter_at < message.created_at) && message.user_id != current_user.id %>
+<% if !@divide_exist && @last_enter_at && (@last_enter_at <= message.created_at) && message.user_id != current_user.id %>
   <% @divide_exist = true %>
   <div class='flex text-right divide'>
     <span class='h-0 border-b-0 border-t-2 block flex-grow border-red-600 my-auto'></span>

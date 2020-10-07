@@ -1,5 +1,6 @@
 class Message < ApplicationRecord
   validates :content, presence: true
+  after_save :update_message_created_at
   
   belongs_to :user
   belongs_to :share_message, class_name: "Message", optional: true
@@ -11,23 +12,36 @@ class Message < ApplicationRecord
 
 
 
-def toggle_emoji(emoji, user_id)
-  if emoji_data[emoji].present?
-    # someone cliked this emoji
-    if emoji_data[emoji].include?(user_id)
-      # user clicked thsi emoji , so delete it
-      emoji_data[emoji].delete(user_id)
-      if emoji_data[emoji].size.zero?
-        emoji_data.delete(emoji)
+  def toggle_emoji(emoji, user_id)
+    if emoji_data[emoji].present?
+      # someone cliked this emoji
+      if emoji_data[emoji].include?(user_id)
+        # user clicked thsi emoji , so delete it
+        emoji_data[emoji].delete(user_id)
+        if emoji_data[emoji].size.zero?
+          emoji_data.delete(emoji)
+        end
+      else
+        #使用者沒按過，把他加入
+        emoji_data[emoji] << user_id
       end
     else
-      #使用者沒按過，把他加入
-      emoji_data[emoji] << user_id
+      emoji_data[emoji] = [user_id]
     end
-  else
-    emoji_data[emoji] = [user_id]
+    save
   end
-  save
-end
+
+  private
+  def update_message_created_at
+    # byebug
+    ##如果是私訊
+    # if messageable_type == "Directmsg"
+
+    # ##如果是群組
+    # elsif messageable_type == "Channel"
+
+    # end
+    # self.touch(:created_at)
+  end
 
 end

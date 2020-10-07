@@ -34,7 +34,7 @@ export default class extends Controller {
           this.messagesTarget.insertAdjacentHTML('beforeend', `<div class='flex text-right divide'><span class='h-0 border-b-0 border-t-2 block flex-grow border-red-600 my-auto'></span><span class="pl-3">new</span></div>`)
         }
       } else {
-        this.subscription.perform("update_enter_time")
+        this.subscription.perform("update_enter_time")   
       }
       this.messagesTarget.insertAdjacentHTML("beforeend", data.message)
       window.initShare()      
@@ -123,34 +123,34 @@ function customEditor(){
   })
 
   $('.ck-editor__editable').keydown( (e) => {
-    // // p
-    // if (e.keyCode == 13 && !e.shiftKey && ($('.ck-editor__editable').children()[0].tagName === 'P' || $('.ck-editor__editable').children()[0].tagName === 'BLOCKQUOTE')){
-    //   $('.ck-editor__editable').children(':last-child')[0].remove()
-    //   $('.message-content').val($('.ck-editor__editable').html()) 
-    //   $('.message-submit').trigger('click')
-    //   return
-    // }
-    // // blockquote
-    // // 跟 li 有關的
-    // if (e.keyCode == 13 && !e.shiftKey && $('.ck-editor__editable').children()[0].tagName !== "PRE"){
-    //   $('.ck-editor__editable').children().find('li:last-child')[0].remove()
-    //   $('.message-content').val($('.ck-editor__editable').html()) 
-    //   $('.message-submit').trigger('click')
-    //   return
-    // }
-    // if (e.shiftKey && ($('.ck-editor__editable').children()[0].tagName === "OL" || $('.ck-editor__editable').children()[0].tagName === "UL")){
-    //   // e.preventDefault()
-    //   // e.keyCode = 13
-    //   // $('.ck-editor__editable').children(':first-child')[0].insertAdjacentHTML('afterend', `<br>`)
-    //   // $('.ck-editor__editable').children(':first-child')[0].insertAdjacentHTML('beforeend', `<li><br data-cke-filler="true"></li>`)
-    //   return
-    // }
-    // // plain text
-    // if (e.keyCode == 13 && !e.shiftKey){
-    //   $('.ck-editor__editable').children().find('br:last-child')[0].remove()
-    //   $('.message-content').val($('.ck-editor__editable').html()) 
-    //   $('.message-submit').trigger('click')
-    //   return
-    // }
+    // p
+    if (e.keyCode == 13 && !e.shiftKey && ($('.ck-editor__editable').children()[0].tagName === 'P' || $('.ck-editor__editable').children()[0].tagName === 'BLOCKQUOTE')){
+      $('.ck-editor__editable').children(':last-child')[0].remove()
+      $('.message-content').val($('.ck-editor__editable').html()) 
+      $('.message-submit').trigger('click')
+      return
+    }
+    // blockquote
+    // 跟 li 有關的
+    if (e.keyCode == 13 && !e.shiftKey && $('.ck-editor__editable').children()[0].tagName !== "PRE"){
+      $('.ck-editor__editable').children().find('li:last-child')[0].remove()
+      $('.message-content').val($('.ck-editor__editable').html()) 
+      $('.message-submit').trigger('click')
+      return
+    }
+    if (e.shiftKey && ($('.ck-editor__editable').children()[0].tagName === "OL" || $('.ck-editor__editable').children()[0].tagName === "UL")){
+      // e.preventDefault()
+      // e.keyCode = 13
+      // $('.ck-editor__editable').children(':first-child')[0].insertAdjacentHTML('afterend', `<br>`)
+      // $('.ck-editor__editable').children(':first-child')[0].insertAdjacentHTML('beforeend', `<li><br data-cke-filler="true"></li>`)
+      return
+    }
+    // plain text
+    if (e.keyCode == 13 && !e.shiftKey){
+      $('.ck-editor__editable').children().find('br:last-child')[0].remove()
+      $('.message-content').val($('.ck-editor__editable').html()) 
+      $('.message-submit').trigger('click')
+      return
+    }
   })
 }

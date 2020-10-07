@@ -28,7 +28,6 @@ class ChannelsController < ApplicationController
     channel_users_for_select2
     @channel_user = current_user.users_channels.find_by(channel: @channel)
     @last_enter_at = @channel_user&.last_enter_at || @channel.created_at
-    
     # 更新使用者進入這個channel的時間
     @channel_user&.touch(:last_enter_at)
     # 查詢私訊未讀訊息數量 
@@ -38,7 +37,7 @@ class ChannelsController < ApplicationController
       # 由私訊的name("DM:X-Y")拿出recipient的id
       user_id = (dc.name.split(":").last.split("-")-["#{current_user.id}"]).first
       # 將recipient的id當key，未讀訊息數目當value
-      @unread_msg_count[user_id] = dc.messages.where("created_at > ? AND user_id != ?", 
+      @unread_msg_count[user_id] = dc.messages.where("created_at >= ? AND user_id != ?", 
                                                     dc.users_directmsgs.find_by(user_id: current_user.id).last_enter_at,current_user.id)
                                                     .count
     end
@@ -47,7 +46,7 @@ class ChannelsController < ApplicationController
     @unread_msg_bol ={}
     added_channel.each do |ac|
       # 將channel的id當key，是否有未讀訊息當做value
-      @unread_msg_bol[ac.id] = ac.messages.where("created_at > ? AND user_id != ?", 
+      @unread_msg_bol[ac.id] = ac.messages.where("created_at >= ? AND user_id != ?", 
                                                   ac.users_channels.find_by(user_id: current_user.id).last_enter_at, current_user.id)
                                                   .present?
     end

@@ -8,12 +8,14 @@ class MessagesController < ApplicationController
       @channel = Channel.find(params[:channel_id])
       @message = @channel.messages.new(message_params)
       channel_id = params[:channel_id]
+      # @channel_user = current_user.users_channels.find_by(channel_id: channel_id).touch(:last_enter_at)
       direct_or_not = false
     #若是私訊訊息
     else  
       @channel = Directmsg.find(params[:directmsg_id])
       @message = @channel.messages.new(message_params)
       channel_id = params[:directmsg_id]
+      # @channel_user = current_user.users_directmsgs.find_by(directmsg_id: channel_id).touch(:last_enter_at)
       direct_or_not = true
     end
     
@@ -23,7 +25,7 @@ class MessagesController < ApplicationController
       @message.attachfiles.each do |file|
         file.document_derivatives! if file.document.mime_type.include? "image"
       end
-    end
+    end 
 
     if @message.save
       # 第三個參數為是否為私訊

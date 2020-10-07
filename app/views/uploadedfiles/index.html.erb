@@ -4,7 +4,8 @@
       <%= render "./shared/leftbar", workspace: @workspace,   
                                      channels:  @channels,
                                      unread_msg_bol: @unread_msg_bol,
-                                     unread_msg_count: @unread_msg_count %>
+                                     unread_msg_count: @unread_msg_count,
+                                     channel: nil %>
     </div>  
     <div class="flex flex-col flex-grow min-w-0 min-h-0">
       <%# 上方白色區塊顯示頻道名稱與邀請按鈕 %>
