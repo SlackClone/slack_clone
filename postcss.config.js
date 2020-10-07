@@ -32,10 +32,10 @@ module.exports = {
       },
       stage: 3
     }),
-    purgecss
-    // ...process.env.RAILS_ENV === 'production'
-    // ? [purgecss]
-    // : []
+    // purgecss
+    ...process.env.RAILS_ENV === 'production'
+    ? [purgecss]
+    : []
   ]
 }
 
