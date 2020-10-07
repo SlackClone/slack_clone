@@ -322,6 +322,7 @@ module.exports = {
       chat_full: "calc(100vh - 30rem)",
       left_full: "calc(100vh - 6.5rem)",
       screen_94: "94vh",
+      small_screen: "calc(100vh - 2.5rem)",
     }),
     inset: {
       0: "0",

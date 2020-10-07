@@ -86,7 +86,10 @@ function editor(){
   .then( editor => {
     window.editor = editor;
     customEditor()
+    findRecord()
+  
   } )
+
   .catch( error => {
     console.error( 'Oops, something went wrong!' );
   } );
@@ -154,3 +157,15 @@ function customEditor(){
     // }
   })
 }
+   // 如果localStorage裡有東西的話就將value塞給表單的input，跳回來input原本的值不會不見   
+  function findRecord(){
+    const records = JSON.parse(localStorage.getItem('drafts')) || []
+    const msgForm = document.forms["new_message"]
+    const chId = msgForm.dataset.cid
+    const target = records.find((e)=> {return e.cid == chId})
+    if (target) {
+      document.querySelector('.ck-content').children[0].textContent = target.value
+    }
+  }
+
+

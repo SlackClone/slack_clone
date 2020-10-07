@@ -15,6 +15,7 @@ zh-TW:
         save: '資料存放區'
         more: '...看更多'
         shared: '已分享'
+        invite: '+邀請加入'
       channel:
         name: '頻道名稱'
         new: '建立新聊天室'

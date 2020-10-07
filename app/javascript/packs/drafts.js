@@ -25,16 +25,9 @@ window.addEventListener('DOMContentLoaded',function(){
         value: ckInput.textContent,
         time: `${date.getHours()}:${date.getMinutes()}`
       }
-      console.log(newDraft)
         // 更新localStorage
         updateRecords(newDraft)      
     })
-    if (findRecord()){
-      setTimeout(()=>{
-    // 如果localStorage裡有東西的話就將value塞給表單的input，跳回來input原本的值不會不見
-        document.querySelector('.ck-content').children[0].textContent = findRecord().value
-      },500)
-    }
 
     // 監聽所有物件的點擊事件，判斷input有值的話只要點擊其他地方，草稿區的BTN就會出現
     document.addEventListener('click',()=>{
