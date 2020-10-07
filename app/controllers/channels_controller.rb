@@ -23,9 +23,10 @@ class ChannelsController < ApplicationController
     @message = Message.new
     @message.attachfiles.build
     @channels = @workspace.channels
-    @messages = @channel.messages
+    @messages = @channel.messages.includes({user: :profile})
     @invitation = Invitation.new
     channel_users_for_select2
+
     @channel_user = current_user.users_channels.find_by(channel: @channel)
     @last_enter_at = @channel_user&.last_enter_at || @channel.created_at
     # 更新使用者進入這個channel的時間
