@@ -51,7 +51,6 @@ export default class extends Controller {
   }
 }
 
-
 function editor(){
   ClassicEditor
   .create( document.querySelector( '.editor' ), {	
@@ -97,6 +96,7 @@ function customEditor(){
   
   $('.centered').attr('class', 'w-full px-3 mb-2')
   $('.ck-editor').attr('class', 'flex flex-col-reverse text-area')
+  $('.ck-tooltip__text').attr('class', 'hidden')
   // 避免一直生成
 
   $('.ck-toolbar_grouping >.ck-toolbar__items').append('<div class="custom-ckeditor" style="margin-left: auto; "></div>')

@@ -1,7 +1,6 @@
 class Message < ApplicationRecord
   validates :content, presence: true
-  after_save :update_message_created_at
-  
+
   belongs_to :user
   belongs_to :share_message, class_name: "Message", optional: true
   belongs_to :messageable, :polymorphic => true
@@ -9,8 +8,6 @@ class Message < ApplicationRecord
   has_many :message_files, dependent: :destroy
   has_many :attachfiles, through: :message_files
   accepts_nested_attributes_for :attachfiles, allow_destroy: true
-
-
 
   def toggle_emoji(emoji, user_id)
     if emoji_data[emoji].present?
@@ -29,19 +26,6 @@ class Message < ApplicationRecord
       emoji_data[emoji] = [user_id]
     end
     save
-  end
-
-  private
-  def update_message_created_at
-    # byebug
-    ##如果是私訊
-    # if messageable_type == "Directmsg"
-
-    # ##如果是群組
-    # elsif messageable_type == "Channel"
-
-    # end
-    # self.touch(:created_at)
   end
 
 end

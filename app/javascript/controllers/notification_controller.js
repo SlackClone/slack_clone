@@ -35,9 +35,6 @@ export default class extends Controller {
       return
     }else{
       if (typeof directMsgId === "undefined" && channelId != this.data.get("channel")){
-        // console.log(channelId !== this.data.get("channel"))
-        // console.log(typeof channelId)
-        // console.log(typeof this.data.get("channel"))
         // 瀏覽器訊息通知
         new Notification(channelTitle, {body: body})
         // 聊天室群組字體提示
