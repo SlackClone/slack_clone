@@ -125,9 +125,10 @@ function editor(){
   } )
   .then( editor => {
     window.editor = editor;
+    console.log(123)
     customEditor()
     findRecord()
-  
+
   } )
 
   .catch( error => {

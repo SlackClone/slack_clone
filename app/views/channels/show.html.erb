@@ -1,10 +1,10 @@
-<div class="chatroom flex overflow-hidden">
+<div class="chatroom flex overflow-hidden" data-controller="subscribe"  data-subscribe-id="<%= @workspace.id %>" data-subscribe-channel="<%= @channel&.id || 0 %>" data-subscribe-direct="<%= @directmsg&.id || 0 %>">
   <%= render "./shared/leftbar", workspace: @workspace, 
                                   channels:  @channels,
                                   unread_msg_bol: @unread_msg_bol,
                                   unread_msg_count: @unread_msg_count,
                                   channel: @channel || @directmsg %>
-  <div class="flex flex-col flex-grow min-w-0 min-h-0 h-screen" data-controller="subscribe"  data-subscribe-id="<%= @workspace.id %>" data-subscribe-channel="<%= @channel&.id || 0 %>" data-subscribe-direct="<%= @directmsg&.id || 0 %>">
+  <div class="flex flex-col flex-grow min-w-0 min-h-0 h-small_screen">
     <%# 上方白色區塊顯示頻道名稱與邀請按鈕 %>
     <div class="box-border border-b border-gray-400 h-16 flex justify-between items-center current-channel-or-directmsg" channel_id="<%= @channel.try(:id) || 0 %>" directmsg_anther_user_id="<%= User.find_by(nickname: @directmsg_user_name).try(:id) || 0 %>">
       <p class="font-bold">#<%=  @channel.try(:name) || @directmsg_user_name %></p>
