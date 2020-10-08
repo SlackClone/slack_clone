@@ -24,7 +24,7 @@ export default class extends Controller {
   subscribe(){
     // 回傳目前游標指導的位置，focusNode則是該node，詳情去找Window.getSelection API
     window.focusElement = window.getSelection().focusNode
-    // 
+    // 回傳游標在Node的哪個位置
     window.inputPosition = window.getSelection().focusOffset
 
     if ($('.text-area').length === 1) {return} 
@@ -137,18 +137,19 @@ function customEditor(){
         textarea.children().html(emoji)  
       // 已經有其他文字的狀況
       }else {
-        // 如果input為element起始點
+        // 如果input為element起始點(例如換行的起始點)
         if(inputPosition === 0){
-          focusElement.innerHTML = emoji + ` &ensp`
+          focusElement.innerHTML = emoji
         }else {
+          // 其他狀況要把emoji跟原有字串做拼接
           let textParent = focusParent.innerHTML
-          console.log(typeof textParent)
+          // string是要插入的emoji，index是要插入的位置
           String.prototype.emojiInsert = function(index, string){
             return this.slice(0, index) + string + this.slice(index)
           }
+          // textParent為插入emoji後的新字串
           textParent = textParent.emojiInsert(inputPosition, emoji)
           focusParent.innerHTML = textParent
-          focusParent.innerHTML.length
         }
       }
       // 尋找最後一個子元素
@@ -171,12 +172,13 @@ function customEditor(){
     $('.message-submit').trigger('click')
   })
 
+  // 為了監聽使用者用滑鼠改變輸入位置時紀錄游標位置
   $('.ck-editor__editable').mouseup( (e) => {
     focusElement = window.getSelection().focusNode
     window.focusParent = window.getSelection().focusNode.parentElement
     inputPosition = window.getSelection().focusOffset
   })
-
+  // 為了監聽使用者使用方向鍵移動輸入位置時紀錄游標位置
   $('.ck-editor__editable').keyup( (e) => {
     focusElement = window.getSelection().focusNode
     focusParent = window.getSelection().focusNode.parentElement
