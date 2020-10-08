@@ -26,7 +26,7 @@ $(document).ready(function () {
 
 document.querySelectorAll('.share-btn').forEach((e)=>{
   e.addEventListener('click', function (e) {
-    let shareContent = e.target.parentNode.querySelector('.content').textContent
+    let shareContent = e.target.parentNode.parentNode.querySelector('.content').textContent
     let selectMessage = document.querySelector('.select-message')
     selectMessage.textContent = shareContent
     let input = document.getElementById('share_message_id')

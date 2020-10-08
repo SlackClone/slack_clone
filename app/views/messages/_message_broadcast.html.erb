@@ -10,7 +10,7 @@
     <div class="txt flex relative pl-12">
       <div class="w-10 h-10 absolute left-0">
         <%= image_tag message.user.profile.try(:avatar_url,(:small)) || 
-          "https://ca.slack-edge.com/T018LF2LHK3-U018XMDF20Y-g206a10ded6a-32",class:"min-w-full h-frounded message_avatar","aria-haspopup": true,"aria-expanded": true,data:{id:message.user_id} %>
+          "https://ca.slack-edge.com/T018LF2LHK3-U018XMDF20Y-g206a10ded6a-32",class:"min-w-full h-frounded message_avatar rounded","aria-haspopup": true,"aria-expanded": true,data:{id:message.user_id} %>
       </div>
       <div class="font-bold items-start">
         <span class="pr-1 author"><%= message.user.nickname %></span>
@@ -18,8 +18,7 @@
           <%= message.created_at.strftime("%I:%M") %>
         </span>
         <div class="share-msg flex-col">
-          <div class="content text-sm text-gray-800">
-              <%= raw(message.content) %>
+          <div class="content text-sm text-gray-800"><%= raw(message.content) %>
           </div>
           <div class="file">
             <% if message.attachfiles.empty? != true %>

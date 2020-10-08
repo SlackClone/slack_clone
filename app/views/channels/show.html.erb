@@ -42,7 +42,7 @@
     </div>
     </div>
     <%# 訊息區 %>
-    <div class="messages_area break-all flex flex-col-reverse overflow-y-auto h-chat_full flex-grow border border-1 bg-gray-300">
+    <div class="messages_area break-all flex flex-col-reverse overflow-y-auto h-chat_full flex-grow border border-1">
       <div class="pb-5 messages" data-target="subscribe.messages">
         <% @messages.order(:created_at).each do |msg| %>
           <%= render "messages/message_broadcast" , message: msg,avatar_url: @avatar_url %>

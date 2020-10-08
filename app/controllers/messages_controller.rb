@@ -35,8 +35,9 @@ class MessagesController < ApplicationController
   def add
     @channel = Channel.find(share_msg_params[:messageable_id])
     @new_message = @channel.messages.new(share_msg_params)
+    @avatar_url = current_user.profile.try(:avatar_url,(:small))
     if @new_message.save
-      sending_message(@new_message, @channel, false)
+      sending_message(@new_message, @channel, @avatar_url, false)
       sending_notice(@channel, current_user, false)
       @result = true
     else
