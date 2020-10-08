@@ -2,6 +2,7 @@ import { Controller } from "stimulus"
 import consumer from "channels/consumer"
 import $ from "jquery"
 import ClassicEditor from "ckeditor5-custom-build/build/ckeditor.js"
+import { EmojiButton } from '@joeattardi/emoji-button'
 
 export default class extends Controller {
   static targets = ["messages", "newMessage" ]
@@ -21,6 +22,9 @@ export default class extends Controller {
   }
 
   subscribe(){
+    window.focusElement = window.getSelection().focusNode
+    window.inputPosition = window.getSelection().focusOffset
+
     if ($('.text-area').length === 1) {return} 
     editor()    // create ckeditor
     console.log(`Messaging channel opened in workspace NO.${this.data.get("id")}`)
@@ -100,7 +104,7 @@ function customEditor(){
   $('.centered').attr('class', 'w-full px-3 mb-2')
   $('.ck-editor').attr('class', 'flex flex-col-reverse text-area')
   $('.ck-tooltip__text').attr('class', 'hidden')
-  // 避免一直生成
+
 
   $('.ck-toolbar_grouping >.ck-toolbar__items').append('<div class="custom-ckeditor" style="margin-left: auto; "></div>')
   $('.custom-ckeditor').append('<button class="custom_emoji ck" style="margin-right: 12px;"></button>')
@@ -110,8 +114,46 @@ function customEditor(){
   $('.custom-ckeditor').append('<button class="custom_send ck" style=" margin-right: 12px;" type="submit"></button>')
   $('.custom_send').append('<i class="far fa-paper-plane ck ck-icon"></i>')
   
+  // emoji 
   $('.custom_emoji').click( (e) => {
     e.preventDefault()
+    const picker = new EmojiButton({
+      autoHide: true,
+      showCategoryButtons: false	
+    })
+    const target = e.currentTarget
+    picker.togglePicker(target)
+  
+    picker.on('emoji', selection => {
+      const emoji = selection.emoji
+      let textarea = $('.ck-editor__editable')
+      let lastChild = $('.ck-editor__editable')
+
+      // 假如輸入框沒有字
+      if (textarea.text() == ""){
+        textarea.children().html(emoji)  
+      }else {
+        // 如果input為element起始點
+        if(inputPosition === 0){
+          focusElement.innerHTML = emoji + ` &ensp`
+        }else {
+          let textParent = focusParent.innerHTML
+          console.log(typeof textParent)
+          String.prototype.emojiInsert = function(index, string){
+            return this.slice(0, index) + string + this.slice(index)
+          }
+          textParent = textParent.emojiInsert(inputPosition, emoji)
+          focusParent.innerHTML = textParent
+          focusParent.innerHTML.length
+        }
+      }
+      // 尋找最後一個子元素
+      // while(textarea.children().length !== 0){
+      //   lastChild = textarea.children().last()
+      //   textarea = lastChild
+      // }
+      // textarea[0].innerHTML += emoji
+    })
   })
 
   $('.custom_attach').click( (e) => {
@@ -125,7 +167,17 @@ function customEditor(){
     $('.message-submit').trigger('click')
   })
 
-  $('.ck-editor__editable').keydown( (e) => {
+  $('.ck-editor__editable').mouseup( (e) => {
+    focusElement = window.getSelection().focusNode
+    window.focusParent = window.getSelection().focusNode.parentElement
+    inputPosition = window.getSelection().focusOffset
+  })
+
+  $('.ck-editor__editable').keyup( (e) => {
+    focusElement = window.getSelection().focusNode
+    focusParent = window.getSelection().focusNode.parentElement
+    inputPosition = window.getSelection().focusOffset
+
     // // p
     // if (e.keyCode == 13 && !e.shiftKey && ($('.ck-editor__editable').children()[0].tagName === 'P' || $('.ck-editor__editable').children()[0].tagName === 'BLOCKQUOTE')){
     //   $('.ck-editor__editable').children(':last-child')[0].remove()
