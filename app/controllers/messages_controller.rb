@@ -23,7 +23,7 @@ class MessagesController < ApplicationController
       @message.attachfiles.each do |file|
         file.document_derivatives! if file.document.mime_type.include? "image"
       end
-    end
+    end 
 
     if @message.save
       # 第三個參數為是否為私訊

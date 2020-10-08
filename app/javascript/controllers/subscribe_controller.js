@@ -34,7 +34,7 @@ export default class extends Controller {
           this.messagesTarget.insertAdjacentHTML('beforeend', `<div class='flex text-right divide'><span class='h-0 border-b-0 border-t-2 block flex-grow border-red-600 my-auto'></span><span class="pl-3">new</span></div>`)
         }
       } else {
-        this.subscription.perform("update_enter_time")
+        this.subscription.perform("update_enter_time")   
       }
       this.messagesTarget.insertAdjacentHTML("beforeend", data.message)
       window.initShare()      
@@ -50,7 +50,6 @@ export default class extends Controller {
     editor()
   }
 }
-
 
 function editor(){
   ClassicEditor
@@ -100,6 +99,7 @@ function customEditor(){
   
   $('.centered').attr('class', 'w-full px-3 mb-2')
   $('.ck-editor').attr('class', 'flex flex-col-reverse text-area')
+  $('.ck-tooltip__text').attr('class', 'hidden')
   // 避免一直生成
 
   $('.ck-toolbar_grouping >.ck-toolbar__items').append('<div class="custom-ckeditor" style="margin-left: auto; "></div>')

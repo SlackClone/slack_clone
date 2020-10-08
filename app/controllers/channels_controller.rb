@@ -28,7 +28,6 @@ class ChannelsController < ApplicationController
     channel_users_for_select2
     @channel_user = current_user.users_channels.find_by(channel: @channel)
     @last_enter_at = @channel_user&.last_enter_at || @channel.created_at
-    
     # 更新使用者進入這個channel的時間
     @channel_user&.touch(:last_enter_at)
     # 查詢私訊未讀訊息數量 

@@ -3,7 +3,7 @@ class ChannelsChannel < ApplicationCable::Channel
     stop_all_streams
     if params[:channelId] != "0"
       @channel_user = current_user.users_channels.find_by(channel_id: params[:channelId])
-      
+
       channel = Channel.find_by(id: params[:channelId])
       stream_for channel
     elsif params[:directId] != "0"
@@ -22,4 +22,5 @@ class ChannelsChannel < ApplicationCable::Channel
   def update_enter_time
     @channel_user.touch(:last_enter_at)
   end
+
 end
