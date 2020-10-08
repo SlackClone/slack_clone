@@ -60,6 +60,8 @@ GEM
       public_suffix (>= 2.0.2, < 5.0)
     airbrussh (1.4.0)
       sshkit (>= 1.6.1, != 1.7.0)
+    ancestry (3.1.0)
+      activerecord (>= 4.2.0)
     aws-eventstream (1.1.0)
     aws-partitions (1.374.0)
     aws-sdk-core (3.107.0)
@@ -78,8 +80,6 @@ GEM
       aws-eventstream (~> 1, >= 1.0.2)
     bcrypt (3.1.16)
     bcrypt_pbkdf (1.0.0)
-    ancestry (3.1.0)
-      activerecord (>= 4.2.0)
     bindex (0.8.1)
     bootsnap (1.4.8)
       msgpack (~> 1.0)
@@ -325,10 +325,10 @@ GEM
     tilt (2.0.10)
     tzinfo (1.2.7)
       thread_safe (~> 0.1)
-    warden (1.2.9)
-      rack (>= 2.0.9)
     tzinfo-data (1.2020.1)
       tzinfo (>= 1.0.0)
+    warden (1.2.9)
+      rack (>= 2.0.9)
     web-console (4.0.4)
       actionview (>= 6.0.0)
       activemodel (>= 6.0.0)
@@ -359,17 +359,8 @@ PLATFORMS
   x86-mswin32
 
 DEPENDENCIES
-<<<<<<< HEAD
-<<<<<<< HEAD
-  aws-sdk-s3 (~> 1.81)
-=======
-<<<<<<< HEAD
->>>>>>> WIP
-  bcrypt_pbkdf (= 1.0)
-=======
-=======
->>>>>>> fix conflict
   ancestry (~> 3.1)
+  aws-sdk-s3 (~> 1.81)
   bcrypt_pbkdf (= 1.0)
   bootsnap (>= 1.4.2)
   byebug
@@ -384,9 +375,9 @@ DEPENDENCIES
   factory_bot_rails (~> 6.1)
   faker (~> 2.13)
   figaro (~> 1.2)
-  image_processing (~> 1.2)
   foreman (~> 0.87.2)
   hirb (~> 0.7.3)
+  image_processing (~> 1.2)
   inline_svg (~> 1.7, >= 1.7.1)
   jbuilder (~> 2.7)
   letter_opener_web (~> 1.4)

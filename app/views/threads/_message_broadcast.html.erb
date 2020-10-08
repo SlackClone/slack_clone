@@ -9,7 +9,7 @@
           <%= message.created_at.strftime("%I:%M") %>
         </div>
         <div class="content">
-          <%= message.content %>
+          <%= raw(message.content) %>
         </div>
       </div>
     </div>
