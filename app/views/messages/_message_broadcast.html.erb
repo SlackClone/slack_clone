@@ -27,20 +27,21 @@
                 <%= link_to file.document.metadata["filename"], file.document.download_url(host: "http://localhost:3000/"), download:"" unless file.document.mime_type.include? "image"%>
               <% end %>
             <% end %>
-          </div>
-            <% if message.share_message_id.present? %>
-            <div class="m-2 border-l-4 border-gray-600">
-              <div class="ml-2 font-bold"> <%= message.share_message.user.nickname %> </div>
-              <div class="ml-2"> <%= raw(message.share_message.content) %> </div>
-            </div> 
-          <% end %>       
-          <div class="reaction-emoji" data-target="emoji.reaction">
-            <div id="message-reaction-<%= message.id %>" class="flex added-emoji">
-              <%= render './shared/reaction', message: message %>
-            </div>
-          </div>
-        </div>        
+        </div>
+          <% if message.share_message_id.present? %>
+          <div class="m-2 border-l-4 border-gray-600">
+            <div class="ml-2 font-bold"> <%= message.share_message.user.nickname %> </div>
+            <div class="ml-2"> <%= raw(message.share_message.content) %> </div>
+          </div> 
+        <% end %>       
+        <div class="reaction-emoji" data-target="emoji.reaction">
+          <div id="message-reaction-<%= message.id %>" class="flex added-emoji items-center">
+            <%= render './shared/reaction', message: message %>
+           </div>
+        </div>
       </div>
+    </div>
+
 
     </div>
     <div class="react-bar">
