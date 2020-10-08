@@ -38,7 +38,7 @@ class UploadedfilesController < ApplicationController
                   {channel_type: "Directmsg"}
                 ]
               }
-    # byebug
+              
     @current_channel = @added_channel + @direct_channel
     
     @files = Attachfile.all

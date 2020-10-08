@@ -22,7 +22,9 @@ export default class extends Controller {
   }
 
   subscribe(){
+    // 回傳目前游標指導的位置，focusNode則是該node，詳情去找Window.getSelection API
     window.focusElement = window.getSelection().focusNode
+    // 
     window.inputPosition = window.getSelection().focusOffset
 
     if ($('.text-area').length === 1) {return} 
@@ -117,21 +119,23 @@ function customEditor(){
   // emoji 
   $('.custom_emoji').click( (e) => {
     e.preventDefault()
+
     const picker = new EmojiButton({
       autoHide: true,
       showCategoryButtons: false	
     })
+
     const target = e.currentTarget
     picker.togglePicker(target)
   
     picker.on('emoji', selection => {
       const emoji = selection.emoji
-      let textarea = $('.ck-editor__editable')
-      let lastChild = $('.ck-editor__editable')
+      let textarea = $('.ck-editor__editable')    //要塞emoji的地方
 
-      // 假如輸入框沒有字
+      // 假如輸入框是空的時候，直接把emoji放進去
       if (textarea.text() == ""){
         textarea.children().html(emoji)  
+      // 已經有其他文字的狀況
       }else {
         // 如果input為element起始點
         if(inputPosition === 0){
