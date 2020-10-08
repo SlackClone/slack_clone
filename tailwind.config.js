@@ -24,7 +24,7 @@ module.exports = {
       current: "currentColor",
       sladock: "#138184",
       light_sladock: "#26bec9",
-      deep_slack:"rgb(14,54,49)",
+      deep_sladock:"rgb(14,54,49)",
       channel_hover:"#64b3f4",
       black: "#333",
       white: "#fff",
