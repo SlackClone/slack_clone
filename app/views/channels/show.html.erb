@@ -1,20 +1,17 @@
 <%= render "./shared/header" %>
-<div class="chatroom flex overflow-hidden ">
-  <div class="leftbar flex flex-col">
-    <%= render "./shared/leftbar", workspace: @workspace, 
-                                    channels:  @channels,
-                                    unread_msg_bol: @unread_msg_bol,
-                                    unread_msg_count: @unread_msg_count %>
-  </div>  
-  <div class="flex flex-col flex-grow min-w-0 min-h-0" data-controller="subscribe"  data-subscribe-id="<%= @workspace.id %>" data-subscribe-channel="<%= @channel&.id || 0 %>" data-subscribe-direct="<%= @directmsg&.id || 0 %>">
+<div class="chatroom flex overflow-hidden">
+  <%= render "./shared/leftbar", workspace: @workspace, 
+                                  channels:  @channels,
+                                  unread_msg_bol: @unread_msg_bol,
+                                  unread_msg_count: @unread_msg_count %>
+  <div class="flex flex-col flex-grow min-w-0 min-h-0 h-small_screen" data-controller="subscribe"  data-subscribe-id="<%= @workspace.id %>" data-subscribe-channel="<%= @channel&.id || 0 %>" data-subscribe-direct="<%= @directmsg&.id || 0 %>">
     <%# 上方白色區塊顯示頻道名稱與邀請按鈕 %>
     <div class="box-border border-b border-gray-400 h-16 font-bold flex justify-between items-center">
       #<%=  @channel.try(:name) || @directmsg_user_name %>
         <%# button %>  
       <% if @channel %>
-        <button class="invite-ch-btn h-8 w-8 rounded hover:bg-gray-100 hover:stroke-gray active:bg-gray-400 focus:outline-none">
-          <%= inline_svg_pack_tag( "media/images/invite-ch.svg" , class: "stroke-current text-gray-600 hover:stroke-gray") %>
-          <%= image_pack_tag("invite-ch.svg") %>
+        <button class="invite-ch-btn h-8 w-8 rounded hover:bg-gray-100 hover:stroke-gray active:bg-gray-400 focus:outline-none text-lg">
+          <i class="fas fa-user-plus text-gray-600" ></i>
         </button>
       <% end %>
     </div>
@@ -36,13 +33,11 @@
     </div>
   </div>    
   <%= render './shared/shareform' %>
-
-
   <%= render './shared/right_info' %>
   <% if @channel %>
     <%= render './shared/invite_ch' %>
   <% end %>
 </div>
 <%= render './channels/new', channel: @new_channel %>
-<%= render './profiles/edit.html.erb',channel: @channel %>
+<%= render './profiles/edit.html.erb' %>
  

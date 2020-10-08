@@ -10,10 +10,12 @@ en:
     leftbar:
       sidebar:
         threads: 'Threads'
+        drafts: 'Drafts'
         Mentions: 'Mentions & reactions'
         save: 'Saved items'
         more: '...More'
         shared: 'Shared'
+        invite: '+invite people'
       channel:
         name: 'Channel'
         new: 'New a channel'
