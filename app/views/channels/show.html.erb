@@ -62,7 +62,7 @@
   <% end %>
 </div>
 <% if @thread.nil? %>
-  <%= render './channels/new', channel: @new_channel %>
+  <%= render './channels/new', channel: @new_channel, workspace: @workspace %>
   <%= render './profiles/edit.html.erb' %>
 <% end %>
 
