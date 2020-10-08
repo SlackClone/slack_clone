@@ -29,6 +29,7 @@ module.exports = {
       googleblue: '#4284F4',
       light_gray: '#ddd',
       sladock_border:"rgb(14, 54, 49)",
+      border_b:'rgb(19, 105, 94)',
       ws_name_purple: "#522754",
       deep_sladock: 'rgb(14, 54, 49)',
       channel_hover: '#64b3f4',
