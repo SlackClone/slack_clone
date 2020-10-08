@@ -11,7 +11,7 @@ export default class extends Controller {
     const id = target.dataset.id
     const picker = new EmojiButton({
       autoHide: true,
-      showCategoryButtons: false	
+      showCategoryButtons: false,
     })
     picker.togglePicker(target)
     picker.on('emoji', selection => {

@@ -1,22 +1,18 @@
 <div class="leftbar hidden md:block">
-  <div class="box-border border-b bg-light_sladock border-sladock_border h-16 flex items-center pl-10">
+  <div class="box-border border-b bg-sladock border-sladock_border h-16 flex items-center pl-10">
     <h3 class="chatroomName text-white font-bold text-lg">
       <%= workspace.name %>
     </h3>
   </div>
-  <div class="bg-light_sladock text-white overflow-y-auto min-w-200 h-left_full" style="width: 300px" data-controller="notification" data-notification-workspace="<%= workspace.id %>" data-notification-user="<%= current_user.nickname %>" data-notification-channel="<%= channel&.id || "" %>">
+  <div class="bg-sladock text-white overflow-y-auto min-w-200 h-left_full pt-4 " style="width: 300px" data-controller="notification" data-notification-workspace="<%= workspace.id %>" data-notification-user="<%= current_user.nickname %>" data-notification-channel="<%= channel&.id || "" %>">
     <div class="left-bar">
       <%= link_to t(".sidebar.drafts"),workspace_draft_path(@workspace),
         class: "truncate pl-10 py-1 hover:bg-deep_sladock block hidden draft-btn" %>
-      <p class="truncate pl-10 py-1 hover:bg-deep_sladock"><%= t(".sidebar.threads") %></p>
-      <p class="truncate pl-10 py-1 hover:bg-deep_sladock"><%= t(".sidebar.mentions") %></p>
-      <p class="truncate pl-10 py-1 hover:bg-deep_sladock"><%= link_to t(".sidebar.save"), workspace_uploadedfiles_path(workspace) %></p>
-      <p class="truncate pl-10 py-1 hover:bg-deep_sladock"><%= t(".sidebar.more") %></p>
-      <p class="truncate pl-10 py-1 hover:bg-deep_sladock"><%= t(".sidebar.shared") %></p>
+      <p class="truncate pl-10 pb-2 bg-sladock border-b border-border_b hover:bg-deep_sladock"><i class="fas fa-file-download mr-2"></i><%= link_to t(".sidebar.save"), workspace_uploadedfiles_path(workspace) %></p>
       <div class="w-full">
-        <div class="font-medium flex justify-between items-center pl-10 py-1">
-          <p class="ch-name truncate"><%= t(".channel.name") %></p> 
-          <%= link_to '+', new_workspace_channels_path(workspace_id: workspace.id),class: 'create-ch-btn text-2xl' %>
+        <div class="font-medium flex justify-between items-center py-1">
+          <p class="ch-name truncate pl-5 text-lg"><%= t(".channel.name") %></p> 
+          <%= link_to '+', new_workspace_channels_path(workspace_id: workspace.id),class: 'create-ch-btn text-2xl pr-5' %>
         </div>
       </div>
       <% channels.each do |channel| %>
@@ -31,11 +27,11 @@
         </div>
       <% end %>
       <div class="w-full">
-        <p class="font-medium truncate pl-10 py-1">
+        <p class="font-medium truncate pl-5 text-lg py-2 mt-2 border-t border-border_b">
           <%= t(".channel.direct") %>
         </p>
         <% (workspace.users - [current_user]).each do |user| %>
-          <p class="truncate pl-10 py-1 hover:bg-deep_sladock">
+          <p class="truncate pl-10 py-1 hover:bg-sladock">
             <%= link_to user.nickname, workspace_directmsg_path(workspace, user.id) %>
             <span class="count text-red-300" unread-id="<%= user.id %>">
               <%= unread_msg_count["#{user.id}"] != nil && unread_msg_count["#{user.id}"] > 0 ? unread_msg_count["#{user.id}"] : "" %>
