@@ -128,7 +128,7 @@ window.addEventListener('DOMContentLoaded',function(){
 
   document.querySelectorAll('.draft-delete').forEach((e)=>{
     e.addEventListener('click',(e)=>{
-      const box = e.target.parentNode.parentNode.parentNode.parentNode
+      const box = e.currentTarget.parentNode.parentNode.parentNode
       let removeRecord = JSON.parse(localStorage.getItem('drafts')) || []
       removeRecord = removeRecord.filter((e)=> {return e.name != box.dataset.name })
       localStorage.setItem('drafts',JSON.stringify(removeRecord))

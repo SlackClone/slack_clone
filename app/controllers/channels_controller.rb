@@ -22,16 +22,17 @@ class ChannelsController < ApplicationController
     @new_channel = Channel.new
     @message = Message.new
     @message.attachfiles.build
-    @channels = @workspace.channels
-    @messages = @channel.messages
+    @channels = @workspace.channels.includes(:users)
+    @messages = @channel.messages.includes({user: :profile})
     @invitation = Invitation.new
     channel_users_for_select2
+
     @channel_user = current_user.users_channels.find_by(channel: @channel)
     @last_enter_at = @channel_user&.last_enter_at || @channel.created_at
     # 更新使用者進入這個channel的時間
     @channel_user&.touch(:last_enter_at)
     # 查詢私訊未讀訊息數量 
-    direct_channel = current_user.directmsgs
+    direct_channel = current_user.directmsgs.includes(:messages)
     @unread_msg_count = {}
     direct_channel.each do |dc|
       # 由私訊的name("DM:X-Y")拿出recipient的id
@@ -42,7 +43,7 @@ class ChannelsController < ApplicationController
                                                     .count
     end
     # 查詢聊天室是否有未讀訊息
-    added_channel = current_user.channels
+    added_channel = current_user.channels.includes(:messages)
     @unread_msg_bol ={}
     added_channel.each do |ac|
       # 將channel的id當key，是否有未讀訊息當做value

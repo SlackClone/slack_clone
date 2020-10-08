@@ -20,7 +20,7 @@ class ProfilesController < ApplicationController
   end
 
   def avatar_url
-    render json: {small: @profile.avatar_url(:small),medium: @profile.avatar_url(:medium),large: @profile.avatar_url(:large)}
+    render json: {small: @profile.avatar_url(:small),medium: @profile.avatar_url(:medium),large: @profile.avatar_url(:large),user_id: current_user.id }
   end
 
   def destroy
