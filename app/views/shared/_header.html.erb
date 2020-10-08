@@ -15,7 +15,7 @@
       </div>
       <div class="open mt-2 w-56 rounded-md shadow-lg hidden absolute right-0 z-40">
         <div class="rounded-md bg-white shadow-xs" role="menu" aria-orientation="vertical"   aria-labelledby="options-menu">
-          <div class="pl-2 py-1 flex ">
+          <div class="pl-2 py-1 flex">
               <%= image_tag current_user.profile.try(:avatar_url,(:small)) || "https://ca.slack-edge.com/T018LF2LHK3-U018XMDF20Y-g206a10ded6a-32",class:"leading-5 transition ease-in-out duration-150 avatar_small","aria-haspopup": true,"aria-expanded": true %> 
             <a href="#" class="block px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100        hover:text-gray-900 focus:outline-none focus:bg-gray-100 focus:text-gray-900" role="menuitem">
               <%= t(".profile.status") %>
@@ -27,7 +27,7 @@
           </div>
           <div class="border-t border-gray-100"></div>
           <div class="py-1">
-            <%= link_to t(".profile.sign_out"), destroy_user_session_path, method: "DELETE", class: "block px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 hover:text-gray-900 focus:outline-none focus:bg-gray-100 focus:text-gray-900",role: "menuitem" 
+            <%= link_to t(".profile.sign_out"), destroy_user_session_path, method: "DELETE", class: "block px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 hover:text-gray-900 focus:outline-none focus:bg-gray-100 focus:text-gray-900 sign-out",role: "menuitem" 
             %>
           </div>
         </div>

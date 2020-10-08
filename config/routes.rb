@@ -17,12 +17,11 @@ Rails.application.routes.draw do
     get :validate
   end
   
-  
   root to: 'pages#index'
   resources :workspaces do
     resource :users_workspaces
     resource :channels, only: %i[new create]
-    resources :channels, only: [:show]
+    resources :channels, only: [:show] 
     resource :invitations, only: :create do
       get :accept
     end
@@ -33,6 +32,7 @@ Rails.application.routes.draw do
       end
     end
     
+    resource :draft, only: [:show]
   end
 
   mount Shrine.download_endpoint => "/attachments"
