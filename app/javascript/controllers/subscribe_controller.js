@@ -31,45 +31,24 @@ export default class extends Controller {
     editor()    // create ckeditor
     console.log(`Messaging channel opened in workspace NO.${this.data.get("id")}`)
 
-    const input = document.querySelector('.file-upload')
-    input.addEventListener('change',async function(eve){
-      //讀取上傳文件
-      var reader = new FileReader();
-      let targetFile = eve.target.files[0]
-
-      const dataURL = (reader, file) => {
-        return new Promise((resolve, reject) => {  
-
-          resolve(reader.readAsDataURL(file))
-          reject("fail!")
-        })
+    $('.file-upload').change( (e) => {
+      $('#new_message #pre-file-zone').empty()
+      let reader = new FileReader();
+      let targetFile = e.target.files[0]
+      let fileName = targetFile.name
+      let fileType = targetFile.type
+      if (fileType.includes("image")){
+        reader.readAsDataURL(targetFile);
+        reader.onload = ()=>{
+          let dataURL = reader.result;
+          $('#new_message #pre-file-zone').append(`<img id="img-pre" width="120">`)
+          document.querySelector('#new_message #img-pre').src = dataURL;
+          $('#new_message #pre-file-zone').append(`<a src="#" id="pre-file-name">${fileName}</a>`)
+        }
+      }else {
+        $('#new_message #pre-file-zone').append(`<a src="#" id="pre-file-name">${fileName}</a>`)
       }
-      // const image_or_not = () => {
-      //   return new Promise((resolve, reject) => {
-
-      //   })
-      // }
-      console.log(reader)
-      console.log(dataURL(reader, targetFile))
-      // if(eve.target.files[0]){
-      //   //readAsDataURL方法可以將File對象轉化為data:URL格式的字符串（base64編碼）
-
-      //   reader.readAsDataURL(eve.target.files[0]);
-      //   // console.log(reader.result.includes("data:image"))
-      //   // setTimeout(() => {
-      //     if (reader.result.includes("data:image")){
-      //       reader.onload = (e)=>{
-      //         let dataURL = reader.result;
-      //         $('.ck-editor__main').append(`<img id="img-pre" width="150px">`)
-      //         document.getElementById('img-pre').src = dataURL;
-      //       }
-      //     } else {
-      //       console.log(234)
-      //     }
-      //     // }, 500);
-      // }
     })
-    
   }
   
   messaging(data){
@@ -92,6 +71,7 @@ export default class extends Controller {
   clearmsg(){
     $('.text-area').remove()
     $('.editor').remove()
+    $('.file-upload').val("")
     $('.w-full.px-3.mb-2').append(`<textarea class="editor" placeholder="輸入訊息" style="display: none;"></textarea>`)
     editor()
   }
@@ -147,6 +127,8 @@ function customEditor(){
   $('.ck-editor').attr('class', 'flex flex-col-reverse text-area')
   $('.ck-tooltip__text').attr('class', 'hidden')
 
+  // 塞預覽檔案的地方
+  $('#new_message .ck-editor__main').append(`<div id="pre-file-zone"></div>`)
 
   $('.ck-toolbar_grouping >.ck-toolbar__items').append('<div class="custom-ckeditor" style="margin-left: auto; "></div>')
   $('.custom-ckeditor').append('<button class="custom_emoji ck" style="margin-right: 12px;"></button>')
