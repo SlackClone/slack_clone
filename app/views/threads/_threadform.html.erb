@@ -1,8 +1,10 @@
-<div class="">
-  <%= form_with(model: @message, url:channel_message_threads_path(@thread.messageable_id, @thread), id:"new_thread", class: "border-2 border-gray-200 rounded w-full text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500") do |f| %>
-    <div class="flex">
-      <%= f.text_field :content, placeholder: t(".placeholder"), id: "thread-form-content" %>
-      <%= f.submit t("utilities.submit"), class: "ml-auto bg-gray-500 shadow bg-purple-500 hover:bg-purple-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded" %>
-    </div>
+<%= form_with(model: @message, url:channel_message_threads_path(@thread.messageable_id, @thread), id:"new_thread", class: "flex bg-gray-200 border-2 border-gray-200 rounded text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500 thread-form" ,data:{action: "ajax:success->subscribe#clearThreadMsg"}) do |f| %>
+  <%= f.text_field :content, class:"min-w-0 flex-grow thread-content hidden", placeholder: t(".placeholder"),autocomplete: "off" %> 
+  <%= f.fields_for :attachfiles do |file| %>
+    <%= file.file_field :document, class:"hidden tfile-upload" %>
   <% end %>
-</div>
+  <div class="centered">
+    <textarea class="thread-editor" placeholder="輸入訊息"></textarea>
+  </div>
+  <%= f.submit t("utilities.submit"), class:"bg-gray-500 shadow bg-purple-500 hover:bg-purple-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded hidden thread-submit" %>
+<% end %>
