@@ -65,7 +65,7 @@ export default class extends Controller {
         // 留言串總則數更新(左側)
         let messageId = this.threadcountTarget.getAttribute("message_id")
         let threadOriginMsg = document.querySelector(`.messages_child[message_id="${messageId}"] .thread-count`)
-        threadOriginMsg.innerHTML = `有 ${ threadCount } 則回覆`
+        threadOriginMsg.innerHTML = `<a class="border-solid border-2 border-blue-600 rounded-md px-1 -ml-2">有 ${ threadCount } 則回覆</a>`
       } else {
         // 一般留言
         if(document.hidden){
@@ -92,6 +92,7 @@ export default class extends Controller {
     editor()
   }
   clearThreadMsg(){
+    console.log(123)
     $('.thread-text-area').remove()
     $('.thread-editor').remove()
     $('#new_thread .w-full.px-3.mb-2').append(`<textarea class="thread-editor" placeholder="輸入訊息" style="display: none;"></textarea>`)
