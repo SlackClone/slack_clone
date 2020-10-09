@@ -26,12 +26,11 @@ en:
       to: "Share this file" 
       message: "message"
       upload: "Upload"
-      placeholder: "Add some message..."
+      placeholder: "Add some message, if you'd like"
     shareform:
       share: "Share this message"
       to: "share to" 
       message: "message"
-      placeholder: "Add some message..."
   channels:
     new:
       create: "Create a channel"
@@ -94,4 +93,3 @@ en:
     index:
       title: "File browser"
       upload: "Upload a File"
-      

@@ -32,25 +32,44 @@ export default class extends Controller {
     console.log(`Messaging channel opened in workspace NO.${this.data.get("id")}`)
 
     const input = document.querySelector('.file-upload')
-    input.addEventListener('change', function(eve){
+    input.addEventListener('change',async function(eve){
       //讀取上傳文件
       var reader = new FileReader();
+      let targetFile = eve.target.files[0]
 
-      if(eve.target.files[0]){
-        //readAsDataURL方法可以將File對象轉化為data:URL格式的字符串（base64編碼）
-        reader.readAsDataURL(eve.target.files[0]);
-        console.log(reader.result.includes("data:image"))
-        reader.onload = (e)=>{
-          let dataURL = reader.result;
-          $('.ck-editor__main').append(`<img id="img-pre"  width="70px">`)
-          document.getElementById('img-pre').src = dataURL;
-        }
-        if (reader.result.includes("data:image")){
-        } else {
-          console.log(234)
-        }
+      const dataURL = (reader, file) => {
+        return new Promise((resolve, reject) => {  
+
+          resolve(reader.readAsDataURL(file))
+          reject("fail!")
+        })
       }
+      // const image_or_not = () => {
+      //   return new Promise((resolve, reject) => {
+
+      //   })
+      // }
+      console.log(reader)
+      console.log(dataURL(reader, targetFile))
+      // if(eve.target.files[0]){
+      //   //readAsDataURL方法可以將File對象轉化為data:URL格式的字符串（base64編碼）
+
+      //   reader.readAsDataURL(eve.target.files[0]);
+      //   // console.log(reader.result.includes("data:image"))
+      //   // setTimeout(() => {
+      //     if (reader.result.includes("data:image")){
+      //       reader.onload = (e)=>{
+      //         let dataURL = reader.result;
+      //         $('.ck-editor__main').append(`<img id="img-pre" width="150px">`)
+      //         document.getElementById('img-pre').src = dataURL;
+      //       }
+      //     } else {
+      //       console.log(234)
+      //     }
+      //     // }, 500);
+      // }
     })
+    
   }
   
   messaging(data){
