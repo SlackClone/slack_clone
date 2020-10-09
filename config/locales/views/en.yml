@@ -2,96 +2,96 @@ en:
   shared:
     leftbar:
       sidebar:
-        threads: 'Threads'
-        drafts: 'Drafts'
-        Mentions: 'Mentions & reactions'
-        save: 'File browser'
-        more: '...More'
-        shared: 'Shared'
-        invite: '+invite people'
+        drafts: "Drafts"
+        save: "File browser"
+        invite: "+invite people"
       channel:
-        name: 'Channel'
-        new: 'New a channel'
-        direct: 'Direct messages'
+        name: "Channel"
+        new: "New a channel"
+        direct: "Direct messages"
     invite_ws:
-      invite: 'Invite people to %{name}'
-      placeholder: 'Please enter a email'
-      send: 'send'
+      invite: "Invite people to %{name}"
+      placeholder: "Please enter a email"
+      send: "send"
     invite_ch:
-      invite: 'Add people'
-      placeholder: 'who want to invite?'
-      send: 'send'        
+      invite: "Add people"
+      placeholder: "who want to invite?"
+      send: "send"
     msgform:
-      placeholder: 'Please enter a messages'
+      placeholder: "Please enter a messages"
     msgform_direct:
-      placeholder: 'Please enter a messages'
+      placeholder: "Please enter a messages"
     sharefileform:
-      title: 'Upload a file' 
-      to: 'Share this file' 
-      message: 'message'
-      placeholder: "Add some message, if you\'d like"
-      upload: 'Upload'
+      title: "Upload a file" 
+      to: "Share this file" 
+      message: "message"
+      upload: "Upload"
+      placeholder: "Add some message..."
     shareform:
-      share: 'Share this message' 
-      to: 'share to' 
-      message: 'message'
-      placeholder: "Add some message, if you\'d like"
+      share: "Share this message"
+      to: "share to" 
+      message: "message"
+      placeholder: "Add some message..."
   channels:
     new:
-      create: 'Create a channel'
-      name: 'Name'
-      description: 'Description'
-      communicates: 'Channels are where your team communicates. They’re best when organized around a topic — #marketing, for example.'
-      name_placeholder: 'enter a channel name'
-      desc_placeholder: 'enter description'
-      about: 'What’s this channel about?'
+      create: "Create a channel"
+      name: "Name"
+      description: "Description"
+      communicates: "Channels are where your team communicates. They’re best when organized around a topic — #marketing, for example."
+      name_placeholder: "enter a channel name"
+      desc_placeholder: "enter description"
+      about: "What’s this channel about?"
     show:
-      status: 'status'
-      edit: 'edit profile'
-      sign_out: 'sign out' 
+      status: "status"
+      edit: "edit profile"
+      sign_out: "sign out" 
   workspaces:
     index:
-      join: 'Join workspace'
-      your_workspaces: 'Your own workspaces'
-      different_team: 'Looking to create a brand new workspace for a different team?'  
-      create: 'Create a new workspace'
-      create_btn: '+ create a new workspace'
-      launch: 'Launch'          
+      join: "Join workspace"
+      your_workspaces: "Your own workspaces"
+      different_team: "Looking to create a brand new workspace for a different team?"
+      create: "Create a new workspace"
+      create_btn: "+ create a new workspace"
+      launch: "Launch"
     new:
-      step: 'Step 1 of 3'
-      name: 'What’s the name of your company or team?'
-      name_detail: This will be the name of your Slack workspace — choose something that your team will recognize.
-      placeholder: 'Please enter workspace name'
+      step: "Step 1 of 3"
+      name: "What’s the name of your company or team?"
+      name_detail: "This will be the name of your Slack workspace — choose something that your team will recognize."
+      placeholder: "Please enter workspace name"
+      errors:
+        messages:
+          blank: "Type the name of your team or company — we’ll use this as the name of your new Slack workspace."
+          exist: "%{name} has already exist"
     show:
-      name: 'Workspace Name：%{name}'
-      create_channel: 'Create Channel'
-      all_channels: 'Display channels in %{name} workspace'
-      delete_channel: 'Delete Channel'
-      join_channel: 'Join Channel'
-      leave_channel: 'Leave Channel'
-      your_channels: 'Your own channels'
+      name: "Workspace Name：%{name}"
+      create_channel: "Create Channel"
+      all_channels: "Display channels in %{name} workspace"
+      delete_channel: "Delete Channel"
+      join_channel: "Join Channel"
+      leave_channel: "Leave Channel"
+      your_channels: "Your own channels"
     notification:
       messages:
-        join: 'Please enther in workspace'
+        join: "Please enther in workspace"
   drafts:
     show: 
-      title: 'Drafts'
-      draft: 'draft'
+      title: "Drafts"
+      draft: "draft"
   profiles:
     edit:
-      title: 'Edit your profile'
-      full_name: 'full_name'
-      nickname: 'nickname'
-      phone: 'phone_number'
-      phone_span: 'enter a phone number'
-      photo: 'Profile photo'
-      upload: 'Upload an image'
-      crop: 'Crop your photo'
-      preview: 'Preview'
-      cancel: 'Cancel'
-      remove: 'remove the photo'
+      title: "Edit your profile"
+      full_name: "full_name"
+      nickname: "nickname"
+      phone: "phone_number"
+      phone_span: "enter a phone number"
+      photo: "Profile photo"
+      upload: "Upload an image"
+      crop: "Crop your photo"
+      preview: "Preview"
+      cancel: "Cancel"
+      remove: "remove the photo"
   uploadedfiles:
     index:
-      title: 'File browser'
-      upload: 'Upload a File'
+      title: "File browser"
+      upload: "Upload a File"
       
