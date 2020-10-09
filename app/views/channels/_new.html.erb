@@ -15,6 +15,9 @@
       <%= f.text_field :description,placeholder:t(".desc_placeholder"),autocomplete:"off",class:"search relative font-bold px-2 py-2 border border-gray-800 rounded block w-full placeholder-gray-600 focus:outline-none focus:shadow-outline" %>
       <span class="text-xs text-gray-600"><%= t(".about") %></span>
     </div>
+    <select name="channels[name][]" id="ws_user" multiple="true" style="width: 100%">
+      <%#= options_for_select() %>
+    </select>
       <%= f.submit t("utilities.submit"),class:"cursor-pointer block font-bold text-gray-700 px-5 py-2 mt-3 ml-auto bg-gray-400 rounded focus:outline-none" %>
     <% end %>
   </div>

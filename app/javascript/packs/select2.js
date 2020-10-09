@@ -6,11 +6,23 @@ $(document).ready(function() {
     placeholder: "輸入欲邀請成員",
     allowClear: true
   })
-
-  // $('#message_messageable_id').select2({
-  //   closeOnSelect: false
-
-  // })
+  $('#ws_user').select2({
+    placeholder: "輸入欲邀請成員",
+    allowClear: true,
+  })  
+  $('.create-ch-btn').click(()=>{
+    let workspaceId = (window.location.href).split('/')
+    fetch(`/workspaces/${workspaceId[4]}/workspace_users`)
+    .then(response => response.json())
+    .then((data) => {
+      data.forEach((e)=>{
+        let opt = document.createElement('option')
+        opt.textContent = e[0]
+        opt.value = e[1]
+        $('#ws_user').append(opt)
+      })
+    })
+  })
 
 
   $('#user_list').on("change", function() {

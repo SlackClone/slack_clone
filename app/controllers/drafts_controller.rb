@@ -3,7 +3,6 @@ class DraftsController < ApplicationController
   def show
     @channels = @workspace.channels
     @new_channel = Channel.new
-
     # 查詢私訊未讀訊息數量 
     direct_channel = current_user.directmsgs
     @unread_msg_count = {}
