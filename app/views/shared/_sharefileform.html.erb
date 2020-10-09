@@ -1,7 +1,9 @@
 <%= form_with model: message, url: workspace_uploadedfiles_path(workspace), method: 'post', class:"w-full max-w-lg border-2 rounded-lg bg-white relative m-auto z-10 file-upload", data:{action: "ajax:success->uploadfile#submitForm"} do |f|%>
       <div class="flex flex-wrap mb-6">
         <div class="w-full flex share-title justify-between">
-          <p class="text-2xl font-bold mt-3 ml-1"><%= t('.upload') %></p>
+          <p class="text-2xl font-bold mt-3 ml-1">
+            <%= t('.title') %>
+          </p>
           <div class="cancel-img mt-4 mr-2">
             <%= inline_svg_pack_tag("media/images/cancel.svg", class:"h-8 w-8 pr-2 cancel", data:{action: "click->uploadfile#closeForm"}) %>
           </div>
@@ -24,6 +26,6 @@
         <%= file.file_field :document %>
       <% end %>
       <div class="flex flex-row-reverse mb-4 mr-2">
-        <%= f.submit t('utilities.share'), class:"share-submit shadow bg-teal-400 hover:bg-teal-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded" %>
+        <%= f.submit t('.upload'), class:"share-submit shadow bg-teal-400 hover:bg-teal-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded" %>
       </div>
     <% end %> 

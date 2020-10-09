@@ -26,10 +26,11 @@ zh-TW:
     msgform_direct:
       placeholder: '請輸入訊息'
     sharefileform:
-      upload: '分享檔案'
-      to: '分享到' 
+      title: '上傳檔案'
+      to: '分享此檔案至' 
       message: '訊息'
       placeholder: '請輸入想要傳達的訊息'
+      upload: '上傳'
     shareform:
       share: '分享訊息' 
       to: '分享給' 

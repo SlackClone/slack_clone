@@ -26,10 +26,11 @@ en:
     msgform_direct:
       placeholder: 'Please enter a messages'
     sharefileform:
-      upload: 'Share the file' 
-      to: 'share to' 
+      title: 'Upload a file' 
+      to: 'Share this file' 
       message: 'message'
       placeholder: "Add some message, if you\'d like"
+      upload: 'Upload'
     shareform:
       share: 'Share this message' 
       to: 'share to' 
