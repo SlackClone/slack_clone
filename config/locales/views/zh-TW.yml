@@ -25,6 +25,16 @@ zh-TW:
       placeholder: '請輸入訊息'
     msgform_direct:
       placeholder: '請輸入訊息'
+    sharefileform:
+      upload: '分享檔案'
+      to: '分享到' 
+      message: '訊息'
+      placeholder: '請輸入想要傳達的訊息'
+    shareform:
+      share: '分享訊息' 
+      to: '分享給' 
+      message: '訊息'
+      placeholder: '請輸入想要傳達的訊息'
   channels:
     new:
       create: '建立聊天室'      
@@ -67,3 +77,25 @@ zh-TW:
     notification:
       messages:
         join: '請先加入workspace'
+  drafts:
+    show: 
+      title: '草稿區'
+      draft: '草稿'
+  profiles:
+    edit:
+      title: '編輯個人基本資料'
+      full_name: '真實姓名'
+      nickname: '暱稱'
+      phone: '手機號碼'
+      phone_span: '輸入您的手機號碼'
+      photo: '個人大頭貼'
+      upload: '上傳大頭貼'
+      crop: '剪裁你的大頭貼'
+      preview: '預覽'
+      cancel: '取消'
+      remove: '刪除大頭貼'
+  uploadedfiles:
+    index:
+      title: '資料存放區'
+      upload: '上傳'    
+      

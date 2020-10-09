@@ -2,6 +2,7 @@ en:
   utilities:
     submit: 'submit'
     back_home: 'Home'
+    save: 'Save'
     messages: 
       delete: "Are you sure you want to delete?"
   

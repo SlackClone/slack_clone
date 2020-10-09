@@ -1,8 +1,6 @@
 import 'cropperjs/dist/cropper.css';
 import Cropper from 'cropperjs';
-export default function cropper(){
-  
-}
+
 window.addEventListener('DOMContentLoaded',function(){
   if (document.getElementById('avatar')) {
     let CROPPER
