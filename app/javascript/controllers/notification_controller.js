@@ -5,6 +5,14 @@ export default class extends Controller {
   static targets = []
 
   connect() {
+    // 私訊頻道旁邊紀錄未讀訊息則數的span
+    let directUnreadCount = document.querySelectorAll('span.count')
+    // 開場先把有未讀訊息的解除隱藏
+    directUnreadCount.forEach((item) => {
+      if(item.innerHTML != ""){
+        item.classList.remove("hidden")
+      }
+    })
     this.subscription = consumer.subscriptions.create({channel: "NotificationChannel", workspaceId: this.data.get("workspace")},
         {
           connected: this.subscribe.bind(this),       
@@ -44,9 +52,11 @@ export default class extends Controller {
         new Notification(directMsgTitle)
         // 私聊未讀訊息則數顯示
         if (!!recipientElement){
-        // 若一開始為空字串，直接指定為1
+          
+          // 若一開始為空字串，直接指定為1
           if (recipientElement.innerHTML == ""){
-            recipientElement.classList.add("text-red-300")
+            recipientElement.classList.remove("hidden")
+            recipientElement.classList.add("text-red-600")
             recipientElement.innerHTML = 1 
           }else{
             recipientElement.innerHTML = parseInt(recipientElement.innerHTML) + 1

@@ -2,6 +2,7 @@ import { Controller } from "stimulus"
 import consumer from "channels/consumer"
 import $ from "jquery"
 import ClassicEditor from "ckeditor5-custom-build/build/ckeditor.js"
+import { EmojiButton } from '@joeattardi/emoji-button'
 
 export default class extends Controller {
   static targets = ["messages", "newMessage" ]
@@ -21,6 +22,11 @@ export default class extends Controller {
   }
 
   subscribe(){
+    // 回傳目前游標指導的位置，focusNode則是該node，詳情去找Window.getSelection API
+    window.focusElement = window.getSelection().focusNode
+    // 回傳游標在Node的哪個位置
+    window.inputPosition = window.getSelection().focusOffset
+
     if ($('.text-area').length === 1) {return} 
     editor()    // create ckeditor
     console.log(`Messaging channel opened in workspace NO.${this.data.get("id")}`)
@@ -100,7 +106,7 @@ function customEditor(){
   $('.centered').attr('class', 'w-full px-3 mb-2')
   $('.ck-editor').attr('class', 'flex flex-col-reverse text-area')
   $('.ck-tooltip__text').attr('class', 'hidden')
-  // 避免一直生成
+
 
   $('.ck-toolbar_grouping >.ck-toolbar__items').append('<div class="custom-ckeditor" style="margin-left: auto; "></div>')
   $('.custom-ckeditor').append('<button class="custom_emoji ck" style="margin-right: 12px;"></button>')
@@ -110,8 +116,49 @@ function customEditor(){
   $('.custom-ckeditor').append('<button class="custom_send ck" style=" margin-right: 12px;" type="submit"></button>')
   $('.custom_send').append('<i class="far fa-paper-plane ck ck-icon"></i>')
   
+  // emoji 
   $('.custom_emoji').click( (e) => {
     e.preventDefault()
+
+    const picker = new EmojiButton({
+      autoHide: true,
+      showCategoryButtons: false	
+    })
+
+    const target = e.currentTarget
+    picker.togglePicker(target)
+  
+    picker.on('emoji', selection => {
+      const emoji = selection.emoji
+      let textarea = $('.ck-editor__editable')    //要塞emoji的地方
+
+      // 假如輸入框是空的時候，直接把emoji放進去
+      if (textarea.text() == ""){
+        textarea.children().html(emoji)  
+      // 已經有其他文字的狀況
+      }else {
+        // 如果input為element起始點(例如換行的起始點)
+        if(inputPosition === 0){
+          focusElement.innerHTML = emoji
+        }else {
+          // 其他狀況要把emoji跟原有字串做拼接
+          let textParent = focusParent.innerHTML
+          // string是要插入的emoji，index是要插入的位置
+          String.prototype.emojiInsert = function(index, string){
+            return this.slice(0, index) + string + this.slice(index)
+          }
+          // textParent為插入emoji後的新字串
+          textParent = textParent.emojiInsert(inputPosition, emoji)
+          focusParent.innerHTML = textParent
+        }
+      }
+      // 尋找最後一個子元素
+      // while(textarea.children().length !== 0){
+      //   lastChild = textarea.children().last()
+      //   textarea = lastChild
+      // }
+      // textarea[0].innerHTML += emoji
+    })
   })
 
   $('.custom_attach').click( (e) => {
@@ -125,7 +172,18 @@ function customEditor(){
     $('.message-submit').trigger('click')
   })
 
-  $('.ck-editor__editable').keydown( (e) => {
+  // 為了監聽使用者用滑鼠改變輸入位置時紀錄游標位置
+  $('.ck-editor__editable').mouseup( (e) => {
+    focusElement = window.getSelection().focusNode
+    window.focusParent = window.getSelection().focusNode.parentElement
+    inputPosition = window.getSelection().focusOffset
+  })
+  // 為了監聽使用者使用方向鍵移動輸入位置時紀錄游標位置
+  $('.ck-editor__editable').keyup( (e) => {
+    focusElement = window.getSelection().focusNode
+    focusParent = window.getSelection().focusNode.parentElement
+    inputPosition = window.getSelection().focusOffset
+
     // // p
     // if (e.keyCode == 13 && !e.shiftKey && ($('.ck-editor__editable').children()[0].tagName === 'P' || $('.ck-editor__editable').children()[0].tagName === 'BLOCKQUOTE')){
     //   $('.ck-editor__editable').children(':last-child')[0].remove()
