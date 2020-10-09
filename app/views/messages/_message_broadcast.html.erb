@@ -12,13 +12,13 @@
         <%= image_tag message.user.profile.try(:avatar_url,(:small)) || 
           "https://ca.slack-edge.com/T018LF2LHK3-U018XMDF20Y-g206a10ded6a-32",class:"min-w-full h-frounded message_avatar rounded","aria-haspopup": true,"aria-expanded": true,data:{id:message.user_id} %>
       </div>
-      <div class="font-bold items-start w-full mr-3">
-        <span class="pr-1 author"><%= message.user.nickname %></span>
+      <div class="items-start w-full mr-3">
+        <span class="font-bold pr-1 author"><%= message.user.nickname %></span>
         <span class="createtime text-xs text-gray-700">
           <%= message.created_at.strftime("%I:%M") %>
         </span>
         <div class="flex-col share-msg">
-          <div class="content text-sm text-gray-800"><%= raw(message.content) %>
+          <div class="content text-lg text-gray-800"><%= raw(message.content) %>
           </div>
           <div class="file flex">
             <% if message.attachfiles.empty? != true %>
