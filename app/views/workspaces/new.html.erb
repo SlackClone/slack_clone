@@ -1,11 +1,10 @@
 
-<%= render "./shared/header" %>
   <div class="chatroom flex h-full" data-controller="hello">
-    <div class=" leftbar flex flex-col bg-sladock">
-      <div class="box-border border-b bg-sladock border-sladock_border h-16 flex items-center">
-        <div class="ml-5 w-2/4 h-5 px-2 bg-ws_name_purple rounded-full text-white font-bold text-sm truncate" data-target="hello.output"></div>
+    <div class=" leftbar flex flex-col">
+      <div class="box-border border-b bg-deep_sladock border-border_b h-16 flex items-center">
+        <div class="ml-5 w-2/4 h-5 px-2 bg-sladock rounded-full text-white font-bold text-sm truncate" data-target="hello.output"></div>
         </div>
-        <div class="bg-sladock text-white h-left_full" style="width: 300px">
+        <div class="bg-deep_sladock text-white h-left_full" style="width: 300px">
       </div>
     </div>
     <div class="flex flex-col flex-grow min-w-0 min-h-0 ml-10">
@@ -13,7 +12,7 @@
         <p class=" text-xs my-3">
           <%= t(".step") %>
         </p>
-        <h3 class="text-5xl font-bold leading-tight">
+        <h3 class="text-3xl font-bold leading-tight">
           <%= t(".name") %>
         </h3>
         <p class="text-sm mt-3 mb-5">
@@ -34,7 +33,7 @@
           <%= f.hidden_field :image, value: @workspace.cached_image_data %>
           <%= f.file_field :image %>  
           <%= f.submit t("utilities.submit"),
-              class:"create-ws-btn cursor-pointer block font-bold text-white px-20 py-2 mb-5 mr-auto bg-green-800 rounded focus:outline-none"
+              class:"create-ws-btn cursor-pointer block font-bold text-white px-20 py-2 my-5 mr-auto bg-green-800 rounded focus:outline-none"
           %>
         <% end %>
         <% if @workspace.errors.any? %>
