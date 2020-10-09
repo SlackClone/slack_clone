@@ -30,6 +30,27 @@ export default class extends Controller {
     if ($('.text-area').length === 1) {return} 
     editor()    // create ckeditor
     console.log(`Messaging channel opened in workspace NO.${this.data.get("id")}`)
+
+    const input = document.querySelector('.file-upload')
+    input.addEventListener('change', function(eve){
+      //讀取上傳文件
+      var reader = new FileReader();
+
+      if(eve.target.files[0]){
+        //readAsDataURL方法可以將File對象轉化為data:URL格式的字符串（base64編碼）
+        reader.readAsDataURL(eve.target.files[0]);
+        console.log(reader.result.includes("data:image"))
+        reader.onload = (e)=>{
+          let dataURL = reader.result;
+          $('.ck-editor__main').append(`<img id="img-pre"  width="70px">`)
+          document.getElementById('img-pre').src = dataURL;
+        }
+        if (reader.result.includes("data:image")){
+        } else {
+          console.log(234)
+        }
+      }
+    })
   }
   
   messaging(data){
@@ -115,7 +136,6 @@ function customEditor(){
   $('.custom_attach').append('<i class="fas fa-paperclip ck ck-icon" type="file"></i>')
   $('.custom-ckeditor').append('<button class="custom_send ck" style=" margin-right: 12px;" type="submit"></button>')
   $('.custom_send').append('<i class="far fa-paper-plane ck ck-icon"></i>')
-  
   // emoji 
   $('.custom_emoji').click( (e) => {
     e.preventDefault()
@@ -168,6 +188,7 @@ function customEditor(){
 
   $('.custom_send').click( (e) => {
     e.preventDefault()
+    if ($('.ck-editor__editable').text() === ``){return}
     $('.message-content').val($('.ck-editor__editable').html()) 
     $('.message-submit').trigger('click')
   })
@@ -226,4 +247,4 @@ function customEditor(){
     }
   }
 
-
+  

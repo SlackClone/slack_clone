@@ -1,3 +1,4 @@
+const plugin = require('tailwindcss/plugin')
 module.exports = {
   purge: [],
   target: "relaxed",
@@ -818,5 +819,13 @@ module.exports = {
     animation: ['responsive'],
   },
   corePlugins: {},
-  plugins: [],
+  plugins: [ 
+    plugin(function({ addBase, config }) {
+      addBase({
+        'h2': { fontSize: config('theme.fontSize.3xl') },
+        'h3': { fontSize: config('theme.fontSize.2xl') },
+        'blockquote': {  } 
+      })
+    })
+  ],
 };
