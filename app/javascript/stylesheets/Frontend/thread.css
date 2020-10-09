@@ -1,0 +1,7 @@
+#thread-count::after {
+  content: "";
+  height: 1px;
+  background-color: #A7B1C2;
+  flex-grow: 1;
+  margin-left: 5px;
+}

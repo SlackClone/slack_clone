@@ -60,7 +60,7 @@ export default class extends Controller {
         this.threadsTarget.insertAdjacentHTML("beforeend", data.message)
         // 留言串總則數更新(右側)
         let threadCount = this.threadsTarget.childElementCount
-        this.threadcountTarget.innerHTML = `===== 有 ${ threadCount } 則回覆 =====`
+        this.threadcountTarget.innerHTML = `有 ${ threadCount } 則回覆`
         // 留言串總則數更新(左側)
         let messageId = this.threadcountTarget.getAttribute("message_id")
         let threadOriginMsg = document.querySelector(`.messages_child[message_id="${messageId}"] .thread-count`)

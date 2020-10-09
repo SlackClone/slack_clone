@@ -1,5 +1,5 @@
 <%# 右方資訊區 %>
-<div class="info right_info hidden w-1/3 min-w-200 border-l border-gray-400">
+<div class="info right_info hidden w-1/4 min-w-200 border-l border-gray-400">
   <% if @thread %>
     <div class="box-border border-b border-gray-400 h-16">
       <button class="info-cancel">X</button>
@@ -15,8 +15,8 @@
 
     <%= render 'threads/message_broadcast', message: @thread %>
 
-    <h2 id="thread-count" data-target="subscribe.threadcount" message_id="<%= @thread.id %>" channel_id="<%= @channel.try(:id) %>" directmsg_id="<%= @directmsg.try(:id) %>">
-      ===== 有 <%= @thread.children.count %> 則回覆 =====
+    <h2 id="thread-count" data-target="subscribe.threadcount" message_id="<%= @thread.id %>" channel_id="<%= @channel.try(:id) %>" directmsg_id="<%= @directmsg.try(:id) %>" class="flex items-center pl-2 text-gray-600">
+      有 <%= @thread.children.count %> 則回覆
     </h2>
 
     <div class="children-message" data-target="subscribe.threads">
