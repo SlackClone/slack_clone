@@ -189,7 +189,7 @@ function customEditor(){
 
   $('.custom_send').click( (e) => {
     e.preventDefault()
-    if ($('.ck-editor__editable').text() === ``){return}
+    if ($('.ck-editor__editable').text() === "" && $('#new_message .file-upload').val() === ""){return}
     $('.message-content').val($('.ck-editor__editable').html()) 
     $('.message-submit').trigger('click')
   })
