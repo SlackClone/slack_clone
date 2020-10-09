@@ -1,18 +1,11 @@
 en:
   shared:
-    header:
-      search:
-        placeholder: 'Search'
-      profile:
-        status: 'Status'
-        edit: 'Edit profile'
-        sign_out: 'Sign out'
     leftbar:
       sidebar:
         threads: 'Threads'
         drafts: 'Drafts'
         Mentions: 'Mentions & reactions'
-        save: 'Saved items'
+        save: 'File browser'
         more: '...More'
         shared: 'Shared'
         invite: '+invite people'
@@ -32,6 +25,17 @@ en:
       placeholder: 'Please enter a messages'
     msgform_direct:
       placeholder: 'Please enter a messages'
+    sharefileform:
+      title: 'Upload a file' 
+      to: 'Share this file' 
+      message: 'message'
+      placeholder: "Add some message, if you\'d like"
+      upload: 'Upload'
+    shareform:
+      share: 'Share this message' 
+      to: 'share to' 
+      message: 'message'
+      placeholder: "Add some message, if you\'d like"
   channels:
     new:
       create: 'Create a channel'
@@ -41,6 +45,10 @@ en:
       name_placeholder: 'enter a channel name'
       desc_placeholder: 'enter description'
       about: 'What’s this channel about?'
+    show:
+      status: 'status'
+      edit: 'edit profile'
+      sign_out: 'sign out' 
   workspaces:
     index:
       join: 'Join workspace'
@@ -65,5 +73,25 @@ en:
     notification:
       messages:
         join: 'Please enther in workspace'
-      
+  drafts:
+    show: 
+      title: 'Drafts'
+      draft: 'draft'
+  profiles:
+    edit:
+      title: 'Edit your profile'
+      full_name: 'full_name'
+      nickname: 'nickname'
+      phone: 'phone_number'
+      phone_span: 'enter a phone number'
+      photo: 'Profile photo'
+      upload: 'Upload an image'
+      crop: 'Crop your photo'
+      preview: 'Preview'
+      cancel: 'Cancel'
+      remove: 'remove the photo'
+  uploadedfiles:
+    index:
+      title: 'File browser'
+      upload: 'Upload a File'
       

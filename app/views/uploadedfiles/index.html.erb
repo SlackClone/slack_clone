@@ -9,8 +9,8 @@
     <div class="flex flex-col flex-grow min-w-0 min-h-0">
       <%# 上方白色區塊顯示頻道名稱與邀請按鈕 %>
       <div class="box-border border-b border-gray-400 h-16 font-bold flex justify-between items-center">
-        <h3>檔案上傳區</h3>
-        <button data-action="click->uploadfile#newFormShowUp">上傳</button>
+        <h3><%= t('.title') %></h3>
+        <button data-action="click->uploadfile#newFormShowUp"><%= t('.upload') %></button>
       </div>
       <%# 檔案區 %>
       <div class="file_area break-all flex flex-wrap overflow-y-auto h-chat_full flex-grow border border-1 bg-gray-300 pl-5 pt-5" workspace_id="<%= @workspace.id %>">

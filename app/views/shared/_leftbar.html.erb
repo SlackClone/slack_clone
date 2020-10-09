@@ -6,9 +6,14 @@
   </div>
   <div class="bg-sladock text-white overflow-y-auto min-w-200 h-left_full pt-4 " style="width: 300px" data-controller="notification" data-notification-workspace="<%= workspace.id %>" data-notification-user="<%= current_user.nickname %>" data-notification-channel="<%= channel&.id || "" %>">
     <div class="left-bar">
-      <%= link_to t(".sidebar.drafts"),workspace_draft_path(@workspace),
-        class: "truncate pl-10 py-1 hover:bg-deep_sladock block hidden draft-btn" %>
-      <p class="truncate pl-10 pb-2 bg-sladock border-b border-border_b hover:bg-deep_sladock"><i class="fas fa-file-download mr-2"></i><%= link_to t(".sidebar.save"), workspace_uploadedfiles_path(workspace) %></p>
+      <%= link_to workspace_draft_path(@workspace),class:"truncate pl-10 py-1 w-full block hover:bg-deep_sladock block hidden draft-btn align-middle" do %>
+        <i class="fas fa-pen-square mr-2"></i>
+        <%= t(".sidebar.drafts") %>
+      <% end %>
+      <%= link_to workspace_uploadedfiles_path(workspace),class:"truncate pl-10 py-1 w-full block bg-sladock border-b border-border_b hover:bg-deep_sladock" do %>
+        <i class="fas fa-file-download mr-2"></i>
+        <%= t(".sidebar.save") %>
+      <% end %>
       <div class="w-full">
         <div class="font-medium flex justify-between items-center py-1">
           <p class="ch-name truncate pl-5 text-lg"><%= t(".channel.name") %></p> 
