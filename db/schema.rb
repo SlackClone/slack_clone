@@ -73,7 +73,6 @@ ActiveRecord::Schema.define(version: 2020_09_30_125937) do
     t.bigint "user_id", null: false
     t.string "messageable_type", null: false
     t.bigint "messageable_id", null: false
-    t.integer "share_message_id"
     t.jsonb "emoji_data", default: {}
     t.string "ancestry"
     t.integer "share_message_id"
