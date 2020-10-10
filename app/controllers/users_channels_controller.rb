@@ -1,4 +1,6 @@
 class UsersChannelsController < ApplicationController
+  include ActionView::Helpers::TagHelper
+  
   before_action :find_channel,:find_workspace
   def create
     @channel.users_channels.where(user_id: current_user.id).first_or_create
@@ -9,18 +11,14 @@ class UsersChannelsController < ApplicationController
   end
 
   def invite
-    # byebug
-    
-
     params["users_channels"]["name"].each do |user|
       @user = User.find_by(email: user)
       @channel.users << @user
       
       # 把其他人加入 channel 後會即時新增訊息通知
       invited_message
-      # @channel.save
     end
-    redirect_to workspace_channel_path(@workspace,@channel),notice: I18n.t("users_channels.invite",user: params["users_channels"]["name"].join(","))
+    redirect_to workspace_channel_path(@workspace,@channel)
   end
   
   private
@@ -34,7 +32,8 @@ class UsersChannelsController < ApplicationController
 
   def invited_message
     channel_name = @channel.name
-    message = @channel.messages.create(content: "<i>已經被「#{current_user.nickname}」邀請加入 ##{channel_name}</i>", user_id: @user.id)
+    msg_content = content_tag(:div, content_tag(:i, "已經被「#{current_user.nickname}」邀請加入 ##{channel_name}"), class: "text-gray-600")
+    message = @channel.messages.create(content: msg_content, user_id: @user.id)
     channel_id = @channel.id
     avatar_url = current_user.profile.try(:avatar_url,(:small))
     direct_or_not = false
