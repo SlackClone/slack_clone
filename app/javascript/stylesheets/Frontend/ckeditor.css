@@ -14,13 +14,22 @@ blockquote::before {
   background: rgba(var(--sk_foreground_low_solid,221,221,221),1);
 }
 
-pre {
+code {
   border: 1px solid rgba(173, 173, 179, 0.4);
   border-radius: 4px;
   background: rgba(224, 224, 230, 0.4);
-  display: block;
+  display: inline-block;
+  padding-left: 0.3em;
+  padding-right: 0.3em;
+  color: red;
+  font-size: 14px;
+}
+
+pre > code {
   width: 100%;
-  padding-left: 1em;
+  color: black;
+  padding-top: 0.2em;
+  padding-bottom: 0.2em;
 }
 
 .share-msg {
