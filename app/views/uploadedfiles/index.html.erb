@@ -20,10 +20,10 @@
               <%= image_tag file.document.url, class: "" if file.document.mime_type.include? "image" %>
               <%= image_pack_tag "media/images/PDF_file_icon.png" if file.document.mime_type.include? "pdf" %>
               <div class="absolute upload-share">
-                <a href="<%= file.document.download_url(host: "https://staging.sladock.tw/") %>" download= "" class= "btn-ds btn-white">
-                  <i class="fas fa-cloud-download-alt"></i>
+                <a href="<%= file.document.download_url(host: "https://staging.sladock.tw/") %>" download= "" class= "btn-ds btn-white w-8 h-8 flex justify-around items-center mr-1">
+                  <i class="fas fa-cloud-download-alt "></i>
                 </a>
-                <a href="" data-action="click->uploadfile#shareFormShowUp" file_id="<%= file.id %>" class= "btn-ds btn-white" >
+                <a href="" data-action="click->uploadfile#shareFormShowUp" file_id="<%= file.id %>" class= "btn-ds btn-white w-8 h-8 flex justify-around items-center" >
                   <i class="fas fa-share"></i>
                 </a>
               </div>

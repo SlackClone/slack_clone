@@ -1,5 +1,9 @@
-.btn-ds {
+.btn-d {
   @apply font-bold py-1 px-2 rounded;
+}
+
+.btn-ds {
+  @apply font-bold rounded;
 }
 
 .btn-white {
@@ -11,7 +15,7 @@
 }
 
 .files-area:hover .upload-share{
-  display: block;
+  display: flex;
 }
 
 .msg-file-area .msg-img-dl {
@@ -28,8 +32,8 @@
 }
 
 .upload-share {
-  right: 3%;
-  top: 5%;
+  right: 2%;
+  top: 2%;
 }
 
 .msg-img-dl {
