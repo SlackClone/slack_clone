@@ -6,29 +6,37 @@
   </div>
 <% end%>
 <div class="messages_child">
-  <div class="flex justify-between hover:bg-gray-100 relative txtcolumn mt-2 mb-2 pl-2" data-controller="emoji" data-emoji-id =<%= message.id %>>
-    <div class="txt flex relative pl-12">
-      <div class="w-10 h-10 absolute left-0">
+  <div class="flex justify-between hover:bg-gray-100 relative txtcolumn pl-2" data-controller="emoji" data-emoji-id =<%= message.id %>>
+    <div class="txt flex w-full my-1">
+      <div class="w-12 h-12 ml-1 flex items-center">
         <%= image_tag message.user.profile.try(:avatar_url,(:small)) || 
           "https://ca.slack-edge.com/T018LF2LHK3-U018XMDF20Y-g206a10ded6a-32",class:"min-w-full h-frounded message_avatar rounded","aria-haspopup": true,"aria-expanded": true,data:{id:message.user_id} %>
       </div>
-      <div class="font-bold items-start">
-        <span class="pr-1 author"><%= message.user.nickname %></span>
+      <div class="items-start w-full mx-3">
+        <span class="font-bold pr-1 author"><%= message.user.nickname %></span>
         <span class="createtime text-xs text-gray-700">
           <%= message.created_at.strftime("%I:%M") %>
         </span>
-        <div class="share-msg flex-col">
-          <div class="content text-sm text-gray-800"><%= raw(message.content) %>
+        <div class="flex-col share-msg">
+          <div class="content text-md text-gray-800"><%= raw(message.content) %>
           </div>
-          <div class="file">
+          <div class="file flex">
             <% if message.attachfiles.empty? != true %>
               <% message.attachfiles.each do |file|%>
-                <%= image_tag file.document(:small).url if file.document.mime_type.include? "image" %>
-                <%= link_to file.document.metadata["filename"], file.document.download_url(host: "http://localhost:3000/"), download:"" unless file.document.mime_type.include? "image"%>
+                <div class="msg-file-area relative">
+                  <% if file.document.mime_type.include? "image" %>
+                    <%= image_tag file.document(:small).url, class: "block" %>
+                    <a href="<%= file.document.download_url(host: "https://staging.sladock.tw/") %>" download= "" class="btn-d btn-white absolute msg-img-dl">
+                      <i class="fas fa-cloud-download-alt"></i>
+                    </a>    
+                  <% end %>
+                  <%= link_to file.document.metadata["filename"], file.document.download_url(host: "https://staging.sladock.tw/"), download:"", class: "inline-block other-file" unless file.document.mime_type.include? "image"%>
+                </div>
               <% end %>
             <% end %>
+          </div>
         </div>
-          <% if message.share_message_id.present? %>
+        <% if message.share_message_id.present? %>
           <div class="m-2 border-l-4 border-gray-600">
             <div class="ml-2 font-bold"> <%= message.share_message.user.nickname %> </div>
             <div class="ml-2"> <%= raw(message.share_message.content) %> </div>
@@ -37,17 +45,16 @@
         <div class="reaction-emoji" data-target="emoji.reaction">
           <div id="message-reaction-<%= message.id %>" class="flex added-emoji items-center">
             <%= render './shared/reaction', message: message %>
-           </div>
+          </div>
         </div>
       </div>
     </div>
 
 
-    </div>
     <div class="react-bar">
       <button class="emoji-trigger btn-blue btn" data-action="click-> emoji#click" data-id=<%= message.id %>><i class="far fa-laugh-wink"></i></button>
       <% if controller_name != "directmsgs"%>
-      <button class= "share-btn btn btn-blue" data-id="<%= message.id %>"><i class="far fa-share-square"></i></button>
+        <button class= "share-btn btn btn-blue" data-id="<%= message.id %>"><i class="far fa-share-square"></i></button>
       <% end %>
     </div>
   </div>

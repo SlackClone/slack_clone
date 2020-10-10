@@ -1,4 +1,50 @@
+.btn-d {
+  @apply font-bold py-1 px-2 rounded;
+}
+
+.btn-ds {
+  @apply font-bold rounded;
+}
+
+.btn-white {
+  @apply bg-white text-black;
+}
+
+.files-area .upload-share{
+  display: none;
+}
+
+.files-area:hover .upload-share{
+  display: flex;
+}
+
+.msg-file-area .msg-img-dl {
+  display: none;
+}
+
+.msg-file-area:hover .msg-img-dl {
+  display: block;
+}
+
 .file-zone {
   width: 250px;
   height: 250px;
+}
+
+.upload-share {
+  right: 2%;
+  top: 2%;
+}
+
+.msg-img-dl {
+  right: 3%;
+  top: 5%;
+}
+
+.other-file {
+  color: blue; 
+}
+
+.other-file:hover {
+  border-bottom: 1.5px solid black;
 }

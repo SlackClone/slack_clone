@@ -18,6 +18,7 @@ class MessagesController < ApplicationController
     end
       @avatar_url = current_user.profile.try(:avatar_url,(:small))
     # 有夾帶檔案的話
+    
     if @message.attachfiles.present?
       # 壓縮圖片
       @message.attachfiles.each do |file|

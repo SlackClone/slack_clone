@@ -30,6 +30,25 @@ export default class extends Controller {
     if ($('.text-area').length === 1) {return} 
     editor()    // create ckeditor
     console.log(`Messaging channel opened in workspace NO.${this.data.get("id")}`)
+
+    $('.file-upload').change( (e) => {
+      $('#new_message #pre-file-zone').empty()
+      let reader = new FileReader();
+      let targetFile = e.target.files[0]
+      let fileName = targetFile.name
+      let fileType = targetFile.type
+      if (fileType.includes("image")){
+        reader.readAsDataURL(targetFile);
+        reader.onload = ()=>{
+          let dataURL = reader.result;
+          $('#new_message #pre-file-zone').append(`<img id="img-pre" width="120">`)
+          document.querySelector('#new_message #img-pre').src = dataURL;
+          $('#new_message #pre-file-zone').append(`<a src="#" id="pre-file-name">${fileName}</a>`)
+        }
+      }else {
+        $('#new_message #pre-file-zone').append(`<a src="#" id="pre-file-name">${fileName}</a>`)
+      }
+    })
   }
   
   messaging(data){
@@ -52,6 +71,7 @@ export default class extends Controller {
   clearmsg(){
     $('.text-area').remove()
     $('.editor').remove()
+    $('.file-upload').val("")
     $('.w-full.px-3.mb-2').append(`<textarea class="editor" placeholder="輸入訊息" style="display: none;"></textarea>`)
     editor()
   }
@@ -107,6 +127,8 @@ function customEditor(){
   $('.ck-editor').attr('class', 'flex flex-col-reverse text-area')
   $('.ck-tooltip__text').attr('class', 'hidden')
 
+  // 塞預覽檔案的地方
+  $('#new_message .ck-editor__main').append(`<div id="pre-file-zone"></div>`)
 
   $('.ck-toolbar_grouping >.ck-toolbar__items').append('<div class="custom-ckeditor" style="margin-left: auto; "></div>')
   $('.custom-ckeditor').append('<button class="custom_emoji ck" style="margin-right: 12px;"></button>')
@@ -115,7 +137,6 @@ function customEditor(){
   $('.custom_attach').append('<i class="fas fa-paperclip ck ck-icon" type="file"></i>')
   $('.custom-ckeditor').append('<button class="custom_send ck" style=" margin-right: 12px;" type="submit"></button>')
   $('.custom_send').append('<i class="far fa-paper-plane ck ck-icon"></i>')
-  
   // emoji 
   $('.custom_emoji').click( (e) => {
     e.preventDefault()
@@ -168,6 +189,7 @@ function customEditor(){
 
   $('.custom_send').click( (e) => {
     e.preventDefault()
+    if ($('.ck-editor__editable').text() === "" && $('#new_message .file-upload').val() === ""){return}
     $('.message-content').val($('.ck-editor__editable').html()) 
     $('.message-submit').trigger('click')
   })
@@ -226,4 +248,4 @@ function customEditor(){
     }
   }
 
-
+  
