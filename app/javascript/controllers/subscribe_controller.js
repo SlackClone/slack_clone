@@ -153,16 +153,14 @@ function customEditor(){
       const emoji = selection.emoji
       let textarea = $('.ck-editor__editable')    //要塞emoji的地方
 
-      let emojiElement = `<a href="#" class="text-xl">${emoji}</a>`
-      console.log(emojiElement)
       // 假如輸入框是空的時候，直接把emoji放進去
       if (textarea.text() == ""){
-        textarea.children().html(emojiElement)  
+        textarea.children().html(emoji)  
       // 已經有其他文字的狀況
       }else {
         // 如果input為element起始點(例如換行的起始點)
         if(inputPosition === 0){
-          focusElement.innerHTML = emojiElement
+          focusElement.innerHTML = emoji
         }else {
           // 其他狀況要把emoji跟原有字串做拼接
           let textParent = focusParent.innerHTML
@@ -171,7 +169,7 @@ function customEditor(){
             return this.slice(0, index) + string + this.slice(index)
           }
           // textParent為插入emoji後的新字串
-          textParent = textParent.emojiInsert(inputPosition, emojiElement)
+          textParent = textParent.emojiInsert(inputPosition, emoji)
           focusParent.innerHTML = textParent
         }
       }

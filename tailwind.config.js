@@ -824,7 +824,6 @@ module.exports = {
       addBase({
         'h2': { fontSize: config('theme.fontSize.3xl') },
         'h3': { fontSize: config('theme.fontSize.2xl') },
-        'blockquote': {  } 
       })
     })
   ],
