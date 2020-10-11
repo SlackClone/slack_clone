@@ -26,17 +26,13 @@ class Webhook::GithubController < ActionController::API
         # user_event_action_type = json_body["hook"]["events"][0] 
         if json_body["hook"] 
           user_event_action_type = "Test webhook"
-        elsif json_body["commit"]["commit"]["message"]
-          user_event_action_type = json_body["commit"]["commit"]["message"]
+        elsif json_body["commits"]["message"]
+          user_event_action_type = json_body["commits"]["message"]
         else
           user_event_action_type = "No Commit Message"
         end
-        # byebug
 
         user_repository_url = json_body["repository"]["html_url"]
-        # payload_content = { user_event_action_type: user_event_action_type, 
-        #                     user_repository_name: user_repository_name, 
-        #                     user_repository_url: user_repository_url }.to_json
         payload_content = "<p>Commit Message: <span>#{user_event_action_type}<span></p>
                            <p>Repository: <span>#{user_repository_name}<span></p>
                            <p>Repository URL: <a href=\"#{user_repository_url}\" class=\"text-blue-700\">#{user_repository_url}</a></p>"
