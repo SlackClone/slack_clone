@@ -24,12 +24,20 @@ class MessagesController < ApplicationController
         file.document_derivatives! if file.document.mime_type.include? "image"
       end
     end 
+    # byebug
+    if (@message.content).scan(channel_usernames(@channel)).flatten != []
+      @message.mention_tag = (@message.content).scan(channel_usernames(@channel)).flatten.uniq
+    end
+    # puts"----------------------"
+    # puts @message.mention_tag
+    # puts"----------------------"
 
     if @message.save
       # 第三個參數為是否為私訊
       sending_message(@message, channel_id, direct_or_not)
       sending_notice(@channel, current_user, direct_or_not)
     end
+    
   end  
 
   def add
@@ -90,4 +98,22 @@ class MessagesController < ApplicationController
   def sending_notice(channel, sender, direct_or_not)
     SendNotificationJob.perform_later(channel, sender, direct_or_not)
   end
+
+  def process_mentions
+  end
+
+  def mentioned_users
+    User.where(nickname: mentioned_usernames) - [user]
+  end
+
+  def channel_usernames(channel)
+    # str.scan(/@([\w-]+)/).flatten
+    # str.scan(/@([\w-]+[\s]*)/).flatten
+    channel_user = channel.users.pluck('nickname').map{ |name| "@"+name }
+    reg_channel_user = Regexp.union(channel_user)
+    return reg_channel_user
+
+  end
+
+
 end
