@@ -23,13 +23,19 @@
         </div>
       </div>
       <% channels.where.not(id: nil).each do |channel| %>
-        <div data-controller="channels" data-channels-id="<%= channel.id %>" class='truncate pl-10 py-1 hover:bg-deep_sladock'>
+        <div data-controller="channels" data-channels-id="<%= channel.id %>" class='truncate pl-10 py-1 hover:bg-deep_sladock flex pr-5'>
           <span>#</span>
           <%= link_to channel.name, workspace_channel_path(workspace, channel), channel_id: channel.id, class: unread_msg_bol[channel.id] ? "font-bold channel-each" : "channel-each", data: { target: "thread.channels" } %>
           <% if channel.users.include?(current_user) %>
             <button data-action="click->channels#removeChannel" data-target="channels.symbol">-</button>
           <% else %>
             <button data-action="click->channels#addChannel" data-target="channels.symbol">+</button>
+          <% end %>
+          <%# <% byebug %> 
+          <% if channel.mentions.select{|mention| mention.user_id == current_user.id} != [] %>
+            <span class="block count ml-auto text-red-600 w-8 bg-yellow-400 rounded-full text-center" mention-id="<%= channel.id %>">
+              <%= channel.mentions.select{|mention| mention.user_id == current_user.id}.map{|mention| mention.user_id}.count %>
+            </span>
           <% end %>
         </div>
       <% end %>

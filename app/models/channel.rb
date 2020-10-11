@@ -7,6 +7,7 @@ class Channel < ApplicationRecord
 
   has_many :users_channels, dependent: :destroy
   has_many :users, through: :users_channels
+  has_many :mentions, as: :messageable
   
   belongs_to :workspace
 end
