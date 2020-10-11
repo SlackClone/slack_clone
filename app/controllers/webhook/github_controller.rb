@@ -22,12 +22,12 @@ class Webhook::GithubController < ActionController::API
 
       # 驗證 payload
       if signature?(payload_body, github_secret) 
-        # 發送訊息匯整 & 把 hash 轉成 json 格式
-        # user_event_action_type = json_body["hook"]["events"][0] 
-        if json_body["hook"] 
+        # byebug
+        if json_body["hook"]
           user_event_action_type = "Test webhook"
-        elsif json_body["commits"]["message"]
-          user_event_action_type = json_body["commits"]["message"]
+          # user_event_action_type = json_body["hook"]["events"][0] 
+        elsif json_body["commits"][0]["message"]
+          user_event_action_type = json_body["commits"][0]["message"]
         else
           user_event_action_type = "No Commit Message"
         end
