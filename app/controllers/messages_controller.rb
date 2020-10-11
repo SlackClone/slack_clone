@@ -26,13 +26,20 @@ class MessagesController < ApplicationController
     end 
     
     if @message.save
+      # 若訊息中有mention別人
       if (@message.content).scan(channel_usernames(@channel)).flatten != []
-        (@message.content).scan(channel_usernames(@channel)).flatten.uniq.each do |name|
+        mentioned_user = (@message.content).scan(channel_usernames(@channel)).flatten.uniq - ['@'+current_user.nickname]
+        mentioned_user.each do |name|
           mention_name = name.sub('@', '')
-          break if mention_name == current_user.name
           mention_user = User.find_by(nickname: mention_name)
-          mention_user.mentions.create(name: mention_name, messageable_type: @message.messageable_type, messageable_id: @message.messageable_id)
+          mention_user.mentions.create(name: mention_name, 
+                                      message_id: @message.id,
+                                      messageable_type: @message.messageable_type, 
+                                      messageable_id: @message.messageable_id)
         end
+        sending_notice(@channel, current_user, direct_or_not, mentioned_user )
+      else
+        sending_notice(@channel, current_user, direct_or_not, [] )
       end
       # byebug
       # 第三個參數為是否為私訊
@@ -97,8 +104,8 @@ class MessagesController < ApplicationController
     SendMessageJob.perform_later(message, channel_id, direct_or_not)
   end
 
-  def sending_notice(channel, sender, direct_or_not)
-    SendNotificationJob.perform_later(channel, sender, direct_or_not)
+  def sending_notice(channel, sender, direct_or_not, mention)
+    SendNotificationJob.perform_later(channel, sender, direct_or_not, mention)
   end
 
   def process_mentions
@@ -109,12 +116,8 @@ class MessagesController < ApplicationController
   end
 
   def channel_usernames(channel)
-    # str.scan(/@([\w-]+)/).flatten
-    # str.scan(/@([\w-]+[\s]*)/).flatten
     channel_user = channel.users.pluck('nickname').map{ |name| "@"+name }
     reg_channel_user = Regexp.union(channel_user)
-
   end
-
 
 end

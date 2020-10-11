@@ -58,10 +58,12 @@ ActiveRecord::Schema.define(version: 2020_10_11_151956) do
   create_table "mentions", force: :cascade do |t|
     t.string "name", null: false
     t.bigint "user_id", null: false
+    t.bigint "message_id", null: false
     t.string "messageable_type", null: false
     t.bigint "messageable_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["message_id"], name: "index_mentions_on_message_id"
     t.index ["messageable_type", "messageable_id"], name: "index_mentions_on_messageable_type_and_messageable_id"
     t.index ["user_id"], name: "index_mentions_on_user_id"
   end
@@ -174,6 +176,7 @@ ActiveRecord::Schema.define(version: 2020_10_11_151956) do
   add_foreign_key "channels", "workspaces"
   add_foreign_key "invitations", "users"
   add_foreign_key "invitations", "workspaces"
+  add_foreign_key "mentions", "messages"
   add_foreign_key "mentions", "users"
   add_foreign_key "message_files", "attachfiles"
   add_foreign_key "message_files", "messages"
