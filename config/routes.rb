@@ -6,11 +6,10 @@ Rails.application.routes.draw do
     registrations:'users/registrations'
   }
 
+  get '/users/profiles/edit', to: 'profiles#edit', as: 'edit_profiles'
+  get '/users/profiles/avatar',to: 'profiles#avatar_url', as: 'avatar_url_profiles'
+  resource :profiles, path: "/users/profiles/:id", except: [:edit,:avatar_url]
 
-
-    get '/users/profiles/edit', to: 'profiles#edit', as: 'edit_profiles'
-    get '/users/profiles/avatar',to: 'profiles#avatar_url', as: 'avatar_url_profiles'
-    resource :profiles, path: "/users/profiles/:id", except: [:edit,:avatar_url]
   resource :pages do
     get :index
     get :login
@@ -19,6 +18,9 @@ Rails.application.routes.draw do
     get '/workspaces/:workspace_id/workspace_users',to: 'channels#workspace_users',as: 'workspace_users'
   root to: 'pages#index'
   resources :workspaces do
+
+    get '/all_user', to: 'workspaces#get_users', as: 'get_users'
+
     resource :users_workspaces
     resource :channels, only: %i[new create]
     resources :channels, only: [:show] do
@@ -27,6 +29,7 @@ Rails.application.routes.draw do
     resource :invitations, only: :create do
       get :accept
     end
+
     resources :directmsgs, only: [:show]
     resources :uploadedfiles, only: %i[index create] do 
       member do

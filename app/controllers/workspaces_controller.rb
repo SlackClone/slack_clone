@@ -1,6 +1,6 @@
 class WorkspacesController < ApplicationController
   before_action :authenticate_user!
-  before_action :find_workspace, except: [:index, :new, :create]
+  before_action :find_workspace, except: [:index, :new, :create, :get_users]
   
   def index  
     @workspaces = Workspace.all
@@ -28,6 +28,10 @@ class WorkspacesController < ApplicationController
 
   def show
     @joined_channel = UsersChannel.where(user_id: current_user.id).where(channel_id: @workspace.channels.ids)
+  end
+
+  def get_users
+    @users = User.includes(:users_workspaces, :profile).where(:users_workspaces => {:workspace_id => params[:workspace_id]})
   end
 
   private

@@ -35,3 +35,12 @@ pre > code {
 .share-msg {
   position: relative;
 }
+
+.mention__item {
+  display: flex;
+  justify-content: space-between;
+  font-weight: bold;
+}
+.mention__item__user-name {
+  font-weight: bold;
+}
