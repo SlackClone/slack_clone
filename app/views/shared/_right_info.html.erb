@@ -18,9 +18,9 @@
     </div>
     <div class="thread-all-msg overflow-y-auto">
       <%= render 'threads/message_broadcast', message: @thread %>
-      <h2 id="thread-count" data-target="subscribe.threadcount" message_id="<%= @thread.id %>" channel_id="<%= @channel.try(:id) %>" directmsg_id="<%= @directmsg.try(:id) %>" class="flex items-center pl-2 text-gray-600">
+      <p id="thread-count" data-target="subscribe.threadcount" message_id="<%= @thread.id %>" channel_id="<%= @channel.try(:id) %>" directmsg_id="<%= @directmsg.try(:id) %>" class="flex items-center pl-2 text-gray-600">
         有 <%= @thread.children.count %> 則回覆
-      </h2>
+      </p>
 
       <div class="children-message" data-target="subscribe.threads">
         <% @thread.children.order(:created_at).each do |thread| %>
