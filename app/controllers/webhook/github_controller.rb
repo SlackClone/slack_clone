@@ -32,9 +32,11 @@ class Webhook::GithubController < ActionController::API
           user_event_action_type = "No Commit Message"
         end
 
+        pusher = json_body["pusher"]["name"]
         user_repository_url = json_body["repository"]["html_url"]
-        payload_content = "<p>Commit Message: <span>#{user_event_action_type}<span></p>
-                           <p>Repository: <span>#{user_repository_name}<span></p>
+        payload_content = "<p>Pusher: <span class=\"text-teal-700\">#{pusher}</span></p>
+                           <p>Commit Message: <span class=\"text-red-700\">#{user_event_action_type}</span></p>
+                           <p>Repository: <span>#{user_repository_name}</span></p>
                            <p>Repository URL: <a href=\"#{user_repository_url}\" class=\"text-blue-700\">#{user_repository_url}</a></p>"
 
 
