@@ -40,6 +40,7 @@ en:
       name_placeholder: "enter a channel name"
       desc_placeholder: "enter description"
       about: "What’s this channel about?"
+      invite: "Invite team member to this channel"
     show:
       status: "status"
       edit: "edit profile"

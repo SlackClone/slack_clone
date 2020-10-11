@@ -2,9 +2,8 @@ class ChannelsController < ApplicationController
   before_action :authenticate_user!
   before_action :find_workspace, except:[:destroy]
   def new
-    
   end
-
+  # 拿到特定ws的所有user
   def workspace_users
     @ws_user = (@workspace.users - [current_user]).map{|user| [user.nickname,user.email] }
     render json: @ws_user
@@ -22,6 +21,8 @@ class ChannelsController < ApplicationController
     # debugger
     if @channel.save
       redirect_to workspace_channel_path(@workspace, @channel), notice: I18n.t("channels.create")
+    else
+      render :new
     end
 
   end
