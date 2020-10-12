@@ -53,6 +53,24 @@ export default class extends Controller {
         $('#new_message #pre-file-zone').append(`<a src="#" id="pre-file-name">${fileName}</a>`)
       }
     })
+    $('.tfile-upload').change( (e) => {
+      $('#new_thread #pre-thread-file-zone').empty()
+      let reader = new FileReader();
+      let targetFile = e.target.files[0]
+      let fileName = targetFile.name
+      let fileType = targetFile.type
+      if (fileType.includes("image")){
+        reader.readAsDataURL(targetFile);
+        reader.onload = ()=>{
+          let dataURL = reader.result;
+          $('#new_thread #pre-thread-file-zone').append(`<img id="img-pre-thread" width="120">`)
+          document.querySelector('#new_thread #img-pre-thread').src = dataURL;
+          $('#new_thread #pre-thread-file-zone').append(`<a src="#" id="pre-thread-file-name">${fileName}</a>`)
+        }
+      }else {
+        $('#new_message #pre-file-zone').append(`<a src="#" id="pre-file-name">${fileName}</a>`)
+      }
+    })
   }
   
   messaging(data){
@@ -320,6 +338,9 @@ function customEditor(){
 function threadCustomEditor(){
   // 調整ckeditor格式
   
+  $('#new_thread .ck-editor__main').append(`<div id="pre-thread-file-zone"></div>`)
+
+
   $('#new_thread .centered').attr('class', 'w-full px-3 mb-2')
   $('#new_thread .ck-editor').attr('class', 'flex flex-col-reverse thread-text-area border border-black rounded')
   $('#new_thread .ck-tooltip__text').attr('class', 'hidden')
@@ -390,7 +411,7 @@ function threadCustomEditor(){
     window.focusParent = window.getSelection().focusNode.parentElement
     inputPosition = window.getSelection().focusOffset
   })
-  
+
   // 為了監聽使用者使用方向鍵移動輸入位置時紀錄游標位置
   $('#new_thread .ck-editor__editable').keyup( (e) => {
     focusElement = window.getSelection().focusNode
