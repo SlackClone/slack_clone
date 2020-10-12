@@ -1,7 +1,7 @@
 class SendMessageJob < ApplicationJob
   queue_as :default
 
-  def perform(message, channel_id, avatar_url, direct_or_not)
+  def perform(message, channel_id, direct_or_not)
     msg_sender = message.user
     if direct_or_not
       # 私訊
