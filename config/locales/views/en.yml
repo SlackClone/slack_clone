@@ -4,7 +4,7 @@ en:
       sidebar:
         drafts: "Drafts"
         save: "File browser"
-        invite: "+invite people"
+        invite: "invite people"
       channel:
         name: "Channel"
         new: "New a channel"

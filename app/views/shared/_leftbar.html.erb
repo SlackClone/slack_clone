@@ -17,7 +17,9 @@
       <div class="w-full">
         <div class="font-medium flex justify-between items-center py-1">
           <p class="ch-name truncate pl-5 text-lg"><%= t(".channel.name") %></p> 
-          <%= link_to '+', new_workspace_channels_path(workspace_id: workspace.id),class: 'create-ch-btn text-2xl pr-5' %>
+          <%= link_to new_workspace_channels_path(workspace_id: workspace.id),class: 'create-ch-btn text-2xl pr-3' do %>
+            <i class="fas fa-plus-circle text-2xl hover:bg-white text-white-500 hover:text-sladock hover:rounded-full"></i>
+          <% end %>
         </div>
       </div>
       <% channels.where.not(id: nil).each do |channel| %>
@@ -43,7 +45,7 @@
         <% end %>
         <%# button顯示 %>
         <p class="invite-ws-btn truncate pl-10 py-1 hover:bg-deep_sladock cursor-pointer">
-          <%= t(".sidebar.invite") %>
+          <i class="fas fa-plus text-white-500 mr-1"></i><%= t(".sidebar.invite") %>
         </p> 
         <%= render "./shared/invite_ws" %>
       </div>
