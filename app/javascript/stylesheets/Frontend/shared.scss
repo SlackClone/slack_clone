@@ -64,3 +64,22 @@
   color: #fff;
 }
 
+.thread-header{
+  position: fixed;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 25%;
+  z-index: 30;
+  background-color: #fff;
+}
+
+.thread-msg{
+  max-height: calc(100vh - 2.6rem);
+  overflow: auto;
+  margin-top: 4rem;
+}
+
+.max-height{
+  max-height: 100vh;
+}

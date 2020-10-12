@@ -1,4 +1,4 @@
-<div class="chatroom flex overflow-hidden" data-controller="subscribe"  data-subscribe-id="<%= @workspace.id %>" data-subscribe-channel="<%= @channel&.id || 0 %>" data-subscribe-direct="<%= @directmsg&.id || 0 %>" data-subscribe-thread="<%= @thread&.id || 0 %>">
+<div class="chatroom flex overflow-hidden max-height" data-controller="subscribe"  data-subscribe-id="<%= @workspace.id %>" data-subscribe-channel="<%= @channel&.id || 0 %>" data-subscribe-direct="<%= @directmsg&.id || 0 %>" data-subscribe-thread="<%= @thread&.id || 0 %>">
   <%= render "./shared/leftbar", workspace: @workspace, 
                                   channels:  @channels,
                                   unread_msg_bol: @unread_msg_bol,
