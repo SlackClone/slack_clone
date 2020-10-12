@@ -89,7 +89,6 @@ ActiveRecord::Schema.define(version: 2020_10_11_151956) do
     t.jsonb "emoji_data", default: {}
     t.string "ancestry"
     t.index ["ancestry"], name: "index_messages_on_ancestry"
-    t.string "mention_tag", default: [], array: true
     t.index ["messageable_type", "messageable_id"], name: "index_messages_on_messageable_type_and_messageable_id"
     t.index ["user_id"], name: "index_messages_on_user_id"
   end

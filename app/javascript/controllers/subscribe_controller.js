@@ -220,7 +220,7 @@ function customEditor(){
   $('#new_message .ck-editor__main').append(`<div id="pre-file-zone"></div>`)
 
   $('#new_message .centered').attr('class', 'w-full px-3 mb-2 thread')
-  $('#new_message .ck-editor').attr('class', 'flex flex-col-reverse text-area')
+  $('#new_message .ck-editor').attr('class', 'flex flex-col-reverse text-area border border-black rounded')
   $('#new_message .ck-tooltip__text').attr('class', 'hidden')
   // emoji 
   
@@ -338,8 +338,9 @@ function threadCustomEditor(){
   // 調整ckeditor格式
   
   $('#new_thread .centered').attr('class', 'w-full px-3 mb-2')
-  $('#new_thread .ck-editor').attr('class', 'flex flex-col-reverse thread-text-area')
+  $('#new_thread .ck-editor').attr('class', 'flex flex-col-reverse thread-text-area border border-black rounded')
   $('#new_thread .ck-tooltip__text').attr('class', 'hidden')
+  $('#new_thread .ck-toolbar_grouping').addClass('border rounded')
   // 避免一直生成
   
   $('#new_thread .ck-toolbar__items').addClass('ck-thread-editor')

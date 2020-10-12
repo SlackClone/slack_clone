@@ -4,7 +4,7 @@
     <div class="box-border border-b border-gray-400 h-16 thread-header">
       <div class="thread-title ml-2">
         <h1><strong>Thread</strong></h1>
-        <p class="text-gray-500 text-xs">
+        <p class="text-gray-500 text-md">
           <% if @thread.messageable_type == "Channel" %>
             # <%= @thread.messageable.name %>
           <% else %>

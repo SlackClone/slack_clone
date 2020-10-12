@@ -49,7 +49,6 @@ export default class extends Controller {
     const mentionTimes = document.querySelector(`[mention-id = "${data.channel_id}"]`)
     const mentionBody = `${data.user_nickname}在${data.channel_name}提到了您`
     const mentionUser = data.mention.map(name => name.substring(1, name.length))
-    console.log(mentionTimes)
     
     if (userNow === data.user_nickname){
       return
