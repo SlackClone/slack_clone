@@ -25,7 +25,13 @@ zh-TW:
       unconfirmed: "您的帳號需需要經過驗證後，才能繼續。"
     mailer:
       confirmation_instructions:
-        subject: "帳號驗證步驟"
+        subject: "SlaDock 註冊驗證信"
+        confirm: "註冊信箱驗證"
+        welcome: "歡迎 %{email}!"
+        successfully: "您已成功註冊 SlaDock!"
+        click: "感謝您的註冊, 請點選下方按鈕完成驗證流程:"
+        btn: "驗證您的帳戶"
+        ignore: "如果不是您本人註冊，可以選擇直接忽略此封信，謝謝。"
       reset_password_instructions:
         subject: "密碼重設步驟"
       unlock_instructions:

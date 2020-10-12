@@ -1,7 +1,35 @@
-    <p>
-      You have successfully signed up to example.com,<%= @invitation.receiver_email %>
-    </p>
-    <p>
-      To login to the site, just follow this link:
-    </p>
-    <%= link_to 'join',"/workspaces/#{@invitation.workspace_id}/invitations/accept?token=#{@invitation.invitation_token}"%>
+  <section style="width:100%;">
+  <div class="mailer-container" style="max-width:500px;margin:0 auto;padding: 0 20px;color:#434245;">
+    <img src="https://ckyang01.s3-ap-northeast-1.amazonaws.com/logo/Sladock_logo.png" alt="" style="width: 150px;">
+    <h3 style="font-size: 30px; margin: 10px 0 20px; color:#434245;"><%= t('my_mailer.join') %></h3>
+    <div class="text" style="color:#434245; font-size:18px;">
+      <p>
+        <strong>
+          <%= @user.nickname %>
+        </strong>
+        (<%= @user.email %>) <%= t('my_mailer.invited') %>
+        <strong>
+          <%= @workspace.name %>
+        </strong>.
+      </p>
+      <div style="border: 1px solid #ccc;border-radius:5px; text-align:center; margin: 20px 0;">
+        <p style="font-size:20px; font-weight:bold;">
+          <%= @workspace.name %>
+        </p>
+        <%= link_to 'Join Now',"/workspaces/#{@workspace.id}/invitations/accept?token=#{@invitation.invitation_token}",style:"text-decoration:none;background-color:#138184;color:white;padding: 10px 20px;border-radius: 3px;margin: 10px 0;display: inline-block;"%>
+        <div style="margin:0 auto; margin: 15px; border-top:1px solid #eee;">
+        <p style="margin:10px 0;font-weight:bold;">
+          <%= @user.nickname %><%= t('my_mailer.joined') %>
+        </p>
+          <%= image_tag (@user.profile.try(:avatar_url,(:small)) || 'https://ca.slack-edge.com/T018LF2LHK3-U018XMDF20Y-g206a10ded6a-32'),style:"display:block; margin:0 auto; width:40px; height:40px; border-radius:3px" %> 
+        </div>
+      </div>
+      <h3 style="font-size: 30px;margin: 10px 0 20px;color:#434245;">
+        <%= t('my_mailer.what') %>
+      </h3>
+      <p>
+        <%= t('my_mailer.description') %>
+      </p>
+    </div>
+  </div>
+</section>

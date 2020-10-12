@@ -18,7 +18,13 @@ en:
       unconfirmed: "You have to confirm your email address before continuing."
     mailer:
       confirmation_instructions:
-        subject: "Confirmation instructions"
+        subject: "SlaDock confirmation"
+        confirm: "Confirm your email address"
+        welcome: "Welcome %{email}!"
+        successfully: "You have successfully signed up to SlaDock!"
+        click: "Thank you for registering, please click the link below to confirm your email account to complete the registration process:"
+        btn: "Confirm your account"
+        ignore: "If you didn’t request this email, there’s nothing to worry about - you can safely ignore it."
       reset_password_instructions:
         subject: "Reset password instructions"
       unlock_instructions:

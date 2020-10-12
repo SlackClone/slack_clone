@@ -1,3 +1,10 @@
 zh-TW:
   mailer:
-    title: '被邀請加入workspace摟'
+    title: '%{username} 邀請您加入 SlaDock 共同工作'
+  my_mailer:
+    join: '加入您在SlaDock上的團隊'
+    invited: '邀請您與他們一起使用 SlaDock, 工作區名稱為:'
+    joined: '已經加入'
+    join_now: '點選此按鈕加入'
+    what: '什麼是 SlaDock?'
+    description: 'SlaDock 為一種協作工具，能夠幫助團隊不管身在何處都能夠立即溝通，讓團隊合作更加順暢，也能夠串連第三方服務取得更優質的協作體驗。'
