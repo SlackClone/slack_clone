@@ -7,10 +7,8 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 # Create users
-User.create(email: 'user01@example.com', password: 'password', nickname: 'user01')
-User.create(email: 'user02@example.com', password: 'password', nickname: 'user02')
-User.create(email: 'user03@example.com', password: 'password', nickname: 'user03')
-User.create(email: 'user04@example.com', password: 'password', nickname: 'user04')
+#User.create(email: 'user01@example.com', password: 'password', nickname: 'user01')
+#User.create(email: 'user02@example.com', password: 'password', nickname: 'user02')
 
 # Create CatBot
 User.create(email: 'catbot@sladock.tw', password: 'password', nickname: 'CatBot')
