@@ -30,7 +30,7 @@ class ChannelsController < ApplicationController
       invited_message
       redirect_to workspace_channel_path(@workspace, @channel)
     else
-      render :new
+      render "_new"
     end
 
   end

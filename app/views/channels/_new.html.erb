@@ -5,6 +5,7 @@
       <button class="create-cancel-btn font-bold text-gray-600 focus:outline-none">X</button>
     </div>
     <p class="text-sm text-gray-600 mb-5"><%= t(".communicates") %></p>
+
     <%= form_with(model: channel, url:workspace_channels_path(workspace),method:'POST',local:true) do |f| %>
     <div class="field">
       <%= f.label :name, t(".name"), class: "font-bold" %>

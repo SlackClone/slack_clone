@@ -14,15 +14,13 @@ class WorkspacesController < ApplicationController
   def create
     @workspace = Workspace.new(workspace_params)  
     @workspace.users << current_user
-    if @workspace.valid?
-      @workspace.image_derivatives! if @workspace.image_data? # create derivatives 
-      if @workspace.save
-        @channel = @workspace.channels.create(name:"general")
-        @channel.users << current_user
-        redirect_to workspace_channel_path(@workspace, @channel), notice: I18n.t("workspaces.create",workspace: @workspace.name)
-      else
-        render :new
-      end
+    @workspace.image_derivatives! if @workspace.image_data? # create derivatives 
+    if @workspace.save
+      @channel = @workspace.channels.create(name:"general")
+      @channel.users << current_user
+      redirect_to workspace_channel_path(@workspace, @channel), notice: I18n.t("workspaces.create",workspace: @workspace.name)
+    else
+      render :new
     end
   end
 
