@@ -76,10 +76,9 @@ end
 
     def send_webhook_message(bot_id, payload_content)
       @message = @channel.messages.new(user_id: bot_id, content: payload_content)
-      @bot_avatar_url = @catbot.profile.try(:avatar_url,(:small))
  
       if @message.save
-        SendMessageJob.perform_later(@message, @channel.id, @bot_avatar_url, false)
+        SendMessageJob.perform_later(@message, @channel.id, false)
       else
         # TODO: false condition
       end
