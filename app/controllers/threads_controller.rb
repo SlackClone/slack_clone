@@ -12,9 +12,9 @@ class ThreadsController < ApplicationController
       @channel_user&.touch(:last_enter_at)
     else
       # directmsg
-      @directmsg = Directmsg.find(params[:directmsg_id])
+      @channel = Directmsg.find(params[:directmsg_id])
       type = "Directmsg"
-      @directmsg_user = current_user.users_directmsgs.find_by(directmsg: @directmsg)
+      @directmsg_user = current_user.users_directmsgs.find_by(directmsg: @channel)
       @last_enter_at = @directmsg_user&.last_enter_at || @directmsg.created_at
       @directmsg_user&.touch(:last_enter_at)
 

@@ -67,7 +67,6 @@
 
 <% if @thread %>
   <script>
-    // import $ from "jquery"
     // 打開右側
     const rightInfo = document.querySelector(".right_info")
     rightInfo.classList.toggle("hidden")
@@ -85,50 +84,6 @@
       let directmsgId = a.getAttribute("directmsg_id")
       a.setAttribute('href', `/directmsgs/${ directmsgId }/messages/${ messageId }/threads`)
     });
-
-  //   threadeditor()
-
-  //   function threadeditor(){
-  //   ClassicEditor
-  //   .create( document.querySelector( '.thread-editor' ), {	
-  //     toolbar: {
-  //       items: [
-  //         'bold',
-  //         'underline',
-  //         'italic',
-  //         'strikethrough',
-  //         'code',
-  //         'link',
-  //         'bulletedList',
-  //         'numberedList',
-  //         'blockQuote',
-  //         'codeBlock',
-  //         '|',
-  //         'undo',
-  //         'redo',
-  //       ]
-  //     },
-  //     language: 'en',
-  //     image: {
-  //       toolbar: [
-  //         'imageTextAlternative',
-  //         'imageStyle:full',
-  //         'imageStyle:side'
-  //       ]
-  //     },
-  //     licenseKey: '',
-      
-  //   } )
-  //   .then( editor2 => {
-  //     window.editor2 = editor2;
-  //     threadCustomEditor()
-  //     // findRecord()
-  //   } )
-
-  //   .catch( error => {
-  //     console.error( 'Oops, something went wrong!' );
-  //   } );
-  // }
   </script>  
 <% end %>
  

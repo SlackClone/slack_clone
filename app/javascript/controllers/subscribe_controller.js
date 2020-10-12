@@ -5,7 +5,7 @@ import ClassicEditor from "ckeditor5-custom-build/build/ckeditor.js"
 import { EmojiButton } from '@joeattardi/emoji-button'
 
 export default class extends Controller {
-  static targets = ["messages", "newMessage", "threads", "threadcount", "msglist"]
+  static targets = ["messages", "threads", "threadcount", "msglist"]
 
   connect() {
     Notification.requestPermission()
@@ -26,14 +26,13 @@ export default class extends Controller {
     // 回傳游標在Node的哪個位置
     window.inputPosition = window.getSelection().focusOffset
 
-    // if ($('#new_message .text-area').length === 1) {return} 
-    editor()    // create ckeditor
-    threadeditor()
+    if(window.location.pathname.includes("threads")){
+      editor()    // create ckeditor
+      threadeditor()
+    }else {
+      editor()    // create ckeditor
+    }
 
-    // if ($('#new_thread').length ===1){
-    //   if ($('#new_thread .text-area').length === 1) {return} 
-
-    // }
     // console.log(`Messaging channel opened in workspace NO.${this.data.get("id")}`)
 
     $('.file-upload').change( (e) => {
@@ -54,8 +53,6 @@ export default class extends Controller {
         $('#new_message #pre-file-zone').append(`<a src="#" id="pre-file-name">${fileName}</a>`)
       }
     })
-    // getWorkspaceUser()
-    // console.log(getWorkspaceUser())
   }
   
   messaging(data){
@@ -91,6 +88,7 @@ export default class extends Controller {
     }
   }
   clearmsg(){
+    console.log(123)
     $('.text-area').remove()
     $('.editor').remove()
     $('.file-upload').val("")
@@ -98,8 +96,10 @@ export default class extends Controller {
     editor()
   }
   clearThreadMsg(){
+    console.log(888)
     $('.thread-text-area').remove()
     $('.thread-editor').remove()
+    $('.tfile-upload').val("")
     $('#new_thread .w-full.px-3.mb-2').append(`<textarea class="thread-editor" placeholder="輸入訊息" style="display: none;"></textarea>`)
     threadeditor()
   }
@@ -140,21 +140,6 @@ function editor(){
               feed: getWorkspaceUser,
               itemRenderer: customItemRenderer,
           },
-          {
-              marker: '#',
-              feed: [
-                  '#american', '#asian', '#baking', '#breakfast', '#cake', '#caribbean',
-                  '#chinese', '#chocolate', '#cooking', '#dairy', '#delicious', '#delish',
-                  '#dessert', '#desserts', '#dinner', '#eat', '#eating', '#eggs', '#fish',
-                  '#food', '#foodgasm', '#foodie', '#foodporn', '#foods', '#french', '#fresh',
-                  '#fusion', '#glutenfree', '#greek', '#grilling', '#halal', '#homemade',
-                  '#hot', '#hungry', '#icecream', '#indian', '#italian', '#japanese', '#keto',
-                  '#korean', '#lactosefree', '#lunch', '#meat', '#mediterranean', '#mexican',
-                  '#moroccan', '#nom', '#nomnom', '#paleo', '#poultry', '#snack', '#spanish',
-                  '#sugarfree', '#sweet', '#sweettooth', '#tasty', '#thai', '#vegan',
-                  '#vegetarian', '#vietnamese', '#yum', '#yummy'
-              ],
-          }
       ]
   },
     licenseKey: '',
@@ -164,7 +149,6 @@ function editor(){
     window.editor1 = editor1;
     customEditor()
     findRecord()
-
   } )
 
   .catch( error => {
@@ -183,10 +167,10 @@ function threadeditor(){
         'strikethrough',
         'code',
         'link',
-        'bulletedList',
-        'numberedList',
-        'blockQuote',
-        'codeBlock',
+        // 'bulletedList',
+        // 'numberedList',
+        // 'blockQuote',
+        // 'codeBlock',
         '|',
         'undo',
         'redo',
@@ -201,12 +185,10 @@ function threadeditor(){
       ]
     },
     licenseKey: '',
-    
   } )
   .then( editor2 => {
     window.editor2 = editor2;
     threadCustomEditor()
-    // findRecord()
   } )
 
   .catch( error => {
@@ -279,15 +261,15 @@ function customEditor(){
     })
   })
 
-  $('#new_message .custom_attach').click( (e) => {
+  $('.custom_attach').click( (e) => {
     e.preventDefault()
     $('.file-upload').trigger('click')
   })
 
-  $('#new_message .custom_send').click( (e) => {
+  $('.custom_send').click( (e) => {
     e.preventDefault()
-    if ($('.ck-editor__editable').text() === "" && $('#new_message .file-upload').val() === ""){return}
-    $('.message-content').val($('.ck-editor__editable').html()) 
+    if ($('#new_message .ck-editor__editable').text() === "" && $('#new_message .file-upload').val() === ""){return}
+    $('.message-content').val($('#new_message .ck-editor__editable').html()) 
     $('.message-submit').trigger('click')
   })
 
@@ -382,7 +364,7 @@ function findRecord(){
 }
 
   
-  function customItemRenderer( item ) {
+function customItemRenderer( item ) {
     const itemElement = document.createElement( 'span' );
     // const avatar = document.createElement( 'img' );
     const userNameElement = document.createElement( 'span' );

@@ -41,10 +41,8 @@ class MessagesController < ApplicationController
       else
         sending_notice(@channel, current_user, direct_or_not, [] )
       end
-      # byebug
       # 第三個參數為是否為私訊
       sending_message(@message, channel_id, direct_or_not)
-      sending_notice(@channel, current_user, direct_or_not)
     end
     
   end  
