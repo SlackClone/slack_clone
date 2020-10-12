@@ -26,13 +26,14 @@ export default class extends Controller {
     // 回傳游標在Node的哪個位置
     window.inputPosition = window.getSelection().focusOffset
 
-    if ($('#new_message .text-area').length === 1) {return} 
+    // if ($('#new_message .text-area').length === 1) {return} 
     editor()    // create ckeditor
+    threadeditor()
 
-    if ($('#new_thread').length ===1){
-      if ($('#new_thread .text-area').length === 1) {return} 
-      threadeditor()
-    }
+    // if ($('#new_thread').length ===1){
+    //   if ($('#new_thread .text-area').length === 1) {return} 
+
+    // }
     // console.log(`Messaging channel opened in workspace NO.${this.data.get("id")}`)
 
     $('.file-upload').change( (e) => {
@@ -352,17 +353,18 @@ function threadCustomEditor(){
   $('#new_thread .thread-ckeditor').append('<button class="thread_send ck" style=" margin-right: 12px;" type="submit"></button>')
   $('#new_thread .thread-ckeditor > .thread_send').append('<i class="far fa-paper-plane ck ck-icon"></i>')
   
-  $('.thread_emoji').click( (e) => {
+  $('#new_thread .thread_emoji').click( (e) => {
     e.preventDefault()
   })
 
-  $('.thread_attach').click( (e) => {
+  $('#new_thread .thread_attach').click( (e) => {
     e.preventDefault()
     $('.tfile-upload').trigger('click')
   })
 
-  $('.thread_send').click( (e) => {
+  $('#new_thread .thread_send').click( (e) => {
     e.preventDefault()
+    if ($('#new_thread .ck-editor__editable').text() === "" && $('#new_thread .tfile-upload').val() === ""){return}
     $('.thread-content').val($('#new_thread .ck-editor__editable').html()) 
     $('.thread-submit').trigger('click')
   })

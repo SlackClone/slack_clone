@@ -4,7 +4,8 @@ const purgecss = require('@fullhuman/postcss-purgecss')({
   // Specify the paths to all of the template files in your project
   content: [
     './app/**/*.html.erb',
-    './app/**/*.css'
+    './app/**/*.css',
+    './app/**/*.scss'
     // etc.
   ],
   whitelistPatterns: [/^cropper-/,/^line-/,/^point-/,/^select2-/,/^ck-/,/^ckeditor-/],
@@ -33,9 +34,9 @@ module.exports = {
       },
       stage: 3
     }),
-    // purgecss
-    ...process.env.RAILS_ENV === 'production'
-    ? [purgecss]
-    : []
+    purgecss
+    // ...process.env.RAILS_ENV === 'production'
+    // ? [purgecss]
+    // : []
   ]
 }
