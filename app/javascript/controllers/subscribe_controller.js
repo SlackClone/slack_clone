@@ -27,8 +27,8 @@ export default class extends Controller {
     window.inputPosition = window.getSelection().focusOffset
 
     if(window.location.pathname.includes("threads")){
-      editor()    // create ckeditor
       threadeditor()
+      editor()    // create ckeditor
     }else {
       editor()    // create ckeditor
     }
@@ -86,9 +86,9 @@ export default class extends Controller {
       let emoji = document.getElementById(`message-reaction-${data.id}`)
       emoji.innerHTML = data.html
     }
+    console.log(data.message)
   }
   clearmsg(){
-    console.log(123)
     $('.text-area').remove()
     $('.editor').remove()
     $('.file-upload').val("")
@@ -96,7 +96,6 @@ export default class extends Controller {
     editor()
   }
   clearThreadMsg(){
-    console.log(888)
     $('.thread-text-area').remove()
     $('.thread-editor').remove()
     $('.tfile-upload').val("")
@@ -167,10 +166,10 @@ function threadeditor(){
         'strikethrough',
         'code',
         'link',
-        // 'bulletedList',
-        // 'numberedList',
-        // 'blockQuote',
-        // 'codeBlock',
+        'bulletedList',
+        'numberedList',
+        'blockQuote',
+        'codeBlock',
         '|',
         'undo',
         'redo',
@@ -202,7 +201,7 @@ function customEditor(){
   // 塞預覽檔案的地方
   $('#new_message .ck-editor__main').append(`<div id="pre-file-zone"></div>`)
 
-  $('#new_message .centered').attr('class', 'w-full px-3 mb-2 thread')
+  $('#new_message .centered').attr('class', 'w-full px-3 mb-2')
   $('#new_message .ck-editor').attr('class', 'flex flex-col-reverse text-area border border-black rounded')
   $('#new_message .ck-tooltip__text').attr('class', 'hidden')
   // emoji 
@@ -261,13 +260,14 @@ function customEditor(){
     })
   })
 
-  $('.custom_attach').click( (e) => {
+  $('#new_message .custom_attach').click( (e) => {
     e.preventDefault()
-    $('.file-upload').trigger('click')
+    $('#new_message .file-upload').trigger('click')
   })
 
   $('.custom_send').click( (e) => {
     e.preventDefault()
+    console.log($('#new_message .ck-editor__editable').text()==="")
     if ($('#new_message .ck-editor__editable').text() === "" && $('#new_message .file-upload').val() === ""){return}
     $('.message-content').val($('#new_message .ck-editor__editable').html()) 
     $('.message-submit').trigger('click')

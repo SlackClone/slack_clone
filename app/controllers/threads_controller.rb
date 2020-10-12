@@ -17,12 +17,11 @@ class ThreadsController < ApplicationController
       @directmsg_user = current_user.users_directmsgs.find_by(directmsg: @channel)
       @last_enter_at = @directmsg_user&.last_enter_at || @directmsg.created_at
       @directmsg_user&.touch(:last_enter_at)
-
+      
       # byebug
       @directmsg_user_name = User.find((Directmsg.find(params[:directmsg_id]).name.split(":")[1].split("-") - [current_user.id.to_s])[0]).nickname
-
+      
     end
-    
     @thread = Message.find(params[:message_id])
     # debugger
     
@@ -31,6 +30,11 @@ class ThreadsController < ApplicationController
     @channels = @workspace.channels
     # debugger
     @message = Message.new
+    @message.attachfiles.build
+
+    @thread_message = Message.new
+    @thread_message.attachfiles.build
+
     @new_channel = @workspace.channels.new
     @workspace_users = @workspace.users
     

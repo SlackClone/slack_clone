@@ -1,4 +1,4 @@
-<%= form_with(model: @message, url:directmsg_message_threads_path(@thread.messageable_id, @thread), id:"new_thread", class: "rounded w-full text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500", data:{action: "ajax:success->subscribe#clearThreadMsg"}) do |f| %>
+<%= form_with(model: @thread_message, url:directmsg_message_threads_path(@thread.messageable_id, @thread), id:"new_thread", class: "rounded w-full text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500", data:{action: "ajax:success->subscribe#clearThreadMsg"}) do |f| %>
   <%= f.text_field :content, class:"min-w-0 flex-grow thread-content hidden", placeholder: t(".placeholder"),autocomplete: "off" %> 
   <%= f.fields_for :attachfiles do |file| %>
     <%= file.file_field :document, class:"hidden tfile-upload" %>
