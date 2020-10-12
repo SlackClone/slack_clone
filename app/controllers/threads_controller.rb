@@ -34,7 +34,9 @@ class ThreadsController < ApplicationController
     @new_channel = @workspace.channels.new
     @workspace_users = @workspace.users
     
-    channel_users_for_select2
+    if @channel
+      channel_users_for_select2
+    end
     @invitation = Invitation.new
 
     # 查詢私訊未讀訊息數量 
