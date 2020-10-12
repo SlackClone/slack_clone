@@ -32,8 +32,8 @@ class ThreadsController < ApplicationController
     @message = Message.new
     @message.attachfiles.build
 
-    @thread_message = Message.new
-    @thread_message.attachfiles.build
+    # @thread_message = Message.new
+    # @thread_message.attachfiles.build
 
     @new_channel = @workspace.channels.new
     @workspace_users = @workspace.users
@@ -75,32 +75,40 @@ class ThreadsController < ApplicationController
       is_directmsg = false
       channel_or_directmsg_id = params[:channel_id]
     else
-      @directmsg = Directmsg.find(params[:directmsg_id])
+      @channel = Directmsg.find(params[:directmsg_id])
       is_directmsg = true
       channel_or_directmsg_id = params[:directmsg_id]
     end
-    @thread = (@channel || @directmsg).messages.new(thread_params)
-    # byebug
+    @thread = @channel.messages.new(thread_params)
 
+    # byebug
+    if @thread.attachfiles.present?
+      # 壓縮圖片
+      @thread.attachfiles.each do |file|
+        file.document_derivatives! if file.document.mime_type.include? "image"
+      end
+    end 
 
     if @thread.save
+      # if (@thread.content).scan(channel_usernames(@channel)).flatten != []
+      #   mention_user = (@thread.content).scan(channel_usernames(@channel)).flatten.uniq - ['@'+current_user.nickname]
       sending_thread_message(@thread, channel_or_directmsg_id, is_directmsg, true)
-      sending_notice((@channel || @directmsg), current_user, false)
+      sending_notice((@channel || @directmsg), current_user, false, [])
     end
   end
 
   private
 
   def thread_params
-    params.require(:message).permit(:content).merge(user: current_user, parent_id: params[:message_id])
+    params.require(:message).permit(:content, attachfiles_attributes: [:document]).merge(user: current_user, parent_id: params[:message_id])
   end
 
   def sending_thread_message(message, channel_id, direct_or_not, thread_or_not)
     SendThreadMessageJob.perform_later(message, channel_id, direct_or_not, thread_or_not)
   end
 
-  def sending_notice(channel, sender, direct_or_not)
-    SendNotificationJob.perform_later(channel, sender, direct_or_not)
+  def sending_notice(channel, sender, direct_or_not, mention)
+    SendNotificationJob.perform_later(channel, sender, direct_or_not, mention)
   end
 
   def channel_users_for_select2

@@ -106,8 +106,6 @@ class MessagesController < ApplicationController
     SendNotificationJob.perform_later(channel, sender, direct_or_not, mention)
   end
 
-  def process_mentions
-  end
 
   def mentioned_users
     User.where(nickname: mentioned_usernames) - [user]

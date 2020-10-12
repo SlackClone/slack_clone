@@ -229,7 +229,7 @@ function customEditor(){
   
     picker.on('emoji', selection => {
       const emoji = selection.emoji
-      let textarea = $('.ck-editor__editable')    //要塞emoji的地方
+      let textarea = $('#new_message .ck-editor__editable')    //要塞emoji的地方
 
       // 假如輸入框是空的時候，直接把emoji放進去
       if (textarea.text() == ""){
@@ -337,6 +337,39 @@ function threadCustomEditor(){
   
   $('#new_thread .thread_emoji').click( (e) => {
     e.preventDefault()
+    const picker = new EmojiButton({
+      autoHide: true,
+      showCategoryButtons: false	
+    })
+
+    const target = e.currentTarget
+    picker.togglePicker(target)
+  
+    picker.on('emoji', selection => {
+      const emoji = selection.emoji
+      let textarea = $('.ck-editor__editable')    //要塞emoji的地方
+
+      // 假如輸入框是空的時候，直接把emoji放進去
+      if (textarea.text() == ""){
+        textarea.children().html(emoji)  
+      // 已經有其他文字的狀況
+      }else {
+        // 如果input為element起始點(例如換行的起始點)
+        if(inputPosition === 0){
+          focusElement.innerHTML = emoji
+        }else {
+          // 其他狀況要把emoji跟原有字串做拼接
+          let textParent = focusParent.innerHTML
+          // string是要插入的emoji，index是要插入的位置
+          String.prototype.emojiInsert = function(index, string){
+            return this.slice(0, index) + string + this.slice(index)
+          }
+          // textParent為插入emoji後的新字串
+          textParent = textParent.emojiInsert(inputPosition, emoji)
+          focusParent.innerHTML = textParent
+        }
+      }
+    })
   })
 
   $('#new_thread .thread_attach').click( (e) => {
@@ -351,6 +384,19 @@ function threadCustomEditor(){
     $('.thread-submit').trigger('click')
   })
 
+  // 為了監聽使用者用滑鼠改變輸入位置時紀錄游標位置
+  $('#new_thread .ck-editor__editable').mouseup( (e) => {
+    focusElement = window.getSelection().focusNode
+    window.focusParent = window.getSelection().focusNode.parentElement
+    inputPosition = window.getSelection().focusOffset
+  })
+  
+  // 為了監聽使用者使用方向鍵移動輸入位置時紀錄游標位置
+  $('#new_thread .ck-editor__editable').keyup( (e) => {
+    focusElement = window.getSelection().focusNode
+    focusParent = window.getSelection().focusNode.parentElement
+    inputPosition = window.getSelection().focusOffset
+  })
 }
    // 如果localStorage裡有東西的話就將value塞給表單的input，跳回來input原本的值不會不見   
 function findRecord(){
