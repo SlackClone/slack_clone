@@ -27,10 +27,10 @@ export default class extends Controller {
     window.inputPosition = window.getSelection().focusOffset
     console.log($('#new_thread .ck-content').length)
     console.log($('#new_message .ck-content').length)
-    if (window.location.pathname.includes("threads") && $('#new_message .ck-content').length === 0){
+    if (window.location.pathname.includes("threads") && $('#new_thread .text-area').length === 0){
       threadeditor()
     }
-    if ($('#new_thread .ck-content').length === 0){
+    if ($('#new_message .text-area').length === 0){
       editor()    // create ckeditor
     }
     console.log($('#new_thread .ck-content'))
