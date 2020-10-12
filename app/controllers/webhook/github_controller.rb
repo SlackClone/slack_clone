@@ -26,6 +26,9 @@ class Webhook::GithubController < ActionController::API
         if json_body["hook"]
           user_event_action_type = "Test webhook"
           # user_event_action_type = json_body["hook"]["events"][0] 
+        elsif json_body["head_commit"]["message"]
+          user_event_action_type = json_body["head_commit"]["message"]
+          pusher = json_body["head_commit"]["author"]["name"]
         elsif json_body["commits"][0]["message"]
           user_event_action_type = json_body["commits"][0]["message"]
         else
@@ -33,6 +36,7 @@ class Webhook::GithubController < ActionController::API
         end
 
         pusher = json_body["pusher"]["name"]
+        
         user_repository_url = json_body["repository"]["html_url"]
         payload_content = "<p>Pusher: <span class=\"text-teal-700\">#{pusher}</span></p>
                            <p>Commit Message: <span class=\"text-red-700\">#{user_event_action_type}</span></p>
