@@ -72,9 +72,9 @@ ActiveRecord::Schema.define(version: 2020_09_30_125937) do
     t.bigint "user_id", null: false
     t.string "messageable_type", null: false
     t.bigint "messageable_id", null: false
-    t.string "ancestry"
     t.integer "share_message_id"
     t.jsonb "emoji_data", default: {}
+    t.string "ancestry"
     t.index ["ancestry"], name: "index_messages_on_ancestry"
     t.index ["messageable_type", "messageable_id"], name: "index_messages_on_messageable_type_and_messageable_id"
     t.index ["user_id"], name: "index_messages_on_user_id"
