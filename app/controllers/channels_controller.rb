@@ -28,7 +28,7 @@ class ChannelsController < ApplicationController
     if @channel.save
       first_join_channel_message
       invited_message
-      redirect_to workspace_channel_path(@workspace, @channel), notice: I18n.t("channels.create")
+      redirect_to workspace_channel_path(@workspace, @channel)
     else
       render :new
     end
