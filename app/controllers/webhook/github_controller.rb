@@ -1,9 +1,6 @@
 class Webhook::GithubController < ActionController::API
 
   def payload
-    # 測試用的 secrets
-    # https://d05eb2c02897.ngrok.io/webhooks
-    # github_secrets = [44b0eb783b2ab91de6b870b9c276a0ed98edcada]
 
     # TODO: 幫使用者自動產生 secret => webhooks_controller => new/edit page
     # generate_github_secret = SecureRandom.hex(20) 
@@ -31,12 +28,12 @@ class Webhook::GithubController < ActionController::API
           pusher = json_body["head_commit"]["author"]["name"]
         elsif json_body["commits"][0]["message"]
           user_event_action_type = json_body["commits"][0]["message"]
+          pusher = json_body["pusher"]["name"]
         else
           user_event_action_type = "No Commit Message"
+          pusher = json_body["pusher"]["name"]
         end
 
-        pusher = json_body["pusher"]["name"]
-        
         user_repository_url = json_body["repository"]["html_url"]
         payload_content = "<p>Pusher: <span class=\"text-teal-700\">#{pusher}</span></p>
                            <p>Commit Message: <span class=\"text-red-700\">#{user_event_action_type}</span></p>
