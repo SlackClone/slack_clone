@@ -1,8 +1,10 @@
-<div>
+
+
+<div class="w-full max-w-xl container mx-auto mb-5">
   <% if webhook.errors %>
     <ul>
       <% webhook.errors.full_messages.each do |message| %>
-        <li>
+        <li class="text-red-700 font-semibold">
           <%= message %>
         </li>
       <% end %>
