@@ -1,13 +1,13 @@
 class SendMessageJob < ApplicationJob
   queue_as :default
 
-  def perform(message, channel_id, avatar_url, direct_or_not)
+  def perform(message, channel_id, direct_or_not)
     msg_sender = message.user
     if direct_or_not
       # 私訊
       @channel = Directmsg.find(channel_id)
       ChannelsChannel.broadcast_to @channel, {
-        message: ApplicationController.render(partial: 'messages/message_broadcast',locals: { message: message, avatar_url: avatar_url }),
+        message: ApplicationController.render(partial: 'messages/message_broadcast',locals: { message: message }),
         user: msg_sender.nickname,
         user_id: msg_sender.id,
         channel_id: channel_id,

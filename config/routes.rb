@@ -16,7 +16,7 @@ Rails.application.routes.draw do
     get :login
     get :validate
   end
-  
+    get '/workspaces/:workspace_id/workspace_users',to: 'channels#workspace_users',as: 'workspace_users'
   root to: 'pages#index'
   resources :workspaces do
     resource :users_workspaces

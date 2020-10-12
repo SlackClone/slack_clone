@@ -2,11 +2,21 @@ class ChannelsController < ApplicationController
   before_action :authenticate_user!
   before_action :find_workspace, except:[:destroy]
   def new
-    
+  end
+  # 拿到特定ws的所有user
+  def workspace_users
+    @ws_user = (@workspace.users - [current_user]).map{|user| [user.nickname,user.email] }
+    render json: @ws_user
   end
   
   def create
     @channel = @workspace.channels.new(channel_params)
+    if params["channels"]
+      params["channels"]["name"].each do |user|
+        @user = User.find_by(email: user)
+        @channel.users << @user
+      end
+    end  
     @channel.users << current_user
     # debugger
     if @channel.save
@@ -26,7 +36,6 @@ class ChannelsController < ApplicationController
     @messages = @channel.messages.includes({user: :profile})
     @invitation = Invitation.new
     channel_users_for_select2
-
     @channel_user = current_user.users_channels.find_by(channel: @channel)
     @last_enter_at = @channel_user&.last_enter_at || @channel.created_at
     # 更新使用者進入這個channel的時間
@@ -70,12 +79,6 @@ class ChannelsController < ApplicationController
     @workspace = Workspace.find(params[:workspace_id])
   end
   def channel_users_for_select2
-    @channel_users = @channel.users.map{|user| [user.nickname,user.email] }
-    @users = (@channel_users + @workspace.users.map{|user| [user.nickname,user.email] })
-    @workspace_users = @users - (@channel_users & @workspace.users.map{|user| [user.nickname,user.email] })
-    respond_to do |format|
-      format.html 
-      format.json {render json: @workspace_users} 
-    end
+    @users = (@workspace.users - @channel.users).map{|user| [user.nickname,user.email]}
   end
 end

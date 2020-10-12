@@ -16,7 +16,6 @@ class MessagesController < ApplicationController
       channel_id = params[:directmsg_id]
       direct_or_not = true
     end
-      @avatar_url = current_user.profile.try(:avatar_url,(:small))
     # 有夾帶檔案的話
     
     if @message.attachfiles.present?
@@ -28,7 +27,7 @@ class MessagesController < ApplicationController
 
     if @message.save
       # 第三個參數為是否為私訊
-      sending_message(@message, channel_id, @avatar_url, direct_or_not)
+      sending_message(@message, channel_id, direct_or_not)
       sending_notice(@channel, current_user, direct_or_not)
     end
   end  
@@ -36,9 +35,8 @@ class MessagesController < ApplicationController
   def add
     @channel = Channel.find(share_msg_params[:messageable_id])
     @new_message = @channel.messages.new(share_msg_params)
-    @avatar_url = current_user.profile.try(:avatar_url,(:small))
     if @new_message.save
-      sending_message(@new_message, @channel, @avatar_url, false)
+      sending_message(@new_message, @channel, false)
       sending_notice(@channel, current_user, false)
       @result = true
     else
@@ -85,8 +83,8 @@ class MessagesController < ApplicationController
     params.require(:message).permit(:messageable_id, :share_message_id, :content).merge(user: current_user)
   end
 
-  def sending_message(message, channel_id, avatar_url, direct_or_not)
-    SendMessageJob.perform_later(message, channel_id, avatar_url, direct_or_not)
+  def sending_message(message, channel_id, direct_or_not)
+    SendMessageJob.perform_later(message, channel_id, direct_or_not)
   end
 
   def sending_notice(channel, sender, direct_or_not)

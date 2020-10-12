@@ -8,7 +8,6 @@ class UploadedfilesController < ApplicationController
     @message = Message.new
     @message.attachfiles.build
     @channels = @workspace.channels
-    
     # 查詢私訊未讀訊息數量 
     @direct_channel = current_user.directmsgs
     @unread_msg_count = {}

@@ -41,6 +41,7 @@ zh-TW:
       name_placeholder: "輸入聊天室名稱"
       desc_placeholder: "輸入關於此聊天室的描述"
       about: "這個聊天室是關於?"
+      invite: "邀請團隊成員"
     show:
       status: "狀態"
       edit: "編輯個人資料"
