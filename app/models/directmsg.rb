@@ -1,9 +1,10 @@
 class Directmsg < ApplicationRecord
   validates :name, presence: true
   
-  has_many :users_directmsgs
-  has_many :users, through: :users_directmsgs
   has_many :messages, as: :messageable, dependent: :destroy
+  
+  has_many :users_directmsgs, dependent: :destroy
+  has_many :users, through: :users_directmsgs
   # has_many :uploadedfiles, as: :uploadable
 
   belongs_to :workspace
@@ -23,7 +24,4 @@ class Directmsg < ApplicationRecord
     end
   end
 
-  # def self.the_other_user
-  #   self.name.split(":")[1].split("-") - [current_user.id.to_s]
-  # end
 end

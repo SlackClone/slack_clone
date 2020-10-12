@@ -8,16 +8,20 @@ class User < ApplicationRecord
          
   validates :nickname, presence: true,length: { in: 2..8 }
 
-  has_many :users_workspaces
-  has_many :workspaces, through: :users_workspaces
-  has_many :users_channels
-  has_many :channels, through: :users_channels
   has_many :messages, dependent: :destroy
   has_many :invitations, dependent: :destroy
-  has_many :users_directmsgs
-  has_many :directmsgs, through: :users_directmsgs
   has_one :profile, dependent: :destroy
   has_many :webhook_records
+  
+  has_many :users_workspaces, dependent: :destroy
+  has_many :workspaces, through: :users_workspaces
+  
+  has_many :users_channels, dependent: :destroy
+  has_many :channels, through: :users_channels
+  
+  has_many :users_directmsgs, dependent: :destroy
+  has_many :directmsgs, through: :users_directmsgs
+  
 
   def self.find_for_google_oauth2(access_token, signed_in_resource=nil)
     data = access_token.info
