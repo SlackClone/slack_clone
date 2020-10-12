@@ -1,4 +1,6 @@
 class ChannelsController < ApplicationController
+  include ActionView::Helpers::TagHelper
+
   before_action :authenticate_user!
   before_action :find_workspace, except:[:destroy]
   before_action :store_user_loaction, only: [:show]
@@ -13,15 +15,19 @@ class ChannelsController < ApplicationController
   
   def create
     @channel = @workspace.channels.new(channel_params)
+    @users = []
     if params["channels"]
       params["channels"]["name"].each do |user|
         @user = User.find_by(email: user)
         @channel.users << @user
+        @users << @user
       end
     end  
     @channel.users << current_user
     # debugger
     if @channel.save
+      first_join_channel_message
+      invited_message
       redirect_to workspace_channel_path(@workspace, @channel), notice: I18n.t("channels.create")
     else
       render :new
@@ -73,23 +79,58 @@ class ChannelsController < ApplicationController
   end
 
   private
-    def channel_params
-      params.require(:channel).permit(:name, :topic, :description)
-    end
+  def channel_params
+    params.require(:channel).permit(:name, :topic, :description)
+  end
 
-    def find_workspace
-      @workspace = Workspace.find(params[:workspace_id])
-    end
+  def find_workspace
+    @workspace = Workspace.find(params[:workspace_id])
+  end
 
-    def channel_users_for_select2
-      @users = (@workspace.users - @channel.users).map{|user| [user.nickname,user.email]}
-    end
+  def channel_users_for_select2
+    @users = (@workspace.users - @channel.users).map{|user| [user.nickname,user.email]}
+  end
 
-    def store_user_loaction
-      # 在 session 記錄 user 進入 webhook 設定頁面前的 workspace_id 與 channel_id
-      # 讓使用者進入 webhook 設定頁面後，不新增 webhook 的情況下，可以回到 channel show 的頁面
-      session[:workspace_id] = params[:workspace_id]
-      session[:channel_id] = params[:id]
-    end
+  def store_user_loaction
+    # 在 session 記錄 user 進入 webhook 設定頁面前的 workspace_id 與 channel_id
+    # 讓使用者進入 webhook 設定頁面後，不新增 webhook 的情況下，可以回到 channel show 的頁面
+    session[:workspace_id] = params[:workspace_id]
+    session[:channel_id] = params[:id]
+  end
 
+  def channel_users_for_select2
+    @users = (@workspace.users - @channel.users).map{|user| [user.nickname,user.email]}
+  end
+
+  def first_join_channel_message
+    channel_name = @channel.name
+    msg_content = content_tag(:div, content_tag(:i, "你建立 ##{channel_name} 並加入了"), class: "text-gray-600")
+    message = @channel.messages.create(content: msg_content, user_id: current_user.id)
+    channel_id = @channel.id
+    avatar_url = current_user.profile.try(:avatar_url,(:small))
+    direct_or_not = false
+
+    channel = @channel
+    sender = current_user
+
+    SendMessageJob.perform_later(message, channel_id, avatar_url, direct_or_not)
+    SendNotificationJob.perform_later(channel, sender, direct_or_not)
+  end
+
+  def invited_message
+    @users.each do |user|
+      channel_name = @channel.name
+      msg_content = content_tag(:div, content_tag(:i, "已經被「#{current_user.nickname}」邀請加入 ##{channel_name}"), class: "text-gray-600")
+      message = @channel.messages.create(content: msg_content, user_id: user.id)
+      channel_id = @channel.id
+      avatar_url = current_user.profile.try(:avatar_url,(:small))
+      direct_or_not = false
+
+      channel = @channel
+      sender = user
+
+      SendMessageJob.perform_later(message, channel_id, avatar_url, direct_or_not)
+      SendNotificationJob.perform_later(channel, sender, direct_or_not)
+    end
+  end
 end
