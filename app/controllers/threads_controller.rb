@@ -34,6 +34,8 @@ class ThreadsController < ApplicationController
     @new_channel = @workspace.channels.new
     @workspace_users = @workspace.users
     
+    channel_users_for_select2
+    @invitation = Invitation.new
 
     # 查詢私訊未讀訊息數量 
     direct_channel = current_user.directmsgs
@@ -93,5 +95,9 @@ class ThreadsController < ApplicationController
 
   def sending_notice(channel, sender, direct_or_not)
     SendNotificationJob.perform_later(channel, sender, direct_or_not)
+  end
+
+  def channel_users_for_select2
+    @users = (@workspace.users - @channel.users).map{|user| [user.nickname,user.email]}
   end
 end

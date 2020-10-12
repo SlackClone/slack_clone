@@ -57,9 +57,7 @@
   </div>    
   <%= render './shared/shareform' %>
   <%= render './shared/right_info' %>
-  <% if @channel && @thread.nil? %>
     <%= render './shared/invite_ch' %>
-  <% end %>
 </div>
 <%= render './channels/new', channel: @new_channel, workspace: @workspace %>
 <%= render './profiles/edit.html.erb' %>
