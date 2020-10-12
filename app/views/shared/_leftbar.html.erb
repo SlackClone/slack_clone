@@ -46,15 +46,19 @@
           <%= t(".sidebar.invite") %>
         </p> 
         <%= render "./shared/invite_ws" %>
-        <%= render './shared/language' %>
       </div>
       <div class="w-full">
         <p class="font-medium truncate pl-5 text-lg py-2 mt-2 border-t border-border_b">
           App
         </p>
-        <p class="truncate pl-10 py-1 hover:bg-sladock flex pr-5">
-          <%= link_to "GitHub", webhooks_path, class: "d-block mr-auto" %>
+        <p class="truncate pl-10 py-1 hover:bg-sladock flex pr-5 text-lg">
+          <%= link_to webhooks_path do %>
+            <i class="fab fa-github"></i><span class="ml-1">GitHub</span>
+          <% end %>
         </p>
+      </div>
+      <div>
+        <%= render './shared/language' %>
       </div>
     </div>
   </div> 
