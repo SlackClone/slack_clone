@@ -52,7 +52,7 @@ class MessagesController < ApplicationController
     @new_message = @channel.messages.new(share_msg_params)
     if @new_message.save
       sending_message(@new_message, @channel, false)
-      sending_notice(@channel, current_user, false)
+      sending_notice(@channel, current_user, false, [])
       @result = true
     else
       @message = ''

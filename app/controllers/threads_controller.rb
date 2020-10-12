@@ -54,7 +54,7 @@ class ThreadsController < ApplicationController
                                                     dc.users_directmsgs.find_by(user_id: current_user.id).last_enter_at)
                                                     .count
     end
-
+    # byebug
     # 查詢聊天室是否有未讀訊息
     added_channel = current_user.channels
     @unread_msg_bol ={}

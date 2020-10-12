@@ -25,15 +25,17 @@ export default class extends Controller {
     window.focusElement = window.getSelection().focusNode
     // 回傳游標在Node的哪個位置
     window.inputPosition = window.getSelection().focusOffset
-
-    if(window.location.pathname.includes("threads")){
+    console.log($('#new_thread .ck-content').length)
+    console.log($('#new_message .ck-content').length)
+    if (window.location.pathname.includes("threads") && $('#new_message .ck-content').length === 0){
       threadeditor()
-      editor()    // create ckeditor
-    }else {
+    }
+    if ($('#new_thread .ck-content').length === 0){
       editor()    // create ckeditor
     }
-
-    // console.log(`Messaging channel opened in workspace NO.${this.data.get("id")}`)
+    console.log($('#new_thread .ck-content'))
+    console.log($('#new_message .ck-content'))
+    console.log(`Messaging channel opened in workspace NO.${this.data.get("id")}`)
 
     $('.file-upload').change( (e) => {
       $('#new_message #pre-file-zone').empty()
@@ -53,6 +55,7 @@ export default class extends Controller {
         $('#new_message #pre-file-zone').append(`<a src="#" id="pre-file-name">${fileName}</a>`)
       }
     })
+
     $('.tfile-upload').change( (e) => {
       $('#new_thread #pre-thread-file-zone').empty()
       let reader = new FileReader();
@@ -201,6 +204,15 @@ function threadeditor(){
         'imageStyle:side'
       ]
     },
+    mention: {
+      feeds: [
+          {
+              marker: '@',
+              feed: getWorkspaceUser,
+              itemRenderer: customItemRenderer,
+          },
+      ]
+  },
     licenseKey: '',
   } )
   .then( editor2 => {
@@ -285,7 +297,6 @@ function customEditor(){
 
   $('.custom_send').click( (e) => {
     e.preventDefault()
-    console.log($('#new_message .ck-editor__editable').text()==="")
     if ($('#new_message .ck-editor__editable').text() === "" && $('#new_message .file-upload').val() === ""){return}
     $('.message-content').val($('#new_message .ck-editor__editable').html()) 
     $('.message-submit').trigger('click')
@@ -456,7 +467,7 @@ function customItemRenderer( item ) {
 }
 
 const getWorkspaceUser = async () => {
-  const workspaceId = window.location.pathname.split("/")[2]
+  const workspaceId = $('h3.chatroomName').attr("workspace_id")
   const response = await fetch(`/workspaces/${workspaceId}/all_user.json`)
   const workspaceUser = await response.json()
   return workspaceUser

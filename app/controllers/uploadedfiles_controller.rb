@@ -9,7 +9,7 @@ class UploadedfilesController < ApplicationController
     @message.attachfiles.build
     @channels = @workspace.channels
     # 查詢私訊未讀訊息數量 
-    @direct_channel = current_user.directmsgs
+    @direct_channel = current_user.directmsgs.where(workspace_id: params[:workspace_id])
     @unread_msg_count = {}
     @direct_channel.each do |dc|
       # 由私訊的name("DM:X-Y")拿出recipient的id
@@ -20,7 +20,7 @@ class UploadedfilesController < ApplicationController
                                                     .count
     end
     # 查詢聊天室是否有未讀訊息
-    @added_channel = current_user.channels
+    @added_channel = current_user.channels.where(workspace_id: params[:workspace_id])
     @unread_msg_bol ={}
     @added_channel.each do |ac|
       # 將channel的id當key，是否有未讀訊息當做value
