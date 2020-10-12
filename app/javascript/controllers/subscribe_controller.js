@@ -5,12 +5,11 @@ import ClassicEditor from "ckeditor5-custom-build/build/ckeditor.js"
 import { EmojiButton } from '@joeattardi/emoji-button'
 
 export default class extends Controller {
-  static targets = ["messages", "newMessage" ]
+  static targets = ["messages", "newMessage", "threads", "threadcount", "msglist"]
 
   connect() {
     Notification.requestPermission()
-
-    this.subscription = consumer.subscriptions.create({channel: "ChannelsChannel", channelId: this.data.get("channel"), directId: this.data.get("direct")},
+    this.subscription = consumer.subscriptions.create({channel: "ChannelsChannel", channelId: this.data.get("channel"), directId: this.data.get("direct"), messageId: this.data.get("thread")},
       {
         connected: this.subscribe.bind(this),
         received: this.messaging.bind(this)
@@ -27,9 +26,14 @@ export default class extends Controller {
     // 回傳游標在Node的哪個位置
     window.inputPosition = window.getSelection().focusOffset
 
-    if ($('.text-area').length === 1) {return} 
+    if ($('#new_message .text-area').length === 1) {return} 
     editor()    // create ckeditor
-    console.log(`Messaging channel opened in workspace NO.${this.data.get("id")}`)
+
+    if ($('#new_thread').length ===1){
+      if ($('#new_thread .text-area').length === 1) {return} 
+      threadeditor()
+    }
+    // console.log(`Messaging channel opened in workspace NO.${this.data.get("id")}`)
 
     $('.file-upload').change( (e) => {
       $('#new_message #pre-file-zone').empty()
@@ -53,16 +57,31 @@ export default class extends Controller {
   
   messaging(data){
     if (data.emoji === undefined){
-      if (document.hidden) {
-        let divideElement = document.querySelector(".divide")
-        if (!divideElement) {
-          this.messagesTarget.insertAdjacentHTML('beforeend', `<div class='flex text-right divide'><span class='h-0 border-b-0 border-t-2 block flex-grow border-red-600 my-auto'></span><span class="pl-3">new</span></div>`)
-        }
+      if (data.thread_or_not){
+        // 留言回覆串
+
+        // 新增留言
+        this.threadsTarget.insertAdjacentHTML("beforeend", data.message)
+        // 留言串總則數更新(右側)
+        let threadCount = this.threadsTarget.childElementCount
+        this.threadcountTarget.innerHTML = `有 ${ threadCount } 則回覆`
+        // 留言串總則數更新(左側)
+        let messageId = this.threadcountTarget.getAttribute("message_id")
+        let threadOriginMsg = document.querySelector(`.messages_child[message_id="${messageId}"] .thread-count`)
+        threadOriginMsg.innerHTML = `<a class="border-solid border-2 border-blue-600 rounded-md px-1 -ml-2">有 ${ threadCount } 則回覆</a>`
       } else {
-        this.subscription.perform("update_enter_time")   
+        // 一般留言
+        if(document.hidden){
+          let divideElement = document.querySelector(".divide")
+          if (!divideElement){
+            this.messagesTarget.insertAdjacentHTML('beforeend', `<div class='flex text-right divide'><span class='h-0 border-b-0 border-t-2 block flex-grow border-red-600 my-auto'></span><span class="pl-3">new</span></div>`)
+          }
+        }else{
+          this.subscription.perform("update_enter_time")
+        }
+        this.messagesTarget.insertAdjacentHTML("beforeend", data.message)
+        window.initShare()
       }
-      this.messagesTarget.insertAdjacentHTML("beforeend", data.message)
-      window.initShare()      
     }else{
       let emoji = document.getElementById(`message-reaction-${data.id}`)
       emoji.innerHTML = data.html
@@ -72,8 +91,14 @@ export default class extends Controller {
     $('.text-area').remove()
     $('.editor').remove()
     $('.file-upload').val("")
-    $('.w-full.px-3.mb-2').append(`<textarea class="editor" placeholder="輸入訊息" style="display: none;"></textarea>`)
+    $('#new_message .w-full.px-3.mb-2').append(`<textarea class="editor" placeholder="輸入訊息" style="display: none;"></textarea>`)
     editor()
+  }
+  clearThreadMsg(){
+    $('.thread-text-area').remove()
+    $('.thread-editor').remove()
+    $('#new_thread .w-full.px-3.mb-2').append(`<textarea class="thread-editor" placeholder="輸入訊息" style="display: none;"></textarea>`)
+    threadeditor()
   }
 }
 
@@ -108,11 +133,53 @@ function editor(){
     licenseKey: '',
     
   } )
-  .then( editor => {
-    window.editor = editor;
+  .then( editor1 => {
+    window.editor1 = editor1;
     customEditor()
     findRecord()
-  
+
+  } )
+
+  .catch( error => {
+    console.error( 'Oops, something went wrong!' );
+  } );
+}
+
+function threadeditor(){
+  ClassicEditor
+  .create( document.querySelector( '.thread-editor' ), {	
+    toolbar: {
+      items: [
+        'bold',
+        'underline',
+        'italic',
+        'strikethrough',
+        'code',
+        'link',
+        'bulletedList',
+        'numberedList',
+        'blockQuote',
+        'codeBlock',
+        '|',
+        'undo',
+        'redo',
+      ]
+    },
+    language: 'en',
+    image: {
+      toolbar: [
+        'imageTextAlternative',
+        'imageStyle:full',
+        'imageStyle:side'
+      ]
+    },
+    licenseKey: '',
+    
+  } )
+  .then( editor2 => {
+    window.editor2 = editor2;
+    threadCustomEditor()
+    // findRecord()
   } )
 
   .catch( error => {
@@ -123,22 +190,25 @@ function editor(){
 function customEditor(){
   // 調整ckeditor格式
   
-  $('.centered').attr('class', 'w-full px-3 mb-2')
-  $('.ck-editor').attr('class', 'flex flex-col-reverse text-area')
-  $('.ck-tooltip__text').attr('class', 'hidden')
-
   // 塞預覽檔案的地方
   $('#new_message .ck-editor__main').append(`<div id="pre-file-zone"></div>`)
 
-  $('.ck-toolbar_grouping >.ck-toolbar__items').append('<div class="custom-ckeditor" style="margin-left: auto; "></div>')
-  $('.custom-ckeditor').append('<button class="custom_emoji ck" style="margin-right: 12px;"></button>')
-  $('.custom_emoji').append('<i class="far fa-smile ck ck-icon"></i>')
-  $('.custom-ckeditor').append('<button class="custom_attach ck" style="margin-right: 12px;" type="file"></button>')
-  $('.custom_attach').append('<i class="fas fa-paperclip ck ck-icon" type="file"></i>')
-  $('.custom-ckeditor').append('<button class="custom_send ck" style=" margin-right: 12px;" type="submit"></button>')
-  $('.custom_send').append('<i class="far fa-paper-plane ck ck-icon"></i>')
+  $('#new_message .centered').attr('class', 'w-full px-3 mb-2 thread')
+  $('#new_message .ck-editor').attr('class', 'flex flex-col-reverse text-area')
+  $('#new_message .ck-tooltip__text').attr('class', 'hidden')
   // emoji 
-  $('.custom_emoji').click( (e) => {
+  
+  $('#new_message .ck-toolbar__items').addClass('ck-custom-editor')
+  $('#new_message .ck-toolbar_grouping > .ck-custom-editor').append('<div class="custom-ckeditor" style="margin-left: auto; "></div>')
+  $('#new_message .custom-ckeditor').append('<button class="custom_emoji ck" style="margin-right: 12px;"></button>')
+  $('#new_message .custom-ckeditor > .custom_emoji').append('<i class="far fa-smile ck ck-icon"></i>')
+  $('#new_message .custom-ckeditor').append('<button class="custom_attach ck" style="margin-right: 12px;" type="file"></button>')
+  $('#new_message .custom-ckeditor > .custom_attach').append('<i class="fas fa-paperclip ck ck-icon" type="file"></i>')
+  $('#new_message .custom-ckeditor').append('<button class="custom_send ck" style=" margin-right: 12px;" type="submit"></button>')
+  $('#new_message .custom-ckeditor > .custom_send').append('<i class="far fa-paper-plane ck ck-icon"></i>')
+
+
+  $('#new_message .custom_emoji').click( (e) => {
     e.preventDefault()
 
     const picker = new EmojiButton({
@@ -182,12 +252,12 @@ function customEditor(){
     })
   })
 
-  $('.custom_attach').click( (e) => {
+  $('#new_message .custom_attach').click( (e) => {
     e.preventDefault()
     $('.file-upload').trigger('click')
   })
 
-  $('.custom_send').click( (e) => {
+  $('#new_message .custom_send').click( (e) => {
     e.preventDefault()
     if ($('.ck-editor__editable').text() === "" && $('#new_message .file-upload').val() === ""){return}
     $('.message-content').val($('.ck-editor__editable').html()) 
@@ -195,13 +265,13 @@ function customEditor(){
   })
 
   // 為了監聽使用者用滑鼠改變輸入位置時紀錄游標位置
-  $('.ck-editor__editable').mouseup( (e) => {
+  $('#new_message .ck-editor__editable').mouseup( (e) => {
     focusElement = window.getSelection().focusNode
     window.focusParent = window.getSelection().focusNode.parentElement
     inputPosition = window.getSelection().focusOffset
   })
   // 為了監聽使用者使用方向鍵移動輸入位置時紀錄游標位置
-  $('.ck-editor__editable').keyup( (e) => {
+  $('#new_message .ck-editor__editable').keyup( (e) => {
     focusElement = window.getSelection().focusNode
     focusParent = window.getSelection().focusNode.parentElement
     inputPosition = window.getSelection().focusOffset
@@ -237,15 +307,49 @@ function customEditor(){
     // }
   })
 }
+
+function threadCustomEditor(){
+  // 調整ckeditor格式
+  
+  $('#new_thread .centered').attr('class', 'w-full px-3 mb-2')
+  $('#new_thread .ck-editor').attr('class', 'flex flex-col-reverse thread-text-area')
+  $('#new_thread .ck-tooltip__text').attr('class', 'hidden')
+  // 避免一直生成
+  
+  $('#new_thread .ck-toolbar__items').addClass('ck-thread-editor')
+  $('#new_thread .ck-toolbar_grouping > .ck-thread-editor').append('<div class="thread-ckeditor" style="margin-left: auto; "></div>')
+  $('#new_thread .thread-ckeditor').append('<button class="thread_emoji ck" style="margin-right: 12px;"></button>')
+  $('#new_thread .thread-ckeditor > .thread_emoji').append('<i class="far fa-smile ck ck-icon"></i>')
+  $('#new_thread .thread-ckeditor').append('<button class="thread_attach ck" style="margin-right: 12px;" type="file"></button>')
+  $('#new_thread .thread-ckeditor > .thread_attach').append('<i class="fas fa-paperclip ck ck-icon" type="file"></i>')
+  $('#new_thread .thread-ckeditor').append('<button class="thread_send ck" style=" margin-right: 12px;" type="submit"></button>')
+  $('#new_thread .thread-ckeditor > .thread_send').append('<i class="far fa-paper-plane ck ck-icon"></i>')
+  
+  $('.thread_emoji').click( (e) => {
+    e.preventDefault()
+  })
+
+  $('.thread_attach').click( (e) => {
+    e.preventDefault()
+    $('.tfile-upload').trigger('click')
+  })
+
+  $('.thread_send').click( (e) => {
+    e.preventDefault()
+    $('.thread-content').val($('#new_thread .ck-editor__editable').html()) 
+    $('.thread-submit').trigger('click')
+  })
+
+}
    // 如果localStorage裡有東西的話就將value塞給表單的input，跳回來input原本的值不會不見   
-  function findRecord(){
-    const records = JSON.parse(localStorage.getItem('drafts')) || []
-    const msgForm = document.forms["new_message"]
-    const chId = msgForm.dataset.cid
-    const target = records.find((e)=> {return e.cid == chId})
-    if (target) {
-      document.querySelector('.ck-content').children[0].textContent = target.value
-    }
+function findRecord(){
+  const records = JSON.parse(localStorage.getItem('drafts')) || []
+  const msgForm = document.forms["new_message"]
+  const chId = msgForm.dataset.cid
+  const target = records.find((e)=> {return e.cid == chId})
+  if (target) {
+    document.querySelector('.ck-content').children[0].textContent = target.value
   }
+}
 
   

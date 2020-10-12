@@ -22,4 +22,8 @@ class Directmsg < ApplicationRecord
       directmsg
     end
   end
+
+  # def self.the_other_user
+  #   self.name.split(":")[1].split("-") - [current_user.id.to_s]
+  # end
 end

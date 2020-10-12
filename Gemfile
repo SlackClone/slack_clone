@@ -38,6 +38,7 @@ gem 'inline_svg', '~> 1.7', '>= 1.7.1'
 gem 'devise-i18n', '~> 1.9', '>= 1.9.2'
 gem 'shrine', '~> 3.2'
 gem 'aws-sdk-s3', '~> 1.81'
+gem 'ancestry', '~> 3.1'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
@@ -52,6 +53,8 @@ group :development, :test do
   gem 'net-ssh', '~> 6.1'
   gem 'ed25519', '1.2'
   gem 'bcrypt_pbkdf', '1.0'
+  gem 'hirb', '~> 0.7.3'
+  gem 'foreman', '~> 0.87.2'
 end
 
 group :development do

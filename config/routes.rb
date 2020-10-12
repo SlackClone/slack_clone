@@ -21,7 +21,9 @@ Rails.application.routes.draw do
   resources :workspaces do
     resource :users_workspaces
     resource :channels, only: %i[new create]
-    resources :channels, only: [:show] 
+    resources :channels, only: [:show] do
+      # resources :threads, only: [:show]
+    end
     resource :invitations, only: :create do
       get :accept
     end
@@ -41,11 +43,15 @@ Rails.application.routes.draw do
     resource :users_channels do 
       post :invite
     end
-    resources :messages
+    resources :messages do
+      resource :threads, only: [:create, :show]
+    end
   end
   
   resources :directmsgs, only: [:show] do
-    resources :messages, only: [:create]
+    resources :messages, only: [:create] do
+      resource :threads, only: [:create, :show]
+    end
   end
 
   resources :messages, only: [:show] do 

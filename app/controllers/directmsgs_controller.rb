@@ -2,6 +2,7 @@ class DirectmsgsController < ApplicationController
   before_action :authenticate_user!
 
   def show
+    # byebug
     users = [current_user, User.find(params[:id])]
   
     @directmsg = Directmsg.create_or_find(users,params[:workspace_id])

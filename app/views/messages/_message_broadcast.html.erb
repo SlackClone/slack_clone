@@ -5,7 +5,7 @@
     <span class="pl-3">new</span>
   </div>
 <% end%>
-<div class="messages_child">
+<div class="messages_child" data-target="subscribe.msglist" message_id="<%= message.id %>">
   <div class="flex justify-between hover:bg-gray-100 relative txtcolumn pl-2" data-controller="emoji" data-emoji-id =<%= message.id %>>
     <div class="txt flex w-full my-1">
       <div class="w-12 h-12 ml-1 flex items-center">
@@ -35,29 +35,52 @@
               <% end %>
             <% end %>
           </div>
+          <% if message.share_message_id.present? %>
+            <div class="m-2 border-l-4 border-gray-600">
+              <div class="ml-2 font-bold"> <%= message.share_message.user.nickname %> </div>
+              <div class="ml-2"> <%= raw(message.share_message.content) %> </div>
+            </div> 
+          <% end %>       
+          <div class="reaction-emoji" data-target="emoji.reaction">
+            <div id="message-reaction-<%= message.id %>" class="flex added-emoji items-center">
+              <%= render './shared/reaction', message: message %>
+            </div>
+          </div>
         </div>
-        <% if message.share_message_id.present? %>
-          <div class="m-2 border-l-4 border-gray-600">
-            <div class="ml-2 font-bold"> <%= message.share_message.user.nickname %> </div>
-            <div class="ml-2"> <%= raw(message.share_message.content) %> </div>
-          </div> 
-        <% end %>       
-        <div class="reaction-emoji" data-target="emoji.reaction">
-          <div id="message-reaction-<%= message.id %>" class="flex added-emoji items-center">
-            <%= render './shared/reaction', message: message %>
+        <div class="thread-btn flex">
+          
+          <div class="thread-count pl-2 text-blue-600">
+            <% if message.children.count > 0 %>
+              <% if message.messageable_type == "Channel" %>
+                <%= link_to channel_message_threads_path(message.messageable_id, message.id), class: "border-solid border-2 border-blue-600 rounded-md px-1 -ml-2" do %>
+                  有 <%= message.children.count %> 則回覆
+                <% end %>
+              <% else %>
+                <%= link_to directmsg_message_threads_path(message.messageable_id, message.id), class: "border-solid border-2 border-blue-600 rounded-md px-1" do %>
+                  有 <%= message.children.count %> 則回覆
+                <% end %>
+              <% end %>
+            <% end %>
           </div>
         </div>
       </div>
     </div>
-
-
     <div class="react-bar">
       <button class="emoji-trigger btn-blue btn" data-action="click-> emoji#click" data-id=<%= message.id %>><i class="far fa-laugh-wink"></i></button>
+      <button class="btn-blue btn">
+        <% if message.messageable_type == "Channel" %>
+          <%= link_to channel_message_threads_path(message.messageable_id, message.id) do %>
+            <i class="far fa-comment-dots"></i>
+          <% end %>
+        <% else %>
+          <%= link_to directmsg_message_threads_path(message.messageable_id, message.id) do %>
+            <i class="far fa-comment-dots"></i>
+          <% end %>
+        <% end %>
+      </button>
       <% if controller_name != "directmsgs"%>
         <button class= "share-btn btn btn-blue" data-id="<%= message.id %>"><i class="far fa-share-square"></i></button>
       <% end %>
     </div>
   </div>
 </div>
-
-

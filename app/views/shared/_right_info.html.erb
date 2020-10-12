@@ -1,6 +1,40 @@
 <%# 右方資訊區 %>
-<div class="info hidden w-1/6 min-w-200 border-l border-gray-400">
-  <div class="box-border border-b border-gray-400 h-16">
-    <button class="info-cancel">X</button>
-  </div>
+<div class="info right_info hidden w-1/4 min-w-200 border-l border-gray-400">
+  <% if @thread %>
+    <div class="box-border border-b border-gray-400 h-16 flex justify-between items-center">
+      <div class="thread-title ml-2">
+        <h1><strong>Thread</strong></h1>
+        <p class="text-gray-500 text-xs">
+          <% if @thread.messageable_type == "Channel" %>
+            # <%= @thread.messageable.name %>
+          <% else %>
+            <%= User.find( (@thread.messageable.name.split(":")[1].split("-") - [current_user.id.to_s])[0]).nickname %>
+          <% end %>
+        </p>
+      </div>
+      <button class="info-cancel block mr-3 hover:bg-gray-200 p-3 rounded-md">
+        <i class="far fa-times-circle fa-lg"></i>
+      </button>
+    </div>
+    <div class="thread-all-msg overflow-y-auto">
+      <%= render 'threads/message_broadcast', message: @thread %>
+      <p id="thread-count" data-target="subscribe.threadcount" message_id="<%= @thread.id %>" channel_id="<%= @channel.try(:id) %>" directmsg_id="<%= @directmsg.try(:id) %>" class="flex items-center pl-2 text-gray-600">
+        有 <%= @thread.children.count %> 則回覆
+      </p>
+
+      <div class="children-message" data-target="subscribe.threads">
+        <% @thread.children.order(:created_at).each do |thread| %>
+          <%= render 'threads/message_broadcast', message: thread %>
+        <% end %>
+      </div>
+
+      <div class="thread-form">
+        <% if @thread.messageable_type == "Channel" %>
+          <%= render 'threads/threadform' %>
+        <% else %>
+          <%= render 'threads/threadform_directmsg' %>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
 </div>

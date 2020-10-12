@@ -1,0 +1,17 @@
+<div class="messages_child pl-5">
+  <div class="flex justify-between hover:bg-gray-100 relative txtcolumn mt-2 mb-2">
+    <div class="txt flex">
+      <div class="author font-bold mr-2">
+        <%= thread.user.nickname %>
+      </div>
+      <div class="share-msg flex-col">
+        <div class="createtime mr-2">
+          <%= thread.created_at.strftime("%I:%M") %>
+        </div>
+          <div class="content">
+            <%= thread.content %>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>
