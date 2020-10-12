@@ -4,6 +4,7 @@ class MessagesController < ApplicationController
   def create
     
     # 若是聊天室訊息
+    byebug
     if params[:channel_id]  
       @channel = Channel.find(params[:channel_id])
       @message = @channel.messages.new(message_params)
@@ -104,11 +105,6 @@ class MessagesController < ApplicationController
 
   def sending_notice(channel, sender, direct_or_not, mention)
     SendNotificationJob.perform_later(channel, sender, direct_or_not, mention)
-  end
-
-
-  def mentioned_users
-    User.where(nickname: mentioned_usernames) - [user]
   end
 
   def channel_usernames(channel)

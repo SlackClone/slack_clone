@@ -430,7 +430,7 @@ function threadCustomEditor(){
     inputPosition = window.getSelection().focusOffset
   })
 }
-   // 如果localStorage裡有東西的話就將value塞給表單的input，跳回來input原本的值不會不見   
+// 如果localStorage裡有東西的話就將value塞給表單的input，跳回來input原本的值不會不見   
 function findRecord(){
   const records = JSON.parse(localStorage.getItem('drafts')) || []
   const msgForm = document.forms["new_message"]

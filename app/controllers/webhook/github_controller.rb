@@ -76,6 +76,7 @@ end
  
       if @message.save
         SendMessageJob.perform_later(@message, @channel.id, false)
+        SendNotificationJob.perform_later(@channel, "Github", false, [])
       else
         # TODO: false condition
       end

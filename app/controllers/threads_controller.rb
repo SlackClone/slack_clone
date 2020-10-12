@@ -12,9 +12,9 @@ class ThreadsController < ApplicationController
       @channel_user&.touch(:last_enter_at)
     else
       # directmsg
-      @channel = Directmsg.find(params[:directmsg_id])
+      @directmsg = Directmsg.find(params[:directmsg_id])
       type = "Directmsg"
-      @directmsg_user = current_user.users_directmsgs.find_by(directmsg: @channel)
+      @directmsg_user = current_user.users_directmsgs.find_by(directmsg: @directmsg)
       @last_enter_at = @directmsg_user&.last_enter_at || @directmsg.created_at
       @directmsg_user&.touch(:last_enter_at)
       
@@ -25,15 +25,12 @@ class ThreadsController < ApplicationController
     @thread = Message.find(params[:message_id])
     # debugger
     
-    @messages = (@channel || @directmsg).messages
-    @workspace = (@channel || @directmsg).workspace
+    @messages = (@directmsg || @channel).messages
+    @workspace = (@directmsg || @channel).workspace
     @channels = @workspace.channels
     # debugger
     @message = Message.new
     @message.attachfiles.build
-
-    # @thread_message = Message.new
-    # @thread_message.attachfiles.build
 
     @new_channel = @workspace.channels.new
     @workspace_users = @workspace.users
@@ -50,8 +47,8 @@ class ThreadsController < ApplicationController
       # 由私訊的name("DM:X-Y")拿出recipient的id
       user_id = (dc.name.split(":").last.split("-")-["#{current_user.id}"]).first
       # 將recipient的id當key，未讀訊息數目當value
-      @unread_msg_count[user_id] = dc.messages.where("created_at > ?", 
-                                                    dc.users_directmsgs.find_by(user_id: current_user.id).last_enter_at)
+      @unread_msg_count[user_id] = dc.messages.where("created_at > ? AND user_id != ?", 
+                                                    dc.users_directmsgs.find_by(user_id: current_user.id).last_enter_at, current_user.id)
                                                     .count
     end
     # byebug
@@ -60,8 +57,8 @@ class ThreadsController < ApplicationController
     @unread_msg_bol ={}
     added_channel.each do |ac|
       # 將channel的id當key，是否有未讀訊息當做value
-      @unread_msg_bol[ac.id] = ac.messages.where("created_at > ?", 
-                                                  ac.users_channels.find_by(user_id: current_user.id).last_enter_at)
+      @unread_msg_bol[ac.id] = ac.messages.where("created_at > ? AND user_id != ?", 
+                                                  ac.users_channels.find_by(user_id: current_user.id).last_enter_at, current_user.id)
                                                   .present?
     end
 
@@ -90,10 +87,21 @@ class ThreadsController < ApplicationController
     end 
 
     if @thread.save
-      # if (@thread.content).scan(channel_usernames(@channel)).flatten != []
-      #   mention_user = (@thread.content).scan(channel_usernames(@channel)).flatten.uniq - ['@'+current_user.nickname]
+      if (@thread.content).scan(channel_usernames(@channel)).flatten != []
+        mentioned_user = (@thread.content).scan(channel_usernames(@channel)).flatten.uniq - ['@'+current_user.nickname]
+        mentioned_user.each do |name|
+          mention_name = name.sub('@', '')
+          mention_user = User.find_by(nickname: mention_name)
+          mention_user.mentions.create(name: mention_name, 
+                                      message_id: @thread.id,
+                                      messageable_type: @thread.messageable_type, 
+                                      messageable_id: @thread.messageable_id)
+        end
+        sending_notice(@channel , current_user, is_directmsg, mentioned_user)
+      else
+        sending_notice(@channel , current_user, is_directmsg, [])
+      end
       sending_thread_message(@thread, channel_or_directmsg_id, is_directmsg, true)
-      sending_notice((@channel || @directmsg), current_user, false, [])
     end
   end
 
@@ -113,5 +121,10 @@ class ThreadsController < ApplicationController
 
   def channel_users_for_select2
     @users = (@workspace.users - @channel.users).map{|user| [user.nickname,user.email]}
+  end
+
+  def channel_usernames(channel)
+    channel_user = channel.users.pluck('nickname').map{ |name| "@"+name }
+    reg_channel_user = Regexp.union(channel_user)
   end
 end

@@ -58,7 +58,7 @@ class ChannelsController < ApplicationController
     user_id = (dc.name.split(":").last.split("-")-["#{current_user.id}"]).first
     # 將recipient的id當key，未讀訊息數目當value
     @unread_msg_count[user_id] = dc.messages.where("created_at > ? AND user_id != ?", 
-      dc.users_directmsgs.find_by(user_id: current_user.id).last_enter_at,current_user.id)
+      dc.users_directmsgs.find_by(user_id: current_user.id).last_enter_at, current_user.id)
       .count
     end
     # 查詢聊天室是否有未讀訊息

@@ -5,9 +5,9 @@ class DirectmsgsController < ApplicationController
     # byebug
     @users = [current_user, User.find(params[:id])]
     
-    @channel = Directmsg.create_or_find(@users,params[:workspace_id])
-    @messages = @channel.messages.includes({user: :profile})
-    @directmsg_user_name = @channel.users.find_by(id: params[:id]).nickname
+    @directmsg = Directmsg.create_or_find(@users,params[:workspace_id])
+    @messages = @directmsg.messages.includes({user: :profile})
+    @directmsg_user_name = @directmsg.users.find_by(id: params[:id]).nickname
     @directmsg_user_id = params[:id]
     @workspace = Workspace.find(params[:workspace_id])
     @channels = @workspace.channels
@@ -15,8 +15,8 @@ class DirectmsgsController < ApplicationController
     @message.attachfiles.build
     @new_channel = Channel.new
     @invitation = Invitation.new
-    @users_direct = current_user.users_directmsgs.find_by(directmsg: @channel)
-    @last_enter_at = @users_direct&.last_enter_at || @channel.created_at
+    @users_direct = current_user.users_directmsgs.find_by(directmsg: @directmsg)
+    @last_enter_at = @users_direct&.last_enter_at || @directmsg.created_at
     
     # 更新使用者進入這個channel的時間
     @users_direct&.touch(:last_enter_at)
