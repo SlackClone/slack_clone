@@ -31,7 +31,7 @@
           <% else %>
             <button data-action="click->channels#addChannel" data-target="channels.symbol">+</button>
           <% end %>
-          <span class="mention ml-auto text-red-600 w-8 bg-yellow-400 rounded-full text-center hidden" mention-id="<%= channel.id %>"><%= unread_msg_bol[channel.id] ? channel.mentions.select{|mention| mention.user_id == current_user.id}.map{|mention| mention.user_id}.count : nil %></span>
+          <span class="mention ml-auto text-red-600 w-8 bg-yellow-400 rounded-full text-center hidden" mention-id="<%= channel.id %>"><%= unread_msg_bol[channel.id] && channel.mentions.select{|mention| mention.user_id == current_user.id} != [] ? channel.mentions.select{|mention| mention.user_id == current_user.id}.count : nil %></span>
         </div>
       <% end %>
       <div class="w-full">
