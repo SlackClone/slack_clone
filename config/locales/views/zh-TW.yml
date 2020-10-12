@@ -4,7 +4,7 @@ zh-TW:
       sidebar:
         drafts: "草稿區"
         save: "資料存放區"
-        invite: "+邀請加入"
+        invite: "邀請加入"
       channel:
         name: "頻道名稱"
         new: "建立新聊天室"
