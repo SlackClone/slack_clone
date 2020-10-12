@@ -4,7 +4,6 @@ class MessagesController < ApplicationController
   def create
     
     # 若是聊天室訊息
-    byebug
     if params[:channel_id]  
       @channel = Channel.find(params[:channel_id])
       @message = @channel.messages.new(message_params)
