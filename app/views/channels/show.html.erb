@@ -61,10 +61,9 @@
     <%= render './shared/invite_ch' %>
   <% end %>
 </div>
-<% if @thread.nil? %>
-  <%= render './channels/new', channel: @new_channel, workspace: @workspace %>
-  <%= render './profiles/edit.html.erb' %>
-<% end %>
+<%= render './channels/new', channel: @new_channel, workspace: @workspace %>
+<%= render './profiles/edit.html.erb' %>
+
 
 <% if @thread %>
   <script>

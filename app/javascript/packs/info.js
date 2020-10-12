@@ -11,7 +11,6 @@ $(document).ready(function() {
     let currentChannel = $('.current-channel-or-directmsg').attr('channel_id')
     let currentDirectmsg = $('.current-channel-or-directmsg').attr('directmsg_anther_user_id')
     
-    console.log($('.directmsg-each'))
     // channel url 改回原本的
     $('.channel-each').each((index, channel) => {
       // console.log($(channel))

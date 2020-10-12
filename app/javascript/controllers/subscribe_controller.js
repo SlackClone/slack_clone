@@ -8,7 +8,6 @@ export default class extends Controller {
   static targets = ["messages", "newMessage", "threads", "threadcount", "msglist"]
 
   connect() {
-    // console.log(this) 
     Notification.requestPermission()
     this.subscription = consumer.subscriptions.create({channel: "ChannelsChannel", channelId: this.data.get("channel"), directId: this.data.get("direct"), messageId: this.data.get("thread")},
       {
@@ -27,10 +26,14 @@ export default class extends Controller {
     // 回傳游標在Node的哪個位置
     window.inputPosition = window.getSelection().focusOffset
 
-    if ($('.text-area').length === 1) {return} 
+    if ($('#new_message .text-area').length === 1) {return} 
     editor()    // create ckeditor
-    threadeditor()
-    console.log(`Messaging channel opened in workspace NO.${this.data.get("id")}`)
+
+    if ($('#new_thread').length ===1){
+      if ($('#new_thread .text-area').length === 1) {return} 
+      threadeditor()
+    }
+    // console.log(`Messaging channel opened in workspace NO.${this.data.get("id")}`)
 
     $('.file-upload').change( (e) => {
       $('#new_message #pre-file-zone').empty()
@@ -92,7 +95,6 @@ export default class extends Controller {
     editor()
   }
   clearThreadMsg(){
-    console.log(123)
     $('.thread-text-area').remove()
     $('.thread-editor').remove()
     $('#new_thread .w-full.px-3.mb-2').append(`<textarea class="thread-editor" placeholder="輸入訊息" style="display: none;"></textarea>`)

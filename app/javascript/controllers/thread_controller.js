@@ -7,6 +7,7 @@ export default class extends Controller {
   // }
   show() {
     // 開關右側
+    console.log(1566666)
     const rightInfo = document.querySelector(".right_info")
 
     rightInfo.classList.toggle("hidden")  

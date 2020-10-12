@@ -23,7 +23,6 @@ class ThreadsController < ApplicationController
 
     end
     
-    puts type
     @thread = Message.find(params[:message_id])
     # debugger
     
