@@ -10,7 +10,7 @@ class InvitationsController < ApplicationController
         invitation_token: Devise.friendly_token[0,20]
       )
       if @invitation.save
-        MyMailer.invite(@invitation).deliver_now
+        MyMailer.invite(current_user,@workspace,@invitation).deliver_now
         redirect_to request.referrer, notice: I18n.t("invitations.create",receiver: @invitation.receiver_email)
       end
     else 

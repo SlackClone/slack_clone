@@ -135,7 +135,9 @@ window.addEventListener('DOMContentLoaded',function(){
       box.classList.add('hidden')
     })
   })
-  document.querySelector('.sign-out').addEventListener('click',()=>{
-    localStorage.removeItem('drafts')
-  })
+  if(document.querySelector('.sign-out')) {
+    document.querySelector('.sign-out').addEventListener('click',()=>{
+      localStorage.removeItem('drafts')
+    })
+  }
 })

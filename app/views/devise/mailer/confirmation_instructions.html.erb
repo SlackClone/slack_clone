@@ -1,5 +1,20 @@
-<p><%= t('.greeting', recipient: @email) %></p>
-
-<p><%= t('.instruction') %></p>
-
-<p><%= link_to t('.action'), confirmation_url(@resource, confirmation_token: @token) %></p>
+<section style="width:100%;">
+  <div class="mailer-container" style="max-width:500px;margin:0 auto;padding: 0 20px;color:#434245;border: 1px solid #ccc; border-radius:3px;">
+    <img src="https://ckyang01.s3-ap-northeast-1.amazonaws.com/logo/Sladock_logo.png" alt="" style="width: 150px;">
+    <h3 style="font-size: 30px;margin: 10px 0 20px;color:#434245;"><%= t('.confirm') %></h3>
+    <div class="text" style="color:#434245;">
+      <p style="font-size:18px; font-weight:bold; text-decoration:none;">
+        <%= t('.welcome',email: @email) %>
+      </p>
+      <p>
+        <%= t('.successfully') %>
+      </p>
+      <p>
+        <%= t('.click') %>
+      </p>
+        
+      <%= link_to t('.btn'), confirmation_url(@resource, confirmation_token: @token),style:"text-decoration:none;background-color:#138184;color:white;padding: 10px 20px;border-radius: 3px;margin: 10px 0;display: inline-block;" %>
+      <p><%= t('.ignore') %></p>
+    </div>
+  </div>
+</section>

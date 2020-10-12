@@ -1,3 +1,10 @@
 en:
   mailer:
-    title: 'invite to workspace'
+    title: '%{username} has invited you to work with them in Sladock'
+  my_mailer:
+    join: 'Join your team on Sladck'
+    invited: 'has invited you to use Sladock with them, in a workspace called'
+    joined: 'has already joined'
+    join_now: 'Join Now'
+    what: 'What is sladock?'
+    description: 'Sladock is a messaging app for teams, a place you can collaborate on projects and organize conversations — so you can work together, no matter where you are.'
