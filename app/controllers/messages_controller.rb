@@ -16,7 +16,6 @@ class MessagesController < ApplicationController
       channel_id = params[:directmsg_id]
       direct_or_not = true
     end
-      @avatar_url = current_user.profile.try(:avatar_url,(:small))
     # 有夾帶檔案的話
     
     if @message.attachfiles.present?
@@ -36,7 +35,6 @@ class MessagesController < ApplicationController
   def add
     @channel = Channel.find(share_msg_params[:messageable_id])
     @new_message = @channel.messages.new(share_msg_params)
-    @avatar_url = current_user.profile.try(:avatar_url,(:small))
     if @new_message.save
       sending_message(@new_message, @channel, @avatar_url, false)
       sending_notice(@channel, current_user, false)
