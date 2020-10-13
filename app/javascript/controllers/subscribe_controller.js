@@ -5,7 +5,7 @@ import ClassicEditor from "ckeditor5-custom-build/build/ckeditor.js"
 import { EmojiButton } from '@joeattardi/emoji-button'
 
 export default class extends Controller {
-  static targets = ["messages", "newMessage", "threads", "threadcount", "msglist"]
+  static targets = ["messages", "threads", "threadcount", "msglist"]
 
   connect() {
     Notification.requestPermission()
@@ -25,15 +25,17 @@ export default class extends Controller {
     window.focusElement = window.getSelection().focusNode
     // 回傳游標在Node的哪個位置
     window.inputPosition = window.getSelection().focusOffset
-
-    if ($('#new_message .text-area').length === 1) {return} 
-    editor()    // create ckeditor
-
-    if ($('#new_thread').length ===1){
-      if ($('#new_thread .text-area').length === 1) {return} 
+    console.log($('#new_thread .ck-content').length)
+    console.log($('#new_message .ck-content').length)
+    if (window.location.pathname.includes("threads") && $('#new_thread .text-area').length === 0){
       threadeditor()
     }
-    // console.log(`Messaging channel opened in workspace NO.${this.data.get("id")}`)
+    if ($('#new_message .text-area').length === 0){
+      editor()    // create ckeditor
+    }
+    console.log($('#new_thread .ck-content'))
+    console.log($('#new_message .ck-content'))
+    console.log(`Messaging channel opened in workspace NO.${this.data.get("id")}`)
 
     $('.file-upload').change( (e) => {
       $('#new_message #pre-file-zone').empty()
@@ -48,6 +50,25 @@ export default class extends Controller {
           $('#new_message #pre-file-zone').append(`<img id="img-pre" width="120">`)
           document.querySelector('#new_message #img-pre').src = dataURL;
           $('#new_message #pre-file-zone').append(`<a src="#" id="pre-file-name">${fileName}</a>`)
+        }
+      }else {
+        $('#new_message #pre-file-zone').append(`<a src="#" id="pre-file-name">${fileName}</a>`)
+      }
+    })
+
+    $('.tfile-upload').change( (e) => {
+      $('#new_thread #pre-thread-file-zone').empty()
+      let reader = new FileReader();
+      let targetFile = e.target.files[0]
+      let fileName = targetFile.name
+      let fileType = targetFile.type
+      if (fileType.includes("image")){
+        reader.readAsDataURL(targetFile);
+        reader.onload = ()=>{
+          let dataURL = reader.result;
+          $('#new_thread #pre-thread-file-zone').append(`<img id="img-pre-thread" width="120">`)
+          document.querySelector('#new_thread #img-pre-thread').src = dataURL;
+          $('#new_thread #pre-thread-file-zone').append(`<a src="#" id="pre-thread-file-name">${fileName}</a>`)
         }
       }else {
         $('#new_message #pre-file-zone').append(`<a src="#" id="pre-file-name">${fileName}</a>`)
@@ -86,6 +107,7 @@ export default class extends Controller {
       let emoji = document.getElementById(`message-reaction-${data.id}`)
       emoji.innerHTML = data.html
     }
+    console.log(data.message)
   }
   clearmsg(){
     $('.text-area').remove()
@@ -97,6 +119,7 @@ export default class extends Controller {
   clearThreadMsg(){
     $('.thread-text-area').remove()
     $('.thread-editor').remove()
+    $('.tfile-upload').val("")
     $('#new_thread .w-full.px-3.mb-2').append(`<textarea class="thread-editor" placeholder="輸入訊息" style="display: none;"></textarea>`)
     threadeditor()
   }
@@ -113,7 +136,7 @@ function editor(){
         'strikethrough',
         'code',
         'link',
-        'bulletedList',
+        // 'bulletedList',
         'numberedList',
         'blockQuote',
         'codeBlock',
@@ -130,6 +153,15 @@ function editor(){
         'imageStyle:side'
       ]
     },
+    mention: {
+      feeds: [
+          {
+              marker: '@',
+              feed: getWorkspaceUser,
+              itemRenderer: customItemRenderer,
+          },
+      ]
+  },
     licenseKey: '',
     
   } )
@@ -137,7 +169,6 @@ function editor(){
     window.editor1 = editor1;
     customEditor()
     findRecord()
-
   } )
 
   .catch( error => {
@@ -156,13 +187,13 @@ function threadeditor(){
         'strikethrough',
         'code',
         'link',
-        'bulletedList',
+        // 'bulletedList',
         'numberedList',
-        'blockQuote',
-        'codeBlock',
-        '|',
-        'undo',
-        'redo',
+        // 'blockQuote',
+        // 'codeBlock',
+        // '|',
+        // 'undo',
+        // 'redo',
       ]
     },
     language: 'en',
@@ -173,13 +204,20 @@ function threadeditor(){
         'imageStyle:side'
       ]
     },
+    mention: {
+      feeds: [
+          {
+              marker: '@',
+              feed: getWorkspaceUser,
+              itemRenderer: customItemRenderer,
+          },
+      ]
+  },
     licenseKey: '',
-    
   } )
   .then( editor2 => {
     window.editor2 = editor2;
     threadCustomEditor()
-    // findRecord()
   } )
 
   .catch( error => {
@@ -193,8 +231,8 @@ function customEditor(){
   // 塞預覽檔案的地方
   $('#new_message .ck-editor__main').append(`<div id="pre-file-zone"></div>`)
 
-  $('#new_message .centered').attr('class', 'w-full px-3 mb-2 thread')
-  $('#new_message .ck-editor').attr('class', 'flex flex-col-reverse text-area')
+  $('#new_message .centered').attr('class', 'w-full px-3 mb-2')
+  $('#new_message .ck-editor').attr('class', 'flex flex-col-reverse text-area border border-black rounded')
   $('#new_message .ck-tooltip__text').attr('class', 'hidden')
   // emoji 
   
@@ -221,7 +259,7 @@ function customEditor(){
   
     picker.on('emoji', selection => {
       const emoji = selection.emoji
-      let textarea = $('.ck-editor__editable')    //要塞emoji的地方
+      let textarea = $('#new_message .ck-editor__editable')    //要塞emoji的地方
 
       // 假如輸入框是空的時候，直接把emoji放進去
       if (textarea.text() == ""){
@@ -254,13 +292,13 @@ function customEditor(){
 
   $('#new_message .custom_attach').click( (e) => {
     e.preventDefault()
-    $('.file-upload').trigger('click')
+    $('#new_message .file-upload').trigger('click')
   })
 
-  $('#new_message .custom_send').click( (e) => {
+  $('.custom_send').click( (e) => {
     e.preventDefault()
-    if ($('.ck-editor__editable').text() === "" && $('#new_message .file-upload').val() === ""){return}
-    $('.message-content').val($('.ck-editor__editable').html()) 
+    if ($('#new_message .ck-editor__editable').text() === "" && $('#new_message .file-upload').val() === ""){return}
+    $('.message-content').val($('#new_message .ck-editor__editable').html()) 
     $('.message-submit').trigger('click')
   })
 
@@ -311,9 +349,13 @@ function customEditor(){
 function threadCustomEditor(){
   // 調整ckeditor格式
   
+  $('#new_thread .ck-editor__main').append(`<div id="pre-thread-file-zone"></div>`)
+
+
   $('#new_thread .centered').attr('class', 'w-full px-3 mb-2')
-  $('#new_thread .ck-editor').attr('class', 'flex flex-col-reverse thread-text-area')
+  $('#new_thread .ck-editor').attr('class', 'flex flex-col-reverse thread-text-area border border-black rounded')
   $('#new_thread .ck-tooltip__text').attr('class', 'hidden')
+  $('#new_thread .ck-toolbar_grouping').addClass('border rounded')
   // 避免一直生成
   
   $('#new_thread .ck-toolbar__items').addClass('ck-thread-editor')
@@ -325,23 +367,70 @@ function threadCustomEditor(){
   $('#new_thread .thread-ckeditor').append('<button class="thread_send ck" style=" margin-right: 12px;" type="submit"></button>')
   $('#new_thread .thread-ckeditor > .thread_send').append('<i class="far fa-paper-plane ck ck-icon"></i>')
   
-  $('.thread_emoji').click( (e) => {
+  $('#new_thread .thread_emoji').click( (e) => {
     e.preventDefault()
+    const picker = new EmojiButton({
+      autoHide: true,
+      showCategoryButtons: false	
+    })
+
+    const target = e.currentTarget
+    picker.togglePicker(target)
+  
+    picker.on('emoji', selection => {
+      const emoji = selection.emoji
+      let textarea = $('.ck-editor__editable')    //要塞emoji的地方
+
+      // 假如輸入框是空的時候，直接把emoji放進去
+      if (textarea.text() == ""){
+        textarea.children().html(emoji)  
+      // 已經有其他文字的狀況
+      }else {
+        // 如果input為element起始點(例如換行的起始點)
+        if(inputPosition === 0){
+          focusElement.innerHTML = emoji
+        }else {
+          // 其他狀況要把emoji跟原有字串做拼接
+          let textParent = focusParent.innerHTML
+          // string是要插入的emoji，index是要插入的位置
+          String.prototype.emojiInsert = function(index, string){
+            return this.slice(0, index) + string + this.slice(index)
+          }
+          // textParent為插入emoji後的新字串
+          textParent = textParent.emojiInsert(inputPosition, emoji)
+          focusParent.innerHTML = textParent
+        }
+      }
+    })
   })
 
-  $('.thread_attach').click( (e) => {
+  $('#new_thread .thread_attach').click( (e) => {
     e.preventDefault()
     $('.tfile-upload').trigger('click')
   })
 
-  $('.thread_send').click( (e) => {
+  $('#new_thread .thread_send').click( (e) => {
     e.preventDefault()
+    if ($('#new_thread .ck-editor__editable').text() === "" && $('#new_thread .tfile-upload').val() === ""){return}
     $('.thread-content').val($('#new_thread .ck-editor__editable').html()) 
     $('.thread-submit').trigger('click')
   })
 
+  // 為了監聽使用者用滑鼠改變輸入位置時紀錄游標位置
+  $('#new_thread .ck-editor__editable').mouseup( (e) => {
+    focusElement = window.getSelection().focusNode
+    window.focusParent = window.getSelection().focusNode.parentElement
+    inputPosition = window.getSelection().focusOffset
+  })
+
+  // 為了監聽使用者使用方向鍵移動輸入位置時紀錄游標位置
+  $('#new_thread .ck-editor__editable').keyup( (e) => {
+    focusElement = window.getSelection().focusNode
+    focusParent = window.getSelection().focusNode.parentElement
+    inputPosition = window.getSelection().focusOffset
+  })
 }
-   // 如果localStorage裡有東西的話就將value塞給表單的input，跳回來input原本的值不會不見   
+// 如果localStorage裡有東西的話就將value塞給表單的input，跳回來input原本的值不會不見   
 function findRecord(){
   const records = JSON.parse(localStorage.getItem('drafts')) || []
   const msgForm = document.forms["new_message"]
@@ -353,3 +442,34 @@ function findRecord(){
 }
 
   
+function customItemRenderer( item ) {
+    const itemElement = document.createElement( 'span' );
+    // const avatar = document.createElement( 'img' );
+    const userNameElement = document.createElement( 'span' );
+    const fullNameElement = document.createElement( 'span' );
+
+    itemElement.classList.add( 'mention__item' );
+
+    // avatar.src = `../../assets/img/${ item.avatar }.jpg`;
+
+    userNameElement.classList.add( 'mention__item__user-name' );
+    userNameElement.textContent = item.id;
+
+    fullNameElement.classList.add( 'mention__item__full-name' );
+    fullNameElement.textContent = item.name;
+
+    // itemElement.classList.add('flex justify-between')
+    // itemElement.appendChild( avatar );
+    itemElement.appendChild( userNameElement );
+    itemElement.appendChild( fullNameElement );
+
+    return itemElement;
+}
+
+const getWorkspaceUser = async () => {
+  const workspaceId = $('h3.chatroomName').attr("workspace_id")
+  const response = await fetch(`/workspaces/${workspaceId}/all_user.json`)
+  const workspaceUser = await response.json()
+  return workspaceUser
+}
+

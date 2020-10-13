@@ -7,8 +7,16 @@ export default class extends Controller {
   connect() {
     // 私訊頻道旁邊紀錄未讀訊息則數的span
     let directUnreadCount = document.querySelectorAll('span.count')
+    // 群聊頻道旁邊紀錄被tag訊息則數的span
+    let channelMentionCount = document.querySelectorAll('span.mention')
     // 開場先把有未讀訊息的解除隱藏
     directUnreadCount.forEach((item) => {
+      if(item.innerHTML != ""){
+        item.classList.remove("hidden")
+      }
+    })
+    // 開場先把有被tag的頻道解除隱藏
+    channelMentionCount.forEach((item) => {
       if(item.innerHTML != ""){
         item.classList.remove("hidden")
       }
@@ -38,15 +46,34 @@ export default class extends Controller {
     const userNow = this.data.get("user")
     const channelName = document.querySelector(`[channel_id="${data.channel_id}"]`)
     const recipientElement = document.querySelector(`[unread-id="${data.user_id}"]`)
-
+    const mentionTimes = document.querySelector(`[mention-id = "${data.channel_id}"]`)
+    const mentionBody = `${data.user_nickname}在${data.channel_name}提到了您`
+    const mentionUser = data.mention.map(name => name.substring(1, name.length))
+    
     if (userNow === data.user_nickname){
       return
     }else{
       if (typeof directMsgId === "undefined" && channelId != this.data.get("channel")){
         // 瀏覽器訊息通知
-        new Notification(channelTitle, {body: body})
+        // 有人mention你
+        if (mentionUser.includes(userNow)){
+          console.log(mentionTimes.innerHTML)
+          new Notification(channelTitle, {body: mentionBody})
+          // if (!!mentionTimes){
+            if (mentionTimes.innerHTML == ""){
+              mentionTimes.classList.remove("hidden")
+
+              mentionTimes.innerHTML = "1"
+            }else {
+              mentionTimes.innerHTML = parseInt(mentionTimes.innerHTML) + 1
+            }
+          // }
+        }else {
+          new Notification(channelTitle, {body: body})
+        }
         // 聊天室群組字體提示
         channelName.classList.add("font-bold")
+
       }else if (typeof channelId === "undefined" && directMsgId != this.data.get("channel")){
         // 瀏覽器訊息通知
         new Notification(directMsgTitle)

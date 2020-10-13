@@ -5,13 +5,40 @@
         <%= image_tag message.user.profile.try(:avatar_url,(:small)) || 
           "https://ca.slack-edge.com/T018LF2LHK3-U018XMDF20Y-g206a10ded6a-32",class:"min-w-full h-frounded message_avatar rounded","aria-haspopup": true,"aria-expanded": true,data:{id:message.user_id} %>
       </div>
-      <div class="font-medium items-start">
-        <span class="pr-1 author"><%= message.user.nickname %></span>
+      <div class="items-start w-full mx-3">
+        <span class="font-bold pr-1 author"><%= message.user.nickname %></span>
         <span class="createtime text-xs text-gray-700">
           <%= message.created_at.strftime("%I:%M") %>
         </span>
-        <div class="content">
-          <%= raw(message.content) %>
+        <div class="flex-col share-msg">
+          <div class="content text-md text-gray-800"><%= raw(message.content) %>
+          </div>
+          <div class="file flex">
+            <% if message.attachfiles.empty? != true %>
+              <% message.attachfiles.each do |file|%>
+                <div class="msg-file-area relative">
+                  <% if file.document.mime_type.include? "image" %>
+                    <%= image_tag file.document(:small).url, class: "block" %>
+                    <a href="<%= file.document.download_url(host: "https://staging.sladock.tw/") %>" download= "" class="btn-d btn-white absolute msg-img-dl">
+                      <i class="fas fa-cloud-download-alt"></i>
+                    </a>    
+                  <% end %>
+                  <%= link_to file.document.metadata["filename"], file.document.download_url(host: "https://staging.sladock.tw/"), download:"", class: "inline-block other-file" unless file.document.mime_type.include? "image"%>
+                </div>
+              <% end %>
+            <% end %>
+          </div>
+          <% if message.share_message_id.present? %>
+            <div class="m-2 border-l-4 border-gray-600">
+              <div class="ml-2 font-bold"> <%= message.share_message.user.nickname %> </div>
+              <div class="ml-2"> <%= raw(message.share_message.content) %> </div>
+            </div> 
+          <% end %>       
+          <div class="reaction-emoji" data-target="emoji.reaction">
+            <div id="message-reaction-<%= message.id %>" class="flex added-emoji items-center">
+              <%= render './shared/reaction', message: message %>
+            </div>
+          </div>
         </div>
       </div>
       

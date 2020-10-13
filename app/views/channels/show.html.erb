@@ -39,7 +39,7 @@
       </div>
     </div>
     <%# 訊息區 %>
-    <div class="messages_area break-all flex flex-col-reverse overflow-y-auto h-chat_full flex-grow border border-1">
+    <div class="messages_area break-all flex flex-col-reverse overflow-y-auto h-chat_full flex-grow border border-none">
       <div class="pb-5 messages" data-target="subscribe.messages">
         <% @messages.where(ancestry: nil).order(:created_at).each do |msg| %>
           <%= render "messages/message_broadcast", message: msg %>
@@ -84,7 +84,6 @@
       let directmsgId = a.getAttribute("directmsg_id")
       a.setAttribute('href', `/directmsgs/${ directmsgId }/messages/${ messageId }/threads`)
     });
-
   </script>  
 <% end %>
  

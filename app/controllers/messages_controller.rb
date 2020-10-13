@@ -24,12 +24,27 @@ class MessagesController < ApplicationController
         file.document_derivatives! if file.document.mime_type.include? "image"
       end
     end 
-
+    
     if @message.save
+      # 若訊息中有mention別人
+      if (@message.content).scan(channel_usernames(@channel)).flatten != []
+        mentioned_user = (@message.content).scan(channel_usernames(@channel)).flatten.uniq - ['@'+current_user.nickname]
+        mentioned_user.each do |name|
+          mention_name = name.sub('@', '')
+          mention_user = User.find_by(nickname: mention_name)
+          mention_user.mentions.create(name: mention_name, 
+                                      message_id: @message.id,
+                                      messageable_type: @message.messageable_type, 
+                                      messageable_id: @message.messageable_id)
+        end
+        sending_notice(@channel, current_user, direct_or_not, mentioned_user )
+      else
+        sending_notice(@channel, current_user, direct_or_not, [] )
+      end
       # 第三個參數為是否為私訊
       sending_message(@message, channel_id, direct_or_not)
-      sending_notice(@channel, current_user, direct_or_not)
     end
+    
   end  
 
   def add
@@ -37,7 +52,7 @@ class MessagesController < ApplicationController
     @new_message = @channel.messages.new(share_msg_params)
     if @new_message.save
       sending_message(@new_message, @channel, false)
-      sending_notice(@channel, current_user, false)
+      sending_notice(@channel, current_user, false, [])
       @result = true
     else
       @message = ''
@@ -87,7 +102,13 @@ class MessagesController < ApplicationController
     SendMessageJob.perform_later(message, channel_id, direct_or_not)
   end
 
-  def sending_notice(channel, sender, direct_or_not)
-    SendNotificationJob.perform_later(channel, sender, direct_or_not)
+  def sending_notice(channel, sender, direct_or_not, mention)
+    SendNotificationJob.perform_later(channel, sender, direct_or_not, mention)
   end
+
+  def channel_usernames(channel)
+    channel_user = channel.users.pluck('nickname').map{ |name| "@"+name }
+    reg_channel_user = Regexp.union(channel_user)
+  end
+
 end

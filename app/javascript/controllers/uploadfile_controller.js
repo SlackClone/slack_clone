@@ -46,6 +46,7 @@ export default class extends Controller {
     this.uploadFormTarget.childNodes[1].classList.add("file-share")
     let fileId = e.currentTarget.getAttribute("file_id")
     let workspaceId = $('.file_area').attr("workspace_id")
+    // let fileName = $('.files-area').attr("file_name")
     $('.file-share').find("input[name='message[attachfiles_attributes][0][document]']").attr("class", "hidden")
     $('.file-share').attr("action", "/workspaces/"+workspaceId+"/uploadedfiles/"+fileId+"/share")
   }

@@ -3,9 +3,9 @@ class DirectmsgsController < ApplicationController
 
   def show
     # byebug
-    users = [current_user, User.find(params[:id])]
-  
-    @directmsg = Directmsg.create_or_find(users,params[:workspace_id])
+    @users = [current_user, User.find(params[:id])]
+    
+    @directmsg = Directmsg.create_or_find(@users,params[:workspace_id])
     @messages = @directmsg.messages.includes({user: :profile})
     @directmsg_user_name = @directmsg.users.find_by(id: params[:id]).nickname
     @directmsg_user_id = params[:id]
@@ -17,6 +17,8 @@ class DirectmsgsController < ApplicationController
     @invitation = Invitation.new
     @users_direct = current_user.users_directmsgs.find_by(directmsg: @directmsg)
     @last_enter_at = @users_direct&.last_enter_at || @directmsg.created_at
+    
+    @directmsg.mentions.where(user_id: current_user.id).destroy_all
     
     # 更新使用者進入這個channel的時間
     @users_direct&.touch(:last_enter_at)

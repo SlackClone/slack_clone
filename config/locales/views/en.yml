@@ -28,6 +28,7 @@ en:
       upload: "Upload"
       placeholder: "Add some message, if you'd like"
     shareform:
+      placeholder: "Add some message, if you'd like"
       share: "Share this message"
       to: "share to" 
       message: "message"

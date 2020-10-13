@@ -1,10 +1,10 @@
 <%# 右方資訊區 %>
-<div class="info right_info hidden w-1/4 min-w-200 border-l border-gray-400">
+<div class="info right_info hidden w-1/4 min-w-200 border-l border-gray-400 bg-transparent">
   <% if @thread %>
     <div class="box-border border-b border-gray-400 h-16 thread-header">
       <div class="thread-title ml-2">
         <h1><strong>Thread</strong></h1>
-        <p class="text-gray-500 text-xs">
+        <p class="text-gray-500 text-md">
           <% if @thread.messageable_type == "Channel" %>
             # <%= @thread.messageable.name %>
           <% else %>
@@ -27,14 +27,13 @@
           <%= render 'threads/message_broadcast', message: thread %>
         <% end %>
       </div>
-
-      <div class="thread-form">
-        <% if @thread.messageable_type == "Channel" %>
-          <%= render 'threads/threadform' %>
-        <% else %>
-          <%= render 'threads/threadform_directmsg' %>
-        <% end %>
-      </div>
+    </div>
+    <div class="thread-form">
+      <% if @thread.messageable_type == "Channel" %>
+        <%= render 'threads/threadform' %>
+      <% else %>
+        <%= render 'threads/threadform_directmsg' %>
+      <% end %>
     </div>
   <% end %>
 </div>

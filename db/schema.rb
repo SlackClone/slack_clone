@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_30_125937) do
+ActiveRecord::Schema.define(version: 2020_10_11_151956) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -53,6 +53,19 @@ ActiveRecord::Schema.define(version: 2020_09_30_125937) do
     t.index ["accept_at"], name: "index_invitations_on_accept_at"
     t.index ["user_id"], name: "index_invitations_on_user_id"
     t.index ["workspace_id"], name: "index_invitations_on_workspace_id"
+  end
+
+  create_table "mentions", force: :cascade do |t|
+    t.string "name", null: false
+    t.bigint "user_id", null: false
+    t.bigint "message_id", null: false
+    t.string "messageable_type", null: false
+    t.bigint "messageable_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["message_id"], name: "index_mentions_on_message_id"
+    t.index ["messageable_type", "messageable_id"], name: "index_mentions_on_messageable_type_and_messageable_id"
+    t.index ["user_id"], name: "index_mentions_on_user_id"
   end
 
   create_table "message_files", force: :cascade do |t|
@@ -162,6 +175,8 @@ ActiveRecord::Schema.define(version: 2020_09_30_125937) do
   add_foreign_key "channels", "workspaces"
   add_foreign_key "invitations", "users"
   add_foreign_key "invitations", "workspaces"
+  add_foreign_key "mentions", "messages"
+  add_foreign_key "mentions", "users"
   add_foreign_key "message_files", "attachfiles"
   add_foreign_key "message_files", "messages"
   add_foreign_key "messages", "users"

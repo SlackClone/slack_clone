@@ -16,9 +16,12 @@
       <div class="file_area break-all flex flex-wrap overflow-y-auto h-chat_full flex-grow border border-1 bg-gray-300 pl-5 pt-5" workspace_id="<%= @workspace.id %>">
         <% @files.each do |file| %>
           <div class="file-zone border-gray-600 border-solid border mx-1 rounded">
-            <div class="flex flex-wrap mx-auto justify-center overflow-hidden h-48 rounded relative files-area">
-              <%= image_tag file.document.url, class: "" if file.document.mime_type.include? "image" %>
-              <%= image_pack_tag "media/images/PDF_file_icon.png" if file.document.mime_type.include? "pdf" %>
+            <div class="flex flex-wrap mx-auto justify-center overflow-hidden h-48 rounded relative files-area" file_name="<%= file.document.metadata["filename"] %>">
+              <%= image_tag file.document.url, class: "image-pre" if file.document.mime_type.include? "image" %>
+              <%= image_pack_tag "media/images/PDF_file_icon.png", class: "pdf-pre" if file.document.mime_type.include? "pdf" %>
+              <% unless (file.document.mime_type.include? "image") || (file.document.mime_type.include? "pdf") %>
+                <%= image_pack_tag "media/images/iconfinder_File.png" %>
+              <% end %>
               <div class="absolute upload-share">
                 <a href="<%= file.document.download_url(host: "https://staging.sladock.tw/") %>" download= "" class= "btn-ds btn-white w-8 h-8 flex justify-around items-center mr-1">
                   <i class="fas fa-cloud-download-alt "></i>
