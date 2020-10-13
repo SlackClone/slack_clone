@@ -57,7 +57,6 @@ export default class extends Controller {
         // 瀏覽器訊息通知
         // 有人mention你
         if (mentionUser.includes(userNow)){
-          console.log(mentionTimes.innerHTML)
           new Notification(channelTitle, {body: mentionBody})
           // if (!!mentionTimes){
             if (mentionTimes.innerHTML == ""){
