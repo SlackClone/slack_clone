@@ -1,13 +1,15 @@
 class Message < ApplicationRecord
   validates :content, presence: true
   
-  has_ancestry
+  has_ancestry orphan_strategy: :destroy
+  
+  has_many :message_files, dependent: :destroy
+  has_many :attachfiles, through: :message_files
+
   belongs_to :user
   belongs_to :share_message, class_name: "Message", optional: true
   belongs_to :messageable, :polymorphic => true
   
-  has_many :message_files, dependent: :destroy
-  has_many :attachfiles, through: :message_files
   accepts_nested_attributes_for :attachfiles, allow_destroy: true
 
   def toggle_emoji(emoji, user_id)
