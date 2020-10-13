@@ -2,7 +2,7 @@ class ThreadsController < ApplicationController
   before_action :authenticate_user!
 
   def show
-    # debugger
+
     if params[:channel_id]
       # channel
       @channel = Channel.find(params[:channel_id])
@@ -10,6 +10,8 @@ class ThreadsController < ApplicationController
       @channel_user = current_user.users_channels.find_by(channel: @channel)
       @last_enter_at = @channel_user&.last_enter_at || @channel.created_at
       @channel_user&.touch(:last_enter_at)
+      @channel.mentions.where(user_id: current_user.id).destroy_all
+      
     else
       # directmsg
       @directmsg = Directmsg.find(params[:directmsg_id])
@@ -17,18 +19,15 @@ class ThreadsController < ApplicationController
       @directmsg_user = current_user.users_directmsgs.find_by(directmsg: @directmsg)
       @last_enter_at = @directmsg_user&.last_enter_at || @directmsg.created_at
       @directmsg_user&.touch(:last_enter_at)
-      
-      # byebug
+      @directmsg.mentions.where(user_id: current_user.id).destroy_all
       @directmsg_user_name = User.find((Directmsg.find(params[:directmsg_id]).name.split(":")[1].split("-") - [current_user.id.to_s])[0]).nickname
       
     end
     @thread = Message.find(params[:message_id])
-    # debugger
     
     @messages = (@directmsg || @channel).messages
     @workspace = (@directmsg || @channel).workspace
     @channels = @workspace.channels
-    # debugger
     @message = Message.new
     @message.attachfiles.build
 
@@ -50,7 +49,6 @@ class ThreadsController < ApplicationController
                                                     dc.users_directmsgs.find_by(user_id: current_user.id).last_enter_at, current_user.id)
                                                     .count
     end
-    # byebug
     # 查詢聊天室是否有未讀訊息
     added_channel = current_user.channels
     @unread_msg_bol ={}

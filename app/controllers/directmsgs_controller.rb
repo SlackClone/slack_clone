@@ -18,6 +18,8 @@ class DirectmsgsController < ApplicationController
     @users_direct = current_user.users_directmsgs.find_by(directmsg: @directmsg)
     @last_enter_at = @users_direct&.last_enter_at || @directmsg.created_at
     
+    @directmsg.mentions.where(user_id: current_user.id).destroy_all
+    
     # 更新使用者進入這個channel的時間
     @users_direct&.touch(:last_enter_at)
     # byebug
