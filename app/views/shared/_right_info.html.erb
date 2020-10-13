@@ -27,14 +27,13 @@
           <%= render 'threads/message_broadcast', message: thread %>
         <% end %>
       </div>
-
-      <div class="thread-form z-40">
-        <% if @thread.messageable_type == "Channel" %>
-          <%= render 'threads/threadform' %>
-        <% else %>
-          <%= render 'threads/threadform_directmsg' %>
-        <% end %>
-      </div>
+    </div>
+    <div class="thread-form">
+      <% if @thread.messageable_type == "Channel" %>
+        <%= render 'threads/threadform' %>
+      <% else %>
+        <%= render 'threads/threadform_directmsg' %>
+      <% end %>
     </div>
   <% end %>
 </div>
