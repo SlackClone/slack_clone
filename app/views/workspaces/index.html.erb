@@ -32,13 +32,13 @@
     </div>
   </div>
 
-<div class="">
-<h3><%= t(".all_workspaces") %></h3>
-<% @workspaces.each do |workspace| %>
-  <p>
-    <%= link_to workspace.name, workspace_path(workspace.id) %>
-    <%= link_to '加入', workspace_users_workspaces_path(workspace.id), method:"post", remote: true %>
-    <%= link_to '離開', workspace_users_workspaces_path(workspace.id), method:"delete", remote: true %>
-  </p>
-<% end %>
-</div>
+<%# <div class=""> %>
+<%# <h3><%= t(".all_workspaces")</h3> %> 
+<%# @workspaces.each do |workspace| %>
+  <%# <p> %>
+    <%#= link_to workspace.name, workspace_path(workspace.id) %>
+    <%#= link_to '加入', workspace_users_workspaces_path(workspace.id), method:"post", remote: true %>
+    <%#= link_to '離開', workspace_users_workspaces_path(workspace.id), method:"delete", remote: true %>
+  <%# </p> %>
+<%# end %>
+<%# </div> %>

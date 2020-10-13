@@ -16,7 +16,7 @@
         <p style="font-size:20px; font-weight:bold;">
           <%= @workspace.name %>
         </p>
-        <%= link_to 'Join Now',"/workspaces/#{@workspace.id}/invitations/accept?token=#{@invitation.invitation_token}",style:"text-decoration:none;background-color:#138184;color:white;padding: 10px 20px;border-radius: 3px;margin: 10px 0;display: inline-block;"%>
+        <%= link_to 'Join Now',"#{accept_workspace_invitations_url(@workspace.id)}?token=#{@invitation.invitation_token}",style:"text-decoration:none;background-color:#138184;color:white;padding: 10px 20px;border-radius: 3px;margin: 10px 0;display: inline-block;"%>
         <div style="margin:0 auto; margin: 15px; border-top:1px solid #eee;">
         <p style="margin:10px 0;font-weight:bold;">
           <%= @user.nickname %><%= t('my_mailer.joined') %>

@@ -25,16 +25,12 @@ export default class extends Controller {
     window.focusElement = window.getSelection().focusNode
     // 回傳游標在Node的哪個位置
     window.inputPosition = window.getSelection().focusOffset
-    console.log($('#new_thread .ck-content').length)
-    console.log($('#new_message .ck-content').length)
     if (window.location.pathname.includes("threads") && $('#new_thread .text-area').length === 0){
       threadeditor()
     }
     if ($('#new_message .text-area').length === 0){
       editor()    // create ckeditor
     }
-    console.log($('#new_thread .ck-content'))
-    console.log($('#new_message .ck-content'))
     console.log(`Messaging channel opened in workspace NO.${this.data.get("id")}`)
 
     $('.file-upload').change( (e) => {
