@@ -11,7 +11,7 @@ class User < ApplicationRecord
   has_many :messages, dependent: :destroy
   has_many :invitations, dependent: :destroy
   has_one :profile, dependent: :destroy
-  has_many :webhook_records
+  has_many :webhook_records, dependent: :destroy
   
   has_many :users_workspaces, dependent: :destroy
   has_many :workspaces, through: :users_workspaces

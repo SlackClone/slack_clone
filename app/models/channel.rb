@@ -3,7 +3,7 @@ class Channel < ApplicationRecord
   validates :public, presence: true
 
   has_many :messages, as: :messageable, dependent: :destroy
-  has_many :webhook_records
+  has_many :webhook_records, dependent: :destroy
 
   has_many :users_channels, dependent: :destroy
   has_many :users, through: :users_channels
