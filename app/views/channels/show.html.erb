@@ -15,7 +15,7 @@
             <i class="fas fa-user-plus text-gray-600"></i>
           </button>
         <% end %>
-        <div class="profile pr-2 col-span-1 ml-auto">
+        <div class="profile pr-2 col-span-1 ml-auto relative">
           <div class="clickopen relative">
             <span class="rounded-md shadow-sm">
               <%= image_tag (current_user.profile.try(:avatar_url,(:small)) || 'https://ca.slack-edge.com/T018LF2LHK3-U018XMDF20Y-g206a10ded6a-32'),class:"leading-5 transition ease-in-out duration-150 avatar_small w-10 h-10","aria-haspopup": true,"aria-expanded": true,id: "options-menu" %> 

@@ -28,10 +28,16 @@ $(document).ready(function() {
 
 
   $('#user_list').on("change", function() {
-    if($('#user_list').select2("val") != []) {
-      $('.invite-btn').val('add')
+    console.log()
+    if($('#user_list').select2("val").length != 0) {
       $('.invite-btn').removeAttr('disabled')
-      $('.invite-btn').addClass('bg-blue-500','text-white')
+      $('.invite-btn').removeClass('cursor-not-allowed text-gray-700 bg-gray-400')
+      $('.invite-btn').addClass('bg-sladock text-white cursor-pointer')
+    } else {
+      $('.invite-btn').attr('disabled','')
+      $('.invite-btn').removeClass('bg-sladock text-white cursor-pointer') 
+      $('.invite-btn').addClass('cursor-not-allowed text-gray-700 bg-gray-400')
+           
     }
   })
   $('.invite-ch-btn').click(() => {

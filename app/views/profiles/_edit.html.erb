@@ -17,7 +17,7 @@
         <%= f.text_field "profile[phone_number]",autocomplete:"off",class:"phone_number relative font-bold px-2 py-2 border border-gray-800 rounded block w-full placeholder-gray-600 focus:outline-none focus:shadow-outline" %>
         <span class="text-xs text-gray-500"><%= t('profiles.edit.phone_span') %></span>        
       </div>
-      <div class="col-span-1 flex flex-col items-center">
+      <div class="col-span-1 flex flex-col items-center mb-2">
       <p class="font-bold text-sm mr-auto"><%= t('profiles.edit.photo') %></p>
         <div class="mb-2 w-full">
             <%= image_tag (current_user.profile.try(:avatar_url,(:large)) || 'https://ca.slack-edge.com/T0196R42HU4-U018Z8Q6XU5-g15b03dc0178-192'),id: "avatar_large",class:"w-full block mx-auto" %>
@@ -40,7 +40,7 @@
       <div class="profile-cancel-btn cursor-pointer block font-bold text-gray-700 px-5 py-2 mr-3 bg-gray-400 rounded focus:outline-none">
         <%= t('profiles.edit.cancel') %>
       </div>
-      <%= f.submit t('utilities.save') ,class:"avatar-update-btn cursor-pointer block font-bold text-gray-700 px-5 py-2 bg-gray-400 rounded focus:outline-none" %>
+      <%= f.submit t('utilities.save') ,class:"avatar-update-btn cursor-pointer block font-bold text-white px-5 py-2 bg-sladock rounded focus:outline-none" %>
     </div>
   </div>
   <%# 編輯照片 %>
@@ -61,7 +61,7 @@
       <div class="flex ml-auto">
         <div class="profile-cancel-btn cursor-pointer block font-bold text-gray-700 px-5 py-2 mr-3 rounded focus:outline-none border "><%= t('profiles.edit.cancel') %></div>
         </div>    
-        <%= f.submit t('utilities.save') ,class:"avatar-update-btn avatar-update-btn2 cursor-pointer block font-bold text-gray-700 px-5 py-2 bg-gray-400 rounded focus:outline-none"
+        <%= f.submit t('utilities.save') ,class:"avatar-update-btn avatar-update-btn2 cursor-pointer block font-bold text-white px-5 py-2 bg-sladock rounded focus:outline-none"
         %>    
         <% end %> 
       </div>

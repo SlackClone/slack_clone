@@ -16,4 +16,34 @@ $(document).ready(()=>{
       $('.create-ch-bg').addClass('hidden')
     }
   })
-})
+  $('.create-ch-input').on('input', ()=>{
+    let input = $('.create-ch-input')
+    if (input.val() != "" && !(matchChannel(input.val()))) {
+      $('.create-ch-submit').removeAttr('disabled')
+      $('.create-ch-submit').removeClass('cursor-not-allowed text-gray-700 bg-gray-400')
+      $('.create-ch-submit').addClass('bg-sladock text-white cursor-pointer')
+      $('.error-span').addClass('hidden')
+    } else if(matchChannel(input.val())){
+      $('.create-ch-submit').attr('disabled','')
+      $('.create-ch-submit').removeClass('bg-sladock text-white cursor-pointer') 
+      $('.create-ch-submit').addClass('cursor-not-allowed text-gray-700 bg-gray-400')
+      $('.error-span').removeClass('hidden')  
+    } else {
+      $('.create-ch-submit').attr('disabled','')
+      $('.create-ch-submit').removeClass('bg-sladock text-white cursor-pointer') 
+      $('.create-ch-submit').addClass('cursor-not-allowed text-gray-700 bg-gray-400')
+      $('.error-span').addClass('hidden')  
+    }
+  })
+
+    function matchChannel(input){
+      let arr = []
+      $('.channel-each').each((e)=>{
+        arr.push($('.channel-each')[e].textContent)
+      })
+      return arr.find((e) => e == input)
+    }
+
+
+
+  })

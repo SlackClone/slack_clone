@@ -66,11 +66,12 @@ $(document).ready(function() {
   })
   // 移除照片更換為預設照片(假象)
   $('.remove-avatar').click(()=>{
-    $('.remove-avatar').addClass('hidden')
-    const large_url = "https://ca.slack-edge.com/T0196R42HU4-U018Z8Q6XU5-g15b03dc0178-192"
-    const small_url = "https://ca.slack-edge.com/T018LF2LHK3-U018XMDF20Y-g206a10ded6a-32"
-    $('#avatar_large').attr('src',large_url)
-    $('.avatar_small').attr('src',small_url)
+    if (!(window.confirm("確定要刪除大頭貼嗎?"))) return;
+      $('.remove-avatar').addClass('hidden')
+      const large_url = "https://ca.slack-edge.com/T0196R42HU4-U018Z8Q6XU5-g15b03dc0178-192"
+      const small_url = "https://ca.slack-edge.com/T018LF2LHK3-U018XMDF20Y-g206a10ded6a-32"
+      $('#avatar_large').attr('src',large_url)
+      $('.avatar_small').attr('src',small_url)
   })
   // 抓取PROFILE資料到表單裡
   fetch("/users/profiles/edit")

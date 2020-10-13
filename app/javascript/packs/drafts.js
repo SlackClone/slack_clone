@@ -2,10 +2,7 @@ window.addEventListener('DOMContentLoaded',function(){
   const records = JSON.parse(localStorage.getItem('drafts')) || []
   const btn = document.querySelector('.draft-btn')
   renderRecords(records)
-  // 在進入channel or directmsg時先判斷input是不是有值，有的話就顯示草稿區
-  if(localStorage.drafts && localStorage.drafts != "[]"){
-    btn.classList.remove('hidden')
-  } 
+
   if(document.querySelector('.centered')) {
     const msgForm = document.forms["new_message"]
     const chId = msgForm.dataset.cid
@@ -66,12 +63,16 @@ window.addEventListener('DOMContentLoaded',function(){
   function renderRecords(records) {
     if (document.querySelector('.draft-area')) {
       const area = document.querySelector('.draft-area')
-      area.innerHTML = "";
       const children = records.map(val => createItem(val))
-      children.forEach( function(child) {
-        area.appendChild(child)
-      })  
-      count()
+      if(children.length != 0){
+        area.classList.remove('flex')
+        // area.innerHTML = "";
+        document.querySelector('.draft-desc').classList.add('hidden')
+        children.forEach( function(child) {
+          area.appendChild(child)
+        })  
+        count()
+      }
     }
   }
   function createItem(records) {
@@ -95,10 +96,18 @@ window.addEventListener('DOMContentLoaded',function(){
   function count(){
     const count = document.querySelector('.count-draft')
     const box = document.querySelectorAll('.box')
-    if( box.length == 1){
-      count.textContent = `${box.length} draft`
-    } else if( box.length > 1 ) {
-      count.textContent = `${box.length} drafts`
+    let arr = []
+    box.forEach((e)=>{
+      if(!(e.classList.contains('hidden'))){
+       arr.push(e)
+      }
+    })
+    if( arr.length == 1){
+      count.textContent = `${arr.length} draft`
+    } else if( arr.length > 1 ) {
+      count.textContent = `${arr.length} drafts`
+    } else {
+      count.textContent = ""
     }
   }
 
@@ -126,6 +135,12 @@ window.addEventListener('DOMContentLoaded',function(){
       removeRecord = removeRecord.filter((e)=> {return e.name != box.dataset.name })
       localStorage.setItem('drafts',JSON.stringify(removeRecord))
       box.classList.add('hidden')
+      if( removeRecord.length == 0) {
+        const area = document.querySelector('.draft-area')
+        area.classList.add('flex')
+        document.querySelector('.draft-desc').classList.remove('hidden')
+      }
+      count()
     })
   })
   if(document.querySelector('.sign-out')) {

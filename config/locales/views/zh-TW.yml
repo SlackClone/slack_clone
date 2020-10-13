@@ -81,6 +81,8 @@ zh-TW:
     show:
       title: "草稿區"
       draft: "草稿"
+      none: "您目前還沒有草稿!"
+      desc: "如果想要試試看的話可以馬上到頻道輸入文字不要送出回到草稿區就能夠看到摟!"
   profiles:
     edit:
       title: "編輯個人基本資料"
@@ -94,6 +96,7 @@ zh-TW:
       preview: "預覽"
       cancel: "取消"
       remove: "刪除大頭貼"
+      confirm: "確定要刪除大頭貼嗎?"
   uploadedfiles:
     index:
       title: "資料存放區"
