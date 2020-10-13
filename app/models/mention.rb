@@ -3,5 +3,5 @@ class Mention < ApplicationRecord
 
   belongs_to :user
   belongs_to :message
-  belongs_to :messageable, :polymorphic => true
+  belongs_to :mentionable, :polymorphic => true
 end

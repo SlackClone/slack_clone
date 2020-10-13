@@ -9,6 +9,7 @@ RSpec.describe Directmsg, type: :model do
     it { should have_many(:users_directmsgs) }
     it { should have_many(:users) }
     it { should have_many(:messages) }
+    it { should have_many(:mentions) }
     it { should belong_to(:workspace) }
   end
 end

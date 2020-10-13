@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_11_151956) do
+ActiveRecord::Schema.define(version: 2020_10_13_071846) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -59,12 +59,12 @@ ActiveRecord::Schema.define(version: 2020_10_11_151956) do
     t.string "name", null: false
     t.bigint "user_id", null: false
     t.bigint "message_id", null: false
-    t.string "messageable_type", null: false
-    t.bigint "messageable_id", null: false
+    t.string "mentionable_type", null: false
+    t.bigint "mentionable_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["mentionable_type", "mentionable_id"], name: "index_mentions_on_mentionable_type_and_mentionable_id"
     t.index ["message_id"], name: "index_mentions_on_message_id"
-    t.index ["messageable_type", "messageable_id"], name: "index_mentions_on_messageable_type_and_messageable_id"
     t.index ["user_id"], name: "index_mentions_on_user_id"
   end
 

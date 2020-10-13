@@ -34,8 +34,8 @@ class MessagesController < ApplicationController
           mention_user = User.find_by(nickname: mention_name)
           mention_user.mentions.create(name: mention_name, 
                                       message_id: @message.id,
-                                      messageable_type: @message.messageable_type, 
-                                      messageable_id: @message.messageable_id)
+                                      mentionable_type: @message.mentionable_type, 
+                                      mentionable_id: @message.mentionable_id)
         end
         sending_notice(@channel, current_user, direct_or_not, mentioned_user )
       else
