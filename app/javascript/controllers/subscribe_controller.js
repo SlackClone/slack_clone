@@ -8,7 +8,7 @@ export default class extends Controller {
   static targets = ["messages", "newMessage", "threads", "threadcount", "msglist"]
 
   connect() {
-    Notification.requestPermission()
+    // Notification.requestPermission()
     this.subscription = consumer.subscriptions.create({channel: "ChannelsChannel", channelId: this.data.get("channel"), directId: this.data.get("direct"), messageId: this.data.get("thread")},
       {
         connected: this.subscribe.bind(this),

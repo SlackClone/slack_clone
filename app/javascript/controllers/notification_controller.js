@@ -25,7 +25,7 @@ export default class extends Controller {
     consumer.subscriptions.remove(this.subscription)
   }
   subscribe(){
-    console.log("Notification On")
+    console.log("! Notification On")
   }
   unsubscribe(){
   }
