@@ -24,10 +24,11 @@ namespace :demo do
     users = User.create([
             { nickname: "老闆", email: "111@111.111", password: "111111", confirmed_at: Time.now },
             { nickname: "主管", email: "222@222.222", password: "222222", confirmed_at: Time.now },
-            { nickname: "新人", email: "333@333.333", password: "333333", confirmed_at: Time.now },
             { nickname: "同事1", email: "444@444.444", password: "444444", confirmed_at: Time.now },
             { nickname: "同事2", email: "555@555.555", password: "555555", confirmed_at: Time.now }
           ])
+
+    newbie = User.create( nickname: "新人", email: "333@333.333", password: "333333", confirmed_at: Time.now )
     
     # 建立 CatBot User
     if User.where(nickname: "CatBot").blank?
