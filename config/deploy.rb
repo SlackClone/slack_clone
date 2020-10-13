@@ -9,7 +9,7 @@ set :repo_url, "git@github.com:SlackClone/slack_clone.git"
 
 # Default deploy_to directory is /var/www/my_app_name
 # set :deploy_to, "/var/www/my_app_name"
-set :deploy_to, "/home/deploy/staging"
+# set :deploy_to, "/home/deploy/staging"
 
 # Default value for :format is :airbrussh.
 # set :format, :airbrussh
@@ -31,7 +31,7 @@ append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "public/syst
 # Default value for default_env is {}
 # set :default_env, { path: "/opt/ruby/bin:$PATH" }
 # FIXME: Replace rvm with rbenv or compile ruby source code for production environment, rvm just for development
-set :default_env, { path: "/usr/local/rvm/rubies/ruby-2.6.5/bin:$PATH" }
+# set :default_env, { path: "/usr/local/ruby-2.6.5/bin:/usr/local/rvm/rubies/ruby-2.6.5/bin:$PATH" }
 
 # Default value for local_user is ENV['USER']
 # set :local_user, -> { `git config user.name`.chomp }
