@@ -29,14 +29,7 @@ window.addEventListener('DOMContentLoaded',function(){
         updateRecords(newDraft)      
     })
 
-    // 監聽所有物件的點擊事件，判斷input有值的話只要點擊其他地方，草稿區的BTN就會出現
-    document.addEventListener('click',()=>{
-      if(localStorage.drafts != "[]"){
-        btn.classList.remove('hidden')
-      } else {
-        btn.classList.add('hidden')
-      }
-    })
+
     // 監聽submit，如果發送出去要將localStorage那一筆刪除
     msgForm.addEventListener('submit',function(){
       var submitItem = findRecord()
