@@ -50,7 +50,6 @@ class ChannelsController < ApplicationController
     @channel_user&.touch(:last_enter_at)
     # 查詢私訊未讀訊息數量 
     direct_channel = current_user.directmsgs.includes(:messages)
-    # byebug
     @channel.mentions.where(user_id: current_user.id).destroy_all
     @unread_msg_count = {}
     direct_channel.each do |dc|
