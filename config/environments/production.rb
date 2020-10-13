@@ -109,4 +109,15 @@ Rails.application.configure do
   # config.active_record.database_selector = { delay: 2.seconds }
   # config.active_record.database_resolver = ActiveRecord::Middleware::DatabaseSelector::Resolver
   # config.active_record.database_resolver_context = ActiveRecord::Middleware::DatabaseSelector::Resolver::Session
+
+  config.action_mailer.delivery_method = :smtp # 真正寄信
+  config.action_mailer.smtp_settings = {
+    address: "smtp.mailgun.org",
+    port: 587,
+    domain: ENV["DOMAIN"],
+    authentication: "plain",
+    user_name: ENV["USERNAME"], #你的帳號
+    password: ENV["PASSWORD"], #信箱密碼 
+    enable_starttls_auto: true 
+  }
 end
