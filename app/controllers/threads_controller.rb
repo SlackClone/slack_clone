@@ -91,8 +91,8 @@ class ThreadsController < ApplicationController
           mention_user = User.find_by(nickname: mention_name)
           mention_user.mentions.create(name: mention_name, 
                                       message_id: @thread.id,
-                                      messageable_type: @thread.messageable_type, 
-                                      messageable_id: @thread.messageable_id)
+                                      mentionable_type: @thread.messageable_type, 
+                                      mentionable_id: @thread.messageable_id)
         end
         sending_notice(@channel , current_user, is_directmsg, mentioned_user)
       else

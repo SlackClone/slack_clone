@@ -5,7 +5,8 @@ class Message < ApplicationRecord
   
   has_many :message_files, dependent: :destroy
   has_many :attachfiles, through: :message_files
-
+  has_many :mentions, dependent: :destroy
+  
   belongs_to :user
   belongs_to :share_message, class_name: "Message", optional: true
   belongs_to :messageable, :polymorphic => true

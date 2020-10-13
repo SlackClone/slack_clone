@@ -15,6 +15,7 @@ RSpec.describe Channel, type: :model do
   describe 'association' do
     it { should belong_to(:workspace) }
     it { should have_many(:messages) }
+    it { should have_many(:mentions) }
   end
 
 end

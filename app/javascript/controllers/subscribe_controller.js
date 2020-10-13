@@ -25,7 +25,7 @@ export default class extends Controller {
     window.focusElement = window.getSelection().focusNode
     // 回傳游標在Node的哪個位置
     window.inputPosition = window.getSelection().focusOffset
-    if (window.location.pathname.includes("threads") && $('#new_thread .text-area').length === 0){
+    if (window.location.pathname.includes("threads") && $('#new_thread .thread-text-area').length === 0){
       threadeditor()
     }
     if ($('#new_message .text-area').length === 0){

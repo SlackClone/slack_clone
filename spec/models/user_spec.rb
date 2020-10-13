@@ -14,6 +14,7 @@ RSpec.describe User, type: :model do
     it { should have_many(:invitations) }
     it { should have_many(:users_directmsgs) }
     it { should have_many(:directmsgs) }
+    it { should have_many(:mentions) }
   end
 
 end

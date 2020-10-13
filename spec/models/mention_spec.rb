@@ -6,7 +6,7 @@ RSpec.describe Mention, type: :model do
   end
 
   describe 'association' do
-    it { should belong_to(:messageable) }
+    it { should belong_to(:mentionable) }
     it { should belong_to(:message) }
     it { should belong_to(:user) }
   end

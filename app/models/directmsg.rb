@@ -1,12 +1,11 @@
 class Directmsg < ApplicationRecord
   validates :name, presence: true
   
-  has_many :messages, as: :messageable, dependent: :destroy
   
   has_many :users_directmsgs, dependent: :destroy
   has_many :users, through: :users_directmsgs
-  has_many :messages, as: :messageable
-  has_many :mentions, as: :messageable
+  has_many :messages, as: :messageable, dependent: :destroy
+  has_many :mentions, as: :mentionable, dependent: :destroy
 
   belongs_to :workspace
 
