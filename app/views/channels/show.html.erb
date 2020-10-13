@@ -1,4 +1,4 @@
-<div class="chatroom flex overflow-hidden" data-controller="subscribe"  data-subscribe-id="<%= @workspace.id %>" data-subscribe-channel="<%= @channel&.id || 0 %>" data-subscribe-direct="<%= @directmsg&.id || 0 %>" data-subscribe-thread="<%= @thread&.id || 0 %>">
+<div class="chatroom flex overflow-hidden max-height" data-controller="subscribe"  data-subscribe-id="<%= @workspace.id %>" data-subscribe-channel="<%= @channel&.id || 0 %>" data-subscribe-direct="<%= @directmsg&.id || 0 %>" data-subscribe-thread="<%= @thread&.id || 0 %>">
   <%= render "./shared/leftbar", workspace: @workspace, 
                                   channels:  @channels,
                                   unread_msg_bol: @unread_msg_bol,
@@ -9,7 +9,7 @@
     <div class="box-border border-b border-gray-400 h-16 flex justify-between items-center current-channel-or-directmsg" channel_id="<%= @channel.try(:id) || 0 %>" directmsg_anther_user_id="<%= User.find_by(nickname: @directmsg_user_name).try(:id) || 0 %>">
       <p class="ml-2 font-bold"># <%=  @channel.try(:name) || @directmsg_user_name %></p>
         <%# button %>  
-      <div class="btn-group flex">
+      <div class="btn-group flex items-center">
         <% if @channel %>
           <button class="invite-ch-btn h-8 w-8 rounded hover:bg-gray-100 hover:stroke-gray active:bg-gray-400 focus:outline-none text-2xl mr-2 flex items-center justify-center self-center">
             <i class="fas fa-user-plus text-gray-600"></i>
