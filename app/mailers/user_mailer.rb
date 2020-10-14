@@ -11,7 +11,7 @@ class UserMailer < Devise::Mailer
     @resource = record
     @token = token
     @email = record["email"]
-    mg_client = Mailgun::Client.new ENV["MAILGUN_API"]
+    mg_client = Mailgun::Client.new(ENV["MAILGUN_API"])
     # Define your message parameters
     message_params =  { from: "sladock@sladock.tw",
                         to:   @email,

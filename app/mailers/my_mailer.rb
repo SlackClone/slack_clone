@@ -7,7 +7,7 @@ class MyMailer < ApplicationMailer
     @user = current_user
     @workspace = workspace
     # First, instantiate the Mailgun Client with your API key
-    mg_client = Mailgun::Client.new ENV["MAILGUN_API"]
+    mg_client = Mailgun::Client.new(ENV["MAILGUN_API"])
     # Define your message parameters
     message_params =  { from: "sladock@sladock.tw",
                         to:   @invitation.receiver_email,
