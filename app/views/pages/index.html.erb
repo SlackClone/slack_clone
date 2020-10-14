@@ -1,5 +1,6 @@
- <%# nav導覽列 %>
-<div class="bg-white border-none sm:border-b border-gray-400">
+<div class="wrap">
+  <%# nav導覽列 %>
+<div class="bg-white border-none sm:border-b border-gray-400 nav">
   <nav class="container mx-auto py-3 flex items-center justify-between flex-wrap">
     <h1 class="w-full sm:w-1/4">
       <%= link_to image_pack_tag("media/images/Sladock_logo.png"),pages_path %>
@@ -16,7 +17,7 @@
   </nav>
 </div>
 <%# Section-1 Slack is where work happens %>
-<section class="py-20 bg-orange-100 hidden sm:block"> 
+<section class="section-img bg-orange-100 hidden sm:block"> 
   <div class="container mx-auto grid grid-cols-5">
     <div class="col-span-2 flex items-center">
       <div class="text mr-16">
@@ -35,3 +36,5 @@
 <footer class="w-full hidden sm:block py-2 bg-light_gray ">
   <p class="text-center"> <i class="far fa-copyright"></i>2020 "SlaDock" All rights reserved.</p>
 </footer>
+
+</div>
