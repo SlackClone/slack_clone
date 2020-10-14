@@ -114,14 +114,10 @@ Rails.application.configure do
   # config.action_mailer.smtp_settings = config_for(:email).symbolize_keys
   # config.action_mailer.delivery_method = :letter_opener_web
 
-  # config.action_mailer.delivery_method = :smtp # 真正寄信
-  # config.action_mailer.smtp_settings = {
-  #   address: "smtp.mailgun.org",
-  #   port: 587,
-  #   domain: ENV["DOMAIN"],
-  #   authentication: "plain",
-  #   user_name: ENV["USERNAME"], #你的帳號
-  #   password: ENV["PASSWORD"], #信箱密碼 
-  #   enable_starttls_auto: true 
-  # }
+  config.action_mailer.delivery_method = :mailgun
+  config.action_mailer.mailgun_settings = {
+    api_key: ENV["MAILGUN_API"],
+    domain: 'sladock.tw',
+    # api_host: 'api.eu.mailgun.net'  # Uncomment this line for EU region domains
+  }
 end

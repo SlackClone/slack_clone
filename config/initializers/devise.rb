@@ -27,10 +27,10 @@ Devise.setup do |config|
   config.mailer_sender = 'sladock@sladock.tw'
 
   # Configure the class responsible to send e-mails.
-  config.mailer = 'Devise::Mailer'
+  config.mailer = 'UserMailer'
 
   # Configure the parent class responsible to send e-mails.
-  # config.parent_mailer = 'ActionMailer::Base'
+  # config.parent_mailer = 'ApplicationMailer'
 
   # 新增第三方登入 GOOGLE API 帳戶
   config.omniauth :google_oauth2, ENV["GOOGLE_CLIENT_ID"], ENV["GOOGLE_CLIENT_SECRET"],{access_type: "offline", approval_prompt: ""}
