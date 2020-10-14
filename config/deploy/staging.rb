@@ -7,7 +7,8 @@ server "staging.sladock.tw", user: "deploy", roles: %w{app db web}, my_property:
 # server "example.com", user: "deploy", roles: %w{app web}, other_property: :other_value
 # server "db.example.com", user: "deploy", roles: %w{db}
 
-
+set :deploy_to, "/home/deploy/staging"
+set :default_env, { path: "/usr/local/rvm/rubies/ruby-2.6.5/bin:$PATH" }
 
 # role-based syntax
 # ==================
