@@ -13,6 +13,6 @@ namespace :attachfile do
     files.each do |file|
       file.update(workspace_id: workspace.id)
     end
-
+    puts "無家可歸的檔案已經被加入Workspace:#{workspace.name} by Hank"
   end
 end
