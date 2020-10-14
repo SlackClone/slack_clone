@@ -8,7 +8,12 @@ export default class extends Controller {
   static targets = ["messages", "threads", "threadcount", "msglist"]
 
   connect() {
-    Notification.requestPermission()
+    let msgThreadCount = document.querySelectorAll('span.children-count')
+    msgThreadCount.forEach((item) => {
+      if(item.innerHTML != 0){
+        item.parentElement.classList.remove("hidden")
+      }
+    })
     this.subscription = consumer.subscriptions.create({channel: "ChannelsChannel", channelId: this.data.get("channel"), directId: this.data.get("direct"), messageId: this.data.get("thread")},
       {
         connected: this.subscribe.bind(this),
@@ -25,14 +30,14 @@ export default class extends Controller {
     window.focusElement = window.getSelection().focusNode
     // 回傳游標在Node的哪個位置
     window.inputPosition = window.getSelection().focusOffset
+    // window.test = window.getSelection()
     if (window.location.pathname.includes("threads") && $('#new_thread .thread-text-area').length === 0){
       threadeditor()
     }
     if ($('#new_message .text-area').length === 0){
+
       editor()    // create ckeditor
     }
-    console.log(`Messaging channel opened in workspace NO.${this.data.get("id")}`)
-
     $('.file-upload').change( (e) => {
       $('#new_message #pre-file-zone').empty()
       let reader = new FileReader();
@@ -76,16 +81,24 @@ export default class extends Controller {
     if (data.emoji === undefined){
       if (data.thread_or_not){
         // 留言回覆串
+        let newthread = document.querySelector(`div[message-string="${data.ancestry_id}"]`)
+        let messageAncestry = document.querySelector(`.messages_child[message_id="${data.ancestry_id}"] span.children-count`)
 
         // 新增留言
-        this.threadsTarget.insertAdjacentHTML("beforeend", data.message)
-        // 留言串總則數更新(右側)
-        let threadCount = this.threadsTarget.childElementCount
+        if (!!newthread){
+          newthread.insertAdjacentHTML("beforeend", data.message)
+        }
+        
+        if (!!messageAncestry){
+          if (messageAncestry.innerHTML == 0){
+            messageAncestry.parentElement.classList.remove('hidden')
+            messageAncestry.innerHTML = 1
+          }else{
+            messageAncestry.innerHTML = parseInt(messageAncestry.innerHTML) + 1
+          }
+        }
+        let threadCount = this.threadsTarget.childElementCount    
         this.threadcountTarget.innerHTML = `有 ${ threadCount } 則回覆`
-        // 留言串總則數更新(左側)
-        let messageId = this.threadcountTarget.getAttribute("message_id")
-        let threadOriginMsg = document.querySelector(`.messages_child[message_id="${messageId}"] .thread-count`)
-        threadOriginMsg.innerHTML = `<a class="border-solid border-2 border-blue-600 rounded-md px-1 -ml-2">有 ${ threadCount } 則回覆</a>`
       } else {
         // 一般留言
         if(document.hidden){
@@ -103,7 +116,6 @@ export default class extends Controller {
       let emoji = document.getElementById(`message-reaction-${data.id}`)
       emoji.innerHTML = data.html
     }
-    console.log(data.message)
   }
   clearmsg(){
     $('.text-area').remove()
@@ -256,18 +268,24 @@ function customEditor(){
     picker.on('emoji', selection => {
       const emoji = selection.emoji
       let textarea = $('#new_message .ck-editor__editable')    //要塞emoji的地方
-
       // 假如輸入框是空的時候，直接把emoji放進去
       if (textarea.text() == ""){
-        textarea.children().html(emoji)  
+        textarea.children().text(emoji)  
       // 已經有其他文字的狀況
       }else {
         // 如果input為element起始點(例如換行的起始點)
-        if(inputPosition === 0){
-          focusElement.innerHTML = emoji
+        if(inputPosition === 0 || $('#new_message .mention').length < 0){
+          focusElement.textContent = emoji
+        }else if($('#new_message .mention').length > 0) {
+          let lastChild
+          while(textarea.children().length !== 0){
+            lastChild = textarea.children().last()
+            textarea = lastChild
+          }
+          textarea.parent()[0].textContent += emoji
         }else {
           // 其他狀況要把emoji跟原有字串做拼接
-          let textParent = focusParent.innerHTML
+          let textParent = focusParent.textContent
           // string是要插入的emoji，index是要插入的位置
           String.prototype.emojiInsert = function(index, string){
             return this.slice(0, index) + string + this.slice(index)
@@ -277,12 +295,6 @@ function customEditor(){
           focusParent.innerHTML = textParent
         }
       }
-      // 尋找最後一個子元素
-      // while(textarea.children().length !== 0){
-      //   lastChild = textarea.children().last()
-      //   textarea = lastChild
-      // }
-      // textarea[0].innerHTML += emoji
     })
   })
 
@@ -303,13 +315,19 @@ function customEditor(){
     focusElement = window.getSelection().focusNode
     window.focusParent = window.getSelection().focusNode.parentElement
     inputPosition = window.getSelection().focusOffset
+    // console.log(focusElement)
+    // console.log(inputPosition)
+    // console.log(focusParent)
+
   })
   // 為了監聽使用者使用方向鍵移動輸入位置時紀錄游標位置
   $('#new_message .ck-editor__editable').keyup( (e) => {
     focusElement = window.getSelection().focusNode
     focusParent = window.getSelection().focusNode.parentElement
     inputPosition = window.getSelection().focusOffset
-
+    // console.log(focusElement)
+    // console.log(inputPosition)
+    // console.log(focusParent)
     // // p
     // if (e.keyCode == 13 && !e.shiftKey && ($('.ck-editor__editable').children()[0].tagName === 'P' || $('.ck-editor__editable').children()[0].tagName === 'BLOCKQUOTE')){
     //   $('.ck-editor__editable').children(':last-child')[0].remove()
@@ -375,7 +393,7 @@ function threadCustomEditor(){
   
     picker.on('emoji', selection => {
       const emoji = selection.emoji
-      let textarea = $('.ck-editor__editable')    //要塞emoji的地方
+      let textarea = $('#new_thread .ck-editor__editable')    //要塞emoji的地方
 
       // 假如輸入框是空的時候，直接把emoji放進去
       if (textarea.text() == ""){
@@ -383,11 +401,18 @@ function threadCustomEditor(){
       // 已經有其他文字的狀況
       }else {
         // 如果input為element起始點(例如換行的起始點)
-        if(inputPosition === 0){
-          focusElement.innerHTML = emoji
+        if(inputPosition === 0 || $('#new_thread .mention').length < 0){
+          focusElement.textContent = emoji
+        }else if($('#new_thread .mention').length > 0 ){
+          let lastChild
+          while(textarea.children().length !== 0){
+            lastChild = textarea.children().last()
+            textarea = lastChild
+          }
+          textarea.parent()[0].textContent += emoji
         }else {
           // 其他狀況要把emoji跟原有字串做拼接
-          let textParent = focusParent.innerHTML
+          let textParent = focusParent.textContent
           // string是要插入的emoji，index是要插入的位置
           String.prototype.emojiInsert = function(index, string){
             return this.slice(0, index) + string + this.slice(index)

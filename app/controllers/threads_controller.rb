@@ -75,14 +75,13 @@ class ThreadsController < ApplicationController
     end
     @thread = @channel.messages.new(thread_params)
 
-    # byebug
     if @thread.attachfiles.present?
       # 壓縮圖片
       @thread.attachfiles.each do |file|
         file.document_derivatives! if file.document.mime_type.include? "image"
       end
     end 
-
+    
     if @thread.save
       if (@thread.content).scan(channel_usernames(@channel)).flatten != []
         mentioned_user = (@thread.content).scan(channel_usernames(@channel)).flatten.uniq - ['@'+current_user.nickname]

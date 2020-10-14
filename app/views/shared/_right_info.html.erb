@@ -22,7 +22,7 @@
         有 <%= @thread.children.count %> 則回覆
       </p>
 
-      <div class="children-message" data-target="subscribe.threads">
+      <div class="children-message" data-target="subscribe.threads" message-string="<%= @thread.id %>">
         <% @thread.children.order(:created_at).each do |thread| %>
           <%= render 'threads/message_broadcast', message: thread %>
         <% end %>

@@ -10,7 +10,8 @@ class SendThreadMessageJob < ApplicationJob
         user: message.user.nickname,
         user_id: message.user.id,
         channel_id: message.messageable_id,
-        thread_or_not: thread_or_not
+        thread_or_not: thread_or_not,
+        ancestry_id: message.parent_id
       }
     else
       # 聊天室
@@ -19,7 +20,8 @@ class SendThreadMessageJob < ApplicationJob
         message: ApplicationController.render(partial: 'threads/message_broadcast',locals: { message: message }),
         user: message.user.nickname,
         user_id: message.user.id,
-        thread_or_not: thread_or_not
+        thread_or_not: thread_or_not,
+        ancestry_id: message.parent_id
       }
     end
   end
