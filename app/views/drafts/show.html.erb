@@ -11,7 +11,11 @@
         <p class="count-draft text-xs text-gray-500"></p>
       </div>
       <%# 訊息區 %>
-      <div class="draft-area break-all overflow-y-auto h-chat_full flex-grow border border-1 bg-gray-300">
+      <div class="draft-area break-all overflow-y-auto h-chat_full flex-grow border border-1 flex justify-center items-center">
+        <div class="draft-desc text-center border border-gray-600 rounded p-3 bg-gray-200 shadow-lg">
+          <p class="text-3xl font-bold mb-3"><%= t('.none') %></p>
+          <p><%= t('.desc') %></p>
+        </div>
       </div>
     </div>    
 

@@ -1,4 +1,5 @@
 class ProfilesController < ApplicationController
+  before_action :authenticate_user!
   before_action :find_user,except:[:edit,:avatar_url]
   before_action :find_profile,only:[:edit,:update,:destroy,:avatar_url]
 

@@ -23,24 +23,24 @@
             <%= f.text_field :name, 
               placeholder: t(".placeholder"),
               data: { action: "input->hello#input focus->hello#check" },
-              class: "w-full font-bold px-2 py-2 mb-5 border border-gray-800 rounded block w-full placeholder-gray-600 focus:outline-none focus:shadow-outline" 
+              class: "w-full font-bold px-2 py-2 mb-5 border border-gray-800 rounded block w-full placeholder-gray-600 focus:outline-none focus:shadow-outline",autocomplete: "off"
             %>
             <div class="hidden check-word absolute inset-y-0 right-0 flex items-center mr-3 text-gray-700" data-target="hello.check">
               255
             </div>              
           </div>         
-          <%= image_tag @workspace.image_url if @workspace.cached_image_data %>
-          <%= f.hidden_field :image, value: @workspace.cached_image_data %>
-          <%= f.file_field :image %>  
+          <div class="ws-image">
+            <%= f.hidden_field :image, value: @workspace.cached_image_data %>
+            <%= f.file_field :image %>  
+            <p class="text-xs text-gray-600"><%= t('.upload') %></p>
+          </div>
           <%= f.submit t("utilities.submit"),
-              class:"create-ws-btn cursor-pointer block font-bold text-white px-20 py-2 my-5 mr-auto bg-green-800 rounded focus:outline-none"
+              class:"create-ws-btn cursor-pointer block font-bold text-white px-20 py-2 my-5 mr-auto bg-gray-500 rounded focus:outline-none",disabled: true
           %>
         <% end %>
         <% if @workspace.errors.any? %>
           <% if Workspace.find_by(name: params[:workspace][:name]) %>
-            <span class="error_messages text-red-600 text-sm font-bold" data-target="hello.error"><%= t("..errors.messages.exist",name: params[:workspace][:name]) %></span>
-          <% else %>
-            <span class="error_messages text-red-600 text-sm font-bold" data-target="hello.error"><%= t("..errors.messages.blank") %></span>
+            <span class="error_messages text-red-600 text-sm font-bold" data-target="hello.error"><%= t(".errors.messages.exist",name: params[:workspace][:name]) %></span>
           <% end %>
         <% end %>
       </div>

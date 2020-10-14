@@ -59,9 +59,9 @@ en:
       name: "What’s the name of your company or team?"
       name_detail: "This will be the name of your Slack workspace — choose something that your team will recognize."
       placeholder: "Please enter workspace name"
+      upload: "Can upload the workspace Logo"
       errors:
         messages:
-          blank: "Type the name of your team or company — we’ll use this as the name of your new Slack workspace."
           exist: "%{name} has already exist"
     show:
       name: "Workspace Name：%{name}"
@@ -78,6 +78,8 @@ en:
     show: 
       title: "Drafts"
       draft: "draft"
+      none: "You currently have no draft!"
+      desc: "you can put a message in channel and return to draft then you can see it if you want to try"      
   profiles:
     edit:
       title: "Edit your profile"
@@ -91,6 +93,7 @@ en:
       preview: "Preview"
       cancel: "Cancel"
       remove: "remove the photo"
+      confirm: "Are you sure to remove the photo?"
   uploadedfiles:
     index:
       title: "File browser"

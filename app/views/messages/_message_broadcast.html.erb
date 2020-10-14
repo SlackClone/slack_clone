@@ -65,13 +65,13 @@
     </div>
     <div class="react-bar">
       <button class="emoji-trigger btn-blue btn" data-action="click-> emoji#click" data-id=<%= message.id %>><i class="far fa-laugh-wink"></i></button>
-      <button class="btn-blue btn">
+      <button>
         <% if message.messageable_type == "Channel" %>
-          <%= link_to channel_message_threads_path(message.messageable_id, message.id) do %>
+          <%= link_to channel_message_threads_path(message.messageable_id, message.id),class:"btn-blue btn block" do %>
             <i class="far fa-comment-dots"></i>
           <% end %>
         <% else %>
-          <%= link_to directmsg_message_threads_path(message.messageable_id, message.id) do %>
+          <%= link_to directmsg_message_threads_path(message.messageable_id, message.id),class:"btn-blue btn block" do %>
             <i class="far fa-comment-dots"></i>
           <% end %>
         <% end %>

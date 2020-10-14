@@ -22,14 +22,22 @@ window.addEventListener('DOMContentLoaded', () => {
     searchInput.addEventListener('input',()=>{
       if (searchInput.value.match(/^[^@\s]+@[^@\s]+\.[^@\s]+$/)) {
         inviteBtn.removeAttribute('disabled')
-        inviteBtn.value = 'Add'
-        inviteBtn.classList.add('bg-green-500')
+        inviteBtn.classList.remove('bg-gray-400')
+        inviteBtn.classList.remove('text-gray-700')
+        inviteBtn.classList.remove('cursor-not-allowed')
+        inviteBtn.classList.add('bg-sladock')
+        inviteBtn.classList.add('text-white')
+        inviteBtn.classList.add('cursor-pointer')
         form.addEventListener('submit', ()=>{
           background.classList.add('hidden')
         })
       } else {
-        inviteBtn.classList.remove('bg-green-500')
-        inviteBtn.value = '請輸入'
+        inviteBtn.classList.remove('bg-sladock')
+        inviteBtn.classList.remove('text-white')
+        inviteBtn.classList.remove('cursor-pointer')
+        inviteBtn.classList.add('text-gray-700')
+        inviteBtn.classList.add('bg-gray-400')
+        inviteBtn.classList.add('cursor-not-allowed')
         inviteBtn.setAttribute('disabled','')
       }
     })

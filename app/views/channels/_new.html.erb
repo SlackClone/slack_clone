@@ -5,10 +5,12 @@
       <button class="create-cancel-btn font-bold text-gray-600 focus:outline-none">X</button>
     </div>
     <p class="text-sm text-gray-600 mb-5"><%= t(".communicates") %></p>
-    <%= form_with(model: channel, url:workspace_channels_path(workspace),method:'POST',local:true) do |f| %>
-    <div class="field">
+
+    <%= form_with(model: channel, url:workspace_channels_path(workspace),method:'POST',local:true,class: "create-ch-form") do |f| %>
+    <div class="field mb-5">
       <%= f.label :name, t(".name"), class: "font-bold" %>
-      <%= f.text_field :name,placeholder:t(".name_placeholder"),autocomplete:"off",class:"search relative font-bold px-2 py-2 mb-5 border border-gray-800 rounded block w-full placeholder-gray-600 focus:outline-none focus:shadow-outline" %>
+      <%= f.text_field :name,placeholder:t(".name_placeholder"),autocomplete:"off",class:"search create-ch-input relative font-bold px-2 py-2 border border-gray-800 rounded block w-full placeholder-gray-600 focus:outline-none focus:shadow-outline" %>
+      <span class="text-xs text-red-600 hidden error-span"> 此channel名稱已經存在 </span>
     </div>
     <div class="field mb-5">
       <%= f.label :description, t(".description"), class: "font-bold" %>
@@ -21,7 +23,7 @@
       <select name="channels[name][]" id="ws_user" multiple="true" style="width: 100%">
       </select>
     </div>
-      <%= f.submit t("utilities.submit"),class:"cursor-pointer block font-bold text-gray-700 px-5 py-2 mt-3 ml-auto bg-gray-400 rounded focus:outline-none" %>
+      <%= f.submit t("utilities.submit"),class:"cursor-not-allowed block font-bold text-gray-700 px-5 py-2 mt-3 ml-auto bg-gray-400 rounded focus:outline-none create-ch-submit",disabled: true%>
     <% end %>
   </div>
 </div>

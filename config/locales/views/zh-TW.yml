@@ -42,6 +42,9 @@ zh-TW:
       desc_placeholder: "輸入關於此聊天室的描述"
       about: "這個聊天室是關於?"
       invite: "邀請團隊成員"
+      errors:
+        messages:
+          blank: "channel名稱不可為空!"
     show:
       status: "狀態"
       edit: "編輯個人資料"
@@ -59,10 +62,10 @@ zh-TW:
       name: "為Workspace建立名稱"
       name_detail: "這將會是你的workspace名稱，請取一個較容易辨別是你們團隊的名稱。"
       placeholder: "請輸入workspace名稱"
+      upload: "可以上傳團隊專屬workspace Logo"
       errors:
         messages:
-          blank: "Type the name of your team or company — we’ll use this as the name of your new Slack workspace."
-          exist: "%{name} has already exist"
+          exist: "%{name} 這個名稱已經存在，請重新命名!"
     show:
       name: "Workspace名稱：%{name}"
       create_channel: "創立聊天室"
@@ -78,6 +81,8 @@ zh-TW:
     show:
       title: "草稿區"
       draft: "草稿"
+      none: "您目前還沒有草稿!"
+      desc: "如果想要試試看的話可以馬上到頻道輸入文字不要送出回到草稿區就能夠看到摟!"
   profiles:
     edit:
       title: "編輯個人基本資料"
@@ -91,6 +96,7 @@ zh-TW:
       preview: "預覽"
       cancel: "取消"
       remove: "刪除大頭貼"
+      confirm: "確定要刪除大頭貼嗎?"
   uploadedfiles:
     index:
       title: "資料存放區"
