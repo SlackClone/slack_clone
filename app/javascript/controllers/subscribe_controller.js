@@ -118,18 +118,10 @@ export default class extends Controller {
     }
   }
   clearmsg(){
-    $('.text-area').remove()
-    $('.editor').remove()
-    $('.file-upload').val("")
-    $('#new_message .w-full.px-3.mb-2').append(`<textarea class="editor" placeholder="輸入訊息" style="display: none;"></textarea>`)
-    editor()
+    clearMessage()
   }
   clearThreadMsg(){
-    $('.thread-text-area').remove()
-    $('.thread-editor').remove()
-    $('.tfile-upload').val("")
-    $('#new_thread .w-full.px-3.mb-2').append(`<textarea class="thread-editor" placeholder="輸入訊息" style="display: none;"></textarea>`)
-    threadeditor()
+    clearThreadMessage()
   }
 }
 
@@ -307,6 +299,7 @@ function customEditor(){
     e.preventDefault()
     if ($('#new_message .ck-editor__editable').text() === "" && $('#new_message .file-upload').val() === ""){return}
     $('.message-content').val($('#new_message .ck-editor__editable').html()) 
+    console.log(123)
     $('.message-submit').trigger('click')
   })
 
@@ -328,33 +321,46 @@ function customEditor(){
     // console.log(focusElement)
     // console.log(inputPosition)
     // console.log(focusParent)
-    // // p
-    // if (e.keyCode == 13 && !e.shiftKey && ($('.ck-editor__editable').children()[0].tagName === 'P' || $('.ck-editor__editable').children()[0].tagName === 'BLOCKQUOTE')){
-    //   $('.ck-editor__editable').children(':last-child')[0].remove()
-    //   $('.message-content').val($('.ck-editor__editable').html()) 
-    //   $('.message-submit').trigger('click')
+    // p
+    // && ($('#new_message .ck-editor__editable').children()[0].tagName === 'P' || $('.ck-editor__editable').children()[0].tagName === 'BLOCKQUOTE')
+    if (e.keyCode == 13 && !e.shiftKey){
+      // $('#new_message .ck-editor__editable').children(':last-child')[0].remove()
+      let textarea = $('#new_message .ck-editor__editable')
+      let lastChild
+      while(textarea.children().length !== 0){
+        lastChild = textarea.children().last()
+        textarea = lastChild
+      }
+      textarea.remove()
+      $('#new_message .custom_send').trigger('click')
+      // clearMessage()
+      // return
+    }
+    if (e.shiftKey && e.keyCode == 13 && ($('#new_message .ck-editor__editable').children()[0].tagName === "UL" || $('#new_message .ck-editor__editable').children()[0].tagName === "OL")){
+      $('#new_message [data-placeholder="輸入訊息"]').insertAdjacentHTML('beforeend',`<li><br data-cke-filler="true"></li>`)
+    }
+    // blockquote
+    // 跟 li 有關的
+    // if (e.keyCode == 13 && !e.shiftKey && $('#new_message .ck-editor__editable').children()[0].tagName !== "PRE"){
+    //   $('#new_message .ck-editor__editable').children().find('li:last-child')[0].remove()
+    //   $('#new_message .message-content').val($('#new_message .ck-editor__editable').html()) 
+    //   $('#new_message .message-submit').trigger('click')
+    //   $('#new_message .ck-editor__editable').text("")
     //   return
     // }
-    // // blockquote
-    // // 跟 li 有關的
-    // if (e.keyCode == 13 && !e.shiftKey && $('.ck-editor__editable').children()[0].tagName !== "PRE"){
-    //   $('.ck-editor__editable').children().find('li:last-child')[0].remove()
-    //   $('.message-content').val($('.ck-editor__editable').html()) 
-    //   $('.message-submit').trigger('click')
-    //   return
-    // }
-    // if (e.shiftKey && ($('.ck-editor__editable').children()[0].tagName === "OL" || $('.ck-editor__editable').children()[0].tagName === "UL")){
+    // if (e.shiftKey && ($('#new_message .ck-editor__editable').children()[0].tagName === "OL" || $('#new_message .ck-editor__editable').children()[0].tagName === "UL")){
     //   // e.preventDefault()
     //   // e.keyCode = 13
     //   // $('.ck-editor__editable').children(':first-child')[0].insertAdjacentHTML('afterend', `<br>`)
     //   // $('.ck-editor__editable').children(':first-child')[0].insertAdjacentHTML('beforeend', `<li><br data-cke-filler="true"></li>`)
     //   return
     // }
-    // // plain text
+    // plain text
     // if (e.keyCode == 13 && !e.shiftKey){
-    //   $('.ck-editor__editable').children().find('br:last-child')[0].remove()
-    //   $('.message-content').val($('.ck-editor__editable').html()) 
-    //   $('.message-submit').trigger('click')
+    //   $('#new_message .ck-editor__editable').children().find('br:last-child')[0].remove()
+    //   $('#new_message .message-content').val($('#new_message .ck-editor__editable').html()) 
+    //   $('#new_message .message-submit').trigger('click')
+    //   $('#new_message .ck-editor__editable').text("")
     //   return
     // }
   })
@@ -494,3 +500,18 @@ const getWorkspaceUser = async () => {
   return workspaceUser
 }
 
+function clearMessage(){
+  $('.text-area').remove()
+  $('.editor').remove()
+  $('.file-upload').val("")
+  $('#new_message .w-full.px-3.mb-2').append(`<textarea class="editor" placeholder="輸入訊息" style="display: none;"></textarea>`)
+  editor()
+  console.log(123456)
+}
+function clearThreadMessage(){
+  $('.thread-text-area').remove()
+  $('.thread-editor').remove()
+  $('.tfile-upload').val("")
+  $('#new_thread .w-full.px-3.mb-2').append(`<textarea class="thread-editor" placeholder="輸入訊息" style="display: none;"></textarea>`)
+  threadeditor()
+}

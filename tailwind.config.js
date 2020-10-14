@@ -325,6 +325,7 @@ module.exports = {
       full: "100%",
       screen: "100vh",
       chat_full: "calc(100vh - 27.5rem)",
+      right_full: "calc(100vh - 27.5rem)",
       left_full: "calc(100vh - 4rem)",
       screen_94: "94vh",
       small_screen: "calc(100vh - 2.5rem)",
