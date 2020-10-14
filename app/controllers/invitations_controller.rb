@@ -12,10 +12,10 @@ class InvitationsController < ApplicationController
       if @invitation.save
         # MyMailer.invite(current_user,@workspace,@invitation).deliver_now
         SendEmailJob.perform_later(current_user,@workspace,@invitation)
-        redirect_to request.referrer, notice: I18n.t("invitations.create",receiver: @invitation.receiver_email)
+        redirect_to request.referrer
       end
     else 
-      redirect_to request.referrer, notice: "已經在WS瞜"
+      redirect_to request.referrer
     end
   end
 
