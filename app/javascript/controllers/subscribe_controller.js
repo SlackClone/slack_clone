@@ -11,7 +11,6 @@ export default class extends Controller {
     let msgThreadCount = document.querySelectorAll('span.children-count')
     msgThreadCount.forEach((item) => {
       if(item.innerHTML != 0){
-        console.log(item.innerHTML)
         item.parentElement.classList.remove("hidden")
       }
     })
@@ -277,13 +276,13 @@ function customEditor(){
         // 如果input為element起始點(例如換行的起始點)
         if(inputPosition === 0 || $('#new_message .mention').length < 0){
           focusElement.textContent = emoji
-        }else if($('#new_message .mention').length > 0 ){
+        }else if($('#new_message .mention').length > 0) {
           let lastChild
           while(textarea.children().length !== 0){
             lastChild = textarea.children().last()
             textarea = lastChild
           }
-          textarea[0].innerHTML += emoji
+          textarea.parent()[0].textContent += emoji
         }else {
           // 其他狀況要把emoji跟原有字串做拼接
           let textParent = focusParent.textContent
@@ -296,12 +295,6 @@ function customEditor(){
           focusParent.innerHTML = textParent
         }
       }
-      // 尋找最後一個子元素
-      // while(textarea.children().length !== 0){
-      //   lastChild = textarea.children().last()
-      //   textarea = lastChild
-      // }
-      // textarea[0].innerHTML += emoji
     })
   })
 
@@ -416,7 +409,7 @@ function threadCustomEditor(){
             lastChild = textarea.children().last()
             textarea = lastChild
           }
-          textarea[0].innerHTML += emoji
+          textarea.parent()[0].textContent += emoji
         }else {
           // 其他狀況要把emoji跟原有字串做拼接
           let textParent = focusParent.textContent
