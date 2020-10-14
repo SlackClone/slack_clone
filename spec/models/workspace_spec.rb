@@ -9,6 +9,7 @@ RSpec.describe Workspace, type: :model do
 
   describe 'association' do
     it { should have_many(:channels) }
+    it { should have_many(:attachfiles) }
   end
 
 end

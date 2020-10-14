@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_13_071846) do
+ActiveRecord::Schema.define(version: 2020_10_14_062550) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -19,6 +19,8 @@ ActiveRecord::Schema.define(version: 2020_10_13_071846) do
     t.text "document_data", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "workspace_id"
+    t.index ["workspace_id"], name: "index_attachfiles_on_workspace_id"
   end
 
   create_table "channels", force: :cascade do |t|

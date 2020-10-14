@@ -16,13 +16,15 @@ class MessagesController < ApplicationController
       channel_id = params[:directmsg_id]
       direct_or_not = true
     end
-    # 有夾帶檔案的話
-    
+
+    # 有夾帶檔案的話    
     if @message.attachfiles.present?
       # 壓縮圖片
       @message.attachfiles.each do |file|
         file.document_derivatives! if file.document.mime_type.include? "image"
+        file.workspace_id = @channel.workspace_id
       end
+      
     end 
     
     if @message.save
