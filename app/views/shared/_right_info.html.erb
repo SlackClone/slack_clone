@@ -16,7 +16,7 @@
         <i class="far fa-times-circle fa-lg"></i>
       </button>
     </div>
-    <div class="thread-all-msg thread-msg">
+    <div class="thread-all-msg break-all thread-msg overflow-y-auto pb-5">
       <%= render 'threads/message_broadcast', message: @thread %>
       <p id="thread-count" data-target="subscribe.threadcount" message_id="<%= @thread.id %>" channel_id="<%= @channel.try(:id) %>" directmsg_id="<%= @directmsg.try(:id) %>" class="flex items-center pl-2 text-gray-600">
         有 <%= @thread.children.count %> 則回覆
