@@ -329,13 +329,19 @@ function customEditor(){
     // p
     // && ($('#new_message .ck-editor__editable').children()[0].tagName === 'P' || $('.ck-editor__editable').children()[0].tagName === 'BLOCKQUOTE')
     if (!isMobileDevice()){
-      if (e.keyCode == 13 && !e.shiftKey){
-        console.log(focusParent)
-        let liTab = $('#new_message .ck-editor__editable li')
-        let codeTab = $('#new_message .ck-editor__editable code')
-  
+      // console.log(window.getSelection())
+      // console.log(focusElement)
+      // console.log(inputPosition)
+      // console.log(focusParent)
+      let liTab = $('#new_message .ck-editor__editable li')
+      let codeTab = $('#new_message .ck-editor__editable code')
+      let preTab = $('#new_message .ck-editor__editable pre')
+      let olTab = $('#new_message .ck-editor__editable ol')
+      if (e.keyCode == 13 && !e.shiftKey && olTab.length == 0){
+
         if (liTab.length !== 0){
           liTab[liTab.length - 1].remove()
+          console.log("li here")
           if ($('#new_message .ck-editor__editable').text() === "" && $('#new_message .file-upload').val() === ""){return}
           $('.message-content').val($('#new_message .ck-editor__editable').html()) 
           $('.message-submit').trigger('click')
@@ -343,7 +349,7 @@ function customEditor(){
           return
         }
   
-        if (codeTab.length !== 0){
+        if (codeTab.length !== 0 && preTab.length == 0){
           codeTab[codeTab.length - 1].remove()
           if ($('#new_message .ck-editor__editable').text() === "" && $('#new_message .file-upload').val() === ""){return}
           $('.message-content').val($('#new_message .ck-editor__editable').html()) 
@@ -360,10 +366,11 @@ function customEditor(){
         return
       }
   
-      if (e.shiftKey && e.keyCode == 13 && ($('#new_message .ck-editor__editable').children()[0].tagName === "OL")){
-        // $('#new_message [data-placeholder="輸入訊息"]').insertAdjacentHTML('beforeend',`<li><br data-cke-filler="true"></li>`)
-        console.log(123)
-      }
+      // if (e.shiftKey && e.keyCode == 13 && olTab.length !== 0){
+      //   // $('#new_message [data-placeholder="輸入訊息"]').insertAdjacentHTML('beforeend',`<li><br data-cke-filler="true"></li>`)
+      //   console.log(olTab[0])
+      //   olTab[0].insertAdjacentHTML('beforeend',`<li></li>`)
+      // }
     }
     
     // blockquote
