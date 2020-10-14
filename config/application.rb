@@ -11,6 +11,8 @@ module SlackClone
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 6.0
     config.time_zone = 'Asia/Taipei'
+    # config.assets.enabled = false
+    # config.assets.initialize_on_precompile = false
     # config.action_view.field_error_proc = Proc.new { |html_tag, instance| 
     #   html_tag
     # }

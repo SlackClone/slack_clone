@@ -27,7 +27,10 @@
 /spec/factories/*.jpg
 
 # Ignore master key for decrypting credentials and more.
+/config/credentials.yml.enc
 /config/master.key
+/config/credentials.yml.demo.enc
+/config/master.demo.key
 
 /public/packs
 /public/packs-test
@@ -37,12 +40,10 @@ yarn-debug.log*
 .yarn-integrity
 
 # Ignore application configuration
-/config/application.yml
-/config/database.yml
-
-# Ignore credentails and related file
-/config/credentials.yml.enc
-/config/master.key
+config/application.yml
+config/database.yml
+config/application.demo.yml
+config/database.demo.yml
 
 # ngrok.sh backup file before modfied it
 config/environments/development.rb.bak

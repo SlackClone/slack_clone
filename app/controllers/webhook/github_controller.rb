@@ -16,7 +16,7 @@ class Webhook::GithubController < ActionController::API
       
       # 讀 payload 資料
       payload_body = request.body.read
-
+      
       # 驗證 payload
       if signature?(payload_body, github_secret) 
         # byebug

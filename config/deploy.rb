@@ -23,7 +23,8 @@ set :repo_url, "git@github.com:SlackClone/slack_clone.git"
 
 # Default value for :linked_files is []
 # append :linked_files, "config/database.yml"
-append :linked_files, "config/database.yml", "config/master.key", "config/credentials.yml.enc", "config/application.yml"
+append :linked_files, "config/database.yml", "config/application.yml", "config/master.key", "config/credentials.yml.enc"
+# append :linked_files, "config/database.yml", "config/application.yml" 
 
 # Default value for linked_dirs is []
 append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "public/system"
