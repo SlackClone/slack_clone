@@ -1,5 +1,8 @@
 class ApplicationController < ActionController::Base
+  
+  rescue_from ActiveRecord::RecordNotFound, with: :not_found
   before_action :set_locale
+
   def set_locale
     # 可以將 ["en", "zh-TW"] 設定為 VALID_LANG 放到 config/environment.rb 中
     if params[:locale] && I18n.available_locales.include?( params[:locale].to_sym )
@@ -13,5 +16,12 @@ class ApplicationController < ActionController::Base
     workspaces_path
   end
 
+  private
+
+  def not_found
+    render file: '/public/404',
+           status: 404,
+           layout: false
+  end
   
 end
