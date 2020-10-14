@@ -40,7 +40,7 @@ class UploadedfilesController < ApplicationController
               
     @current_channel = @added_channel + @direct_channel
     
-    @files = Attachfile.all
+    @files = Attachfile.where(workspace_id: @workspace.id)
   end
 
   def create
@@ -59,6 +59,7 @@ class UploadedfilesController < ApplicationController
     # 壓縮圖片
     @message.attachfiles.each do |file|
       file.document_derivatives! if file.present? && (file.document.mime_type.include? "image")
+      file.workspace = @channel.workspace
     end
 
     if @message.save

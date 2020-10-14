@@ -79,7 +79,7 @@ class ThreadsController < ApplicationController
       # 壓縮圖片
       @thread.attachfiles.each do |file|
         file.document_derivatives! if file.document.mime_type.include? "image"
-        file.workspace_id = @channel.workspace_id
+        file.workspace = @channel.workspace
       end
     end 
     
