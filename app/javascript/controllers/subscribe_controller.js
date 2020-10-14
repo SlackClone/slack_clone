@@ -8,6 +8,13 @@ export default class extends Controller {
   static targets = ["messages", "threads", "threadcount", "msglist"]
 
   connect() {
+    let msgThreadCount = document.querySelectorAll('span.children-count')
+    msgThreadCount.forEach((item) => {
+      if(item.innerHTML != 0){
+        console.log(item.innerHTML)
+        item.parentElement.classList.remove("hidden")
+      }
+    })
     this.subscription = consumer.subscriptions.create({channel: "ChannelsChannel", channelId: this.data.get("channel"), directId: this.data.get("direct"), messageId: this.data.get("thread")},
       {
         connected: this.subscribe.bind(this),
@@ -84,7 +91,8 @@ export default class extends Controller {
         }
         
         if (!!messageAncestry){
-          if (messageAncestry.innerHTML == ""){
+          if (messageAncestry.innerHTML == 0){
+            messageAncestry.parentElement.classList.remove('hidden')
             messageAncestry.innerHTML = 1
           }else{
             messageAncestry.innerHTML = parseInt(messageAncestry.innerHTML) + 1

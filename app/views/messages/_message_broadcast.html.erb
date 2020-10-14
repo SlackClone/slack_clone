@@ -50,15 +50,13 @@
         <div class="thread-btn flex">
           
           <div class="thread-count pl-2 text-blue-600">
-            <% if message.children.count > 0 %>
-              <% if message.messageable_type == "Channel" %>
-                <%= link_to channel_message_threads_path(message.messageable_id, message.id), class: "border-solid border-2 border-blue-600 rounded-md px-1 -ml-2" do %>
-                  有 <span class="children-count"><%= message.children.count %></span> 則回覆
-                <% end %>
-              <% else %>
-                <%= link_to directmsg_message_threads_path(message.messageable_id, message.id), class: "border-solid border-2 border-blue-600 rounded-md px-1 -ml-2" do %>
-                  有 <span class="children-count"><%= message.children.count %></span> 則回覆
-                <% end %>
+            <% if message.messageable_type == "Channel" %>
+              <%= link_to channel_message_threads_path(message.messageable_id, message.id), class: "border-solid border-2 border-blue-600 rounded-md px-1 -ml-2 hidden" do %>
+                有 <span class="children-count"><%= message.children.count %></span> 則回覆
+              <% end %>
+            <% else %>
+              <%= link_to directmsg_message_threads_path(message.messageable_id, message.id), class: "border-solid border-2 border-blue-600 rounded-md px-1 -ml-2 hidden" do %>
+                有 <span class="children-count"><%= message.children.count %></span> 則回覆
               <% end %>
             <% end %>
           </div>
