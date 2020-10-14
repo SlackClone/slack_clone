@@ -35,7 +35,6 @@ export default class extends Controller {
       threadeditor()
     }
     if ($('#new_message .text-area').length === 0){
-
       editor()    // create ckeditor
     }
     $('.file-upload').change( (e) => {
@@ -299,7 +298,6 @@ function customEditor(){
     e.preventDefault()
     if ($('#new_message .ck-editor__editable').text() === "" && $('#new_message .file-upload').val() === ""){return}
     $('.message-content').val($('#new_message .ck-editor__editable').html()) 
-    console.log(123)
     $('.message-submit').trigger('click')
   })
 
@@ -318,27 +316,56 @@ function customEditor(){
     focusElement = window.getSelection().focusNode
     focusParent = window.getSelection().focusNode.parentElement
     inputPosition = window.getSelection().focusOffset
+
+    let textarea = $('#new_message .ck-editor__editable')
+    let lastChild
+    while(textarea.children().length !== 0){
+      lastChild = textarea.children().last()
+      textarea = lastChild
+    }
     // console.log(focusElement)
     // console.log(inputPosition)
     // console.log(focusParent)
     // p
     // && ($('#new_message .ck-editor__editable').children()[0].tagName === 'P' || $('.ck-editor__editable').children()[0].tagName === 'BLOCKQUOTE')
-    if (e.keyCode == 13 && !e.shiftKey){
-      // $('#new_message .ck-editor__editable').children(':last-child')[0].remove()
-      let textarea = $('#new_message .ck-editor__editable')
-      let lastChild
-      while(textarea.children().length !== 0){
-        lastChild = textarea.children().last()
-        textarea = lastChild
+    if (!isMobileDevice()){
+      if (e.keyCode == 13 && !e.shiftKey){
+        console.log(focusParent)
+        let liTab = $('#new_message .ck-editor__editable li')
+        let codeTab = $('#new_message .ck-editor__editable code')
+  
+        if (liTab.length !== 0){
+          liTab[liTab.length - 1].remove()
+          if ($('#new_message .ck-editor__editable').text() === "" && $('#new_message .file-upload').val() === ""){return}
+          $('.message-content').val($('#new_message .ck-editor__editable').html()) 
+          $('.message-submit').trigger('click')
+          clearMessage()
+          return
+        }
+  
+        if (codeTab.length !== 0){
+          codeTab[codeTab.length - 1].remove()
+          if ($('#new_message .ck-editor__editable').text() === "" && $('#new_message .file-upload').val() === ""){return}
+          $('.message-content').val($('#new_message .ck-editor__editable').html()) 
+          $('.message-submit').trigger('click')
+          clearMessage()
+          return
+        }
+  
+        textarea.remove()
+        if ($('#new_message .ck-editor__editable').text() === "" && $('#new_message .file-upload').val() === ""){return}
+        $('.message-content').val($('#new_message .ck-editor__editable').html())
+        $('.message-submit').trigger('click')
+        clearMessage()
+        return
       }
-      textarea.remove()
-      $('#new_message .custom_send').trigger('click')
-      // clearMessage()
-      // return
+  
+      if (e.shiftKey && e.keyCode == 13 && ($('#new_message .ck-editor__editable').children()[0].tagName === "OL")){
+        // $('#new_message [data-placeholder="輸入訊息"]').insertAdjacentHTML('beforeend',`<li><br data-cke-filler="true"></li>`)
+        console.log(123)
+      }
     }
-    if (e.shiftKey && e.keyCode == 13 && ($('#new_message .ck-editor__editable').children()[0].tagName === "UL" || $('#new_message .ck-editor__editable').children()[0].tagName === "OL")){
-      $('#new_message [data-placeholder="輸入訊息"]').insertAdjacentHTML('beforeend',`<li><br data-cke-filler="true"></li>`)
-    }
+    
     // blockquote
     // 跟 li 有關的
     // if (e.keyCode == 13 && !e.shiftKey && $('#new_message .ck-editor__editable').children()[0].tagName !== "PRE"){
@@ -506,12 +533,18 @@ function clearMessage(){
   $('.file-upload').val("")
   $('#new_message .w-full.px-3.mb-2').append(`<textarea class="editor" placeholder="輸入訊息" style="display: none;"></textarea>`)
   editor()
-  console.log(123456)
 }
+
 function clearThreadMessage(){
   $('.thread-text-area').remove()
   $('.thread-editor').remove()
   $('.tfile-upload').val("")
   $('#new_thread .w-full.px-3.mb-2').append(`<textarea class="thread-editor" placeholder="輸入訊息" style="display: none;"></textarea>`)
   threadeditor()
+}
+
+function isMobileDevice() {
+  const mobileDevice = ['Android', 'webOS', 'iPhone', 'iPad', 'iPod', 'BlackBerry', 'Windows Phone']
+  let isMobileDevice = mobileDevice.some(e => navigator.userAgent.match(e))
+  return isMobileDevice
 }
