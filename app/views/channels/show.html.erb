@@ -6,8 +6,8 @@
                                   channel: @channel || @directmsg %>
   <div class="flex flex-col flex-grow min-w-0 min-h-0 h-screen right-content">
     <%# 上方白色區塊顯示頻道名稱與邀請按鈕 %>
-    <div class="box-border border-b border-gray-400 h-16 flex justify-between items-center current-channel-or-directmsg" channel_id="<%= @channel.try(:id) || 0 %>" directmsg_anther_user_id="<%= @directmsg_receiving_user.try(:id) || 0 %>">
-      <div class="menu ml-2"> <i class="fas fa-bars"></i> </div><p class="ml-2 font-bold">  #<%=  @channel.try(:name) || @directmsg_receiving_user.nickname %></p>
+    <div class="box-border border-b border-gray-400 h-16 flex justify-between items-center current-channel-or-directmsg" channel_id="<%= @channel.try(:id) || 0 %>" directmsg_anther_user_id="<%= User.find_by(nickname: @directmsg_user_name).try(:id) || 0 %>">
+      <div class="menu ml-2"> <i class="fas fa-bars"></i> </div><p class="ml-2 font-bold">  #<%=  @channel.try(:name) || @directmsg_user_name %></p>
         <%# button %>  
       <div class="btn-group flex items-center">
         <% if @channel %>
@@ -41,7 +41,7 @@
     <%# 訊息區 %>
     <div class="messages_area break-all flex flex-col-reverse overflow-y-auto h-chat_full flex-grow border border-none">
       <div class="pb-5 messages" data-target="subscribe.messages">
-        <% @messages.each do |msg| %>
+        <% @messages.where(ancestry: nil).order(:created_at).each do |msg| %>
           <%= render "messages/message_broadcast", message: msg %>
         <% end %>
       </div>

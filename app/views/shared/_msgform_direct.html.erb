@@ -1,4 +1,4 @@
-<%= form_with(model: @message, url:directmsg_messages_path(@directmsg) , class: "flex  appearance-none border-none rounded text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500",method: "post", id:"new_message", data:{action: "ajax:success->subscribe#clearmsg",cid: @directmsg_user_id,name: @directmsg_receiving_user.nickname,wid: @workspace.id}) do |f| %>
+<%= form_with(model: @message, url:directmsg_messages_path(@directmsg) , class: "flex  appearance-none border-none rounded text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500",method: "post", id:"new_message", data:{action: "ajax:success->subscribe#clearmsg",cid: @directmsg_user_id,name: @directmsg_user_name,wid: @workspace.id}) do |f| %>
   <%= f.text_field :content, class:"min-w-0 flex-grow message-content hidden", placeholder: t(".placeholder"),autocomplete: "off" %> 
   <%= f.fields_for :attachfiles do |file| %>
     <%= file.file_field :document, class:"hidden file-upload" %>

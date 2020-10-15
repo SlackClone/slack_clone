@@ -20,12 +20,11 @@ class ThreadsController < ApplicationController
       @last_enter_at = @directmsg_user&.last_enter_at || @directmsg.created_at
       @directmsg_user&.touch(:last_enter_at)
       @directmsg.mentions.where(user_id: current_user.id).destroy_all
-      # @directmsg_user_name = User.find((Directmsg.find(params[:directmsg_id]).name.split(":")[1].split("-") - [current_user.id.to_s])[0]).nickname
-      @directmsg_receiving_user = User.find(@directmsg.name.split(":")[1].split("-") - [current_user.id.to_s])[0]
+      @directmsg_user_name = User.find((Directmsg.find(params[:directmsg_id]).name.split(":")[1].split("-") - [current_user.id.to_s])[0]).nickname
       
     end
     @thread = Message.find(params[:message_id])
-    @messages = (@directmsg || @channel).messages.includes({user: :profile}, :attachfiles).where(ancestry: nil).order(:created_at)
+    @messages = (@directmsg || @channel).messages
     @workspace = (@directmsg || @channel).workspace
     @channels = @workspace.channels
     @message = Message.new
