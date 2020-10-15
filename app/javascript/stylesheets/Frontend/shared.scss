@@ -189,8 +189,7 @@ select{
     left: 0;
     transition: left .8s;
   }
-  .right-content {
-  }
+
 }
 
 @screen sm {
@@ -221,11 +220,9 @@ select{
 }
 
 .thread-header{
-  position: fixed;
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  width: 25%;
+  width: 100%;
   z-index: 30;
   background-color: #fff;
 }
@@ -233,9 +230,25 @@ select{
 .thread-msg{
   max-height: calc(100vh - 10.2rem);
   overflow: auto;
-  margin-top: 4rem;
 }
 
 .max-height{
   max-height: 100vh;
+}
+
+.right_info{
+  position: fixed;
+  width: 100%;
+  background: #fff;
+  z-index: 500;
+  height: 100vh ;
+}
+
+
+@screen sm {
+  .right_info {
+    position: static;
+    width: 300px;
+    transition: none;
+  }
 }
