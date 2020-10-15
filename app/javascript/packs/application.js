@@ -22,6 +22,7 @@ import './header-btn'
 import "./share-btn"
 import './header-btn'
 import './drafts.js'
+import './left_bar'
 import './generate_payload_url.js'
 import "@fortawesome/fontawesome-free/css/all";
 import "@fortawesome/fontawesome-free/js/all";

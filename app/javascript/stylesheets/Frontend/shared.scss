@@ -58,15 +58,85 @@ select{
   }
 }
 
+.wrap{
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+.nav{
+  flex-grow: 0;
+}
+section{
+  flex-grow: 2;
+}
+
+.section-img{
+  padding-top: 150px;
+}
+
 .footerContent{
   text-align: center;
   font-size: 20px;
   color: #fff;
 }
 
-footer{
-  position: absolute;
-  bottom: 0;
+.menu{
+  display: block;
+  cursor: pointer;
+}
+
+@screen sm{
+  .menu {
+    display:none
+  }
+}
+.leftbar {
+  position: fixed;
+  z-index: 300;
+  left: -100%;
+  right: 0;
+  width: 100%;
+  background-color: #128184;
+  transition: left 1.5s;
+}
+.right-content {
+  margin-left: 0;
+  transition: margin-left 0.9s;
+}
+.toggle {
+  .leftbar{
+    left: 0;
+    transition: left .8s;
+  }
+  .right-content {
+  }
+}
+
+@screen sm {
+  .leftbar {
+    position: static;
+    width: 300px;
+    transition: none;
+  }
+  .right-content {
+    transition: none;
+  }
+
+  .toggle {
+    .right-content {
+      margin-left: 0;
+    }
+  }
+}
+
+.close{
+  font-size: 25px;
+}
+
+@screen sm{
+  .close {
+    display:none
+  }
 }
 
 .thread-header{
