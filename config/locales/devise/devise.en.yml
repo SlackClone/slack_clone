@@ -6,6 +6,10 @@ en:
       confirmed: "Your email address has been successfully confirmed."
       send_instructions: "You will receive an email with instructions for how to confirm your email address in a few minutes."
       send_paranoid_instructions: "If your email address exists in our database, you will receive an email with instructions for how to confirm your email address in a few minutes."
+      new:
+        resend_confirmation_instructions: "Resend confirmation instructions"      
+        resend: "Resend!"
+        sign_in: "back to login"
     failure:
       already_authenticated: "You are already signed in."
       inactive: "Your account is not activated yet."
@@ -52,6 +56,9 @@ en:
       updated: "Your account has been updated successfully."
       updated_but_not_signed_in: "Your account has been updated successfully, but since your password was changed, you need to sign in again"
       signed_in_with_google: 'Signed in with google'
+      new:
+        have_account: 'if you already have an account'
+        login: 'Login'        
     sessions:
       signed_in: "Signed in successfully."
       signed_out: "Signed out successfully."

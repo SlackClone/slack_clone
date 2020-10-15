@@ -13,6 +13,10 @@ zh-TW:
       confirmed: "您的帳號已通過驗證，現在您已成功登入。"
       send_instructions: "您將在幾分鐘後收到一封電子郵件，內有驗證帳號的步驟說明。"
       send_paranoid_instructions: "如果我們有您的信箱，您將會收到一封驗證您的帳號的電子郵件。"
+      new: 
+        resend_confirmation_instructions: "重新寄送驗證信"
+        resend: "重新寄送!"
+        sign_in: "回到登入頁"
     failure:
       already_authenticated: "您已經登入。"
       inactive: "您的帳號尚未被啟用。"
@@ -59,6 +63,9 @@ zh-TW:
       updated: "您已經成功的更新帳號資訊。"
       updated_but_not_signed_in: "您已經成功的更新帳號資訊。但因為您變更了密碼，請重新登入。"
       signed_in_with_google: "使用Google登入"
+      new:
+        have_account: '已經有帳號了?'
+        login: '登入'        
     sessions:
       signed_in: "成功登入了。"
       signed_out: "成功登出了。"

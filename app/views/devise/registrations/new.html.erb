@@ -37,6 +37,10 @@
       <%= f.submit t('.sign_up'),class: "cursor-pointer text-white font-bold bg-sladock w-full py-2 border border-gray-400 rounded hover:bg-light_sladock transition-all duration-100" %>
     </div>
   <% end %>
+  <div class="text-sm mt-2">
+    <%= t(".have_account") %>
+    <%= link_to t(".login"), new_session_path(resource_name),class:"cursor-pointer hover:text-sladock pl-2 text-base font-bold" %><br />
+  </div>
   </div>
 </div>
 

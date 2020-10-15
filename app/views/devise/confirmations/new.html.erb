@@ -1,15 +1,21 @@
-<h2><%= t('.resend_confirmation_instructions') %></h2>
-
-<%= form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post }) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email", value: (resource.pending_reconfirmation? ? resource.unconfirmed_email : resource.email) %>
+<%= render './shared/nav' %>
+<div class="container mx-auto flex flex-col items-center">
+  <div class="sign_in min-w-30 max-w-lg">
+    <h2 class="text-3xl font-bold mb-2 text-center">
+      <%= t('.resend_confirmation_instructions') %>
+    </h2>
+    <%= form_for(resource, as: resource_name, url: confirmation_path(resource_name),
+    html: { method: :post }) do |f| %>
+      <%= render "devise/shared/error_messages", resource: resource %>
+      <div class="field text-center sm:text-left">
+        <%= f.label :email,class:"text-lg"%>
+        <%= f.email_field :email, autofocus: true, autocomplete: "email", value: (resource.pending_reconfirmation? ? resource.unconfirmed_email : resource.email),placeholder: "name@work-email.com",class: "w-full py-2 px-2 mb-6 mt-2 border border-gray-700 rounded focus:outline-none focus:shadow-outline" %>
+      </div>
+      <div class="actions">
+        <%= f.submit t('.resend'),class:"cursor-pointer text-white font-bold bg-light_sladock w-full py-2 my-2 border border-gray-400 rounded hover:bg-sladock transition-all duration-100" %>
+      </div>
+    <% end %>
+      <%= link_to t(".sign_in"), new_session_path(resource_name),class:"cursor-pointer block text-center font-bold hover:text-sladock" %>
   </div>
+</div>
 
-  <div class="actions">
-    <%= f.submit t('.resend_confirmation_instructions') %>
-  </div>
-<% end %>
-
-<%= render "devise/shared/links" %>
