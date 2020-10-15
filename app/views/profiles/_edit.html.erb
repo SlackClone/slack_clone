@@ -8,7 +8,7 @@
     <div class="grid grid-cols-3 px-6">
       <div class="col-span-2 mr-5">
         <%= f.label t('profiles.edit.full_name'),class: "font-bold text-sm mb-2" %>
-        <%= f.text_field "profile[full_name]",autocomplete:"off",class:"full-name-input relative font-bold px-2 py-2 mb-5 border border-gray-800 rounded block w-full placeholder-gray-600 focus:outline-none focus:shadow-outline" %>
+        <%= f.text_field "profile[full_name]",autocomplete:"off",class:"full_name relative font-bold px-2 py-2 mb-5 border border-gray-800 rounded block w-full placeholder-gray-600 focus:outline-none focus:shadow-outline" %>
 
         <%= f.label t('profiles.edit.nickname'),class: "font-bold text-sm mb-2" %>
         <%= f.text_field "user[nickname]",class:"full_name relative font-bold px-2 py-2 mb-5 border border-gray-800 rounded block w-full placeholder-gray-600 focus:outline-none focus:shadow-outline"%>
@@ -55,13 +55,13 @@
     </div>
     <p class="text-xs text-gray-600"><%= t('profiles.edit.preview') %></p>
     <div class="flex items-center my-3">
-      <div class="previewBox w-10 h-10 overflow-hidden"></div>
+      <div class="previewBox w-20 h-20 overflow-hidden"></div>
       <p class="font-bold"><%= current_user.nickname %></p>
       <%# 下方BUTTON %>
       <div class="flex ml-auto">
         <div class="profile-cancel-btn cursor-pointer block font-bold text-gray-700 px-5 py-2 mr-3 rounded focus:outline-none border "><%= t('profiles.edit.cancel') %></div>
         </div>    
-        <%= f.submit t('utilities.save') ,class:"avatar-update-btn avatar-update-btn2 cursor-pointer block font-bold text-white px-5 py-2 bg-sladock rounded focus:outline-none"
+        <%= f.submit t('utilities.save') ,class:"avatar-update-btn avatar-update-btn2 cursor-pointer block font-bold text-white px-5 py-3 bg-sladock rounded focus:outline-none"
         %>    
         <% end %> 
       </div>
