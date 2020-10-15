@@ -7,7 +7,7 @@
     </h1>
     <div class="w-full sm:w-auto flex flex-col sm:flex-row items-center">
       <% if user_signed_in? %>
-        <span class="indexBtn"><%= link_to 'TRY FOR FREE',workspaces_path%></span>
+        <span class="indexBtn"><%= link_to 'LAUNCH SLADOCK',workspaces_path%></span>
         <span class="indexBtn signoutBtn"><%= link_to 'SIGN OUT' ,destroy_user_session_path %></span>
       <% else %>
         <span class="indexBtn signinBtn"><%= link_to 'SIGN IN' ,new_user_session_path %></span>

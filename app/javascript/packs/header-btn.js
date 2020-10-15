@@ -14,9 +14,13 @@ $(document).ready(function () {
       $('.open').slideUp();
     }
   })
+  $('.edit_profile').click(()=>{
+    $('.full-name-input').focus()
+  })
 });
 
 
 $('.upload-btn').click(() => {
   $('#upload-input').trigger('click')
 })
+

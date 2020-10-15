@@ -1,10 +1,10 @@
-<div class="create-ch-bg absolute w-full h-full top-0 bg-black bg-opacity-25 flex hidden justify-center items-center">
-  <div class=" create-ch-area px-6 py-4 bg-white shadow-2xl w-1/3 h-1/3 rounded relative">
+<div class="create-ch-bg absolute w-full h-full top-0 bg-black bg-opacity-25 flex hidden justify-center items-center z-40">
+  <div class=" create-ch-area px-6 py-4 bg-white shadow-2xl w-10/12 sm:w-1/3 h-1/3 rounded relative">
     <div class="flex justify-between items-center mb-5">
       <h5 class="font-bold text-2xl"><%= t(".create") %></h5>
       <button class="create-cancel-btn font-bold text-gray-600 focus:outline-none">X</button>
     </div>
-    <p class="text-sm text-gray-600 mb-5"><%= t(".communicates") %></p>
+    <p class="text-sm text-gray-600 mb-5 hidden sm:block"><%= t(".communicates") %></p>
 
     <%= form_with(model: channel, url:workspace_channels_path(workspace),method:'POST',local:true,class: "create-ch-form") do |f| %>
     <div class="field mb-5">

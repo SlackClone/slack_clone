@@ -9,11 +9,16 @@
     <div class="flex flex-col flex-grow min-w-0 min-h-0">
       <%# 上方白色區塊顯示頻道名稱與邀請按鈕 %>
       <div class="box-border border-b border-gray-400 h-16 font-bold flex justify-between items-center">
-        <h3><%= t('.title') %></h3>
-        <button class="btn-ds btn-white border mr-3" data-action="click->uploadfile#newFormShowUp"><%= t('.upload') %></button>
+        <div class="flex items-center">
+          <div class="menu mx-2">
+            <i class="fas fa-bars"></i>
+          </div>
+         <h3><%= t('.title') %></h3>
+        </div>
+        <button class="btn-ds btn-white border mr-3" data-action="click->uploadfile#newFormShowUp"><%= t('.upload') %></button>        
       </div>
       <%# 檔案區 %>
-      <div class="file_area break-all flex flex-wrap overflow-y-auto h-chat_full flex-grow border border-1 bg-gray-300 pl-5 pt-5" workspace_id="<%= @workspace.id %>">
+      <div class="file_area break-all flex flex-wrap overflow-y-auto h-chat_full flex-grow border border-1 pl-5 pt-5" workspace_id="<%= @workspace.id %>">
         <% @files.each do |file| %>
           <div class="file-zone border-gray-600 border-solid border mx-1 rounded">
             <div class="flex flex-wrap mx-auto justify-center overflow-hidden h-48 rounded relative files-area" file_name="<%= file.document.metadata["filename"] %>">
