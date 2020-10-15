@@ -11,10 +11,10 @@ export default class extends Controller {
     if (e.target.value) {
       btn.removeAttribute('disabled')
       btn.classList.remove('bg-gray-500')
-      btn.classList.add('bg-deep_sladock')
+      btn.classList.add('bg-sladock','hover:bg-deep_sladock','transition-all','duration-100')
     } else {
       btn.setAttribute('disabled','')
-      btn.classList.remove('bg-deep_sladock')
+      btn.classList.remove('bg-sladock','hover:bg-deep_sladock','transition-all','duration-100')
       btn.classList.add('bg-gray-500')
     }
   }

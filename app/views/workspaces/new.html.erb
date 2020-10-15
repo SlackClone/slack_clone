@@ -1,14 +1,15 @@
 
-  <div class="chatroom flex h-full" data-controller="hello">
-    <div class="leftbar flex flex-col">
+  <div class="chatroom block sm:flex h-full" data-controller="hello">
+    <div class=" leftbar flex flex-col">
       <div class="box-border border-b bg-deep_sladock border-border_b h-16 flex items-center">
-        <div class="ml-5 w-2/4 h-5 px-2 bg-sladock rounded-full text-white font-bold text-sm truncate" data-target="hello.output"></div>
+        <div class="truncate mx-auto sm:ml-5 w-2/4 h-5 px-2 bg-sladock rounded-full text-white font-bold text-sm " data-target="hello.output">
         </div>
-        <div class="bg-deep_sladock text-white h-left_full" style="width: 300px">
+      </div>
+      <div class="bg-deep_sladock text-white h-left_full hidden sm:block" style="width: 300px">
       </div>
     </div>
-    <div class="flex flex-col flex-grow min-w-0 min-h-0 ml-10">
-      <div class=" max-w-2xl py-5">
+    <div class="flex flex-col flex-grow min-w-0 min-h-0 sm:ml-10">
+      <div class=" max-w-2xl p-5 sm:py-5">
         <p class=" text-xs my-3">
           <%= t(".step") %>
         </p>
@@ -23,7 +24,7 @@
             <%= f.text_field :name, 
               placeholder: t(".placeholder"),
               data: { action: "input->hello#input focus->hello#check" },
-              class: "w-full font-bold px-2 py-2 mb-5 border border-gray-800 rounded block w-full placeholder-gray-600 focus:outline-none focus:shadow-outline",autocomplete: "off"
+              class: "w-full font-bold px-2 py-2 mb-5 border border-gray-800 rounded block w-full placeholder-gray-600 focus:outline-none focus:shadow-outline",autocomplete: "off",autofocus:true
             %>
             <div class="hidden check-word absolute inset-y-0 right-0 flex items-center mr-3 text-gray-700" data-target="hello.check">
               255
