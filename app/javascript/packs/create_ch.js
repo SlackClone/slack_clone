@@ -5,6 +5,7 @@ $(document).ready(()=>{
   $('.create-ch-btn').click((e)=> {
     e.preventDefault()
     $('.create-ch-bg').removeClass('hidden')
+    $('.create-ch-input').focus()
   })
 
   $('.create-cancel-btn').click(()=> {
