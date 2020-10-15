@@ -24,7 +24,6 @@ class ThreadsController < ApplicationController
       
     end
     @thread = Message.find(params[:message_id])
-    
     @messages = (@directmsg || @channel).messages
     @workspace = (@directmsg || @channel).workspace
     @channels = @workspace.channels

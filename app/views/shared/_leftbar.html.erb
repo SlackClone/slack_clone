@@ -27,11 +27,11 @@
         <div data-controller="channels" data-channels-id="<%= channel.id %>" class='truncate pl-10 py-1 hover:bg-deep_sladock flex pr-5'>
           <span class="pr-2">#</span>
           <%= link_to channel.name, workspace_channel_path(workspace, channel), channel_id: channel.id, class: unread_msg_bol[channel.id] ? "font-bold channel-each" : "channel-each", data: { target: "thread.channels" } %>
-          <%# <% if channel.users.include?(current_user) %> 
-            <%# <button data-action="click->channels#removeChannel" data-target="channels.symbol">-</button> %>
-          <%# <% else %> 
-            <%# <button data-action="click->channels#addChannel" data-target="channels.symbol">+</button> %>
-          <%# <% end %> 
+          <% if channel.users.include?(current_user) %>
+            <button data-action="click->channels#removeChannel" data-target="channels.symbol">-</button>
+          <% else %>
+            <button data-action="click->channels#addChannel" data-target="channels.symbol">+</button>
+          <% end %>
           <span class="mention ml-auto text-red-600 w-8 bg-yellow-400 rounded-full text-center hidden" mention-id="<%= channel.id %>"><%= unread_msg_bol[channel.id] && channel.mentions.select{|mention| mention.user_id == current_user.id} != [] ? channel.mentions.select{|mention| mention.user_id == current_user.id}.count : nil %></span>
         </div>
       <% end %>
@@ -40,7 +40,7 @@
           <%= t(".channel.direct") %>
         </p>
         <% (workspace.users - [current_user]).each do |user| %>
-          <p class="truncate pl-10 py-1 flex pr-5 hover:bg-deep_sladock"></p>
+          <p class="truncate pl-10 py-1 hover:bg-sladock flex pr-5">
             <%= link_to user.nickname, workspace_directmsg_path(workspace, user.id), class: "d-block mr-auto directmsg-each", user_id: user.id, directmsg_id: Directmsg.create_or_find([current_user, user], @workspace.id).id %>
             <span class="count text-red-600 w-8 bg-yellow-400 rounded-full text-center hidden" unread-id="<%= user.id %>"><%= unread_msg_count["#{user.id}"] != nil  && unread_msg_count["#{user.id}"] > 0 ? unread_msg_count["#{user.id}"] : nil %></span>
           </p>

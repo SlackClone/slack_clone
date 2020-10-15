@@ -22,7 +22,7 @@
         <% @files.each do |file| %>
           <div class="file-zone border-gray-600 border-solid border mx-1 rounded">
             <div class="flex flex-wrap mx-auto justify-center overflow-hidden h-48 rounded relative files-area" file_name="<%= file.document.metadata["filename"] %>">
-              <%= image_tag file.document.url, class: "image-pre" if file.document.mime_type.include? "image" %>
+              <%= image_tag file.document(:small).url, class: "image-pre" if file.document.mime_type.include? "image" %>
               <%= image_pack_tag "media/images/PDF_file_icon.png", class: "pdf-pre" if file.document.mime_type.include? "pdf" %>
               <% unless (file.document.mime_type.include? "image") || (file.document.mime_type.include? "pdf") %>
                 <%= image_pack_tag "media/images/iconfinder_File.png" %>

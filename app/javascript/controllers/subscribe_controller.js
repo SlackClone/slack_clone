@@ -474,7 +474,7 @@ function threadCustomEditor(){
 
         if (liThreadTab.length !== 0){
           liThreadTab[liThreadTab.length - 1].remove()
-          if ($('#new_thread .ck-editor__editable').text() === "" && $('#new_thread .file-upload').val() === ""){return}
+          if ($('#new_thread .ck-editor__editable').text() === "" && $('#new_thread .tfile-upload').val() === ""){return}
           $('.thread-content').val($('#new_thread .ck-editor__editable').html()) 
           $('.thread-submit').trigger('click')
           clearThreadMessage()
@@ -483,10 +483,10 @@ function threadCustomEditor(){
   
         if (codeThreadTab.length !== 0 && preThreadTab.length == 0){
           codeThreadTab[codeThreadTab.length - 1].remove()
-          if ($('#new_thread .ck-editor__editable').text() === "" && $('#new_thread .file-upload').val() === ""){return}
+          if ($('#new_thread .ck-editor__editable').text() === "" && $('#new_thread .tfile-upload').val() === ""){return}
           $('.thread-content').val($('#new_thread .ck-editor__editable').html()) 
           $('.thread-submit').trigger('click')
-          cclearThreadMessage()
+          clearThreadMessage()
           return
         }
   
