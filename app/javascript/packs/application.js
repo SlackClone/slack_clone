@@ -24,6 +24,7 @@ import "./share-btn"
 import './header-btn'
 import './drafts.js'
 import './left_bar'
+import './esc.js'
 import './generate_payload_url.js'
 
 // Uncomment to copy all static images under ../images to the output folder and reference

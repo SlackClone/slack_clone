@@ -15,7 +15,7 @@ $(document).ready(function () {
     }
   })
   $('.edit_profile').click(()=>{
-    $('.full-name-input').focus()
+    $("input[name='profile[full_name]").focus()
   })
 });
 
