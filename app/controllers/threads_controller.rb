@@ -25,7 +25,7 @@ class ThreadsController < ApplicationController
       
     end
     @thread = Message.find(params[:message_id])
-    @messages = (@directmsg || @channel).messages.includes({user: :profile}, :attachfiles)
+    @messages = (@directmsg || @channel).messages.includes({user: :profile}, :attachfiles).where(ancestry: nil).order(:created_at)
     @workspace = (@directmsg || @channel).workspace
     @channels = @workspace.channels
     @message = Message.new

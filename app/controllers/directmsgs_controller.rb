@@ -6,7 +6,7 @@ class DirectmsgsController < ApplicationController
     @users = [current_user, User.find(params[:id])]
     
     @directmsg = Directmsg.create_or_find(@users,params[:workspace_id])
-    @messages = @directmsg.messages.includes({user: :profile}, :attachfiles)
+    @messages = @directmsg.messages.includes({user: :profile}, :attachfiles).where(ancestry: nil).order(:created_at)
     # @directmsg_user_name = @directmsg.users.find_by(id: params[:id]).nickname
     @directmsg_receiving_user = @directmsg.users.find_by(id: params[:id])
     @directmsg_user_id = params[:id]
