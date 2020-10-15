@@ -17,7 +17,7 @@
   </nav>
 </div>
 <%# Section-1 Slack is where work happens %>
-<section class="section-img bg-orange-100 hidden sm:block"> 
+<div class="section section-img bg-orange-100 hidden sm:block"> 
   <div class="container mx-auto grid grid-cols-5">
     <div class="col-span-2 flex items-center">
       <div class="text mr-16">
@@ -32,9 +32,48 @@
       <%= link_to image_pack_tag("media/images/indexImg.jpg"),pages_path %>
     </div>
   </div>
-</section>
+</div>
+<div class="feature hidden sm:block">
+  <div class="feature-content">
+    <div class="feature-img">
+      <%= link_to image_pack_tag("media/images/sladockIndex.png"),pages_path %>
+    </div>
+    <div class="feature-intro">
+      <ul>
+        <li class="mt-2">
+          <div class="intro-icon">
+            <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+            <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none"/>
+            <path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
+            </svg>
+          </div>    
+          <p>Group Chat</p>
+        </li>
+        <li>
+          <div class="intro-icon">
+            <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+            <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none"/>
+            <path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
+            </svg>
+          </div>   
+          <p>Instant Chat And Interaction</p>
+        </li>
+        <li>
+          <div class="intro-icon">
+            <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+            <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none"/>
+            <path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
+            </svg>
+          </div>
+          <p>Integrate Service</p>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
 <footer class="w-full hidden sm:block py-2 bg-light_gray ">
-  <p class="text-center"> <i class="far fa-copyright"></i>2020 "SlaDock" All rights reserved.</p>
+  <p class="text-center text-lg"> <i class="far fa-copyright"></i>2020 "SlaDock" All rights reserved.</p>
 </footer>
 
 </div>
