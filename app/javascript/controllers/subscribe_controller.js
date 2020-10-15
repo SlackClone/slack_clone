@@ -491,7 +491,7 @@ function threadCustomEditor(){
         }
   
         threadTextArea.remove()
-        if ($('#new_thread .ck-editor__editable').text() === "" && $('#new_thread .file-upload').val() === ""){return}
+        if ($('#new_thread .ck-editor__editable').text() === "" && $('#new_thread .tfile-upload').val() === ""){return}
         $('.thread-content').val($('#new_thread .ck-editor__editable').html())
         $('.thread-submit').trigger('click')
         clearThreadMessage()

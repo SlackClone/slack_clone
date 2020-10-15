@@ -84,9 +84,9 @@ class ChannelsController < ApplicationController
   def channel_params
     params.require(:channel).permit(:name, :topic, :description)
   end
-
+  # 待改
   def find_workspace
-    @workspace = Workspace.find(params[:workspace_id])
+    @workspace = Workspace.includes(:users).find(params[:workspace_id])
   end
 
   def channel_users_for_select2
