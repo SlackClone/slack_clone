@@ -42,6 +42,8 @@ $(document).ready(function() {
   })
   $('.invite-ch-btn').click(() => {
     $('.ch-background').removeClass('hidden')
+    $('#user_list').focus()
+
   })
   $('.invite-cancel-btn').click(() => {
     $('.ch-background').addClass('hidden')

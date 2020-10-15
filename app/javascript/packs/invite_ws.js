@@ -18,6 +18,12 @@ window.addEventListener('DOMContentLoaded', () => {
         background.classList.add('hidden')
       }
     })
+    // background.addEventListener('keydown', (e) => {
+    //   console.log(background)
+    //   if(e.keyCode === 27) {
+    //     background.classList.add('hidden')
+    //   }
+    // })
     //如果輸入值符合EMAIL格式就可以送
     searchInput.addEventListener('input',()=>{
       if (searchInput.value.match(/^[^@\s]+@[^@\s]+\.[^@\s]+$/)) {
