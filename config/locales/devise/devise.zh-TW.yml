@@ -13,6 +13,10 @@ zh-TW:
       confirmed: "您的帳號已通過驗證，現在您已成功登入。"
       send_instructions: "您將在幾分鐘後收到一封電子郵件，內有驗證帳號的步驟說明。"
       send_paranoid_instructions: "如果我們有您的信箱，您將會收到一封驗證您的帳號的電子郵件。"
+      new: 
+        resend_confirmation_instructions: "重新寄送驗證信"
+        resend: "重新寄送!"
+        sign_in: "回到登入頁"
     failure:
       already_authenticated: "您已經登入。"
       inactive: "您的帳號尚未被啟用。"
@@ -49,7 +53,6 @@ zh-TW:
       send_paranoid_instructions: "如果我們有您的信箱，您將會收到一封內含可重新設定密碼連結的電子郵件。"
       updated: "您的密碼已被修改，您現在已經登入。"
       updated_not_active: "您的密碼已被修改。"
-      forgot_your_password: "忘記密碼?"
     registrations:
       destroyed: "再會！您的帳號已被取消。有緣再會。"
       signed_up: "註冊成功，歡迎！"
@@ -60,6 +63,9 @@ zh-TW:
       updated: "您已經成功的更新帳號資訊。"
       updated_but_not_signed_in: "您已經成功的更新帳號資訊。但因為您變更了密碼，請重新登入。"
       signed_in_with_google: "使用Google登入"
+      new:
+        have_account: '已經有帳號了?'
+        login: '登入'        
     sessions:
       signed_in: "成功登入了。"
       signed_out: "成功登出了。"
@@ -69,6 +75,8 @@ zh-TW:
         no_account: "沒有帳號嗎?"
         find: "找尋你的團隊"
         login: '使用email登入或google登入'
+        didn_t_receive_confirmation_instructions: '沒有收到驗證信嗎?'
+        forgot_your_password: "忘記密碼?"
     unlocks:
       send_instructions: "您將在幾分鐘後收到一封電子郵件，內有將帳號解除鎖定的步驟說明。"
       send_paranoid_instructions: "如果您的帳號已存在，您的電子信箱將會收到如何解鎖帳號的指示。"
