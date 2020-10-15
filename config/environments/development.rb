@@ -73,4 +73,10 @@ Rails.application.configure do
 
   # for test webhook
   config.hosts << "4310402cd00b.ngrok.io"
+  config.after_initialize do
+    #Enable bullet in your application
+    Bullet.enable = true
+    Bullet.console = true
+  end
+
 end
