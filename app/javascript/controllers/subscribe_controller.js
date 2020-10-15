@@ -323,16 +323,8 @@ function customEditor(){
       lastChild = textarea.children().last()
       textarea = lastChild
     }
-    // console.log(focusElement)
-    // console.log(inputPosition)
-    // console.log(focusParent)
-    // p
-    // && ($('#new_message .ck-editor__editable').children()[0].tagName === 'P' || $('.ck-editor__editable').children()[0].tagName === 'BLOCKQUOTE')
+
     if (!isMobileDevice()){
-      // console.log(window.getSelection())
-      // console.log(focusElement)
-      // console.log(inputPosition)
-      // console.log(focusParent)
       let liTab = $('#new_message .ck-editor__editable li')
       let codeTab = $('#new_message .ck-editor__editable code')
       let preTab = $('#new_message .ck-editor__editable pre')
@@ -373,30 +365,6 @@ function customEditor(){
       // }
     }
     
-    // blockquote
-    // 跟 li 有關的
-    // if (e.keyCode == 13 && !e.shiftKey && $('#new_message .ck-editor__editable').children()[0].tagName !== "PRE"){
-    //   $('#new_message .ck-editor__editable').children().find('li:last-child')[0].remove()
-    //   $('#new_message .message-content').val($('#new_message .ck-editor__editable').html()) 
-    //   $('#new_message .message-submit').trigger('click')
-    //   $('#new_message .ck-editor__editable').text("")
-    //   return
-    // }
-    // if (e.shiftKey && ($('#new_message .ck-editor__editable').children()[0].tagName === "OL" || $('#new_message .ck-editor__editable').children()[0].tagName === "UL")){
-    //   // e.preventDefault()
-    //   // e.keyCode = 13
-    //   // $('.ck-editor__editable').children(':first-child')[0].insertAdjacentHTML('afterend', `<br>`)
-    //   // $('.ck-editor__editable').children(':first-child')[0].insertAdjacentHTML('beforeend', `<li><br data-cke-filler="true"></li>`)
-    //   return
-    // }
-    // plain text
-    // if (e.keyCode == 13 && !e.shiftKey){
-    //   $('#new_message .ck-editor__editable').children().find('br:last-child')[0].remove()
-    //   $('#new_message .message-content').val($('#new_message .ck-editor__editable').html()) 
-    //   $('#new_message .message-submit').trigger('click')
-    //   $('#new_message .ck-editor__editable').text("")
-    //   return
-    // }
   })
 }
 
@@ -489,6 +457,47 @@ function threadCustomEditor(){
     focusElement = window.getSelection().focusNode
     focusParent = window.getSelection().focusNode.parentElement
     inputPosition = window.getSelection().focusOffset
+
+    let threadTextArea = $('#new_thread .ck-editor__editable')
+    let lastThreadChild
+    while(threadTextArea.children().length !== 0){
+      lastThreadChild = threadTextArea.children().last()
+      threadTextArea = lastThreadChild
+    }
+
+    if (!isMobileDevice()){
+      let liThreadTab = $('#new_thread .ck-editor__editable li')
+      let codeThreadTab = $('#new_thread .ck-editor__editable code')
+      let preThreadTab = $('#new_thread .ck-editor__editable pre')
+      let olThreadTab = $('#new_thread .ck-editor__editable ol')
+      if (e.keyCode == 13 && !e.shiftKey && olThreadTab.length == 0){
+
+        if (liThreadTab.length !== 0){
+          liThreadTab[liThreadTab.length - 1].remove()
+          if ($('#new_thread .ck-editor__editable').text() === "" && $('#new_thread .file-upload').val() === ""){return}
+          $('.thread-content').val($('#new_thread .ck-editor__editable').html()) 
+          $('.thread-submit').trigger('click')
+          clearThreadMessage()
+          return
+        }
+  
+        if (codeThreadTab.length !== 0 && preThreadTab.length == 0){
+          codeThreadTab[codeThreadTab.length - 1].remove()
+          if ($('#new_thread .ck-editor__editable').text() === "" && $('#new_thread .file-upload').val() === ""){return}
+          $('.thread-content').val($('#new_thread .ck-editor__editable').html()) 
+          $('.thread-submit').trigger('click')
+          cclearThreadMessage()
+          return
+        }
+  
+        threadTextArea.remove()
+        if ($('#new_thread .ck-editor__editable').text() === "" && $('#new_thread .file-upload').val() === ""){return}
+        $('.thread-content').val($('#new_thread .ck-editor__editable').html())
+        $('.thread-submit').trigger('click')
+        clearThreadMessage()
+        return
+      }  
+    }
   })
 }
 // 如果localStorage裡有東西的話就將value塞給表單的input，跳回來input原本的值不會不見   
