@@ -39,7 +39,7 @@ class ChannelsController < ApplicationController
     @message = Message.new
     @message.attachfiles.build
     @channels = @workspace.channels.includes(:users, :mentions)
-    @messages = @channel.messages.includes({user: :profile})
+    @messages = @channel.messages.includes({user: :profile}, :attachfiles)
     @invitation = Invitation.new
     channel_users_for_select2
     @channel_user = current_user.users_channels.find_by(channel: @channel)
