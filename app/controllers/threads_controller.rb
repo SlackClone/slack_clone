@@ -59,6 +59,8 @@ class ThreadsController < ApplicationController
                                                   .present?
     end
 
+    # 確認權限，沒有會噴403頁面
+    raise NotAuthorizedError unless @workspace.users.include?(current_user) && (@channel || @directmsg).users.include?(current_user)
     
     render 'channels/show'
   end

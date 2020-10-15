@@ -26,6 +26,8 @@ class WorkspacesController < ApplicationController
 
   def show
     @joined_channel = UsersChannel.where(user_id: current_user.id).where(channel_id: @workspace.channels.ids)
+
+    raise NotAuthorizedError unless @workspace.users.include?(current_user)
   end
 
   def get_users
