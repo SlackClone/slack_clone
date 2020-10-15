@@ -40,6 +40,7 @@ gem 'devise-i18n', '~> 1.9', '>= 1.9.2'
 gem 'shrine', '~> 3.2'
 gem 'aws-sdk-s3', '~> 1.81'
 gem 'ancestry', '~> 3.1'
+gem 'mailgun-ruby', '~> 1.2'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

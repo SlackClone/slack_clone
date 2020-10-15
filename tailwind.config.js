@@ -402,7 +402,8 @@ module.exports = {
       full: "100%",
       "1/2": "50%",
       "1/4": "25%",
-      "200": "200px"
+      "200": "200px",
+      '30': '30%'
     },
     objectPosition: {
       bottom: "bottom",
