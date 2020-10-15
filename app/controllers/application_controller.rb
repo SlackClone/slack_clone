@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
   
-  rescue_from ActiveRecord::RecordNotFound, with: :not_found
+  rescue_from ActiveRecord::RecordNotFound, with: :not_found_404
+  rescue_from NotAuthorizedError, with: :not_authorized_403
   before_action :set_locale
 
   def set_locale
@@ -18,10 +19,15 @@ class ApplicationController < ActionController::Base
 
   private
 
-  def not_found
+  def not_found_404
     render file: '/public/404',
            status: 404,
            layout: false
   end
   
+  def not_authorized_403
+    render file: '/public/403',
+           status: 403,
+           layout: false
+  end
 end

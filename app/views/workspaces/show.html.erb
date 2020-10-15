@@ -1,39 +1,33 @@
-<% if in_workspace? %>
-  <div>
-    <%= render "./shared/header" %>
-    <div class="chatroom grid grid-cols-12">
-      <div class="bg-sladock text-white col-span-2 h-screen_94 overflow-y-scroll">
-        <h1><%= t(".name",name: @workspace.name) %></h1>
-        <%= link_to t(".create_channel"), new_workspace_channels_path(@workspace.id) %>
-        <h2><%= t(".all_channels",name: @workspace.name) %></h2>
-      <div>
-        <% @workspace.channels.each do |channel| %>
-          <div>
-            <%= link_to channel.name, workspace_channel_path(workspace_id: @workspace.id, id: channel.id) %>
-            <%= link_to t(".delete_channel"), channel_path(channel.id), method: "delete", destroy_channel: channel.id, data:{confirm:t("utilities.messages.delete")} %>
-            <%= link_to t(".join_channel"), channel_users_channels_path(channel.id), method: "post", remote: true, add_channel: channel.id %>
-            <%= link_to t(".leave_channel"), channel_users_channels_path(channel.id), method: "delete", remote: true, leave_channel: channel.id %>
-          </div>
-        <% end %>
-      </div>
-        <h2><%= t(".your_channels") %></h2>
-          <div class="active-area">
-            <% @joined_channel.each do |channel| %>
-              <div class="active-channel" channel-id=<%= channel.channel_id %>  >
-                <%= link_to channel.channel.name, workspace_channel_path(workspace_id: @workspace.id, id: channel.channel_id)%>
-              </div>
-            <% end %>
-          </div>
-          <div>
-            <%= link_to t("utilities.back_home"), root_path %>
-          </div>
-      </div>
-      <div class=" col-span-10 border border-1">
-      </div>  
+<div>
+  <%= render "./shared/header" %>
+  <div class="chatroom grid grid-cols-12">
+    <div class="bg-sladock text-white col-span-2 h-screen_94 overflow-y-scroll">
+      <h1><%= t(".name",name: @workspace.name) %></h1>
+      <%= link_to t(".create_channel"), new_workspace_channels_path(@workspace.id) %>
+      <h2><%= t(".all_channels",name: @workspace.name) %></h2>
+    <div>
+      <% @workspace.channels.each do |channel| %>
+        <div>
+          <%= link_to channel.name, workspace_channel_path(workspace_id: @workspace.id, id: channel.id) %>
+          <%= link_to t(".delete_channel"), channel_path(channel.id), method: "delete", destroy_channel: channel.id, data:{confirm:t("utilities.messages.delete")} %>
+          <%= link_to t(".join_channel"), channel_users_channels_path(channel.id), method: "post", remote: true, add_channel: channel.id %>
+          <%= link_to t(".leave_channel"), channel_users_channels_path(channel.id), method: "delete", remote: true, leave_channel: channel.id %>
+        </div>
+      <% end %>
     </div>
+      <h2><%= t(".your_channels") %></h2>
+        <div class="active-area">
+          <% @joined_channel.each do |channel| %>
+            <div class="active-channel" channel-id=<%= channel.channel_id %>  >
+              <%= link_to channel.channel.name, workspace_channel_path(workspace_id: @workspace.id, id: channel.channel_id)%>
+            </div>
+          <% end %>
+        </div>
+        <div>
+          <%= link_to t("utilities.back_home"), root_path %>
+        </div>
+    </div>
+    <div class=" col-span-10 border border-1">
+    </div>  
   </div>
-<% else %>
-  <h2><%= t("workspace.error.messages.join") %></h2>
-<% end %>
-
-
+</div>
