@@ -23,16 +23,19 @@
             <%= f.check_box :remember_me %>
             <%= f.label :remember_me %>
           </div>
-          <%= link_to t("devise.passwords.forgot_your_password"), new_password_path(resource_name) %>
+          <%= link_to t(".forgot_your_password"), new_password_path(resource_name) %>
         </div>
       <% end %>
       <div class="actions">
         <%= f.submit t('.sign_in'),class: "text-white font-bold bg-light_sladock w-full py-2 my-2 border border-gray-400 rounded hover:bg-sladock transition-all duration-100"%>
       </div>
     <% end %>
-    <div><%= t(".no_account") %>
+    <div>
+      <%= t(".no_account") %>
       <%= link_to t(".sign_up"), new_registration_path(resource_name) %><br />
     </div>
+    <div>
+      <%= link_to t('.didn_t_receive_confirmation_instructions'), new_confirmation_path(resource_name) %></div>
   </div>
 </div>
 
