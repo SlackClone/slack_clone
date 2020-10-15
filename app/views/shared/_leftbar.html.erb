@@ -1,10 +1,11 @@
-<div class="leftbar hidden md:block">
-  <div class="box-border border-b bg-sladock border-sladock_border h-16 flex items-center pl-5">
+<div class="leftbar">
+  <div class="box-border border-b bg-sladock border-sladock_border h-16 flex justify-between items-center pl-5">
     <h3 class="chatroomName text-white font-bold text-xl current-worksapce" workspace_id="<%= @workspace.id %>"">
-      <%= workspace.name %>
+      <%= workspace.name %> 
     </h3>
+    <a class="close"><i class="far fa-times-circle text-white mr-2"></i></a>
   </div>
-  <div class="bg-sladock text-white overflow-y-auto min-w-200 h-left_full" style="width: 300px" data-controller="notification" data-notification-workspace="<%= workspace.id %>" data-notification-user="<%= current_user.nickname %>" data-notification-channel="<%= channel&.id || "" %>">
+  <div class="bg-sladock text-white overflow-y-auto min-w-300 h-left_full" data-controller="notification" data-notification-workspace="<%= workspace.id %>" data-notification-user="<%= current_user.nickname %>" data-notification-channel="<%= channel&.id || "" %>">
     <div class="left-bar">
       <%= link_to workspace_draft_path(@workspace),class:"truncate pl-10 pt-2 pb-1 w-full block hover:bg-deep_sladock block draft-btn align-middle" do %>
         <i class="fas fa-pen-square mr-2"></i>
@@ -54,7 +55,7 @@
         <p class="font-medium truncate pl-5 text-lg py-2 mt-2 border-t border-border_b">
           App
         </p>
-        <p class="truncate pl-10 py-1 hover:bg-sladock flex pr-5 mb-2 text-lg">
+        <p class="truncate pl-10 py-1 hover:bg-deep_sladock flex pr-5 mb-2 text-lg">
           <%= link_to webhooks_path do %>
             <i class="fab fa-github"></i><span class="ml-1">GitHub</span>
           <% end %>
