@@ -64,21 +64,15 @@ select{
 }
 
 .section{
-  padding-top: 50px;
-  padding-bottom: 30px;
-}
-.section-img{
+  padding: 50px;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 .text{
- margin-left: 150px;
 }
-
 .feature-img{
   width: 50%;
-  margin-left: 30px;
 }
 .feature-intro {
   font-size: 25px;
