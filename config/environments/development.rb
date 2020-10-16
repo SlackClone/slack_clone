@@ -62,15 +62,8 @@ Rails.application.configure do
 
   config.action_mailer.default_url_options = { host: 'http://localhost:3000' }
 
-  # config.action_mailer.smtp_settings = config_for(:email).symbolize_keys
   config.action_mailer.delivery_method = :letter_opener_web
-  # config.action_mailer.delivery_method = :mailgun
-  # config.action_mailer.mailgun_settings = {
-  #   api_key: ENV["MAILGUN_API"],
-  #   domain: 'sladock.tw',
-  #   # api_host: 'api.eu.mailgun.net'  # Uncomment this line for EU region domains
-  # }
-
+  
   # for test webhook
   config.hosts << "4310402cd00b.ngrok.io"
   config.after_initialize do
