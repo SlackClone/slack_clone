@@ -38,6 +38,8 @@
   width: 50%;
   background-color: #26bec9;
   color: #fff;
+  padding-top: 5px;
+  padding-bottom: 5px;
 }
 
 @screen sm{
@@ -50,7 +52,8 @@
   }
   .signinBtn , .signoutBtn {
     background: none;
-    color: #000;
+    color: #128184;
+
   }
 }
 
@@ -66,6 +69,8 @@
   width: 50%;
   background-color: #26bec9;
   color: #fff;
+  padding-top: 5px;
+  padding-bottom: 5px;
 }
 
 @screen sm{
