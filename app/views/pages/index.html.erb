@@ -7,7 +7,7 @@
     </h1>
     <div class="w-full mt-3 sm:w-auto flex flex-col sm:flex-row items-center">
       <% if user_signed_in? %>
-        <span class="indexBtn"><%= link_to 'LAUNCH',workspaces_path,class:'block py-2 px-1'%></span>
+        <span class="indexBtn"><%= link_to 'LAUNCH',workspaces_path,class:'block py-2 px-5'%></span>
         <span class="indexBtn signoutBtn"><%= link_to 'SIGN OUT' ,destroy_user_session_path, class:'block py-2' %></span>
       <% else %>
         <span class="indexBtn signinBtn"><%= link_to 'SIGN IN' ,new_user_session_path, class:'block py-2' %></span>
