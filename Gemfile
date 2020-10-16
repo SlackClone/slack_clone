@@ -5,7 +5,7 @@ ruby '2.6.5'
 gem 'devise', '~>  4.7.2'
 gem 'strong_migrations', '~> 0.7.1'
 #直接在本機預覽信件
-gem 'letter_opener_web', '~> 1.4'
+# gem 'letter_opener_web', '~> 1.4'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 6.0.3', '>= 6.0.3.2'
@@ -42,7 +42,7 @@ gem 'aws-sdk-s3', '~> 1.81'
 gem 'ancestry', '~> 3.1'
 gem 'mailgun-ruby', '~> 1.2'
 
-group :development, :test do
+group :development, :test, :staging do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'rspec-rails', '~> 4.0', '>= 4.0.1'
@@ -59,6 +59,8 @@ group :development, :test do
   gem 'hirb', '~> 0.7.3'
   gem 'foreman', '~> 0.87.2'
   gem 'capistrano', '3.14.1'
+  gem 'letter_opener', '~> 1.7'
+  gem 'letter_opener_web', '~> 1.4'
 end
 
 group :development do
