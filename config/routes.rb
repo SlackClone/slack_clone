@@ -79,7 +79,7 @@ Rails.application.routes.draw do
 
 
   # 信件測試
-  if Rails.env.development? || Rails.env.staging?
+  if Rails.env.development? || Rails.env.staging? || Rails.env.demo?
      mount LetterOpenerWeb::Engine, at: "/letter_opener"
   end
 
