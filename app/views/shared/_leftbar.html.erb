@@ -1,13 +1,13 @@
 <div class="leftbar min-w-1/5">
   <div class="box-border border-b bg-sladock border-sladock_border h-16 flex justify-between items-center pl-5">
-    <h3 class="chatroomName text-white font-bold text-xl current-worksapce" workspace_id="<%= @workspace.id %>"">
+    <h3 class="chatroomName text-white font-bold text-xl current-worksapce" workspace_id="<%= workspace.id %>"">
       <%= workspace.name %> 
     </h3>
     <a class="close"><i class="far fa-times-circle text-white mr-2"></i></a>
   </div>
   <div class="bg-sladock text-white overflow-y-auto min-w-300 h-left_full" data-controller="notification" data-notification-workspace="<%= workspace.id %>" data-notification-user="<%= current_user.nickname %>" data-notification-channel="<%= channel&.id || "" %>">
     <div class="left-bar">
-      <%= link_to workspace_draft_path(@workspace),class:"truncate pl-10 pt-2 pb-1 w-full block hover:bg-deep_sladock block draft-btn align-middle" do %>
+      <%= link_to workspace_draft_path(workspace),class:"truncate pl-10 pt-2 pb-1 w-full block hover:bg-deep_sladock block draft-btn align-middle" do %>
         <i class="fas fa-pen-square mr-2"></i>
         <%= t(".sidebar.drafts") %>
       <% end %>
@@ -40,8 +40,8 @@
           <%= t(".channel.direct") %>
         </p>
         <% (workspace.users - [current_user]).each do |user| %>
-          <p class="truncate pl-10 py-1 flex pr-5 hover:bg-deep_sladock">
-            <%= link_to user.nickname, workspace_directmsg_path(workspace, user.id), class: "d-block mr-auto directmsg-each", user_id: user.id, directmsg_id: Directmsg.create_or_find([current_user, User.find(user.id)], @workspace.id).id %>
+          <p class="truncate pl-10 py-1 hover:bg-deep_sladock flex pr-5">
+            <%= link_to user.nickname, workspace_directmsg_path(workspace, user.id), class: "d-block mr-auto directmsg-each", user_id: user.id, directmsg_id: Directmsg.create_or_find([current_user, user], @workspace.id).id %>
             <span class="count text-red-600 w-8 bg-yellow-400 rounded-full text-center hidden" unread-id="<%= user.id %>"><%= unread_msg_count["#{user.id}"] != nil  && unread_msg_count["#{user.id}"] > 0 ? unread_msg_count["#{user.id}"] : nil %></span>
           </p>
         <% end %>

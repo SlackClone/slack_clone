@@ -53,12 +53,11 @@ export default class extends Controller {
     if (userNow === data.user_nickname){
       return
     }else{
-      if (typeof directMsgId === "undefined" && channelId != this.data.get("channel")){
+      if (typeof directMsgId === "undefined"){
         // 瀏覽器訊息通知
         // 有人mention你
         if (mentionUser.includes(userNow)){
           new Notification(channelTitle, {body: mentionBody})
-          // if (!!mentionTimes){
             if (mentionTimes.innerHTML == ""){
               mentionTimes.classList.remove("hidden")
 
@@ -66,14 +65,13 @@ export default class extends Controller {
             }else {
               mentionTimes.innerHTML = parseInt(mentionTimes.innerHTML) + 1
             }
-          // }
         }else {
           new Notification(channelTitle, {body: body})
         }
         // 聊天室群組字體提示
         channelName.classList.add("font-bold")
 
-      }else if (typeof channelId === "undefined" && directMsgId != this.data.get("channel")){
+      }else if (typeof channelId === "undefined"){
         // 瀏覽器訊息通知
         new Notification(directMsgTitle)
         // 私聊未讀訊息則數顯示

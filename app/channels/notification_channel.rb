@@ -2,7 +2,7 @@ class NotificationChannel < ApplicationCable::Channel
   def subscribed
     stop_all_streams
 
-    current_workspace = Workspace.find(params[:workspaceId])
+    current_workspace = Workspace.includes(:channels).find(params[:workspaceId])
     join_channels = current_workspace.channels & current_user.channels
     other_members = current_workspace.directmsgs & current_user.directmsgs
 

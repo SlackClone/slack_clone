@@ -59,7 +59,7 @@ class ChannelsController < ApplicationController
       .count
     end
     # 查詢聊天室是否有未讀訊息
-    added_channel = current_user.channels.includes(:messages)
+    added_channel = current_user.channels.includes(:messages).where(workspace: @workspace)
     @unread_msg_bol ={}
     added_channel.each do |ac|
     # 將channel的id當key，是否有未讀訊息當做value
@@ -84,9 +84,9 @@ class ChannelsController < ApplicationController
   def channel_params
     params.require(:channel).permit(:name, :topic, :description)
   end
-
+  # 待改
   def find_workspace
-    @workspace = Workspace.find(params[:workspace_id])
+    @workspace = Workspace.includes(:users).find(params[:workspace_id])
   end
 
   def channel_users_for_select2

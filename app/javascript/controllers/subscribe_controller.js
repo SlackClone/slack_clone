@@ -317,53 +317,58 @@ function customEditor(){
     focusParent = window.getSelection().focusNode.parentElement
     inputPosition = window.getSelection().focusOffset
 
-    let textarea = $('#new_message .ck-editor__editable')
-    let lastChild
-    while(textarea.children().length !== 0){
-      lastChild = textarea.children().last()
-      textarea = lastChild
-    }
-
-    if (!isMobileDevice()){
-      let liTab = $('#new_message .ck-editor__editable li')
-      let codeTab = $('#new_message .ck-editor__editable code')
-      let preTab = $('#new_message .ck-editor__editable pre')
-      let olTab = $('#new_message .ck-editor__editable ol')
-      if (e.keyCode == 13 && !e.shiftKey && olTab.length == 0){
-
-        if (liTab.length !== 0){
-          liTab[liTab.length - 1].remove()
-          console.log("li here")
-          if ($('#new_message .ck-editor__editable').text() === "" && $('#new_message .file-upload').val() === ""){return}
-          $('.message-content').val($('#new_message .ck-editor__editable').html()) 
-          $('.message-submit').trigger('click')
-          clearMessage()
-          return
-        }
+    // let textarea = $('#new_message .ck-editor__editable')
+    // let lastChild
+    // while(textarea.children().length !== 0){
+    //   lastChild = textarea.children().last()
+    //   textarea = lastChild
+    // }
+    // $('#new_message .ck-editor__editable')[0].addEventListener("compositionupdate", (ev) =>{
+      // console.log(ev.data)
+      // if (!isMobileDevice()){
+      //   let liTab = $('#new_message .ck-editor__editable li')
+      //   let codeTab = $('#new_message .ck-editor__editable code')
+      //   let preTab = $('#new_message .ck-editor__editable pre')
+      //   let olTab = $('#new_message .ck-editor__editable ol')
+      //   console.log(e.compositionstart)
   
-        if (codeTab.length !== 0 && preTab.length == 0){
-          codeTab[codeTab.length - 1].remove()
-          if ($('#new_message .ck-editor__editable').text() === "" && $('#new_message .file-upload').val() === ""){return}
-          $('.message-content').val($('#new_message .ck-editor__editable').html()) 
-          $('.message-submit').trigger('click')
-          clearMessage()
-          return
-        }
+      //   if (e.keyCode == 13 && !e.shiftKey && olTab.length == 0){
   
-        textarea.remove()
-        if ($('#new_message .ck-editor__editable').text() === "" && $('#new_message .file-upload').val() === ""){return}
-        $('.message-content').val($('#new_message .ck-editor__editable').html())
-        $('.message-submit').trigger('click')
-        clearMessage()
-        return
-      }
-  
-      // if (e.shiftKey && e.keyCode == 13 && olTab.length !== 0){
-      //   // $('#new_message [data-placeholder="輸入訊息"]').insertAdjacentHTML('beforeend',`<li><br data-cke-filler="true"></li>`)
-      //   console.log(olTab[0])
-      //   olTab[0].insertAdjacentHTML('beforeend',`<li></li>`)
+      //     if (liTab.length !== 0){
+      //       liTab[liTab.length - 1].remove()
+      //       console.log("li here")
+      //       if ($('#new_message .ck-editor__editable').text() === "" && $('#new_message .file-upload').val() === ""){return}
+      //       $('.message-content').val($('#new_message .ck-editor__editable').html()) 
+      //       $('.message-submit').trigger('click')
+      //       clearMessage()
+      //       return
+      //     }
+    
+      //     if (codeTab.length !== 0 && preTab.length == 0){
+      //       codeTab[codeTab.length - 1].remove()
+      //       if ($('#new_message .ck-editor__editable').text() === "" && $('#new_message .file-upload').val() === ""){return}
+      //       $('.message-content').val($('#new_message .ck-editor__editable').html()) 
+      //       $('.message-submit').trigger('click')
+      //       clearMessage()
+      //       return
+      //     }
+    
+      //     textarea.remove()
+      //     if ($('#new_message .ck-editor__editable').text() === "" && $('#new_message .file-upload').val() === ""){return}
+      //     $('.message-content').val($('#new_message .ck-editor__editable').html())
+      //     $('.message-submit').trigger('click')
+      //     clearMessage()
+      //     return
+      //   }
+    
+        // if (e.shiftKey && e.keyCode == 13 && olTab.length !== 0){
+        //   // $('#new_message [data-placeholder="輸入訊息"]').insertAdjacentHTML('beforeend',`<li><br data-cke-filler="true"></li>`)
+        //   console.log(olTab[0])
+        //   olTab[0].insertAdjacentHTML('beforeend',`<li></li>`)
+        // }
       // }
-    }
+      
+    // })
     
   })
 }
@@ -458,46 +463,46 @@ function threadCustomEditor(){
     focusParent = window.getSelection().focusNode.parentElement
     inputPosition = window.getSelection().focusOffset
 
-    let threadTextArea = $('#new_thread .ck-editor__editable')
-    let lastThreadChild
-    while(threadTextArea.children().length !== 0){
-      lastThreadChild = threadTextArea.children().last()
-      threadTextArea = lastThreadChild
-    }
+    // let threadTextArea = $('#new_thread .ck-editor__editable')
+    // let lastThreadChild
+    // while(threadTextArea.children().length !== 0){
+    //   lastThreadChild = threadTextArea.children().last()
+    //   threadTextArea = lastThreadChild
+    // }
 
-    if (!isMobileDevice()){
-      let liThreadTab = $('#new_thread .ck-editor__editable li')
-      let codeThreadTab = $('#new_thread .ck-editor__editable code')
-      let preThreadTab = $('#new_thread .ck-editor__editable pre')
-      let olThreadTab = $('#new_thread .ck-editor__editable ol')
-      if (e.keyCode == 13 && !e.shiftKey && olThreadTab.length == 0){
+    // if (!isMobileDevice()){
+    //   let liThreadTab = $('#new_thread .ck-editor__editable li')
+    //   let codeThreadTab = $('#new_thread .ck-editor__editable code')
+    //   let preThreadTab = $('#new_thread .ck-editor__editable pre')
+    //   let olThreadTab = $('#new_thread .ck-editor__editable ol')
+    //   if (e.keyCode == 13 && !e.shiftKey && olThreadTab.length == 0){
 
-        if (liThreadTab.length !== 0){
-          liThreadTab[liThreadTab.length - 1].remove()
-          if ($('#new_thread .ck-editor__editable').text() === "" && $('#new_thread .file-upload').val() === ""){return}
-          $('.thread-content').val($('#new_thread .ck-editor__editable').html()) 
-          $('.thread-submit').trigger('click')
-          clearThreadMessage()
-          return
-        }
+    //     if (liThreadTab.length !== 0){
+    //       liThreadTab[liThreadTab.length - 1].remove()
+    //       if ($('#new_thread .ck-editor__editable').text() === "" && $('#new_thread .tfile-upload').val() === ""){return}
+    //       $('.thread-content').val($('#new_thread .ck-editor__editable').html()) 
+    //       $('.thread-submit').trigger('click')
+    //       clearThreadMessage()
+    //       return
+    //     }
   
-        if (codeThreadTab.length !== 0 && preThreadTab.length == 0){
-          codeThreadTab[codeThreadTab.length - 1].remove()
-          if ($('#new_thread .ck-editor__editable').text() === "" && $('#new_thread .file-upload').val() === ""){return}
-          $('.thread-content').val($('#new_thread .ck-editor__editable').html()) 
-          $('.thread-submit').trigger('click')
-          cclearThreadMessage()
-          return
-        }
+    //     if (codeThreadTab.length !== 0 && preThreadTab.length == 0){
+    //       codeThreadTab[codeThreadTab.length - 1].remove()
+    //       if ($('#new_thread .ck-editor__editable').text() === "" && $('#new_thread .tfile-upload').val() === ""){return}
+    //       $('.thread-content').val($('#new_thread .ck-editor__editable').html()) 
+    //       $('.thread-submit').trigger('click')
+    //       clearThreadMessage()
+    //       return
+    //     }
   
-        threadTextArea.remove()
-        if ($('#new_thread .ck-editor__editable').text() === "" && $('#new_thread .file-upload').val() === ""){return}
-        $('.thread-content').val($('#new_thread .ck-editor__editable').html())
-        $('.thread-submit').trigger('click')
-        clearThreadMessage()
-        return
-      }  
-    }
+    //     threadTextArea.remove()
+    //     if ($('#new_thread .ck-editor__editable').text() === "" && $('#new_thread .tfile-upload').val() === ""){return}
+    //     $('.thread-content').val($('#new_thread .ck-editor__editable').html())
+    //     $('.thread-submit').trigger('click')
+    //     clearThreadMessage()
+    //     return
+    //   }  
+    // }
   })
 }
 // 如果localStorage裡有東西的話就將value塞給表單的input，跳回來input原本的值不會不見   
