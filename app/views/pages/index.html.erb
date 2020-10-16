@@ -1,16 +1,16 @@
 <div class="wrap">
   <%# nav導覽列 %>
 <div class="bg-white border-none sm:border-b border-gray-400 nav">
-  <nav class="container mx-auto py-3 flex items-center justify-between flex-wrap">
+  <nav class="p-3 flex items-center justify-between flex-wrap">
     <h1 class="w-full sm:w-1/4">
       <%= link_to image_pack_tag("media/images/Sladock_logo.png"),pages_path %>
     </h1>
     <div class="w-full mt-3 sm:w-auto flex flex-col sm:flex-row items-center">
       <% if user_signed_in? %>
         <span class="indexBtn"><%= link_to 'LAUNCH',workspaces_path,class:'block py-2 px-5'%></span>
-        <span class="indexBtn signoutBtn"><%= link_to 'SIGN OUT' ,destroy_user_session_path, class:'block py-2' %></span>
+        <span class="indexBtn signoutBtn"><%= link_to 'SIGN OUT' ,destroy_user_session_path, class:'block py-2 text-lg' %></span>
       <% else %>
-        <span class="indexBtn signinBtn"><%= link_to 'SIGN IN' ,new_user_session_path, class:'block py-2' %></span>
+        <span class="indexBtn signinBtn"><%= link_to 'SIGN IN' ,new_user_session_path, class:'block py-2 text-lg' %></span>
       <% end %>
     </div>
   </nav>
