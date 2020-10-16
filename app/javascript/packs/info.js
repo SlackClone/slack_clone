@@ -21,7 +21,9 @@ $(document).ready(function() {
     })
     // directmsg url 改回原本的
     $('.directmsg-each').each((index, directmsg) => {
-      $(directmsg).attr('href', `/workspaces/${workspaceId}/directmsgs/${currentDirectmsg}`)
+      let directmsgUserlId = $(directmsg).attr('user_id')
+
+      $(directmsg).attr('href', `/workspaces/${workspaceId}/directmsgs/${directmsgUserlId}`)
     })
 
     // 改現在上方網址
