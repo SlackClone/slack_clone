@@ -5,22 +5,13 @@ window.addEventListener('DOMContentLoaded',function(){
   let profileBg = document.querySelector('.profile-background')
   let inviteChBtn = document.querySelector('.invite-ch-btn')
   let bgGroup = [createChBg,inviteChBg,addChBg,profileBg]
-  if(inviteChBtn) {
-    inviteChBtn.addEventListener('click',(e)=>{
-      inviteChBg.addEventListener('keydown',(e)=>{
-        if(e.keyCode === 27) {
-          inviteChBg.classList.add('hidden')
-        }
-      })
-    })
-  }
-  
+
   cancelForm(bgGroup)
 
   function cancelForm(bgGroup){
     bgGroup.forEach((bg) => {
       if (bg != null) {
-        bg.addEventListener('keydown', function(e){
+        window.addEventListener('keyup', function(e){
           if(e.keyCode === 27) {
             bg.classList.add('hidden')
           }
