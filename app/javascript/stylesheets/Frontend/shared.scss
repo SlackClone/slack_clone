@@ -13,9 +13,6 @@
   display: block;
 }
 
-select{
-  width: 300px;
-}
 
 .react-bar {
   position: absolute;
@@ -41,6 +38,8 @@ select{
   width: 50%;
   background-color: #26bec9;
   color: #fff;
+  padding-top: 5px;
+  padding-bottom: 5px;
 }
 
 @screen sm{
@@ -53,8 +52,32 @@ select{
   }
   .signinBtn , .signoutBtn {
     background: none;
-    color: #000;
+    color: #128184;
+
   }
+}
+
+.indexBtn-2{
+  margin-right: 1rem;
+  margin-top: 6rem;
+  margin-bottom: 20px;
+  border: 2px;
+  text-align: center;
+  font-size: 1.5rem;
+  border-radius:0.25rem ;
+  display: block;
+  width: 50%;
+  background-color: #26bec9;
+  color: #fff;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+@screen sm{
+  .indexBtn-2{
+    display: none;
+ }
+
 }
 
 .wrap{
@@ -63,22 +86,18 @@ select{
   flex-direction: column;
 }
 
-.section{
-  padding-top: 50px;
-  padding-bottom: 30px;
-}
-.section-img{
+@screen sm{
+  .section{
+  padding: 50px;
   display: flex;
   justify-content: center;
   align-items: center;
 }
-.text{
- margin-left: 150px;
 }
+
 
 .feature-img{
   width: 50%;
-  margin-left: 30px;
 }
 .feature-intro {
   font-size: 25px;
@@ -103,6 +122,20 @@ select{
   align-items: center;
   justify-content: center;
 }
+
+.get_started-img{
+  width: 25%;
+  margin-right: 70px;
+}
+
+@screen sm{
+  .container-getstarted{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  }
+}
+
 
 
 .checkmark__circle {
