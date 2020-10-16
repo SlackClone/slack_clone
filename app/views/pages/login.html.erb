@@ -17,16 +17,17 @@
   </div>
 </div>
 <%# 如果登入過且有WS的話這邊會顯示 %>
-<div class="container mx-auto mb-5 text-center font-bold">
+<div class="mb-5 text-center font-bold hidden sm:block">
   <p>You’re already signed in to…</p>
 </div>
 <%# get_started_tip %>
-<div class="get_started_tip container mx-auto flex max-w-xl">
-  <div class="hidden sm:block w-1/2">
+<div class="hidden container-getstarted">
+  <div class="get_started-img">
     <%= image_pack_tag("media/images/get_started.png")%>
   </div>
-  <div class="text py-5 pl-3 flex flex-wrap justify-center sm:block">
+  <div class="text py-5">
     <p class="text-sm font-bold mb-2">What’s a Sladock workspace?</p>
-    <p class="text-sm ">By Invitation Only. The Sladock workspaces are available only to those who were invited</p>
+    <p class="text-sm leading-3">By Invitation Only. </p>
+    <p class="text-sm ">The Sladock workspaces are available only to those who were invited.</p>
   </div>
 </div>

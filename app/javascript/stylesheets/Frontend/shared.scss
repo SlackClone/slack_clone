@@ -104,6 +104,19 @@ select{
   justify-content: center;
 }
 
+.get_started-img{
+  width: 25%;
+}
+
+@screen sm{
+  .container-getstarted{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  }
+}
+
+
 
 .checkmark__circle {
   stroke-dasharray: 166;
