@@ -7,11 +7,11 @@
       </h1>
       <div class="w-full mt-3 sm:w-auto flex flex-col sm:flex-row items-center">
         <% if user_signed_in? %>
-          <span class="indexBtn sm:mr-2"><%= link_to 'LAUNCH',workspaces_path,class:'block px-5'%></span>
+          <span class="indexBtn sm:mr-2 signinBtn"><%= link_to 'LAUNCH',workspaces_path,class:'py-2 text-lg sm:bg-sladock text-white rounded block px-5'%></span>
           <span class="indexBtn signoutBtn"><%= link_to 'SIGN OUT' ,destroy_user_session_path, class:'py-2 text-lg' %></span>
         <% else %>
-          <span class="indexBtn signinBtn"><%= link_to 'SIGN IN' ,new_user_session_path, class:'py-2 text-lg sm:bg-sladock text-white rounded block py-2 px-5' %></span>
-          <span class="indexBtn-2"><%= link_to 'GET STRATED',login_pages_path, class:'py-2 text-lg' %></span>
+          <span class="indexBtn signinBtn"><%= link_to 'SIGN IN' ,new_user_session_path, class:'py-2 text-lg sm:bg-sladock text-white rounded block px-5' %></span>
+          <span class="indexBtn-2"><%= link_to 'GET STRATED',login_pages_path, class:'py-3 text-lg block' %></span>
         <% end %>
       </div>
     </nav>
@@ -23,7 +23,7 @@
         <h3 class="text-6_2xl font-bold leading-tight">SlaDock is where magic happens</h2>
         <p class="text-lg mt-4 mb-8 light_gray">With channels in SlaDock, you and your team can work effectively.</p>
         <div class="btn-group mb-4">
-          <button class="bg-sladock text-white rounded "><%= link_to 'GET STRATED' ,login_pages_path, class:'block py-4 px-10' %></button>
+          <button class="bg-sladock text-white rounded text-lg"><%= link_to 'GET STRATED' ,login_pages_path, class:'block py-4 px-10' %></button>
         </div>
       </div>
       <div class="section-img">

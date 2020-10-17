@@ -2,3 +2,8 @@
   display: block;
 }
 
+input {
+  -webkit-appearance: none;  /* Safari 和 Chrome，常用於iOS下移除內建樣式 */
+  -moz-appearance: none;     /* FireFox */
+  appearance: none;
+}
