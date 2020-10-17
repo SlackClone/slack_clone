@@ -168,6 +168,7 @@ module.exports = {
       48: "12rem",
       56: "14rem",
       64: "16rem",
+      50: "50px"
     },
     backgroundColor: (theme) => theme("colors"),
     backgroundImage: {
@@ -490,6 +491,7 @@ module.exports = {
       "11/12": "91.666667%",
       full: "100%",
       screen: "100vw",
+      "200": "200px"
     }),
     zIndex: {
       auto: "auto",

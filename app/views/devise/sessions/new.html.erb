@@ -1,10 +1,9 @@
 <%= render './shared/nav' %>
 <div class="container mx-auto flex flex-col items-center text-center">
 <div class="sign_in max-w-lg min-w-1/2">
-  <h2 class="text-3xl font-bold mb-2"><%= t(".find") %> </h2>
-  <p class="mb-3"><%= t(".login") %> </p>
-
-  <div class="btn-group py-6 max-w-sm mx-auto">
+  <div class="btn-group pb-6 max-w-sm mx-auto">
+    <h2 class="text-3xl font-bold mb-2"><%= t(".find") %> </h2>
+    <p class="mb-3"><%= t(".login") %> </p>
     <%= render "devise/shared/links" %>
     <div class="HR mb-6 flex items-center">
       <hr class="flex-grow"><p class="px-2">OR</p><hr class="flex-grow">

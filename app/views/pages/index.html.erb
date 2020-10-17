@@ -1,69 +1,75 @@
 <div class="wrap">
   <%# nav導覽列 %>
-<div class="bg-white border-none sm:border-b border-gray-400 nav">
-  <nav class="p-3 flex items-center justify-between flex-wrap">
-    <h1 class="w-full sm:w-1/4">
-      <%= link_to image_pack_tag("media/images/Sladock_logo.png"),pages_path %>
-    </h1>
-    <div class="w-full mt-3 sm:w-auto flex flex-col sm:flex-row items-center">
-      <% if user_signed_in? %>
-        <span class="indexBtn"><%= link_to 'LAUNCH',workspaces_path,class:'block px-5'%></span>
-        <span class="indexBtn signoutBtn"><%= link_to 'SIGN OUT' ,destroy_user_session_path, class:'py-2 text-lg' %></span>
-      <% else %>
-        <span class="indexBtn signinBtn"><%= link_to 'SIGN IN' ,new_user_session_path, class:'py-2 text-lg' %></span>
-        <span class="indexBtn-2"><%= link_to 'GET STRATED',login_pages_path, class:'py-2' %></span>
-      <% end %>
-    </div>
-  </nav>
-</div>
-<%# Section-1 Slack is where work happens %>
-<div class="section bg-orange-100 hidden sm:block"> 
-    <div class="text">
-      <h3 class="text-6_2xl font-bold leading-tight">SlaDock is where magic happens</h2>
-      <p class="text-lg mt-4 mb-8 light_gray">With channels in SlaDock, you and your team can work effectively.</p>
-      <div class="btn-group mb-4">
-        <button class="bg-sladock text-white rounded "><%= link_to 'GET STRATED' ,login_pages_path, class:'block py-4 px-10' %></button>
+  <div class="bg-white border-none sm:border-b border-gray-400 nav">
+    <nav class="flex items-center justify-center sm:justify-between flex-wrap max-w-6xl mx-auto sm:px-50 xl:px-0">
+      <h1 class="w-9/12 sm:w-200">
+        <%= link_to image_pack_tag("media/images/Sladock_logo.png"),pages_path %>
+      </h1>
+      <div class="w-full mt-3 sm:w-auto flex flex-col sm:flex-row items-center">
+        <% if user_signed_in? %>
+          <span class="indexBtn sm:mr-2"><%= link_to 'LAUNCH',workspaces_path,class:'block px-5'%></span>
+          <span class="indexBtn signoutBtn"><%= link_to 'SIGN OUT' ,destroy_user_session_path, class:'py-2 text-lg' %></span>
+        <% else %>
+          <span class="indexBtn signinBtn"><%= link_to 'SIGN IN' ,new_user_session_path, class:'py-2 text-lg sm:bg-sladock text-white rounded block py-2 px-5' %></span>
+          <span class="indexBtn-2"><%= link_to 'GET STRATED',login_pages_path, class:'py-2 text-lg' %></span>
+        <% end %>
       </div>
+    </nav>
+  </div>
+  <%# Section-1 Slack is where work happens %>
+  <div class="section bg-orange-100 hidden sm:block"> 
+    <div class="max-w-6xl mx-auto flex">
+      <div class="text">
+        <h3 class="text-6_2xl font-bold leading-tight">SlaDock is where magic happens</h2>
+        <p class="text-lg mt-4 mb-8 light_gray">With channels in SlaDock, you and your team can work effectively.</p>
+        <div class="btn-group mb-4">
+          <button class="bg-sladock text-white rounded "><%= link_to 'GET STRATED' ,login_pages_path, class:'block py-4 px-10' %></button>
+        </div>
+      </div>
+      <div class="section-img">
+        <%= link_to image_pack_tag("media/images/indexImg.jpg"),pages_path %>
+      </div>  
     </div>
-    <div class="section-img">
-      <%= link_to image_pack_tag("media/images/indexImg.jpg"),pages_path %>
-    </div>
-</div>
-<div class="feature hidden sm:block">
-  <div class="feature-content">
-    <div class="feature-img">
-      <%= image_pack_tag("media/images/sladockIndex.png") %>
-    </div>
-    <div class="feature-intro">
-      <ul>
-        <li class="mt-2">
-          <div class="intro-icon">
-            <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
-            <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none"/>
-            <path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
-            </svg>
-          </div>    
-          <p>Group Chat</p>
-        </li>
-        <li>
-          <div class="intro-icon">
-            <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
-            <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none"/>
-            <path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
-            </svg>
-          </div>   
-          <p>Instant Chat And Interaction</p>
-        </li>
-        <li>
-          <div class="intro-icon">
-            <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
-            <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none"/>
-            <path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
-            </svg>
-          </div>
-          <p>Integrate Service</p>
-        </li>
-      </ul>
+  </div>
+  <div class="max-w-6xl mx-auto flex">
+  <div class="feature hidden sm:block">
+    <div>
+      <div class="feature-content">
+        <div class="feature-img my-5">
+          <%= image_pack_tag("media/images/sladockIndex-2.jpg") %>
+        </div>
+        <div class="feature-intro">
+          <ul>
+            <li class="mt-2">
+              <div class="intro-icon">
+                <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+                <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none"/>
+                <path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
+                </svg>
+              </div>    
+              <p>Group Chat</p>
+            </li>
+            <li>
+              <div class="intro-icon">
+                <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+                <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none"/>
+                <path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
+                </svg>
+              </div>   
+              <p>Instant Chat And Interaction</p>
+            </li>
+            <li>
+              <div class="intro-icon">
+                <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+                <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none"/>
+                <path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
+                </svg>
+              </div>
+              <p>Integrate Service</p>
+            </li>
+          </ul>
+        </div>
+      </div>  
     </div>
   </div>
 </div>

@@ -67,7 +67,7 @@ en:
         sign_up: "sign up"
         no_account: "Don't have an account?"
         find: "Let’s find your team"
-        login: "Start by choosing the Google account or email you use for work" 
+        login: "Start by the Google account or your email" 
         didn_t_receive_confirmation_instructions: "Didn't receive confirmation instructions?"
         forgot_your_password: "Forgot your password?"
     unlocks:
