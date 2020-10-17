@@ -49,3 +49,9 @@ config/environments/development.rb.bak
 
 # Get & set ngork hostname to config/development.rb automatically
 ngrok.sh
+
+# demo branch ingore file
+config/application.demo.yml
+config/credentials.yml.demo.enc
+config/database.demo.yml
+config/master.demo.key
