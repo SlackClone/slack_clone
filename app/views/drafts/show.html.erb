@@ -6,7 +6,7 @@
                                  channel: @channel || @directmsg %>
     <div class="flex flex-col flex-grow min-w-0 min-h-0">
       <%# 上方白色區塊顯示頻道名稱與邀請按鈕 %>
-      <div class="box-border border-b border-gray-400 flex  items-center h-16 font-bold  pl-3">
+      <div class="box-border border-b border-gray-400 flex items-center h-16 font-bold pl-3">
         <div class="menu mx-2">
           <i class="fas fa-bars"></i>
         </div>
@@ -17,7 +17,7 @@
       </div>
       <%# 訊息區 %>
       <div class="draft-area break-all overflow-y-auto h-chat_full flex-grow border border-1 flex justify-center items-center">
-        <div class="draft-desc text-center border border-gray-600 rounded p-3 bg-gray-200 shadow-lg">
+        <div class="m-5 sm:m-0 draft-desc text-center border border-gray-600 rounded p-3 bg-gray-200 shadow-lg">
           <p class="text-3xl font-bold mb-3"><%= t('.none') %></p>
           <p><%= t('.desc') %></p>
         </div>
