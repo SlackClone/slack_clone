@@ -27,7 +27,6 @@
 } 
 
 .indexBtn{
-  margin-right: 1rem;
   margin-top: 6rem;
   margin-bottom: 20px;
   border: 2px;
@@ -97,7 +96,7 @@
 
 
 .feature-img{
-  width: 50%;
+  width: 60%;
 }
 .feature-intro {
   font-size: 25px;
@@ -120,11 +119,11 @@
 .feature-content{
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
 }
 
 .get_started-img{
-  width: 25%;
+  width: 13%;
   margin-right: 70px;
 }
 
