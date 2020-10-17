@@ -7,7 +7,7 @@
   <div class="flex flex-col flex-grow min-w-0 min-h-0 h-screen right-content">
     <%# 上方白色區塊顯示頻道名稱與邀請按鈕 %>
     <div class="box-border border-b border-gray-400 h-16 flex justify-between items-center current-channel-or-directmsg" channel_id="<%= @channel.try(:id) || 0 %>" directmsg_anther_user_id="<%= User.find_by(nickname: @directmsg_user_name).try(:id) || 0 %>">
-      <div class="menu ml-2"> <i class="fas fa-bars"></i> </div><p class="ml-2 font-bold">  #<%=  @channel.try(:name) || @directmsg_user_name %></p>
+      <div class="menu ml-2"> <i class="fas fa-bars"></i> </div><p class="ml-2 font-bold">  # <%=  @channel.try(:name) || @directmsg_user_name %></p>
         <%# button %>  
       <div class="btn-group flex items-center">
         <% if @channel %>
