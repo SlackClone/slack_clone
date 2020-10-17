@@ -58,7 +58,7 @@ namespace :demo do
     # 串第三方的所有設定
     user_reid = User.find_by(email: "reid@sladock.tw")
     ch_github = ws.channels.find_by(name: "GitHub_Msg")
-    payload_url = "https://staging.sladock.tw/webhook/channels/#{ch_github.id}/github"
+    payload_url = "https://demo.sladock.tw/webhook/channels/#{ch_github.id}/github"
     user_reid.webhook_records.create(webhook_name: "GitHub_demo", repo_name: "SlackClone/slack", channel_id: ch_github.id, secret: "123456", payload_url: payload_url)
 
     puts "payload_url: #{payload_url}"
