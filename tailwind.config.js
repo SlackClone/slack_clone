@@ -168,7 +168,8 @@ module.exports = {
       48: "12rem",
       56: "14rem",
       64: "16rem",
-      50: "50px"
+      50: "50px",
+      "94": "9.4rem"
     },
     backgroundColor: (theme) => theme("colors"),
     backgroundImage: {
@@ -371,10 +372,12 @@ module.exports = {
       auto: "auto",
       ...theme("spacing"),
       ...negative(theme("spacing")),
+
     }),
     maxHeight: {
       full: "100%",
       screen: "100vh",
+      470:"470px"
     },
     maxWidth: (theme, { breakpoints }) => ({
       none: "none",
