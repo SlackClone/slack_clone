@@ -67,7 +67,6 @@ class ChannelsController < ApplicationController
       ac.users_channels.find_by(user_id: current_user.id).last_enter_at, current_user.id)
       .present?
     end
-
     # 確認權限，沒有會噴403頁面
     raise NotAuthorizedError unless @workspace.users.include?(current_user) && (@channel || @directmsg).users.include?(current_user)
   end

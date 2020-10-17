@@ -9,8 +9,10 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       if (cookies[:workspace] && session[:token] && session[:channel])
         sign_in @user, :event => :authentication
         Workspace.find(cookies[:workspace]).users << @user 
+        general_channel = Workspace.find(cookies[:workspace]).channels.find_by(name: "general")
+        general_channel.users << @user
         Invitation.find_by(invitation_token: session[:token]).touch(:accept_at)
-        redirect_to workspace_channel_path(cookies[:workspace], session[:channel])
+        redirect_to workspace_channel_path(cookies[:workspace], general_channel.id)
       else
         sign_in @user, :event => :authentication
         return redirect_to workspaces_path
