@@ -7,7 +7,7 @@ namespace :demo do
     # 找到既有的 workspace 並刪除 channel, message, directmsg, third-table (有 dependent destroy 會自動刪除)
     Workspace.find_by(name: "百倍紅寶石").try(:destroy)
     # 找到既有的 user 並刪除
-    User.where(email: ["111@111.111", "222@222.222", "ruby@sladock.tw", "444@444.444", "555@555.555"]).try(:destroy_all)
+    User.where(email: ["111@111.111", "hank@sladock.tw", "ruby@sladock.tw", "444@444.444", "555@555.555"]).try(:destroy_all)
 
 
 
@@ -23,7 +23,7 @@ namespace :demo do
     # 建立 User：「龍哥」、「主管-昶宏」、「Ruby」、「Keddie」、「Sabrina」
     users = User.create([
             { nickname: "龍哥", email: "111@111.111", password: "111111", confirmed_at: Time.now },
-            { nickname: "主管-昶宏", email: "222@222.222", password: "222222", confirmed_at: Time.now },
+            { nickname: "主管-昶宏", email: "hank@sladock.tw", password: "222222", confirmed_at: Time.now },
             { nickname: "Keddie", email: "444@444.444", password: "444444", confirmed_at: Time.now },
             { nickname: "Sabrina", email: "555@555.555", password: "555555", confirmed_at: Time.now }
           ])
@@ -56,7 +56,7 @@ namespace :demo do
                                                        )
 
     # 串第三方的所有設定
-    manager = User.find_by(email: "222@222.222")
+    manager = User.find_by(email: "hank@sladock.tw")
     ch_github = ws.channels.find_by(name: "GitHub_Msg")
     payload_url = "https://staging.sladock.tw/webhook/channels/#{ch_github.id}/github"
     manager.webhook_records.create(webhook_name: "GitHub_demo", repo_name: "SlackClone/slack", channel_id: ch_github.id, secret: "123456", payload_url: payload_url)
