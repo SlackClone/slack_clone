@@ -82,3 +82,5 @@ SlaDock 是台灣版 Slack 和 Flowdock 的結合。希望藉由這個網站來�
  - 主要負責：Webhook 串接功能 / 整合 Travis CI  / Rails 專案佈署 / GCP 伺服器安裝及設定
  - GitHub：https://github.com/yuka1981
  - Email：touyalin@gmail.com
+ - Resume：https://www.cakeresume.com/renjie
+ - Linkedin：https://www.linkedin.com/in/renjie1120/
