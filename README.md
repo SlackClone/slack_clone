@@ -1,6 +1,8 @@
 # SlaDock
 
-網址：https://www.sladock.tw/
+**網址**：https://www.sladock.tw/
+
+**產品 Demo 影片**：https://www.youtube.com/watch?v=Xwld4cUt4YY
 
 SlaDock 是台灣版 Slack 和 Flowdock 的結合。希望藉由這個網站來提高使用者的工作效率！
 
@@ -58,11 +60,13 @@ SlaDock 是台灣版 Slack 和 Flowdock 的結合。希望藉由這個網站來�
  - 主要負責：網頁切版及特效 / Devise 及第三方登入 / 邀請及訊息草稿功能 / 上傳圖片及剪裁功能
  - GitHub：https://github.com/Leoyang0717
  - Email：pithend58639@gmail.com
+ - Resume：https://pse.is/whxxb
 
 #### 陳炯翰
  - 主要負責：群組聊天 / 1 對 1 私訊 / 訊息回覆串 / RSpec 測試
  - GitHub：https://github.com/rzchen
  - Email：jeff820523@gmail.com
+ - Resume：https://pse.is/vwsyj
  
 #### 張雯婷
  - 主要負責：網頁切版 / Devise 及寄信功能 / 訊息分享功能 / 即時貼圖傳送
