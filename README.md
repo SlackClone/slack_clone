@@ -66,7 +66,7 @@ SlaDock 是台灣版 Slack 和 Flowdock 的結合。希望藉由這個網站來�
  - 主要負責：群組聊天 / 1 對 1 私訊 / 訊息回覆串 / RSpec 測試
  - GitHub：https://github.com/rzchen
  - Email：jeff820523@gmail.com
- - Resume：https://pse.is/vwsyj
+ - Resume：https://rzchen.pse.is/rd-resume
  
 #### 張雯婷
  - 主要負責：網頁切版 / Devise 及寄信功能 / 訊息分享功能 / 即時貼圖傳送
